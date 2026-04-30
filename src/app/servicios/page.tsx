@@ -5,9 +5,9 @@ import { PageHeroPro, ServicesOverview } from "@/components/sections/detail-sect
 import { assets } from "@/content/assets";
 
 export const metadata: Metadata = {
-  title: "Servicios tecnicos",
+  title: "Servicios técnicos",
   description:
-    "Servicio tecnico integral, trazabilidad Revisa, revisiones certificadas y repuestos para equipos electricos."
+    "Servicio técnico integral, trazabilidad Revisa, revisiones certificadas y repuestos para equipos eléctricos."
 };
 
 export default function ServicesPage() {
@@ -17,7 +17,7 @@ export default function ServicesPage() {
       <main id="contenido">
         <PageHeroPro
           eyebrow="Servicios"
-          title="Servicio tecnico, trazabilidad, revisiones y soporte durante todo el ciclo de vida."
+          title="Servicio técnico, trazabilidad, revisiones y soporte durante todo el ciclo de vida."
           text="Los servicios se presentan como soluciones premium con alcance claro, proceso, entregables, documentos y conversion B2B propia."
           image={assets.its}
           actions={[
