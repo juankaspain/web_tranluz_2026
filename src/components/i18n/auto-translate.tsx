@@ -50,14 +50,7 @@ export function AutoTranslate() {
           const current = node.textContent;
           const translated = translateText(current);
           if (translated !== current) {
-            // Buscamos el texto original en el nodo y lo reemplazamos
-            const normalizedText = current.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            const normalizedKey = normalize(current);
-            const match = table[normalizedKey];
-            if (match && match !== normalizedKey) {
-              node.textContent = current.replace(current, translated);
-            }
-          }
+            node.textContent = translated;          }
         } else if (node.nodeType === Node.ELEMENT_NODE) {
           translateElement(node as Element);
         }
