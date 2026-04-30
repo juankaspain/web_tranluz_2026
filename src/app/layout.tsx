@@ -106,7 +106,7 @@ export default async function RootLayout({
         <ThemeScript />
       </head>
       <body>
-        <AutoTranslate locale={locale} />
+        <AutoTranslate />
         <a href="#contenido" className="skip-link">
           Saltar al contenido
         </a>
