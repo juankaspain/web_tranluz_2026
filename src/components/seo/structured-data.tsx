@@ -36,7 +36,7 @@ export function StructuredData() {
         addressLocality: "Sevilla",
         addressCountry: "ES"
       },
-      areaServed: ["Espana", "Portugal"],
+      areaServed: ["España", "Portugal"],
       priceRange: "$$"
     },
     {
@@ -56,14 +56,14 @@ export function StructuredData() {
     {
       "@type": "Service",
       "@id": `${baseUrl}/#technical-service`,
-      name: "Servicio tecnico, alquiler, formacion y trazabilidad para trabajos electricos",
+      name: "Servicio técnico, alquiler, formación y trazabilidad para trabajos eléctricos",
       provider: {
         "@id": `${baseUrl}/#organization`
       },
       serviceType: [
-        "Servicio tecnico integral",
+        "Servicio técnico integral",
         "Alquiler de equipos de tendido",
-        "Formacion tecnica",
+        "Formación técnica",
         "Trazabilidad de equipos"
       ],
       areaServed: "ES"
@@ -73,12 +73,7 @@ export function StructuredData() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@graph": graph
-        })
-      }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }) }}
     />
   );
 }
