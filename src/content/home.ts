@@ -1,50 +1,46 @@
 import { assets } from "@/content/assets";
 
 export const proofPoints = [
-  { value: "1987", label: "Especializacion desde" },
-  { value: "+30", label: "anos de experiencia sectorial" },
-  { value: "4", label: "lineas diferenciales: ITS, Revisa, alquiler y formacion" },
-  { value: "2025/26", label: "catalogo general vigente" }
+  { value: "1987", label: "Especialización desde" },
+  { value: "+30", label: "años de experiencia sectorial" },
+  { value: "4", label: "líneas diferenciales: ITS, Revisa, alquiler y formación" },
+  { value: "2025/26", label: "catálogo general vigente" }
 ];
 
 export const partnerBrands = ["Tesmec", "Plumett", "Work Italia", "3M", "Tractel", "Cembre"];
 
 export const homeServices = [
   {
-    title: "ITS Servicio Tecnico Integral",
+    title: "ITS Servicio Técnico Integral",
     href: "/servicios/its-servicio-tecnico",
     image: assets.its,
-    kicker: "Revision, mantenimiento y calibracion",
-    summary:
-      "Programa preventivo para acreditar que el equipo mantiene su punto optimo de funcionamiento y seguridad.",
-    bullets: ["Informes completos", "Servicio tecnico oficial", "Actuacion en instalaciones u obra"]
+    kicker: "Revisión, mantenimiento y calibración",
+    summary: "Programa preventivo para acreditar que el equipo mantiene su punto óptimo de funcionamiento y seguridad.",
+    bullets: ["Informes completos", "Servicio técnico oficial", "Actuación en instalaciones u obra"]
   },
   {
     title: "Revisa",
     href: "/servicios/revisa-trazabilidad",
     image: assets.revisa,
     kicker: "Trazabilidad en tiempo real",
-    summary:
-      "Sistema para controlar EPIs, lineas de vida, cabrestantes y equipos que requieren revision periodica.",
-    bullets: ["Lectura por movil, tablet o PC", "Alertas por estado", "Informes por equipo y ubicacion"]
+    summary: "Sistema para controlar EPIs, líneas de vida, cabrestantes y equipos que requieren revisión periódica.",
+    bullets: ["Lectura por móvil, tablet o PC", "Alertas por estado", "Informes por equipo y ubicación"]
   },
   {
     title: "Rent Puller",
     href: "/alquiler",
     image: assets.rentPuller,
     kicker: "Alquiler para obra",
-    summary:
-      "Equipos de tendido para necesidades puntuales, desde tiradas pequenas hasta proyectos de mayor escala.",
-    bullets: ["Cabrestantes y frenadoras", "Asistencia tecnica", "Alquiler diario, semanal o mensual"]
+    summary: "Equipos de tendido para necesidades puntuales, desde tiradas pequeñas hasta proyectos de mayor escala.",
+    bullets: ["Cabrestantes y frenadoras", "Asistencia técnica", "Alquiler diario, semanal o mensual"]
   },
   {
-    title: "Formacion Tranluz",
+    title: "Formación Tranluz",
     href: "/formacion",
     image: assets.training,
     kicker: "Cursos para empresas",
-    summary:
-      "Formacion teorico-practica para que operadores y tecnicos trabajen con seguridad y criterio.",
-    bullets: ["Operador de tendido", "Fibra optica", "Trabajos en altura"]
+    summary: "Formación teórico-práctica para que operadores y técnicos trabajen con seguridad y criterio.",
+    bullets: ["Operador de tendido", "Fibra óptica", "Trabajos en altura"]
   }
 ];
 
@@ -53,31 +49,31 @@ export const featuredEquipment = [
     name: "Cabrestante ARS301",
     href: "/alquiler/cabrestante-ars301",
     meta: "2.500 kg",
-    specs: ["Tiro maximo 25 kN", "Motor diesel 25 kW", "Tendido aereo y subterraneo"]
+    specs: ["Tiro máximo 25 kN", "Motor diésel 25 kW", "Tendido aéreo y subterráneo"]
   },
   {
     name: "Cabrestante ARS403",
     href: "/alquiler/cabrestante-ars403",
     meta: "3.500 kg",
-    specs: ["Tiro maximo 35 kN", "Velocidad max. 3,6 km/h", "Control de tiro"]
+    specs: ["Tiro máximo 35 kN", "Velocidad máx. 3,6 km/h", "Control de tiro"]
   },
   {
     name: "Cabrestante ARS523",
     href: "/alquiler/cabrestante-ars523",
     meta: "7.000 kg",
-    specs: ["Tiro maximo 70 kN", "Peso 2.100 kg", "Grabadora de tiro opcional"]
+    specs: ["Tiro máximo 70 kN", "Peso 2.100 kg", "Grabadora de tiro opcional"]
   },
   {
     name: "Frenadora TN1200",
     href: "/alquiler/frenadora-tn1200",
     meta: "4.000 kg",
-    specs: ["Tension max. 40 kN", "Pantalla 7 pulgadas", "Control remoto por radio"]
+    specs: ["Tensión máx. 40 kN", "Pantalla 7 pulgadas", "Control remoto por radio"]
   }
 ];
 
 export const downloads = [
   {
-    title: "Catalogo General 2025-2026",
+    title: "Catálogo General 2025-2026",
     href: "/soporte/catalogos",
     version: "V1 - 20/11/2025",
     size: "23,31 Mb"
@@ -95,7 +91,7 @@ export const downloads = [
     size: "2,3 Mb"
   },
   {
-    title: "Folleto Formate Tranluz",
+    title: "Folleto Fórmate Tranluz",
     href: "/formacion",
     version: "V1 - 05/2024",
     size: "2,9 Mb"
@@ -105,7 +101,7 @@ export const downloads = [
 export const quickActions = [
   {
     title: "Comprar producto",
-    summary: "Catalogo por familias tecnicas, fichas, accesorios y presupuesto.",
+    summary: "Catálogo por familias técnicas, fichas, accesorios y presupuesto.",
     href: "/productos"
   },
   {
@@ -115,13 +111,12 @@ export const quickActions = [
   },
   {
     title: "Revisar o certificar",
-    summary: "Mantenimiento preventivo, revisiones, calibracion e informes.",
+    summary: "Mantenimiento preventivo, revisiones, calibración e informes.",
     href: "/servicios/its-servicio-tecnico"
   },
   {
     title: "Formar equipo",
-    summary: "Cursos para operadores, fibra optica, altura y empresas.",
+    summary: "Cursos para operadores, fibra óptica, altura y empresas.",
     href: "/formacion"
   }
 ];
-
