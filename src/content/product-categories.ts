@@ -1,33 +1,32 @@
 export const productCategories = [
   {
-    title: "Alta tension",
+    title: "Alta tensión",
     href: "/productos/alta-tension",
-    summary: "Equipos y herramientas para trabajos en media y alta tension."
+    summary: "Equipos y herramientas para trabajos en media y alta tensión."
   },
   {
-    title: "Tendidos aereos",
+    title: "Tendidos aéreos",
     href: "/productos/tendidos-aereos",
-    summary: "Maquinaria, accesorios y soluciones para tendido aereo profesional."
+    summary: "Maquinaria, accesorios y soluciones para tendido aéreo profesional."
   },
   {
-    title: "Tendidos subterraneos",
+    title: "Tendidos subterráneos",
     href: "/productos/tendidos-subterraneos",
-    summary: "Rodillos, cabrestantes, guias y equipamiento para obra subterranea."
+    summary: "Rodillos, cabrestantes, guías y equipamiento para obra subterránea."
   },
   {
-    title: "Fibra optica",
+    title: "Fibra óptica",
     href: "/productos/fibra-optica",
     summary: "Equipos de soplado, tendido y control para telecomunicaciones."
   },
   {
-    title: "Seguridad electrica",
+    title: "Seguridad eléctrica",
     href: "/productos/seguridad-electrica",
-    summary: "Verificadores, pertigas, EPIs y material de seguridad certificado."
+    summary: "Verificadores, pértigas, EPIs y material de seguridad certificado."
   },
   {
-    title: "Herramienta hidraulica",
+    title: "Herramienta hidráulica",
     href: "/productos/herramienta-hidraulica",
     summary: "Prensas, bombas, cabezales y accesorios para trabajos exigentes."
   }
 ];
-
