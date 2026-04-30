@@ -7,4 +7,6 @@ dist
 .env.*.local
 *.log
 Thumbs.db
+.chrome-*
+
 
