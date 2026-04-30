@@ -6,8 +6,7 @@ import { ContactExperience } from "@/components/sections/detail-sections";
 export const metadata: Metadata = {
   title: "Contacto",
   description:
-    "Contacta con Tranluz para producto, alquiler, servicio tecnico, formacion, compras o administracion."
-};
+        "Contacta con Tranluz para productos, alquiler, servicio técnico, formación, compras o administración."};
 
 export default function ContactPage() {
   return (
