@@ -6,9 +6,9 @@ import { OperationsSection } from "@/components/sections/operations-section";
 import { assets } from "@/content/assets";
 
 export const metadata: Metadata = {
-  title: "Soluciones por aplicacion",
+  title: "Soluciones por aplicación",
   description:
-    "Soluciones por industria y caso de uso para empresas electricas, telecomunicaciones, industria, obra y mantenimiento."
+    "Soluciones por industria y caso de uso para empresas eléctricas, telecomunicaciones, industria, obra y mantenimiento."
 };
 
 export default function SolutionsPage() {
@@ -18,8 +18,8 @@ export default function SolutionsPage() {
       <main id="contenido">
         <PageHeroPro
           eyebrow="Soluciones"
-          title="Arquitectura por aplicacion para comprar, alquilar y mantener con menos friccion."
-          text="Tranluz se organiza por industrias y casos de uso: empresas electricas, telecomunicaciones, industria, obra y mantenimiento."
+          title="Arquitectura por aplicación para comprar, alquilar y mantener con menos fricción."
+          text="Tranluz se organiza por industrias y casos de uso: empresas eléctricas, telecomunicaciones, industria, obra y mantenimiento."
           image={assets.hero}
           actions={[{ label: "Hablar con un experto", href: "/presupuesto" }]}
         />
