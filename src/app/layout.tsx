@@ -18,18 +18,18 @@ export const metadata: Metadata = {
   creator: "Tranluz",
   publisher: "Tranluz",
   title: {
-    default: "Tranluz | Equipos, servicio tecnico, alquiler y formacion",
+    default: "Tranluz | Equipos, servicio técnico, alquiler y formación",
     template: "%s | Tranluz"
   },
   description:
-    "Plataforma tecnico-comercial para productos electricos, tendido, alquiler, servicio tecnico, trazabilidad y formacion profesional.",
+    "Plataforma técnico-comercial para productos eléctricos, tendido, alquiler, servicio técnico, trazabilidad y formación profesional.",
   keywords: [
     "Tranluz",
-    "equipos electricos",
+    "equipos eléctricos",
     "alquiler de cabrestantes",
-    "servicio tecnico electrico",
-    "tendido electrico",
-    "formacion tecnica",
+    "servicio técnico eléctrico",
+    "tendido eléctrico",
+    "formación técnica",
     "trazabilidad de equipos"
   ],
   alternates: {
@@ -39,9 +39,9 @@ export const metadata: Metadata = {
     }
   },
   openGraph: {
-    title: "Tranluz | Equipos, servicio tecnico, alquiler y formacion",
+    title: "Tranluz | Equipos, servicio técnico, alquiler y formación",
     description:
-      "Equipos, servicio tecnico, alquiler, formacion y trazabilidad para trabajos electricos y de telecomunicaciones.",
+      "Equipos, servicio técnico, alquiler, formación y trazabilidad para trabajos eléctricos y de telecomunicaciones.",
     url: "https://www.tranluz.es",
     locale: "es_ES",
     siteName: "Tranluz",
@@ -51,15 +51,15 @@ export const metadata: Metadata = {
         url: assets.ogImage,
         width: 1536,
         height: 1024,
-        alt: "Tranluz equipos y soporte tecnico para obras electricas"
+        alt: "Tranluz equipos y soporte técnico para obras eléctricas"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tranluz | Equipos, servicio tecnico, alquiler y formacion",
+    title: "Tranluz | Equipos, servicio técnico, alquiler y formación",
     description:
-      "Equipos, alquiler, servicio tecnico y formacion para trabajos electricos y telecomunicaciones.",
+      "Equipos, alquiler, servicio técnico y formación para trabajos eléctricos y telecomunicaciones.",
     images: [assets.ogImage]
   },
   robots: {
@@ -94,19 +94,25 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const cookieLocale = cookieStore.get("tranluz_locale")?.value;
   const headerLocale = requestHeaders.get("x-tranluz-locale");
-  const locale = isLocale(cookieLocale) ? cookieLocale : isLocale(headerLocale) ? headerLocale : defaultLocale;
+  const locale = isLocale(cookieLocale)
+    ? cookieLocale
+    : isLocale(headerLocale)
+      ? headerLocale
+      : defaultLocale;
 
   return (
-    <html lang={locale}>
-      <body>
+    <html lang={locale} suppressHydrationWarning>
+      <head>
         <ThemeScript />
-        <StructuredData />
-        <AutoTranslate />
-        <a className="skip-link" href="#contenido">
+      </head>
+      <body>
+        <AutoTranslate locale={locale} />
+        <a href="#contenido" className="skip-link">
           Saltar al contenido
         </a>
+        <StructuredData />
+        <ActionDock locale={locale} />
         {children}
-        <ActionDock />
       </body>
     </html>
   );
