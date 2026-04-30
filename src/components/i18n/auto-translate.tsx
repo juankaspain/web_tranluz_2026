@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect } from "react";
 import { defaultLocale, locales, type Locale } from "@/i18n/config";
 import { translations } from "@/i18n/translations";
@@ -11,20 +10,19 @@ function getLocale(): Locale {
     ?.split("=")[1] as Locale | undefined;
   const stored = window.localStorage.getItem("tranluz_locale") as Locale | null;
   const browserLocale = navigator.language.slice(0, 2) as Locale;
-
   if (cookie && locales.includes(cookie)) return cookie;
   if (stored && locales.includes(stored)) return stored;
   if (locales.includes(browserLocale)) return browserLocale;
-
   return defaultLocale;
 }
 
 function normalize(value: string) {
-        return value
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/\s+/g, " ")
-            .trim();}
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
 export function AutoTranslate() {
   useEffect(() => {
@@ -51,7 +49,15 @@ export function AutoTranslate() {
         if (node.nodeType === Node.TEXT_NODE && node.textContent) {
           const current = node.textContent;
           const translated = translateText(current);
-          if (translated !== current) node.textContent = current.replace(normalize(current), translated);
+          if (translated !== current) {
+            // Buscamos el texto original en el nodo y lo reemplazamos
+            const normalizedText = current.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const normalizedKey = normalize(current);
+            const match = table[normalizedKey];
+            if (match && match !== normalizedKey) {
+              node.textContent = current.replace(current, translated);
+            }
+          }
         } else if (node.nodeType === Node.ELEMENT_NODE) {
           translateElement(node as Element);
         }
@@ -67,8 +73,8 @@ export function AutoTranslate() {
         }
       }
     });
-
     observer.observe(document.body, { childList: true, subtree: true });
+
     return () => observer.disconnect();
   }, []);
 
