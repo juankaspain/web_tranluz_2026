@@ -6,7 +6,7 @@ import { RentalLanding } from "@/components/sections/detail-sections";
 export const metadata: Metadata = {
   title: "Alquiler de equipos de tendido",
   description:
-    "Rent Puller: alquiler de cabrestantes, frenadoras y equipos de tendido con asistencia tecnica."
+    "Rent Puller: alquiler de cabrestantes, frenadoras y equipos de tendido con asistencia técnica."
 };
 
 export default function RentalPage() {
