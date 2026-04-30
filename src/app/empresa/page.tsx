@@ -6,8 +6,7 @@ import { CompanyStory } from "@/components/sections/detail-sections";
 export const metadata: Metadata = {
   title: "Empresa",
   description:
-    "Tranluz, especialista desde 1987 en equipos, maquinas y soluciones para el sector electrico y telecomunicaciones."
-};
+        "Tranluz, especialista desde 1987 en equipos, máquinas y soluciones para el sector eléctrico y telecomunicaciones."};
 
 export default function CompanyPage() {
   return (
