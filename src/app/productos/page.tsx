@@ -6,9 +6,9 @@ import { PageHeroPro, ProductsLandingContent } from "@/components/sections/detai
 import { assets } from "@/content/assets";
 
 export const metadata: Metadata = {
-  title: "Catalogo tecnico de productos",
+  title: "Catálogo técnico de productos",
   description:
-    "Productos para trabajos electricos, telecomunicaciones, tendido, seguridad, fibra optica e industria."
+    "Productos para trabajos eléctricos, telecomunicaciones, tendido, seguridad, fibra óptica e industria."
 };
 
 type ProductsPageProps = {
@@ -26,9 +26,9 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
       <SiteHeader />
       <main id="contenido">
         <PageHeroPro
-          eyebrow="Catalogo tecnico"
-          title="Productos para trabajos electricos, telecomunicaciones y obra industrial."
-          text="Una arquitectura preparada para busqueda, filtros, fichas tecnicas, documentos, presupuesto, compra y alquiler."
+          eyebrow="Catálogo técnico"
+          title="Productos para trabajos eléctricos, telecomunicaciones y obra industrial."
+          text="Una arquitectura preparada para búsqueda, filtros, fichas técnicas, documentos, presupuesto, compra y alquiler."
           image={assets.presentationCover}
           actions={[
             { label: "Solicitar producto", href: "/presupuesto" },
