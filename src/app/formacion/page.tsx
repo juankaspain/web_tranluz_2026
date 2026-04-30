@@ -4,9 +4,9 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { TrainingLanding } from "@/components/sections/detail-sections";
 
 export const metadata: Metadata = {
-  title: "Formacion tecnica",
+  title: "Formación técnica",
   description:
-    "Cursos tecnico-practicos para operadores de equipos electricos, tendido, fibra optica y seguridad."
+    "Cursos técnico-prácticos para operadores de equipos eléctricos, tendido, fibra óptica y seguridad."
 };
 
 export default function TrainingPage() {
