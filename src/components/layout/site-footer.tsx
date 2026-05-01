@@ -73,12 +73,33 @@ export function SiteFooter() {
       <div className="footer-trust">
         <div>
           <strong>Confianza y cumplimiento</strong>
-          <p>Calidad, financiacion europea, accesibilidad, privacidad y criterios web para Kit Digital.</p>
+          <p>Calidad, financiación europea, accesibilidad, privacidad y criterios web para Kit Digital.</p>
         </div>
-        <div className="footer-certifications" aria-label="Certificaciones y financiacion">
-          <img src={assets.quality} alt="Sello de calidad AENOR Tranluz" loading="lazy" decoding="async" />
-          <img src={assets.footerFunding} alt="Financiado por la Union Europea NextGenerationEU" loading="lazy" decoding="async" />
-          <img src={assets.footerMoves} alt="Programa MOVES III Andalucia" loading="lazy" decoding="async" />
+        <div className="footer-certifications" aria-label="Certificaciones y financiación">
+          <Image
+            src={assets.quality}
+            alt="Sello de calidad AENOR Tranluz"
+            width={180}
+            height={72}
+            loading="lazy"
+            sizes="(max-width: 768px) 140px, 180px"
+          />
+          <Image
+            src={assets.footerFunding}
+            alt="Financiado por la Unión Europea NextGenerationEU"
+            width={260}
+            height={80}
+            loading="lazy"
+            sizes="(max-width: 768px) 180px, 260px"
+          />
+          <Image
+            src={assets.footerMoves}
+            alt="Programa MOVES III Andalucía"
+            width={180}
+            height={72}
+            loading="lazy"
+            sizes="(max-width: 768px) 140px, 180px"
+          />
         </div>
       </div>
 
