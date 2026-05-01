@@ -1,4 +1,4 @@
-const baseUrl = "https://deepskyblue-eel-381189.hostingersite.com/";
+const baseUrl = "https://www.tranluz.es";
 
 export const assets = {
   generatedHero: "/images/generated/tranluz-hero-ai.webp",
