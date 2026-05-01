@@ -8,8 +8,8 @@ import { StructuredData } from "@/components/seo/structured-data";
 import { ThemeScript } from "@/components/theme/theme-script";
 import { assets } from "@/content/assets";
 import { defaultLocale, isLocale } from "@/i18n/config";
-import "@fontsource-variable/manrope/index.css";
-import "@fontsource-variable/archivo/index.css";
+import "@fontsource-variable/manrope";
+import "@fontsource-variable/archivo";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
