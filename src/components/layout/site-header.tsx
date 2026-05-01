@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   BookOpenText,
@@ -23,11 +22,11 @@ export function SiteHeader() {
       <div className="topbar">
         <span className="topbar-kicker">
           <ShieldCheck aria-hidden="true" size={15} />
-          Especialistas en máquinas y herramientas para montadores eléctricos
+          Especialistas en maquinas y herramientas para montadores electricos
         </span>
         <div className="topbar-actions">
           <Link href="/kit-digital">Presencia digital preparada</Link>
-          <Link href="/soporte/catalogos">Catálogo 2025/2026</Link>
+          <Link href="/soporte/catalogos">Catalogo 2025/2026</Link>
           <a href={`tel:${brand.phone.replaceAll(" ", "")}`}>
             <Phone aria-hidden="true" size={14} />
             {brand.phone}
@@ -35,15 +34,8 @@ export function SiteHeader() {
         </div>
       </div>
       <div className="navbar">
-        <Link className="brand-mark" href="/" aria-label="Tranluz inicio">
-          <Image
-            src={assets.mark}
-            alt="Tranluz"
-            width={132}
-            height={42}
-            priority
-            sizes="132px"
-          />
+        <Link className="brand-mark" href="/">
+          <img src={assets.mark} alt="Tranluz" width="132" height="42" decoding="async" />
         </Link>
         <div className="desktop-nav">
           <nav className="main-nav" aria-label="Principal">
@@ -70,12 +62,7 @@ export function SiteHeader() {
         <div className="header-actions">
           <LanguageSelector />
           <ThemeToggle />
-          <a
-            className="icon-button icon-button-link"
-            href={`tel:${brand.phone.replaceAll(" ", "")}`}
-            aria-label="Llamar a Tranluz"
-            title="Llamar"
-          >
+          <a className="icon-button icon-button-link" href={`tel:${brand.phone.replaceAll(" ", "")}`} aria-label="Llamar a Tranluz" title="Llamar">
             <Phone aria-hidden="true" size={18} />
           </a>
           <Link className="button button-primary button-compact" href="/presupuesto">
@@ -84,11 +71,11 @@ export function SiteHeader() {
           </Link>
         </div>
         <details className="mobile-menu">
-          <summary aria-label="Abrir menú">
+          <summary aria-label="Abrir menu">
             <Menu aria-hidden="true" size={22} />
           </summary>
           <div className="mobile-menu-panel">
-            <nav aria-label="Menú móvil">
+            <nav aria-label="Menu movil">
               <LanguageSelector />
               {mainNavigation.map((item) => (
                 <Link href={item.href} key={item.href}>
@@ -105,7 +92,51 @@ export function SiteHeader() {
         </details>
       </div>
       <div className="mega-strip" aria-label="Accesos destacados">
-        {/* resto igual que ahora, solo con tildes corregidas */}
+        <Link href="/servicios/its-servicio-tecnico">
+          <span className="mega-icon">
+            <Wrench aria-hidden="true" size={17} />
+          </span>
+          <span>
+            <strong>ITS Servicio Tecnico</strong>
+            <small>Revisiones e informes</small>
+          </span>
+        </Link>
+        <Link href="/servicios/revisa-trazabilidad">
+          <span className="mega-icon">
+            <ShieldCheck aria-hidden="true" size={17} />
+          </span>
+          <span>
+            <strong>Revisa trazabilidad</strong>
+            <small>Control y alertas</small>
+          </span>
+        </Link>
+        <Link href="/alquiler">
+          <span className="mega-icon">
+            <FileDown aria-hidden="true" size={17} />
+          </span>
+          <span>
+            <strong>Rent Puller</strong>
+            <small>Alquiler para obra</small>
+          </span>
+        </Link>
+        <Link href="/formacion">
+          <span className="mega-icon">
+            <BookOpenText aria-hidden="true" size={17} />
+          </span>
+          <span>
+            <strong>Formacion</strong>
+            <small>Operadores y equipos</small>
+          </span>
+        </Link>
+        <Link href="/contacto">
+          <span className="mega-icon">
+            <MapPin aria-hidden="true" size={17} />
+          </span>
+          <span>
+            <strong>Sevilla</strong>
+            <small>Atencion tecnica</small>
+          </span>
+        </Link>
       </div>
     </header>
   );
