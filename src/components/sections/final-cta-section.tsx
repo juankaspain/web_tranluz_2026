@@ -5,16 +5,16 @@ export function FinalCtaSection() {
   return (
     <section className="final-cta">
       <div>
-        <p className="eyebrow">Siguiente paso</p>
-        <h2>Convierte la web en un canal comercial tecnico, no en un escaparate pasivo.</h2>
+        <p className="eyebrow">¿Listo para empezar?</p>
+        <h2>Cuéntanos qué necesitas. Te respondemos en menos de 24 horas.</h2>
         <p>
-          La estructura ya esta preparada para producto, servicio, alquiler,
-          soporte, formacion, SEO, analitica y captacion B2B.
+          Presupuesto de producto, disponibilidad de alquiler, programa de revisión
+          o consulta técnica: un solo equipo lo gestiona todo desde Sevilla.
         </p>
       </div>
       <div className="final-cta-actions">
         <a className="button button-primary" href="/presupuesto">
-          Crear solicitud
+          Solicitar presupuesto
           <ArrowRight aria-hidden="true" size={18} />
         </a>
         <a className="button button-secondary" href={`tel:${brand.phone.replaceAll(" ", "")}`}>
@@ -25,4 +25,3 @@ export function FinalCtaSection() {
     </section>
   );
 }
-

@@ -1,58 +1,66 @@
-import { Activity, ArrowRight, DatabaseZap, Route, ShieldCheck } from "lucide-react";
+import { ArrowRight, ClipboardCheck, GraduationCap, Layers, PackageSearch, Wrench } from "lucide-react";
 
-const operations = [
+const ops = [
   {
-    icon: Route,
-    title: "Elegir el equipo correcto",
-    text: "Rutas por aplicacion, filtros tecnicos y fichas conectadas a accesorios, documentos y asistencia."
+    icon: PackageSearch,
+    title: "Catálogo técnico",
+    body: "Equipos y accesorios para tendido, altura, fibra óptica y trabajos eléctricos, con ficha técnica y referencia de fabricante.",
+    href: "/productos",
+    cta: "Ver productos"
   },
   {
-    icon: Activity,
-    title: "Mantener la obra activa",
-    text: "Alquiler y soporte para cubrir picos de demanda sin inmovilizar capital en maquinaria puntual."
+    icon: Wrench,
+    title: "Servicio técnico oficial",
+    body: "Revisiones preventivas ITS, calibración y mantenimiento en instalaciones o en obra. Informes completos y certificación.",
+    href: "/servicios/its-servicio-tecnico",
+    cta: "Solicitar revisión"
   },
   {
-    icon: ShieldCheck,
-    title: "Acreditar seguridad",
-    text: "ITS y revisiones certificadas para mantener equipos en estado operativo y documentado."
+    icon: ClipboardCheck,
+    title: "Trazabilidad Revisa",
+    body: "Control de EPIs, líneas de vida y equipos con alerta automática por caducidad o estado. Lectura desde móvil, tablet o PC.",
+    href: "/servicios/revisa-trazabilidad",
+    cta: "Conocer Revisa"
   },
   {
-    icon: DatabaseZap,
-    title: "Controlar trazabilidad",
-    text: "Revisa permite consultar estado, ubicacion e informes desde movil, tablet o PC."
+    icon: GraduationCap,
+    title: "Formación especializada",
+    body: "Cursos teórico-prácticos para operadores de tendido, trabajos en altura y fibra óptica. Formación in-company disponible.",
+    href: "/formacion",
+    cta: "Ver formación"
+  },
+  {
+    icon: Layers,
+    title: "Alquiler para obra",
+    body: "Cabrestantes y frenadoras disponibles por día, semana o mes. Asistencia técnica incluida para proyectos puntuales.",
+    href: "/alquiler",
+    cta: "Consultar disponibilidad"
   }
 ];
 
 export function OperationsSection() {
   return (
-    <section className="section operations-section">
+    <section className="section operations">
       <div className="section-heading">
-        <p className="eyebrow">UX por flujo de trabajo</p>
-        <h2>La nueva web acompana la decision tecnica completa.</h2>
-        <p>
-          Un comprador B2B no navega por secciones decorativas: busca resolver
-          una obra, una revision, una urgencia, una referencia o una formacion.
-        </p>
+        <p className="eyebrow">Líneas de negocio</p>
+        <h2>Todo lo que necesita una empresa eléctrica o de telecomunicaciones, en un mismo lugar.</h2>
       </div>
-      <div className="operations-timeline">
-        {operations.map((item) => {
-          const Icon = item.icon;
+      <div className="ops-grid">
+        {ops.map((op) => {
+          const Icon = op.icon;
           return (
-            <article className="operation-step" key={item.title}>
-              <span className="operation-icon">
-                <Icon aria-hidden="true" size={20} />
+            <a className="ops-card" href={op.href} key={op.href}>
+              <Icon aria-hidden="true" size={24} />
+              <h3>{op.title}</h3>
+              <p>{op.body}</p>
+              <span className="ops-cta">
+                {op.cta}
+                <ArrowRight aria-hidden="true" size={15} />
               </span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
+            </a>
           );
         })}
       </div>
-      <a className="text-link" href="/soluciones">
-        Ver arquitectura por soluciones
-        <ArrowRight aria-hidden="true" size={17} />
-      </a>
     </section>
   );
 }
-

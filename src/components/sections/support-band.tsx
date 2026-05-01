@@ -5,14 +5,15 @@ export function SupportBand() {
   return (
     <section className="support-band">
       <div className="support-copy">
-        <p className="eyebrow">Centro tecnico</p>
-        <h2>Catalogos, manuales, guias y soporte para decidir con seguridad.</h2>
+        <p className="eyebrow">Centro técnico</p>
+        <h2>Catálogos, manuales y guías técnicas para decidir con seguridad.</h2>
         <p>
-          La nueva web debe convertir la antigua zona de descarga en una base de
-          conocimiento versionada, encontrable y conectada a cada producto.
+          Accede a la documentación técnica actualizada de todos los equipos:
+          catálogo general, folletos de servicio y guías de operación, siempre
+          vinculados a cada producto.
         </p>
         <a className="button button-primary" href="/soporte">
-          Ir a soporte
+          Ver recursos técnicos
           <ArrowRight aria-hidden="true" size={18} />
         </a>
       </div>

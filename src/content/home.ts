@@ -1,10 +1,10 @@
 import { assets } from "@/content/assets";
 
 export const proofPoints = [
-  { value: "1987", label: "Especialización desde" },
-  { value: "+30", label: "años de experiencia sectorial" },
-  { value: "4", label: "líneas diferenciales: ITS, Revisa, alquiler y formación" },
-  { value: "2025/26", label: "catálogo general vigente" }
+  { value: "1987", label: "Especializados desde" },
+  { value: "+35", label: "Años de experiencia sectorial" },
+  { value: "4", label: "Líneas: ITS, Revisa, alquiler y formación" },
+  { value: "2025/26", label: "Catálogo general vigente" }
 ];
 
 export const partnerBrands = ["Tesmec", "Plumett", "Work Italia", "3M", "Tractel", "Cembre"];
@@ -32,7 +32,7 @@ export const homeServices = [
     image: assets.rentPuller,
     kicker: "Alquiler para obra",
     summary: "Equipos de tendido para necesidades puntuales, desde tiradas pequeñas hasta proyectos de mayor escala.",
-    bullets: ["Cabrestantes y frenadoras", "Asistencia técnica", "Alquiler diario, semanal o mensual"]
+    bullets: ["Cabrestantes y frenadoras", "Asistencia técnica incluida", "Alquiler diario, semanal o mensual"]
   },
   {
     title: "Formación Tranluz",
@@ -111,11 +111,11 @@ export const quickActions = [
   },
   {
     title: "Revisar o certificar",
-    summary: "Mantenimiento preventivo, revisiones, calibración e informes.",
+    summary: "Mantenimiento preventivo, revisiones, calibración e informes ITS.",
     href: "/servicios/its-servicio-tecnico"
   },
   {
-    title: "Formar equipo",
+    title: "Formar al equipo",
     summary: "Cursos para operadores, fibra óptica, altura y empresas.",
     href: "/formacion"
   }

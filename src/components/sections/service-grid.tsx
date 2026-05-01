@@ -7,10 +7,10 @@ export function ServiceGrid() {
     <section className="section section-contrast">
       <div className="section-heading">
         <p className="eyebrow">Servicios diferenciales</p>
-        <h2>Mas que suministro: soporte durante todo el ciclo de vida del equipo.</h2>
+        <h2>Más que suministro: soporte durante todo el ciclo de vida del equipo.</h2>
         <p>
-          Tranluz debe convertir ITS, Revisa, Rent Puller y Formacion en
-          servicios de alto valor, medibles y faciles de contratar.
+          ITS, Revisa, Rent Puller y Formación son servicios de alto valor,
+          medibles y contratables directamente desde esta página.
         </p>
       </div>
       <div className="service-showcase">
@@ -37,7 +37,7 @@ export function ServiceGrid() {
                 ))}
               </ul>
               <strong>
-                Ver servicio
+                Contratar servicio
                 <ArrowRight aria-hidden="true" size={16} />
               </strong>
             </div>

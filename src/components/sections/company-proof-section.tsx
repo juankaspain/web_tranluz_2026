@@ -10,11 +10,12 @@ export function CompanyProofSection() {
       </div>
       <div className="company-proof-copy">
         <p className="eyebrow">Confianza industrial</p>
-        <h2>Desde Sevilla para empresas que necesitan precision, respuesta y criterio tecnico.</h2>
+        <h2>Desde Sevilla para empresas que necesitan precisión, respuesta y criterio técnico.</h2>
         <p>
-          Tranluz nace en 1987 con el proposito de ser referente en equipos,
-          maquinas y utiles especiales para el sector electrico y de
-          telecomunicaciones.
+          Tranluz nace en 1987 con el propósito de ser referente en equipos,
+          máquinas y útiles especiales para el sector eléctrico y de
+          telecomunicaciones. Más de 35 años de especialización avalan cada
+          presupuesto, cada revisión y cada equipo alquilado.
         </p>
         <div className="proof-list">
           <span>
@@ -23,20 +24,19 @@ export function CompanyProofSection() {
           </span>
           <span>
             <Building2 aria-hidden="true" size={18} />
-            Poligono Industrial Calonge, Sevilla
+            Polígono Industrial Calonge, Sevilla
           </span>
           <span>
             <CheckCircle2 aria-hidden="true" size={18} />
-            Acuerdos con fabricantes de referencia
+            Acuerdos con fabricantes líderes del sector
           </span>
         </div>
-        <div className="partner-cloud" aria-label="Fabricantes mencionados por Tranluz">
-          {partnerBrands.map((brand) => (
-            <span key={brand}>{brand}</span>
+        <div className="brand-row" aria-label="Partners oficiales">
+          {partnerBrands.map((partner) => (
+            <span key={partner}>{partner}</span>
           ))}
         </div>
       </div>
     </section>
   );
 }
-

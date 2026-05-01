@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, FileText, PhoneCall, Search, ShieldCheck } from "lucide-react";
+import { ArrowRight, FileText, PhoneCall, ShieldCheck, Wrench, Package } from "lucide-react";
 import { brand } from "@/config/brand";
 import { assets } from "@/content/assets";
 import { partnerBrands, proofPoints } from "@/content/home";
@@ -18,34 +18,42 @@ export function HeroSection() {
         />
       </div>
       <div className="hero-copy">
-        <p className="eyebrow">Especialistas desde {brand.founded}</p>
-        <h1 id="hero-title">Equipos, alquiler y soporte tecnico para obras electricas criticas.</h1>
+        <p className="eyebrow">Especialistas desde {brand.founded} · Sevilla</p>
+        <h1 id="hero-title">Equipos, alquiler y soporte técnico para obras eléctricas críticas.</h1>
         <p>
-          Tranluz conecta catalogo tecnico, servicio oficial, revisiones,
-          formacion, alquiler y trazabilidad para empresas electricas,
-          telecomunicaciones e industria.
+          Catálogo técnico, servicio oficial, revisiones ITS, formación,
+          alquiler y trazabilidad desde un único partner en Sevilla.
         </p>
-        <form className="hero-search" role="search" action="/productos">
-          <label className="sr-only" htmlFor="hero-search">
-            Buscar referencia, producto o servicio
-          </label>
-          <Search aria-hidden="true" size={20} />
-          <input
-            id="hero-search"
-            name="q"
-            type="search"
-            placeholder="Cabrestante, Revisa, fibra..."
-          />
-          <button type="submit">Buscar</button>
-        </form>
+        <nav className="hero-intent" aria-label="¿Qué necesitas hoy?">
+          <Link className="intent-card intent-card-primary" href="/productos">
+            <Package aria-hidden="true" size={22} />
+            <span>
+              <strong>Comprar equipos</strong>
+              <small>Catálogo por familias, marcas y referencias</small>
+            </span>
+            <ArrowRight aria-hidden="true" size={16} />
+          </Link>
+          <Link className="intent-card" href="/alquiler">
+            <FileText aria-hidden="true" size={22} />
+            <span>
+              <strong>Solicitar alquiler</strong>
+              <small>Cabrestantes y frenadoras para obra</small>
+            </span>
+            <ArrowRight aria-hidden="true" size={16} />
+          </Link>
+          <Link className="intent-card" href="/servicios/its-servicio-tecnico">
+            <Wrench aria-hidden="true" size={22} />
+            <span>
+              <strong>Programar revisión / ITS</strong>
+              <small>Mantenimiento preventivo y certificación</small>
+            </span>
+            <ArrowRight aria-hidden="true" size={16} />
+          </Link>
+        </nav>
         <div className="hero-actions">
           <Link className="button button-primary" href="/presupuesto">
             Solicitar presupuesto
             <ArrowRight aria-hidden="true" size={18} />
-          </Link>
-          <Link className="button button-secondary" href="/productos">
-            Ver catalogo
-            <FileText aria-hidden="true" size={18} />
           </Link>
           <a className="button button-ghost" href={`tel:${brand.phone.replaceAll(" ", "")}`}>
             Llamar ahora
@@ -63,8 +71,8 @@ export function HeroSection() {
         <div className="command-card command-card-main">
           <ShieldCheck aria-hidden="true" size={20} />
           <div>
-            <span>Operacion segura</span>
-            <strong>Compra, alquiler, revision y formacion desde un unico partner.</strong>
+            <span>Operación segura</span>
+            <strong>Compra, alquiler, revisión y formación desde un único partner.</strong>
           </div>
         </div>
         <div className="metric-grid">
