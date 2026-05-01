@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Award, Building2, CheckCircle2 } from "lucide-react";
 import { assets } from "@/content/assets";
 import { partnerBrands } from "@/content/home";
@@ -6,7 +7,14 @@ export function CompanyProofSection() {
   return (
     <section className="company-proof">
       <div className="company-proof-media">
-        <img src={assets.ceo} alt="" loading="lazy" decoding="async" />
+        <Image
+          src={assets.ceo}
+          alt="Equipo directivo de Tranluz"
+          width={720}
+          height={900}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 720px"
+        />
       </div>
       <div className="company-proof-copy">
         <p className="eyebrow">Confianza industrial</p>
