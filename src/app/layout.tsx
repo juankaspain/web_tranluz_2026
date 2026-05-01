@@ -111,7 +111,7 @@ export default async function RootLayout({
           Saltar al contenido
         </a>
         <StructuredData />
-        <ActionDock locale={locale} />
+        <ActionDock />
         {children}
       </body>
     </html>
