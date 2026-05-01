@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   BookOpenText,
@@ -22,11 +23,11 @@ export function SiteHeader() {
       <div className="topbar">
         <span className="topbar-kicker">
           <ShieldCheck aria-hidden="true" size={15} />
-          Especialistas en maquinas y herramientas para montadores electricos
+          Especialistas en máquinas y herramientas para montadores eléctricos
         </span>
         <div className="topbar-actions">
           <Link href="/kit-digital">Presencia digital preparada</Link>
-          <Link href="/soporte/catalogos">Catalogo 2025/2026</Link>
+          <Link href="/soporte/catalogos">Catálogo 2025/2026</Link>
           <a href={`tel:${brand.phone.replaceAll(" ", "")}`}>
             <Phone aria-hidden="true" size={14} />
             {brand.phone}
@@ -34,8 +35,15 @@ export function SiteHeader() {
         </div>
       </div>
       <div className="navbar">
-        <Link className="brand-mark" href="/">
-          <img src={assets.mark} alt="Tranluz" width="132" height="42" decoding="async" />
+        <Link className="brand-mark" href="/" aria-label="Tranluz inicio">
+          <Image
+            src={assets.mark}
+            alt="Tranluz"
+            width={132}
+            height={42}
+            priority
+            sizes="132px"
+          />
         </Link>
         <div className="desktop-nav">
           <nav className="main-nav" aria-label="Principal">
@@ -62,7 +70,12 @@ export function SiteHeader() {
         <div className="header-actions">
           <LanguageSelector />
           <ThemeToggle />
-          <a className="icon-button icon-button-link" href={`tel:${brand.phone.replaceAll(" ", "")}`} aria-label="Llamar a Tranluz" title="Llamar">
+          <a
+            className="icon-button icon-button-link"
+            href={`tel:${brand.phone.replaceAll(" ", "")}`}
+            aria-label="Llamar a Tranluz"
+            title="Llamar"
+          >
             <Phone aria-hidden="true" size={18} />
           </a>
           <Link className="button button-primary button-compact" href="/presupuesto">
@@ -71,11 +84,11 @@ export function SiteHeader() {
           </Link>
         </div>
         <details className="mobile-menu">
-          <summary aria-label="Abrir menu">
+          <summary aria-label="Abrir menú">
             <Menu aria-hidden="true" size={22} />
           </summary>
           <div className="mobile-menu-panel">
-            <nav aria-label="Menu movil">
+            <nav aria-label="Menú móvil">
               <LanguageSelector />
               {mainNavigation.map((item) => (
                 <Link href={item.href} key={item.href}>
