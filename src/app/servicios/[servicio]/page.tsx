@@ -4,36 +4,25 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { ServiceDetailView } from "@/components/sections/detail-sections";
 import { serviceDetails } from "@/content/site-data";
 
-export type ServicePageProps = {
-  params: Promise<{ servicio: string }>;
+type ServiceSlug = keyof typeof serviceDetails;
+
+type ServicePageProps = {
+  params: Promise<{
+    servicio: ServiceSlug;
+  }>;
 };
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
   const { servicio } = await params;
   const data = serviceDetails[servicio];
-  const defaultTitle = "Servicio técnico | Tranluz";
-  const defaultDescription = "Servicio técnico integral, trazabilidad, revisiones certificadas y repuestos para equipos eléctricos.";
 
-  if (!data) {
-    return {
-      title: defaultTitle,
-      description: defaultDescription,
-    };
-  }
+  const defaultTitle = "Servicio técnico | Tranluz";
+  const defaultDescription =
+    "Servicio técnico integral, trazabilidad, revisiones certificadas y repuestos para tacógrafos.";
 
   return {
-    title: data.title,
-    description: data.intro,
-    openGraph: {
-      title: data.title,
-      description: data.intro,
-      type: "website",
-    },
-    twitter: {
-      title: data.title,
-      description: data.intro,
-      card: "summary_large_image",
-    },
+    title: data?.title ?? defaultTitle,
+    description: data?.intro ?? defaultDescription,
   };
 }
 
