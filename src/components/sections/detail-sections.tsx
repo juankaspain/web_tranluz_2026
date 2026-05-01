@@ -100,7 +100,15 @@ export function ServiceDetailView({ serviceSlug }: { serviceSlug: string }) {
       <section className="section detail-layout">
         <aside className="detail-aside">
           {"logo" in service && service.logo ? (
-            <img className="service-logo" src={service.logo} alt="" loading="lazy" />
+            <Image
+              className="service-logo"
+              src={service.logo}
+              alt=""
+              width={180}
+              height={72}
+              loading="lazy"
+              sizes="180px"
+            />
           ) : null}
           <h2>Alcance operativo</h2>
           <div className="pill-list">
@@ -250,8 +258,22 @@ export function TrainingLanding() {
       />
       <section className="section training-showcase">
         <div className="training-media">
-          <img src={trainingIntro.logo} alt="" loading="lazy" decoding="async" />
-          <img src={trainingIntro.imageTwo} alt="" loading="lazy" decoding="async" />
+        <Image
+          src={trainingIntro.logo}
+          alt=""
+          width={220}
+          height={88}
+          loading="lazy"
+          sizes="(max-width: 768px) 160px, 220px"
+        />
+        <Image
+          src={trainingIntro.imageTwo}
+          alt="Formación práctica de Tranluz"
+          width={960}
+          height={720}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 480px"
+        />
         </div>
         <div id="cursos" className="course-grid">
           {courses.map((course) => (
