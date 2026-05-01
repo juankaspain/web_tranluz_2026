@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ServiceFooter } from "@/components/layout/site-footer";
+import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { ServiceDetailView } from "@/components/sections/detail-sections";
 import { serviceDetails } from "@/content/site-data";
