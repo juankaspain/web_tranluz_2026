@@ -72,193 +72,188 @@ export function SiteHeader() {
   // Bloquear scroll del body al abrir menú móvil
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
   return (
     <>
       <a href="#contenido" className="skip-link">Saltar al contenido</a>
 
-      {/* —— Topbar —— */}
-      <div className="topbar">
-        <span>{brand.claim}</span>
-        <nav aria-label="Utilidades" className="topbar-nav">
-          <a href={assets.catalogUrl} className="topbar-link">
-            Catálogo 2025/2026
-          </a>
-          <a href={`tel:${brand.phone}`} className="topbar-link topbar-phone">
-            {brand.phone}
-          </a>
-        </nav>
-      </div>
+      <div className={`site-header${scrolled ? " site-header--scrolled" : ""}`} ref={navRef}>
 
-      {/* —— Navbar —— */}
-      <header
-        ref={navRef}
-        className={`navbar${scrolled ? " navbar--scrolled" : ""}`}
-        role="banner"
-      >
-        {/* Logo */}
-        <Link href="/" aria-label="Tranluz – inicio" className="navbar-logo">
-          <Image
-            src={assets.logo}
-            alt="Tranluz"
-            width={120}
-            height={36}
-            priority
-          />
-        </Link>
-
-        {/* Desktop nav */}
-        <nav aria-label="Principal" className="navbar-nav">
-          {mainNavigation.map((item) => {
-            const hasChildren = item.children && item.children.length > 0;
-            const isOpen = openMega === item.href;
-            return (
-              <div key={item.href} className="nav-item">
-                {hasChildren ? (
-                  <>
-                    <button
-                      className="nav-btn"
-                      aria-haspopup="true"
-                      aria-expanded={isOpen}
-                      onClick={() => setOpenMega(isOpen ? null : item.href)}
-                    >
-                      {item.label}
-                      <ChevronDown size={14} aria-hidden="true" />
-                    </button>
-                    {isOpen && (
-                      <ul className="mega-menu" role="menu">
-                        {item.children!.map((child) => (
-                          <li key={child.href} role="none">
-                            <Link
-                              href={child.href}
-                              role="menuitem"
-                              className="mega-menu-item"
-                              onClick={() => setOpenMega(null)}
-                            >
-                              {navIcon(child.href)}
-                              {child.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </>
-                ) : (
-                  <Link href={item.href} className="nav-link">
-                    {item.label}
-                  </Link>
-                )}
-              </div>
-            );
-          })}
-        </nav>
-
-        {/* Buscador */}
-        <form role="search" className="navbar-search">
-          <Search size={16} aria-hidden="true" className="search-icon" />
-          <input
-            type="search"
-            placeholder="Buscar equipo…"
-            aria-label="Buscar equipo"
-            autoComplete="off"
-            className="search-input"
-          />
-        </form>
-
-        {/* Acciones header */}
-        <div className="navbar-actions">
-          <ThemeToggle />
-          <LanguageSelector />
-          <a href="/presupuesto" className="btn-presupuesto">
-            Presupuesto
-          </a>
-        </div>
-
-        {/* Botón hamburguesa móvil */}
-        <button
-          className="hamburger"
-          aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-          aria-controls={mobileMenuId}
-          aria-expanded={mobileOpen}
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          {mobileOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-        </button>
-      </header>
-
-      {/* —— Mega-strip: accesos directos clave —— */}
-      <nav aria-label="Accesos rápidos" className="mega-strip">
-        {megaItems.map((mi) => (
-          <Link key={mi.href} href={mi.href} className="mega-strip-item">
-            {mi.icon}
-            <span>
-              <strong>{mi.label}</strong>
-              <span>{mi.sub}</span>
-            </span>
-          </Link>
-        ))}
-      </nav>
-
-      {/* —— Menú móvil —— */}
-      {mobileOpen && (
-        <div
-          id={mobileMenuId}
-          className="mobile-menu"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Menú de navegación"
-        >
-          <button
-            className="mobile-menu-close"
-            onClick={() => setMobileOpen(false)}
-            aria-label="Cerrar menú"
-          >
-            <X aria-hidden="true" />
-          </button>
-          <nav aria-label="Menú móvil principal">
-            {mainNavigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="mobile-nav-link"
-                onClick={() => setMobileOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
+        {/* —— Topbar —— */}
+        <div className="topbar">
+          <span>{brand.claim}</span>
+          <nav aria-label="Topbar">
+            <Link href={assets.catalogUrl} target="_blank" rel="noopener">Catálogo 2025/2026</Link>
+            <a href={`tel:${brand.phone}`}>{brand.phone}</a>
           </nav>
-          <div className="mobile-mega-grid">
-            {megaItems.map((mi) => (
-              <Link
-                key={mi.href}
-                href={mi.href}
-                className="mobile-mega-item"
-                onClick={() => setMobileOpen(false)}
-                style={{ display: "flex", alignItems: "center", gap: "12px", padding: "12px", border: "1px solid var(--line)", borderRadius: "var(--radius)", color: "var(--text-muted)" }}
-              >
-                {mi.icon}
-                <span>
-                  <strong>{mi.label}</strong>
-                  <span>{mi.sub}</span>
-                </span>
-              </Link>
-            ))}
-          </div>
         </div>
-      )}
 
-      {/* Overlay */}
-      {mobileOpen && (
-        <div
-          className="mobile-overlay"
-          aria-hidden="true"
-          onClick={() => setMobileOpen(false)}
-        />
-      )}
+        {/* —— Navbar —— */}
+        <header className={`navbar`} role="banner">
+
+          {/* Logo */}
+          <Link href="/" aria-label="Tranluz - inicio" className="brand-mark">
+            <Image
+              src={assets.logo}
+              alt="Tranluz"
+              width={120}
+              height={36}
+              priority
+            />
+          </Link>
+
+          {/* Desktop nav */}
+          <nav aria-label="Principal" className="main-nav">
+            {mainNavigation.map((item) => {
+              const hasChildren = item.children && item.children.length > 0;
+              const isOpen = openMega === item.href;
+              return (
+                <div key={item.href} className="nav-item">
+                  {hasChildren ? (
+                    <>
+                      <button
+                        className="nav-btn"
+                        aria-haspopup="true"
+                        aria-expanded={isOpen}
+                        onClick={() => setOpenMega(isOpen ? null : item.href)}
+                      >
+                        {item.label}
+                        <ChevronDown size={14} aria-hidden="true" />
+                      </button>
+                      {isOpen && (
+                        <ul className="mega-menu" role="menu">
+                          {item.children!.map((child) => (
+                            <li key={child.href} role="none">
+                              <Link
+                                href={child.href}
+                                role="menuitem"
+                                className="mega-menu-item"
+                                onClick={() => setOpenMega(null)}
+                              >
+                                {navIcon(child.href)}
+                                {child.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </>
+                  ) : (
+                    <Link href={item.href} className="nav-link">
+                      {item.label}
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
+
+          {/* Buscador */}
+          <form role="search" className="site-search">
+            <Search size={16} aria-hidden="true" className="search-icon" />
+            <input
+              type="search"
+              placeholder="Buscar equipo…"
+              aria-label="Buscar equipo"
+              autoComplete="off"
+              className="search-input"
+            />
+          </form>
+
+          {/* Acciones header */}
+          <div className="header-actions">
+            <ThemeToggle />
+            <LanguageSelector />
+            <Link href="/presupuesto" className="button button-primary">
+              Presupuesto
+            </Link>
+          </div>
+
+          {/* Botón hamburguesa móvil */}
+          <button
+            className="icon-button"
+            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-controls={mobileMenuId}
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+          </button>
+
+        </header>
+
+        {/* —— Mega-strip: accesos directos clave —— */}
+        <nav aria-label="Accesos rápidos" className="mega-strip">
+          {megaItems.map((mi) => (
+            <Link key={mi.href} href={mi.href} className="mega-strip-item">
+              <span className="mega-icon">{mi.icon}</span>
+              <span>
+                <strong style={{ display: "block", color: "var(--text)", fontSize: "0.9rem" }}>{mi.label}</strong>
+                <span style={{ fontSize: "0.78rem", color: "var(--text-soft)" }}>{mi.sub}</span>
+              </span>
+            </Link>
+          ))}
+        </nav>
+
+        {/* —— Menú móvil —— */}
+        {mobileOpen && (
+          <div
+            id={mobileMenuId}
+            className="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menú de navegación"
+          >
+            <button
+              className="mobile-menu-close"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Cerrar menú"
+            >
+              <X aria-hidden="true" />
+            </button>
+            <nav aria-label="Menú móvil principal">
+              {mainNavigation.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="mobile-nav-link"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            <div className="mobile-mega-grid">
+              {megaItems.map((mi) => (
+                <Link
+                  key={mi.href}
+                  href={mi.href}
+                  className="mobile-mega-item"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {mi.icon}
+                  <span>
+                    <strong>{mi.label}</strong>
+                    <span>{mi.sub}</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Overlay */}
+        {mobileOpen && (
+          <div
+            className="mobile-overlay"
+            aria-hidden="true"
+            onClick={() => setMobileOpen(false)}
+          />
+        )}
+
+      </div>
     </>
   );
 }
