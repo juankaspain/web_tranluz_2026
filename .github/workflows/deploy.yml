@@ -24,16 +24,18 @@ jobs:
       - name: Build Next.js app
         run: npm run build
         env:
-          NODE_ENV: production
+          NEXT_PUBLIC_SITE_URL: https://www.tranluz.es
 
       - name: Deploy via FTP
+        if: ${{ secrets.FTP_SERVER != '' }}
+        continue-on-error: true
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./.next/
-          server-dir: /domains/deepskyblue-eel-381189.hostingersite.com/public_html/.next/
+          local-dir: ./out/
+          server-dir: /public_html/
           exclude: |
             **/.git*
             **/.git*/**
