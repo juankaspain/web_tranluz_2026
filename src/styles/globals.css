@@ -3770,4 +3770,50 @@ img.lazy.loaded {
   }
 }
 
+/* ====== LAYOUT FIXES ====== */
+
+/* Fix mega-strip to show 6 items */
+.mega-strip {
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+}
+
+/* Fix main-nav to fit all 7 items by reducing padding */
+.main-nav a, .main-nav button {
+  padding: 8px 5px !important;
+  font-size: 0.83rem !important;
+}
+
+/* Fix footer-main to show 5 columns: brand + 3 nav + contact */
+.footer-main {
+  grid-template-columns: minmax(200px, 1fr) repeat(3, minmax(110px, 0.6fr)) minmax(220px, 0.85fr) !important;
+  gap: 22px !important;
+}
+
+/* Ensure ops-grid is always visible as grid */
+.ops-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+  gap: 14px !important;
+}
+
+/* Responsive: mega-strip 3 cols on medium screens */
+@media (max-width: 1120px) {
+  .mega-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  .footer-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .mega-strip {
+    display: none !important;
+  }
+  .footer-main {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
 /* ── End Iter-9 ── */
