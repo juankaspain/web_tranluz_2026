@@ -11,6 +11,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "www.tranluz.es" },
       { protocol: "https", hostname: "deepskyblue-eel-381189.hostingersite.com" },
+              { protocol: "https", hostname: "image.pollinations.ai" },
     ],
   },
 
