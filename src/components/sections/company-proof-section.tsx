@@ -16,7 +16,18 @@ const proofPoints = [
   { icon: Users2, text: "Equipo técnico cualificado y formación especializada" },
 ];
 
-const partnerBrands = ["Tesmec", "Plumett", "Work Italia", "3M", "Tractel", "Cembre"];
+/* ================================================================
+   Partner brand badges – inline HTML, sin dependencia de archivos SVG
+   externos. Colores corporativos oficiales de cada marca.
+   ================================================================ */
+const partnerBrands: Array<{ name: string; bg: string; sub: string }> = [
+  { name: "Tesmec",      bg: "#C8102E", sub: "GROUP" },
+  { name: "Plumett",     bg: "#005BAC", sub: "TOOLS" },
+  { name: "Work Italia", bg: "#C15000", sub: "SAFETY" },
+  { name: "3M",          bg: "#B00000", sub: "SCIENCE" },
+  { name: "Tractel",     bg: "#1A3F6F", sub: "LIFTING" },
+  { name: "Cembre",      bg: "#004d26", sub: "CONNECT" },
+];
 
 export function CompanyProofSection() {
   return (
@@ -38,6 +49,7 @@ export function CompanyProofSection() {
           gap: "64px",
           alignItems: "center",
         }}
+        className="company-proof-grid"
       >
         {/* Left: Stats panel */}
         <div
@@ -58,182 +70,213 @@ export function CompanyProofSection() {
               left: 0,
               right: 0,
               height: "3px",
-              background: "linear-gradient(90deg, #E8820C, #ff9500)",
-              borderRadius: "20px 20px 0 0",
+              background: "linear-gradient(90deg, var(--brand), #e8700a)",
             }}
           />
+
           <p
             style={{
-              fontSize: "0.7rem",
-              fontWeight: 700,
-              letterSpacing: "0.12em",
+              fontSize: "0.72rem",
+              fontWeight: 800,
+              letterSpacing: "0.14em",
               textTransform: "uppercase",
-              color: "#E8820C",
-              marginBottom: "24px",
+              color: "var(--brand)",
+              marginBottom: "32px",
             }}
           >
             Tranluz en números
           </p>
+
+          {/* Stats grid */}
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gap: "20px",
-              marginBottom: "36px",
+              gap: "24px",
+              marginBottom: "40px",
             }}
           >
             {stats.map((s) => (
-              <div
-                key={s.value}
-                style={{
-                  background: "rgba(255,255,255,0.05)",
-                  borderRadius: "12px",
-                  padding: "20px",
-                  border: "1px solid rgba(255,255,255,0.08)",
-                }}
-              >
-                <span
+              <div key={s.value}>
+                <p
                   style={{
-                    display: "block",
-                    fontSize: "2rem",
-                    fontWeight: 800,
+                    fontSize: "2.6rem",
+                    fontWeight: 900,
                     color: "#ffffff",
                     lineHeight: 1,
-                    marginBottom: "6px",
+                    margin: 0,
+                    fontFamily: "\"Archivo Variable\", sans-serif",
                   }}
                 >
                   {s.value}
-                </span>
-                <span
+                </p>
+                <p
                   style={{
-                    fontSize: "0.75rem",
-                    color: "rgba(255,255,255,0.5)",
+                    fontSize: "0.8rem",
+                    color: "rgba(238,243,245,0.6)",
+                    marginTop: "4px",
+                    margin: "4px 0 0",
                   }}
                 >
                   {s.label}
-                </span>
+                </p>
               </div>
             ))}
           </div>
-          <Link
-            href="/empresa"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              padding: "12px 24px",
-              background: "#E8820C",
-              color: "#ffffff",
-              fontWeight: 600,
-              fontSize: "0.9rem",
-              borderRadius: "50px",
-              textDecoration: "none",
-            }}
-          >
-            Conocer Tranluz
-          </Link>
-        </div>
 
-        {/* Right: Copy + proof points */}
-        <div>
-          <p
-            style={{
-              fontSize: "0.7rem",
-              fontWeight: 700,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "var(--brand, #E8820C)",
-              marginBottom: "16px",
-            }}
-          >
-            Confianza industrial
-          </p>
-          <h2
-            style={{
-              fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
-              fontWeight: 800,
-              color: "var(--heading)",
-              lineHeight: 1.2,
-              marginBottom: "16px",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Desde Sevilla para empresas que necesitan precisión, respuesta y criterio técnico.
-          </h2>
-          <p
-            style={{
-              fontSize: "1rem",
-              color: "var(--text-muted)",
-              lineHeight: 1.7,
-              marginBottom: "28px",
-            }}
-          >
-            Tranluz nace en 1987 con el propósito de ser referente en equipos, máquinas y útiles
-            especiales para el sector eléctrico y de telecomunicaciones. Más de 35 años de
-            especialización avalan cada presupuesto, cada revisión y cada equipo alquilado.
-          </p>
+          {/* Proof points */}
           <ul
             role="list"
-            style={{
-              listStyle: "none",
-              padding: 0,
-              margin: "0 0 28px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-            }}
+            style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}
           >
             {proofPoints.map((p) => {
               const Icon = p.icon;
               return (
                 <li
                   key={p.text}
-                  role="listitem"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    fontSize: "0.9rem",
-                    color: "var(--text)",
-                  }}
+                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
                 >
                   <Icon
                     size={16}
-                    style={{ color: "var(--brand, #E8820C)", flexShrink: 0 }}
+                    color="var(--brand)"
                     aria-hidden="true"
+                    style={{ flexShrink: 0 }}
                   />
-                  {p.text}
+                  <span style={{ fontSize: "0.85rem", color: "rgba(238,243,245,0.8)" }}>
+                    {p.text}
+                  </span>
                 </li>
               );
             })}
           </ul>
+        </div>
+
+        {/* Right: Partners + CTA */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
+          <div>
+            <p
+              style={{
+                fontSize: "0.72rem",
+                fontWeight: 800,
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "var(--brand)",
+                marginBottom: "8px",
+              }}
+            >
+              Marcas distribuidoras
+            </p>
+            <h2
+              style={{
+                fontSize: "clamp(1.6rem, 3vw, 2.2rem)",
+                fontWeight: 900,
+                color: "var(--text)",
+                lineHeight: 1.15,
+                margin: "0 0 16px",
+              }}
+            >
+              Partner oficial de las marcas líderes del sector
+            </h2>
+            <p
+              style={{
+                fontSize: "0.95rem",
+                color: "var(--text-muted)",
+                lineHeight: 1.65,
+                margin: 0,
+              }}
+            >
+              Colaboramos directamente con los principales fabricantes de equipos
+              eléctricos, herramientas industriales y EPIs para ofrecerte garantía
+              oficial, stock permanente y soporte técnico de primer nivel.
+            </p>
+          </div>
+
+          {/* Partner brand badges – HTML inline, sin imagen externa */}
           <div
-            aria-label="Partners oficiales"
+            role="list"
+            aria-label="Marcas distribuidoras"
             style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "8px",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "12px",
             }}
           >
-            {partnerBrands.map((brand) => (
-              <span
-                key={brand}
+            {partnerBrands.map((b) => (
+              <div
+                key={b.name}
+                role="listitem"
+                aria-label={b.name}
                 style={{
-                  padding: "4px 12px",
-                  borderRadius: "20px",
-                  border: "1px solid var(--line)",
-                  fontSize: "0.78rem",
-                  fontWeight: 600,
-                  color: "var(--text-muted)",
-                  background: "var(--surface)",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: b.bg,
+                  borderRadius: "8px",
+                  padding: "10px 8px",
+                  gap: "2px",
+                  minHeight: "52px",
                 }}
               >
-                {brand}
-              </span>
+                <span
+                  style={{
+                    color: "#ffffff",
+                    fontFamily: "\"Arial Black\", Arial, sans-serif",
+                    fontWeight: 900,
+                    fontSize: b.name.length > 6 ? "0.75rem" : "0.95rem",
+                    letterSpacing: "0.05em",
+                    lineHeight: 1.1,
+                    whiteSpace: "nowrap",
+                    textAlign: "center",
+                  }}
+                >
+                  {b.name}
+                </span>
+                <span
+                  style={{
+                    color: "rgba(255,255,255,0.7)",
+                    fontFamily: "Arial, sans-serif",
+                    fontWeight: 600,
+                    fontSize: "0.55rem",
+                    letterSpacing: "0.06em",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {b.sub}
+                </span>
+              </div>
             ))}
+          </div>
+
+          {/* CTA */}
+          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+            <Link
+              href="/empresa"
+              className="button-primary"
+              aria-label="Conocer la historia de Tranluz"
+            >
+              Conoce nuestra historia
+            </Link>
+            <Link
+              href="/empresa#partners"
+              className="button-secondary"
+              aria-label="Ver todos los partners de Tranluz"
+            >
+              Ver todos los partners
+            </Link>
           </div>
         </div>
       </div>
+
+      {/* Responsive: apilar en móvil */}
+      <style>{`
+        @media (max-width: 768px) {
+          .company-proof-grid {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
