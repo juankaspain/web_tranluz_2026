@@ -1,4 +1,4 @@
-import { Award, Clock, MapPin, ShieldCheck, Wrench, Users } from "lucide-react";
+import { Award, Clock, MapPin, ShieldCheck, Users, Wrench } from "lucide-react";
 
 const credentials = [
   {
@@ -53,144 +53,111 @@ export function TrustBandSection() {
     <section
       aria-label="Credenciales y partners"
       style={{
-        background: "var(--surface)",
+        background: "var(--bg-muted)",
         borderTop: "1px solid var(--line)",
         borderBottom: "1px solid var(--line)",
         padding: "48px 0",
       }}
     >
+      {/* Credenciales */}
       <div
         style={{
-          maxWidth: "1200px",
+          width: "min(100%, var(--max-width))",
           margin: "0 auto",
           padding: "0 24px",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "48px",
-          alignItems: "start",
         }}
       >
-        {/* Credentials column */}
-        <div>
-          <p
-            style={{
-              fontSize: "0.7rem",
-              fontWeight: 700,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "var(--text-muted)",
-              marginBottom: "20px",
-            }}
-          >
-            Por qué Tranluz
-          </p>
-          <ul
-            role="list"
-            style={{
-              listStyle: "none",
-              padding: 0,
-              margin: 0,
-              display: "flex",
-              flexDirection: "column",
-              gap: "12px",
-            }}
-          >
-            {credentials.map((c) => {
-              const Icon = c.icon;
-              return (
-                <li
-                  key={c.value}
-                  role="listitem"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "12px",
-                    padding: "10px 14px",
-                    borderRadius: "8px",
-                    background: "var(--bg)",
-                    border: "1px solid var(--line)",
-                  }}
-                >
-                  <Icon
-                    size={18}
-                    style={{ color: c.color, flexShrink: 0 }}
-                    aria-hidden="true"
-                  />
-                  <span style={{ fontSize: "0.85rem", color: "var(--text)" }}>
-                    <strong style={{ color: "var(--heading)", marginRight: "6px" }}>
-                      {c.value}
-                    </strong>
-                    {c.label}
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-
-        {/* Partners column */}
-        <div>
-          <p
-            style={{
-              fontSize: "0.7rem",
-              fontWeight: 700,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "var(--text-muted)",
-              marginBottom: "20px",
-            }}
-          >
-            Partners oficiales
-          </p>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "10px",
-            }}
-          >
-            {partners.map((p) => (
+        <p className="eyebrow" style={{ marginBottom: "20px", textAlign: "center" }}>
+          Por qué Tranluz
+        </p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+            gap: "12px",
+            marginBottom: "48px",
+          }}
+        >
+          {credentials.map((c) => {
+            const Icon = c.icon;
+            return (
               <div
-                key={p.name}
+                key={c.value}
                 style={{
                   display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "14px 10px",
-                  borderRadius: "10px",
-                  background: p.bg,
-                  border: `1.5px solid ${p.color}22`,
-                  gap: "4px",
-                  minHeight: "70px",
-                  transition: "box-shadow 0.2s",
+                  alignItems: "flex-start",
+                  gap: "12px",
+                  border: "1px solid var(--line)",
+                  borderRadius: "var(--radius-lg)",
+                  background: "var(--bg-elevated)",
+                  padding: "16px",
+                  boxShadow: "var(--shadow-soft)",
                 }}
               >
-                <span
+                <div
                   style={{
-                    fontSize: "1rem",
-                    fontWeight: 800,
-                    color: p.color,
-                    letterSpacing: "-0.01em",
-                    lineHeight: 1,
+                    display: "grid",
+                    placeItems: "center",
+                    width: "38px",
+                    height: "38px",
+                    borderRadius: "999px",
+                    background: `color-mix(in srgb, ${c.color} 14%, transparent)`,
+                    color: c.color,
+                    flexShrink: 0,
                   }}
                 >
-                  {p.name}
-                </span>
-                <span
-                  style={{
-                    fontSize: "0.62rem",
-                    color: "#666",
-                    textAlign: "center",
-                    lineHeight: 1.2,
-                    marginTop: "2px",
-                  }}
-                >
-                  {p.sector}
-                </span>
+                  <Icon size={18} aria-hidden="true" />
+                </div>
+                <div>
+                  <strong style={{ display: "block", fontSize: "0.94rem", lineHeight: 1.2 }}>
+                    {c.value}
+                  </strong>
+                  <span style={{ display: "block", marginTop: "4px", color: "var(--text-muted)", fontSize: "0.8rem", lineHeight: 1.45 }}>
+                    {c.label}
+                  </span>
+                </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
+
+        {/* Partners */}
+        <p className="eyebrow" style={{ marginBottom: "16px", textAlign: "center" }}>
+          Partners oficiales
+        </p>
+        <div
+          aria-label="Partners oficiales"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
+            gap: "10px",
+          }}
+        >
+          {partners.map((p) => (
+            <div
+              key={p.name}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "6px",
+                border: `1px solid ${p.color}33`,
+                borderRadius: "var(--radius-lg)",
+                background: p.bg,
+                padding: "18px 12px",
+                transition: "transform 180ms ease, box-shadow 180ms ease",
+                cursor: "default",
+              }}
+            >
+              <strong style={{ color: p.color, fontSize: "1.1rem", fontWeight: 900, letterSpacing: "0.01em" }}>
+                {p.name}
+              </strong>
+              <span style={{ color: "#52606d", fontSize: "0.76rem", textAlign: "center" }}>
+                {p.sector}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
