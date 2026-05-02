@@ -1,92 +1,93 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, FileText, PhoneCall, ShieldCheck, Wrench, Package } from "lucide-react";
+import { ArrowRight, FileText, Package, PhoneCall, Wrench } from "lucide-react";
 import { brand } from "@/config/brand";
 import { assets } from "@/content/assets";
-import { partnerBrands, proofPoints } from "@/content/home";
+import { partnerBrands } from "@/content/home";
+
+const heroMetrics = [
+  { value: "+35", label: "años de especializ." },
+  { value: "4", label: "líneas de servicio" },
+  { value: "B2B", label: "sector eléctrico" },
+];
 
 export function HeroSection() {
   return (
-    <section className="hero-section" aria-labelledby="hero-title">
-      <div className="hero-media" aria-hidden="true">
-        <Image
-          src={assets.hero}
-          alt="Obras de tendido eléctrico con equipos Tranluz"
-          fill
-          priority
-          sizes="100vw"
-        />
-      </div>
-      <div className="hero-copy">
-        <p className="eyebrow">Especialistas desde {brand.founded} · Sevilla</p>
-        <h1 id="hero-title">Equipos, alquiler y soporte técnico para obras eléctricas críticas.</h1>
-        <p>
-          Catálogo técnico, servicio oficial, revisiones ITS, formación,
-          alquiler y trazabilidad desde un único partner en Sevilla.
-        </p>
-        <nav className="hero-intent" aria-label="¿Qué necesitas hoy?">
-          <Link className="intent-card intent-card-primary" href="/productos">
-            <Package aria-hidden="true" size={22} />
-            <span>
-              <strong>Comprar equipos</strong>
-              <small>Catálogo por familias, marcas y referencias</small>
-            </span>
-            <ArrowRight aria-hidden="true" size={16} />
-          </Link>
-          <Link className="intent-card" href="/alquiler">
-            <FileText aria-hidden="true" size={22} />
-            <span>
-              <strong>Solicitar alquiler</strong>
-              <small>Cabrestantes y frenadoras para obra</small>
-            </span>
-            <ArrowRight aria-hidden="true" size={16} />
-          </Link>
-          <Link className="intent-card" href="/servicios/its-servicio-tecnico">
-            <Wrench aria-hidden="true" size={22} />
-            <span>
-              <strong>Programar revisión / ITS</strong>
-              <small>Mantenimiento preventivo y certificación</small>
-            </span>
-            <ArrowRight aria-hidden="true" size={16} />
-          </Link>
-        </nav>
-        <div className="hero-actions">
-          <Link className="button button-primary" href="/presupuesto">
-            Solicitar presupuesto
-            <ArrowRight aria-hidden="true" size={18} />
-          </Link>
-          <a className="button button-ghost" href={`tel:${brand.phone.replaceAll(" ", "")}`}>
-            Llamar ahora
-            <PhoneCall aria-hidden="true" size={18} />
-          </a>
+    <>
+      <section className="hero-section" aria-labelledby="hero-title">
+        <div className="hero-media" aria-hidden="true">
+          <Image
+            src={assets.hero}
+            alt="Obras de tendido eléctrico con equipos Tranluz"
+            fill
+            priority
+            sizes="100vw"
+          />
         </div>
-        <div className="brand-row" aria-label="Fabricantes y partners destacados">
-          {partnerBrands.map((partner) => (
-            <span key={partner}>{partner}</span>
-          ))}
-        </div>
-      </div>
-      <div className="hero-command" role="complementary" aria-label="Panel operativo Tranluz">
-        <p className="command-label">
-          <ShieldCheck aria-hidden="true" size={14} />
-          Panel operativo Tranluz
-        </p>
-        <div className="command-card">
-          <ShieldCheck aria-hidden="true" size={22} />
-          <div>
-            <span>Operación segura</span>
-            <strong>Compra, alquiler, revisión y formación desde un único partner.</strong>
+
+        <div className="hero-copy">
+          <p className="eyebrow">Especialistas desde {brand.founded} · Sevilla</p>
+          <h1 id="hero-title">Equipos, alquiler y soporte técnico para obras eléctricas críticas.</h1>
+          <p>
+            Catálogo técnico, servicio oficial, revisiones ITS, formación,{" "}
+            alquiler y trazabilidad desde un único partner en Sevilla.
+          </p>
+
+          <div className="hero-metrics" aria-label="Datos clave Tranluz">
+            {heroMetrics.map((m) => (
+              <div className="hero-metric" key={m.label}>
+                <strong>{m.value}</strong>
+                <span>{m.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <nav className="hero-intent" aria-label="¿Qué necesitas hoy?">
+            <Link className="intent-card intent-card-primary" href="/productos">
+              <Package aria-hidden="true" size={22} />
+              <span>
+                <strong>Comprar equipos</strong>
+                <small>Catálogo por familias, marcas y referencias</small>
+              </span>
+              <ArrowRight aria-hidden="true" size={16} />
+            </Link>
+
+            <Link className="intent-card" href="/alquiler">
+              <Wrench aria-hidden="true" size={22} />
+              <span>
+                <strong>Solicitar alquiler</strong>
+                <small>Cabrestantes y frenadoras para obra</small>
+              </span>
+              <ArrowRight aria-hidden="true" size={16} />
+            </Link>
+
+            <Link className="intent-card" href="/servicios/its-servicio-tecnico">
+              <FileText aria-hidden="true" size={22} />
+              <span>
+                <strong>Programar revisión / ITS</strong>
+                <small>Mantenimiento preventivo y certificación</small>
+              </span>
+              <ArrowRight aria-hidden="true" size={16} />
+            </Link>
+          </nav>
+
+          <div className="hero-actions">
+            <Link className="button button-secondary" href="/presupuesto">
+              Solicitar presupuesto
+            </Link>
+            <a className="button button-ghost" href={`tel:${brand.phone.replaceAll(" ", "")}`}>
+              <PhoneCall aria-hidden="true" size={18} />
+              Llamar ahora
+            </a>
+          </div>
+
+          <div className="brand-row" aria-label="Partners oficiales">
+            {partnerBrands.map((partner) => (
+              <span key={partner}>{partner}</span>
+            ))}
           </div>
         </div>
-        <div className="metric-grid">
-          {proofPoints.map((point) => (
-            <div className="metric-card" key={point.value}>
-              <strong>{point.value}</strong>
-              <span>{point.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
