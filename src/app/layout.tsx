@@ -135,11 +135,11 @@ export default async function RootLayout({
         <meta name="ICBM" content="40.416775, -3.703790" />
       </head>
       <body>
-        <a href="#contenido" className="skip-link">Saltar al contenido</a>
+        
         <AutoTranslate />
         <StructuredData />
         <ActionDock />
-        <main id="contenido">{children}</main>
+                  {children}
       </body>
     </html>
   );
