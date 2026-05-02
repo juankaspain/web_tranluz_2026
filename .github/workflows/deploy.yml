@@ -27,7 +27,6 @@ jobs:
           NEXT_PUBLIC_SITE_URL: https://www.tranluz.es
 
       - name: Deploy via FTP
-        if: ${{ secrets.FTP_SERVER != '' }}
         continue-on-error: true
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
