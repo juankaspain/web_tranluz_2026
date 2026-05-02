@@ -16,23 +16,23 @@ export function ProductCategoryGrid({ query = "" }: ProductCategoryGridProps) {
   return (
     <section className="section">
       <div className="section-heading">
-        <p className="eyebrow">Catalogo tecnico</p>
-        <h2>Productos organizados por aplicacion, no por burocracia interna.</h2>
+        <p className="eyebrow">Catálogo técnico</p>
+        <h2>Productos organizados por aplicación, no por burocracia interna.</h2>
         <p>
-          Alta tension, tendido, fibra, seguridad, hidraulica y herramientas en
-          una taxonomia preparada para busqueda, filtros y ficha tecnica.
+          Alta tensión, tendido, fibra, seguridad, hidráulica y herramientas en
+          una taxonomía preparada para búsqueda, filtros y ficha técnica.
         </p>
       </div>
       {query ? (
         <div className="search-feedback" role="status">
-          <strong>Busqueda activa</strong>
+          <strong>Búsqueda activa</strong>
           <span>
             {visibleCategories.length > 0
-              ? `Resultados para "${query}" en categorias tecnicas.`
-              : `No hay coincidencia directa para "${query}". Te mostramos categorias relacionadas y acceso a presupuesto tecnico.`}
+              ? `Resultados para «${query}» en categorías técnicas.`
+              : `No hay coincidencia directa para «${query}». Te mostramos categorías relacionadas y acceso a presupuesto técnico.`}
           </span>
           <a className="button button-secondary" href="/presupuesto">
-            Pedir ayuda tecnica
+            Pedir ayuda técnica
             <ArrowRight aria-hidden="true" size={16} />
           </a>
         </div>
