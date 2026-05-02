@@ -52,32 +52,71 @@ export function OperationsSection() {
         <h2 id="ops-heading">Todo lo que necesita una empresa eléctrica o de telecomunicaciones, en un mismo lugar.</h2>
         <p>Cinco servicios integrados. Un único partner en Sevilla.</p>
       </div>
-
-      <div className="ops-grid" role="list">
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+          gap: "16px",
+          paddingTop: "28px",
+        }}
+        role="list"
+      >
         {ops.map((op) => {
           const Icon = op.icon;
           return (
             <Link
-              className="ops-card"
-              href={op.href}
               key={op.href}
+              href={op.href}
               role="listitem"
-              aria-label={op.title}
+              style={{
+                display: "grid",
+                alignContent: "space-between",
+                minHeight: "200px",
+                border: "1px solid var(--line)",
+                borderRadius: "var(--radius-lg)",
+                background: "var(--bg-elevated)",
+                padding: "22px",
+                boxShadow: "var(--shadow-soft)",
+                textDecoration: "none",
+                color: "inherit",
+                transition: "transform 0.18s ease, border-color 0.18s ease",
+              }}
             >
               <div>
                 <div
-                  className="ops-card-icon"
-                  style={{ background: `color-mix(in srgb, ${op.color} 14%, transparent)`, color: op.color }}
-                  aria-hidden="true"
+                  style={{
+                    display: "grid",
+                    placeItems: "center",
+                    width: "44px",
+                    height: "44px",
+                    borderRadius: "999px",
+                    background: "var(--brand-soft)",
+                    color: op.color,
+                    marginBottom: "14px",
+                  }}
                 >
-                  <Icon size={22} />
+                  <Icon aria-hidden="true" size={22} />
                 </div>
-                <h3>{op.title}</h3>
-                <p>{op.body}</p>
+                <strong style={{ fontSize: "1rem", fontWeight: 700, display: "block", marginBottom: "8px" }}>
+                  {op.title}
+                </strong>
+                <p style={{ fontSize: "0.875rem", color: "var(--text-muted)", lineHeight: 1.55, margin: 0 }}>
+                  {op.body}
+                </p>
               </div>
-              <span className="ops-cta" aria-hidden="true">
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  marginTop: "16px",
+                  color: "var(--brand)",
+                  fontSize: "0.85rem",
+                  fontWeight: 600,
+                }}
+              >
                 {op.cta}
-                <ArrowRight size={15} />
+                <ArrowRight aria-hidden="true" size={14} />
               </span>
             </Link>
           );
