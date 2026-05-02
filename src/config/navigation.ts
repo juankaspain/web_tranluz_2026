@@ -36,9 +36,3 @@ export const mainNavigation = [
   { label: "Soporte", href: "/soporte" },
   { label: "Empresa", href: "/empresa" }
 ];
-
-export const utilityNavigation = [
-  { label: "Solicitar presupuesto", href: "/presupuesto" },
-  { label: "Catálogos", href: "/soporte/catalogos" },
-  { label: "Contacto", href: "/contacto" }
-];
