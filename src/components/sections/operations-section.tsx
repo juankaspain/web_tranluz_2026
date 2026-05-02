@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight, ClipboardCheck, GraduationCap, Layers, PackageSearch, Wrench } from "lucide-react";
 
 const ops = [
@@ -6,58 +7,79 @@ const ops = [
     title: "Catálogo técnico",
     body: "Equipos y accesorios para tendido, altura, fibra óptica y trabajos eléctricos, con ficha técnica y referencia de fabricante.",
     href: "/productos",
-    cta: "Ver productos"
+    cta: "Ver productos",
+    color: "var(--brand)",
   },
   {
     icon: Wrench,
     title: "Servicio técnico oficial",
     body: "Revisiones preventivas ITS, calibración y mantenimiento en instalaciones o en obra. Informes completos y certificación.",
     href: "/servicios/its-servicio-tecnico",
-    cta: "Solicitar revisión"
+    cta: "Solicitar revisión",
+    color: "var(--field)",
   },
   {
     icon: ClipboardCheck,
     title: "Trazabilidad Revisa",
     body: "Control de EPIs, líneas de vida y equipos con alerta automática por caducidad o estado. Lectura desde móvil, tablet o PC.",
     href: "/servicios/revisa-trazabilidad",
-    cta: "Conocer Revisa"
+    cta: "Conocer Revisa",
+    color: "var(--safety)",
   },
   {
     icon: GraduationCap,
     title: "Formación especializada",
     body: "Cursos teórico-prácticos para operadores de tendido, trabajos en altura y fibra óptica. Formación in-company disponible.",
     href: "/formacion",
-    cta: "Ver formación"
+    cta: "Ver formación",
+    color: "var(--technical)",
   },
   {
     icon: Layers,
     title: "Alquiler para obra",
     body: "Cabrestantes y frenadoras disponibles por día, semana o mes. Asistencia técnica incluida para proyectos puntuales.",
     href: "/alquiler",
-    cta: "Consultar disponibilidad"
-  }
+    cta: "Consultar disponibilidad",
+    color: "var(--brand)",
+  },
 ];
 
 export function OperationsSection() {
   return (
-    <section className="section operations">
+    <section className="section" aria-labelledby="ops-heading">
       <div className="section-heading">
         <p className="eyebrow">Líneas de negocio</p>
-        <h2>Todo lo que necesita una empresa eléctrica o de telecomunicaciones, en un mismo lugar.</h2>
+        <h2 id="ops-heading">Todo lo que necesita una empresa eléctrica o de telecomunicaciones, en un mismo lugar.</h2>
+        <p>Cinco servicios integrados. Un único partner en Sevilla.</p>
       </div>
-      <div className="ops-grid">
+
+      <div className="ops-grid" role="list">
         {ops.map((op) => {
           const Icon = op.icon;
           return (
-            <a className="ops-card" href={op.href} key={op.href}>
-              <Icon aria-hidden="true" size={24} />
-              <h3>{op.title}</h3>
-              <p>{op.body}</p>
-              <span className="ops-cta">
+            <Link
+              className="ops-card"
+              href={op.href}
+              key={op.href}
+              role="listitem"
+              aria-label={op.title}
+            >
+              <div>
+                <div
+                  className="ops-card-icon"
+                  style={{ background: `color-mix(in srgb, ${op.color} 14%, transparent)`, color: op.color }}
+                  aria-hidden="true"
+                >
+                  <Icon size={22} />
+                </div>
+                <h3>{op.title}</h3>
+                <p>{op.body}</p>
+              </div>
+              <span className="ops-cta" aria-hidden="true">
                 {op.cta}
-                <ArrowRight aria-hidden="true" size={15} />
+                <ArrowRight size={15} />
               </span>
-            </a>
+            </Link>
           );
         })}
       </div>
