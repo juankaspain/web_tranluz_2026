@@ -2951,3 +2951,635 @@ address {
   letter-spacing: -0.02em;
   line-height: 1;
 }
+
+
+/* ============================================================
+   ITER-5: Dark mode refinado · Print styles · Skeleton loaders
+   · Color semántico para badges de servicio · Accesibilidad extra
+   ============================================================ */
+
+/* ─ Dark mode: transparencias más ricas ──────────────────────── */
+:root[data-theme="dark"] .quick-link,
+:root[data-theme="dark"] .content-card,
+:root[data-theme="dark"] .equipment-card,
+:root[data-theme="dark"] .overview-card,
+:root[data-theme="dark"] .course-card {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--bg-elevated) 94%, var(--brand)),
+    var(--bg-elevated)
+  );
+}
+
+:root[data-theme="dark"] .mega-strip a {
+  background: linear-gradient(145deg,
+    color-mix(in srgb, var(--bg-elevated) 82%, transparent),
+    color-mix(in srgb, var(--bg-muted) 65%, transparent)
+  );
+}
+
+:root[data-theme="dark"] .site-header {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--bg-elevated) 94%, transparent),
+    color-mix(in srgb, var(--bg-elevated) 86%, transparent)
+  ), var(--bg-elevated);
+  border-bottom-color: var(--line);
+}
+
+:root[data-theme="dark"] .hero-copy .button-secondary,
+:root[data-theme="dark"] .hero-copy .button-ghost {
+  border-color: rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.1);
+}
+
+:root[data-theme="dark"] .final-cta {
+  background: linear-gradient(135deg, rgba(189,80,14,0.85), rgba(8,10,14,0.97)), var(--bg-inverse);
+}
+
+/* ─ Color semántico para badges de servicio ─────────────────── */
+.badge-technical {
+  background: color-mix(in srgb, var(--technical) 14%, transparent);
+  color: var(--technical);
+  border-color: color-mix(in srgb, var(--technical) 28%, transparent);
+}
+.badge-field {
+  background: color-mix(in srgb, var(--field) 14%, transparent);
+  color: var(--field);
+  border-color: color-mix(in srgb, var(--field) 28%, transparent);
+}
+.badge-safety {
+  background: color-mix(in srgb, var(--safety) 14%, transparent);
+  color: var(--safety);
+  border-color: color-mix(in srgb, var(--safety) 28%, transparent);
+}
+.badge-brand {
+  background: var(--brand-soft);
+  color: var(--brand);
+  border-color: color-mix(in srgb, var(--brand) 28%, transparent);
+}
+
+.service-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.74rem;
+  font-weight: 880;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ─ Skeleton loader ─────────────────────────────────────── */
+@keyframes skeleton-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-muted) 25%,
+    color-mix(in srgb, var(--bg-muted) 55%, var(--bg-elevated)) 50%,
+    var(--bg-muted) 75%
+  );
+  background-size: 200% auto;
+  animation: skeleton-shimmer 1.6s linear infinite;
+  border-radius: var(--radius);
+  color: transparent;
+  user-select: none;
+  pointer-events: none;
+}
+.skeleton-text  { height: 1em; margin-bottom: 0.5em; }
+.skeleton-title { height: 1.5em; width: 60%; margin-bottom: 0.75em; }
+.skeleton-img   { width: 100%; min-height: 200px; border-radius: var(--radius-lg); }
+
+/* ─ Accesibilidad: alto contraste ────────────────────────── */
+@media (forced-colors: active) {
+  .button-primary {
+    border: 2px solid ButtonText;
+  }
+  .brand-mark,
+  .icon-button {
+    border: 1px solid ButtonText;
+  }
+  :focus-visible {
+    outline: 3px solid Highlight;
+  }
+}
+
+/* ─ Print styles ───────────────────────────────────────── */
+@media print {
+  .site-header,
+  .mobile-menu,
+  .action-dock,
+  .final-cta,
+  .footer-cta,
+  .hero-actions,
+  .hero-search {
+    display: none !important;
+  }
+
+  body {
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+    padding: 0;
+  }
+
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+
+  .section,
+  .hero-section {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+
+  a[href^="/"]::after {
+    content: " (https://www.tranluz.es" attr(href) ")";
+  }
+
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  .quick-link,
+  .content-card,
+  .service-card,
+  .equipment-card {
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+}
+
+/* ─ Mejora: transición de página suave (view transitions API) ─── */
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+::view-transition-old(root) {
+  animation: 220ms ease both fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 280ms ease both page-fade-in;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ─ Mejora: color semántico por variable CSS aplicado a iconos ── */
+[data-color="technical"] { color: var(--technical); }
+[data-color="field"]     { color: var(--field); }
+[data-color="safety"]    { color: var(--safety); }
+[data-color="brand"]     { color: var(--brand); }
+
+/* ─ Mejora: hero-copy más legible en pantallas pequeñas ──────── */
+@media (max-width: 480px) {
+  .hero-copy h1 {
+    font-size: clamp(1.45rem, 6.5vw, 1.95rem);
+    line-height: 1.12;
+  }
+  .hero-copy p:not(.eyebrow) {
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+  .section {
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+  .quick-access,
+  .equipment-grid {
+    grid-template-columns: 1fr;
+  }
+  .service-showcase {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─ Mejora: image lazy-load blur-up effect ─────────────────── */
+img[loading="lazy"] {
+  transition: filter 300ms ease, opacity 300ms ease;
+  filter: blur(4px);
+  opacity: 0.85;
+}
+
+img[loading="lazy"].is-loaded {
+  filter: none;
+  opacity: 1;
+}
+
+/* ─ Mejora: quote-form inputs más espaciosos y legibles ──────── */
+.quote-form input,
+.quote-form select,
+.quote-form textarea {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.quote-form textarea {
+  min-height: 120px;
+}
+
+/* ─ Mejora: número de referencia en catalog-row destacado ─────── */
+.catalog-row b {
+  font-size: 0.86rem;
+  font-weight: 880;
+  color: var(--brand);
+  border-radius: var(--radius-xs);
+  background: var(--brand-soft);
+  padding: 4px 8px;
+}
+
+/* ─ Mejora: partner-cloud tags con mejor hover ──────────────── */
+.partner-cloud span,
+.brand-row span {
+  transition: background 180ms ease, border-color 180ms ease, transform 160ms ease;
+  cursor: default;
+}
+
+.partner-cloud span:hover,
+.brand-row span:hover {
+  background: color-mix(in srgb, var(--brand-soft) 80%, var(--bg-elevated));
+  border-color: color-mix(in srgb, var(--brand) 40%, var(--line));
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   ITER-6: Mejoras avanzadas UI/UX — micro-interacciones, accesibilidad,
+   tooltips, badges, scroll behavior, focus-visible, reduced-motion
+   ============================================================ */
+
+/* Focus-visible accesible en todos los interactivos */
+*:focus-visible {
+  outline: 2.5px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: var(--radius-xs);
+}
+
+/* Scroll suave global */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Reduced motion — respeto a preferencias del usuario */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Tooltip nativo mejorado ── */
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--bg-ink);
+  color: var(--text-inverse);
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.4;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 180ms ease, transform 180ms ease;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+}
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Badge de estado ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.badge--brand   { background: var(--brand-soft); color: var(--brand-dark); }
+.badge--success { background: #d1fae5; color: #065f46; }
+.badge--warn    { background: #fef9c3; color: #854d0e; }
+.badge--error   { background: #fee2e2; color: #991b1b; }
+.badge--neutral { background: var(--bg-elevated); color: var(--text-muted); }
+
+/* ── Divider decorativo ── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--space-lg) 0;
+}
+.divider--brand {
+  border-top-color: var(--brand);
+  opacity: 0.3;
+}
+
+/* ── Animación fade-in-up para secciones ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.55s cubic-bezier(0.22,1,0.36,1) both;
+}
+.animate-delay-1 { animation-delay: 0.08s; }
+.animate-delay-2 { animation-delay: 0.16s; }
+.animate-delay-3 { animation-delay: 0.24s; }
+.animate-delay-4 { animation-delay: 0.32s; }
+
+/* ── Shimmer/skeleton mejorado ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-elevated) 25%,
+    var(--bg-muted, #f3f4f6) 50%,
+    var(--bg-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: var(--radius-sm);
+  color: transparent;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Back-to-top button ── */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 250ms ease, transform 250ms ease, background 180ms ease;
+  z-index: 900;
+  border: none;
+}
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  background: var(--brand-dark);
+  transform: translateY(-2px);
+}
+
+/* ── Mejora tabla responsiva ── */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+.table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.table-wrap th {
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+}
+.table-wrap td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: middle;
+}
+.table-wrap tr:last-child td { border-bottom: none; }
+.table-wrap tr:hover td { background: var(--brand-soft); }
+
+/* ── Mejoras formulario accesible ── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+.form-hint {
+  font-size: 0.78rem;
+  color: var(--text-subtle, var(--text-muted));
+  margin-top: 2px;
+}
+.form-error {
+  font-size: 0.8rem;
+  color: #dc2626;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.input-wrap {
+  position: relative;
+}
+.input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  width: 18px;
+  height: 18px;
+}
+.input-icon ~ input,
+.input-icon ~ select {
+  padding-left: 40px;
+}
+
+/* ── Card con ribbon ── */
+.card-ribbon {
+  position: absolute;
+  top: 12px;
+  right: -4px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 4px 12px 4px 10px;
+  border-radius: 2px 0 0 2px;
+  line-height: 1;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.12);
+}
+.card-ribbon::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  bottom: 0;
+  border: 4px solid transparent;
+  border-left-color: var(--brand-dark);
+  border-bottom-color: var(--brand-dark);
+}
+
+/* ── Progress bar ── */
+.progress-bar {
+  height: 6px;
+  background: var(--bg-elevated);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand), var(--brand-light, var(--brand)));
+  border-radius: 999px;
+  transition: width 600ms cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ── Notification toast ── */
+.toast {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  background: var(--bg-ink);
+  color: var(--text-inverse);
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease, transform 250ms ease;
+  z-index: 9999;
+  white-space: nowrap;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Mejora visual nav sticky ── */
+.nav-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(var(--bg-rgb, 255,255,255), 0.88);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 200ms ease;
+}
+.nav-sticky.scrolled {
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+
+/* ── Highlight text brand ── */
+.text-highlight {
+  background: linear-gradient(180deg, transparent 55%, var(--brand-soft) 55%);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* ── Responsive utilities ── */
+@media (max-width: 640px) {
+  .hide-mobile { display: none !important; }
+  .stack-mobile { flex-direction: column !important; }
+  .full-mobile  { width: 100% !important; }
+}
+@media (min-width: 641px) {
+  .hide-desktop { display: none !important; }
+}
+
+/* ── Aspect-ratio helpers ── */
+.ratio-16-9  { aspect-ratio: 16 / 9; }
+.ratio-4-3   { aspect-ratio: 4 / 3; }
+.ratio-1-1   { aspect-ratio: 1 / 1; }
+.ratio-3-4   { aspect-ratio: 3 / 4; }
+
+/* ── Image lazy-load fade ── */
+img.lazy {
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+img.lazy.loaded {
+  opacity: 1;
+}
+
+/* ── Link con flecha animada ── */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--brand);
+  text-decoration: none;
+  transition: gap 180ms ease, color 180ms ease;
+}
+.link-arrow::after {
+  content: '\2192';
+  display: inline-block;
+  transition: transform 180ms ease;
+}
+.link-arrow:hover {
+  gap: 8px;
+  color: var(--brand-dark);
+}
+.link-arrow:hover::after {
+  transform: translateX(3px);
+}
+
+/* ── End Iter-6 ── */
