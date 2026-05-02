@@ -10,6 +10,7 @@ import { defaultLocale, isLocale } from "@/i18n/config";
 import "@fontsource-variable/manrope";
 import "@fontsource-variable/archivo";
 import "@/styles/globals.css";
+import { assets } from "@/content/assets";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.tranluz.es"),
