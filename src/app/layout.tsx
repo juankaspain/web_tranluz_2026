@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Tranluz"
   },
   description:
-    "Plataforma técnico-comercial para productos eléctricos, tendido, alquiler, servicio técnico, trazabilidad y formación profesional.",
+    "Especialistas desde 1987 en equipos eléctricos, alquiler de cabrestantes, servicio técnico ITS, formación y trazabilidad para obras eléctricas críticas en Sevilla.",
   keywords: [
     "Tranluz",
     "equipos eléctricos",
@@ -30,18 +30,30 @@ export const metadata: Metadata = {
     "servicio técnico eléctrico",
     "tendido eléctrico",
     "formación técnica",
-    "trazabilidad de equipos"
+    "trazabilidad de equipos",
+    "ITS servicio técnico integral",
+    "Rent Puller alquiler",
+    "Revisa trazabilidad EPI",
+    "herramientas alta tensión",
+    "Sevilla",
+    "obras eléctricas",
+    "cabrestantes frenadoras",
+    "Tesmec",
+    "Plumett",
+    "Tractel",
+    "Cembre"
   ],
+  authors: [{ name: "Tranluz", url: "https://www.tranluz.es" }],
+  category: "industrial equipment",
+  classification: "business",
   alternates: {
     canonical: "/",
-    languages: {
-      "es-ES": "/"
-    }
+    languages: { "es-ES": "/" }
   },
   openGraph: {
-    title: "Tranluz | Equipos, servicio técnico, alquiler y formación",
+    title: "Tranluz | Equipos eléctricos, alquiler y soporte técnico",
     description:
-      "Equipos, servicio técnico, alquiler, formación y trazabilidad para trabajos eléctricos y de telecomunicaciones.",
+      "Equipos, servicio técnico, alquiler, formación y trazabilidad para trabajos eléctricos y de telecomunicaciones desde 1987.",
     url: "https://www.tranluz.es",
     locale: "es_ES",
     siteName: "Tranluz",
@@ -51,15 +63,15 @@ export const metadata: Metadata = {
         url: assets.ogImage,
         width: 1536,
         height: 1024,
-        alt: "Tranluz equipos y soporte técnico para obras eléctricas"
+        alt: "Tranluz – Equipos y soporte técnico para obras eléctricas críticas"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tranluz | Equipos, servicio técnico, alquiler y formación",
+    title: "Tranluz | Equipos, alquiler y servicio técnico eléctrico",
     description:
-      "Equipos, alquiler, servicio técnico y formación para trabajos eléctricos y telecomunicaciones.",
+      "Especialistas desde 1987: equipos, alquiler, ITS, formación y trazabilidad en Sevilla.",
     images: [assets.ogImage]
   },
   robots: {
@@ -72,6 +84,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
       "max-video-preview": -1
     }
+  },
+  verification: {
+    // Sustituir por el código real si se tiene Google Search Console
+    // google: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
   }
 };
 
@@ -82,14 +98,13 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "#0c1116" }
   ],
   width: "device-width",
-  initialScale: 1
+  initialScale: 1,
+  minimumScale: 1
 };
 
 export default async function RootLayout({
   children
-}: Readonly<{
-  children: ReactNode;
-}>) {
+}: Readonly<{ children: ReactNode }>) {
   const requestHeaders = await headers();
   const cookieStore = await cookies();
   const cookieLocale = cookieStore.get("tranluz_locale")?.value;
@@ -103,16 +118,18 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <ThemeScript />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://www.tranluz.es" />
       </head>
       <body>
-        <AutoTranslate />
-        <a href="#contenido" className="skip-link">
+        <ThemeScript />
+        <AutoTranslate locale={locale} />
+        <a className="skip-link" href="#contenido">
           Saltar al contenido
         </a>
         <StructuredData />
-        <ActionDock />
         {children}
+        <ActionDock />
       </body>
     </html>
   );
