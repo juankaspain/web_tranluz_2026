@@ -9,14 +9,14 @@ export default function NotFound() {
       <main id="contenido">
         <section className="page-hero">
           <p className="eyebrow">404</p>
-          <h1>No hemos encontrado esta ruta tecnica.</h1>
+          <h1>No hemos encontrado esta ruta técnica.</h1>
           <p>
-            Puedes volver al catalogo, solicitar presupuesto o entrar en el
-            centro tecnico para encontrar documentacion.
+            Puedes volver al catálogo, solicitar presupuesto o entrar en el{" "}
+            centro técnico para encontrar documentación.
           </p>
           <div className="hero-actions">
             <Link className="button button-primary" href="/productos">
-              Ver catalogo
+              Ver catálogo
             </Link>
             <Link className="button button-secondary" href="/presupuesto">
               Solicitar presupuesto
@@ -28,4 +28,3 @@ export default function NotFound() {
     </>
   );
 }
-
