@@ -2760,3 +2760,194 @@ address {
     justify-content: flex-start;
   }
 }
+
+
+/* ============================================================
+   ITER-1: UI/UX ENHANCEMENTS – performance, accesibilidad, visual polish
+   ============================================================ */
+
+/* Mejora: animación de entrada suave para secciones */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.section,
+.hero-section,
+.support-band,
+.company-proof,
+.final-cta {
+  animation: fadeInUp 0.45s ease both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 28%;
+}
+
+/* Mejora: focus-visible más visible y consistente */
+:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 4px;
+  border-radius: var(--radius-xs);
+}
+
+/* Mejora: transición global más suave en tarjetas interactivas */
+.quick-link,
+.content-card,
+.service-card,
+.equipment-card,
+.overview-card,
+.course-card,
+.solution-card,
+.story-card,
+.download-item {
+  transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 200ms ease,
+              box-shadow 200ms ease;
+}
+
+.quick-link:hover,
+.content-card:hover,
+.service-card:hover,
+.equipment-card:hover,
+.overview-card:hover,
+.course-card:hover,
+.solution-card:hover,
+.story-card:hover,
+.download-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+/* Mejora: hero search placeholder más legible */
+.hero-search input::placeholder {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.94rem;
+}
+
+/* Mejora: botón primario con gradiente sutil */
+.button-primary {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-strong) 100%);
+  box-shadow: 0 4px 14px rgba(189, 80, 14, 0.38);
+}
+
+.button-primary:hover {
+  background: linear-gradient(135deg, var(--brand-strong) 0%, #7a2d04 100%);
+  box-shadow: 0 6px 20px rgba(189, 80, 14, 0.52);
+  transform: translateY(-2px);
+}
+
+/* Mejora: métricas del hero más visibles */
+.metric-card strong {
+  font-size: 1.75rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+/* Mejora: intent-cards más prominentes */
+.intent-card {
+  transition: transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 200ms ease,
+              border-color 200ms ease;
+}
+
+.intent-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.2);
+}
+
+.intent-card-primary:hover {
+  background: color-mix(in srgb, var(--brand) 88%, black);
+}
+
+/* Mejora: eyebrow con mejor tracking */
+.eyebrow {
+  letter-spacing: 0.08em;
+  font-size: 0.73rem;
+}
+
+/* Mejora: section heading con mejor leading */
+.section-heading h2,
+.support-copy h2,
+.company-proof-copy h2,
+.final-cta h2 {
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+
+/* Mejora: mega-strip hover más visible */
+.mega-strip a:hover {
+  border-color: color-mix(in srgb, var(--brand) 60%, var(--line));
+  background: linear-gradient(145deg,
+    color-mix(in srgb, var(--bg-elevated) 95%, transparent),
+    color-mix(in srgb, var(--brand-soft) 55%, transparent)
+  ), var(--bg-elevated);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+/* Mejora: footer CTA gradiente más rico */
+.footer-cta {
+  background: linear-gradient(135deg, rgba(189,80,14,0.28), rgba(16,20,24,0.94) 60%),
+              linear-gradient(160deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+}
+
+/* Mejora: action dock siempre visible en móvil */
+@media (max-width: 760px) {
+  .action-dock {
+    display: flex;
+  }
+}
+
+/* Mejora: imágenes de servicio con object-position optimizado */
+.service-card-media img {
+  object-position: center 30%;
+}
+
+/* Mejora: scrollbar personalizada (Chromium) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-muted);
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--brand) 55%, var(--bg-muted));
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand);
+}
+
+/* Mejora: selection color consistente */
+::selection {
+  background: var(--brand);
+  color: #fff;
+  text-shadow: none;
+}
+
+/* Mejora: imagen hero con blend mode para mejor integración */
+.hero-media img {
+  mix-blend-mode: luminosity;
+  opacity: 0.88;
+}
+
+/* Mejora: company-proof-media con overlay sutil */
+.company-proof-media {
+  position: relative;
+}
+.company-proof-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(8,10,12,0.35));
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Mejora: trust-band stats con mejor tipografía */
+.trust-stat-value {
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
