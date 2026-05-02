@@ -34,7 +34,7 @@ const navIcon = (href: string) => {
   return <MapPin aria-hidden="true" size={18} />;
 };
 
-// Ítem de mega-strip: icon, label, sub
+// Ítem de mega-strip
 const megaItems = [
   { icon: <Wrench size={18} aria-hidden="true" />, label: "ITS Servicio Técnico", sub: "Revisiones e informes", href: "/servicios/its-servicio-tecnico" },
   { icon: <ShieldCheck size={18} aria-hidden="true" />, label: "Revisa trazabilidad", sub: "Control y alertas", href: "/servicios/revisa-trazabilidad" },
@@ -51,14 +51,12 @@ export function SiteHeader() {
   const mobileMenuId = useId();
   const navRef = useRef<HTMLDivElement>(null);
 
-  // Detectar scroll para shadow en navbar
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Cerrar mega-menu al hacer click fuera
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
@@ -69,7 +67,6 @@ export function SiteHeader() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  // Bloquear scroll del body al abrir menú móvil
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -79,22 +76,66 @@ export function SiteHeader() {
     <>
       <a href="#contenido" className="skip-link">Saltar al contenido</a>
 
-      <div className={`site-header${scrolled ? " site-header--scrolled" : ""}`} ref={navRef}>
-
-        {/* —— Topbar —— */}
-        <div className="topbar">
+      <div
+        ref={navRef}
+        className="site-header"
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 50,
+          borderBottom: "1px solid var(--line)",
+          background: "var(--bg-elevated)",
+          backdropFilter: "blur(20px)",
+        }}
+      >
+        {/* Topbar */}
+        <div
+          className="topbar"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "18px",
+            padding: "8px 24px",
+            fontSize: "0.8rem",
+            color: "var(--text-muted)",
+            borderBottom: "1px solid var(--line)",
+          }}
+        >
           <span>{brand.claim}</span>
-          <nav aria-label="Topbar">
+          <nav aria-label="Utilidades" style={{ display: "flex", gap: "16px", alignItems: "center" }}>
             <Link href={assets.catalogUrl} target="_blank" rel="noopener">Catálogo 2025/2026</Link>
             <a href={`tel:${brand.phone}`}>{brand.phone}</a>
           </nav>
         </div>
 
-        {/* —— Navbar —— */}
-        <header className={`navbar`} role="banner">
-
+        {/* Navbar */}
+        <header
+          className="navbar"
+          role="banner"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "14px",
+            minHeight: "var(--header-height, 78px)",
+            padding: "0 24px",
+            maxWidth: "var(--max-width, 1240px)",
+            margin: "0 auto",
+            width: "100%",
+          }}
+        >
           {/* Logo */}
-          <Link href="/" aria-label="Tranluz - inicio" className="brand-mark">
+          <Link
+            href="/"
+            aria-label="Tranluz - inicio"
+            className="brand-mark"
+            style={{
+              display: "inline-flex",
+              flex: "0 0 auto",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <Image
               src={assets.logo}
               alt="Tranluz"
@@ -104,13 +145,28 @@ export function SiteHeader() {
             />
           </Link>
 
-          {/* Desktop nav */}
-          <nav aria-label="Principal" className="main-nav">
+          {/* Desktop nav - hidden on mobile via CSS */}
+          <nav
+            aria-label="Principal"
+            className="navbar-nav"
+            style={{
+              display: "flex",
+              flex: "1 1 auto",
+              alignItems: "center",
+              gap: "4px",
+              flexWrap: "nowrap",
+              minWidth: 0,
+            }}
+          >
             {mainNavigation.map((item) => {
               const hasChildren = item.children && item.children.length > 0;
               const isOpen = openMega === item.href;
               return (
-                <div key={item.href} className="nav-item">
+                <div
+                  key={item.href}
+                  className="nav-item"
+                  style={{ position: "relative" }}
+                >
                   {hasChildren ? (
                     <>
                       <button
@@ -118,12 +174,43 @@ export function SiteHeader() {
                         aria-haspopup="true"
                         aria-expanded={isOpen}
                         onClick={() => setOpenMega(isOpen ? null : item.href)}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "4px",
+                          padding: "10px 7px",
+                          borderRadius: "999px",
+                          fontSize: "0.86rem",
+                          fontWeight: 760,
+                          color: "var(--text-muted)",
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          whiteSpace: "nowrap",
+                        }}
                       >
                         {item.label}
                         <ChevronDown size={14} aria-hidden="true" />
                       </button>
                       {isOpen && (
-                        <ul className="mega-menu" role="menu">
+                        <ul
+                          className="mega-menu"
+                          role="menu"
+                          style={{
+                            position: "absolute",
+                            top: "calc(100% + 8px)",
+                            left: 0,
+                            minWidth: "200px",
+                            background: "var(--bg-elevated)",
+                            border: "1px solid var(--line)",
+                            borderRadius: "var(--radius-lg, 14px)",
+                            boxShadow: "var(--shadow)",
+                            padding: "8px",
+                            listStyle: "none",
+                            zIndex: 100,
+                            margin: 0,
+                          }}
+                        >
                           {item.children!.map((child) => (
                             <li key={child.href} role="none">
                               <Link
@@ -131,6 +218,15 @@ export function SiteHeader() {
                                 role="menuitem"
                                 className="mega-menu-item"
                                 onClick={() => setOpenMega(null)}
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "8px",
+                                  padding: "8px 12px",
+                                  borderRadius: "var(--radius, 8px)",
+                                  fontSize: "0.85rem",
+                                  color: "var(--text-muted)",
+                                }}
                               >
                                 {navIcon(child.href)}
                                 {child.label}
@@ -141,7 +237,20 @@ export function SiteHeader() {
                       )}
                     </>
                   ) : (
-                    <Link href={item.href} className="nav-link">
+                    <Link
+                      href={item.href}
+                      className="nav-link"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        padding: "10px 7px",
+                        borderRadius: "999px",
+                        fontSize: "0.86rem",
+                        fontWeight: 760,
+                        color: "var(--text-muted)",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       {item.label}
                     </Link>
                   )}
@@ -151,53 +260,151 @@ export function SiteHeader() {
           </nav>
 
           {/* Buscador */}
-          <form role="search" className="site-search">
-            <Search size={16} aria-hidden="true" className="search-icon" />
+          <form
+            role="search"
+            className="site-search"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              border: "1px solid var(--line)",
+              borderRadius: "999px",
+              padding: "0 14px",
+              height: "44px",
+              flex: "0 1 290px",
+              minWidth: "180px",
+            }}
+          >
+            <Search size={16} aria-hidden="true" style={{ color: "var(--text-muted)", flexShrink: 0 }} />
             <input
               type="search"
               placeholder="Buscar equipo…"
               aria-label="Buscar equipo"
               autoComplete="off"
-              className="search-input"
+              style={{
+                border: "none",
+                background: "none",
+                outline: "none",
+                width: "100%",
+                fontSize: "0.875rem",
+                color: "var(--text)",
+              }}
             />
           </form>
 
-          {/* Acciones header */}
-          <div className="header-actions">
+          {/* Acciones */}
+          <div
+            className="header-actions"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              marginLeft: "auto",
+              flexShrink: 0,
+            }}
+          >
             <ThemeToggle />
             <LanguageSelector />
-            <Link href="/presupuesto" className="button button-primary">
+            <Link
+              href="/presupuesto"
+              className="button button-primary"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: "42px",
+                borderRadius: "999px",
+                padding: "0 18px",
+                background: "var(--brand)",
+                color: "#ffffff",
+                fontWeight: 760,
+                fontSize: "0.875rem",
+                whiteSpace: "nowrap",
+              }}
+            >
               Presupuesto
             </Link>
           </div>
 
-          {/* Botón hamburguesa móvil */}
+          {/* Hamburguesa móvil */}
           <button
             className="icon-button"
             aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
             aria-controls={mobileMenuId}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen(!mobileOpen)}
+            style={{
+              display: "none",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "42px",
+              height: "42px",
+              border: "1px solid var(--line)",
+              borderRadius: "999px",
+              background: "none",
+              cursor: "pointer",
+              flexShrink: 0,
+            }}
           >
             {mobileOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
-
         </header>
 
-        {/* —— Mega-strip: accesos directos clave —— */}
-        <nav aria-label="Accesos rápidos" className="mega-strip">
+        {/* Mega-strip */}
+        <nav
+          aria-label="Accesos rápidos"
+          className="mega-strip"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
+            gap: "8px",
+            padding: "0 24px 14px",
+            maxWidth: "var(--max-width, 1240px)",
+            margin: "0 auto",
+            width: "100%",
+          }}
+        >
           {megaItems.map((mi) => (
-            <Link key={mi.href} href={mi.href} className="mega-strip-item">
-              <span className="mega-icon">{mi.icon}</span>
-              <span>
-                <strong style={{ display: "block", color: "var(--text)", fontSize: "0.9rem" }}>{mi.label}</strong>
-                <span style={{ fontSize: "0.78rem", color: "var(--text-soft)" }}>{mi.sub}</span>
+            <Link
+              key={mi.href}
+              href={mi.href}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "auto minmax(0, 1fr)",
+                alignItems: "center",
+                gap: "10px",
+                minHeight: "54px",
+                border: "1px solid var(--line)",
+                borderRadius: "var(--radius-lg, 14px)",
+                padding: "9px 12px",
+                fontSize: "0.8rem",
+                fontWeight: 720,
+              }}
+            >
+              <span
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "32px",
+                  height: "32px",
+                  borderRadius: "999px",
+                  background: "var(--brand-soft)",
+                  color: "var(--brand)",
+                  flexShrink: 0,
+                }}
+              >
+                {mi.icon}
+              </span>
+              <span style={{ minWidth: 0 }}>
+                <strong style={{ display: "block", color: "var(--text)", fontSize: "0.85rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{mi.label}</strong>
+                <span style={{ fontSize: "0.75rem", color: "var(--text-muted)", display: "block" }}>{mi.sub}</span>
               </span>
             </Link>
           ))}
         </nav>
 
-        {/* —— Menú móvil —— */}
+        {/* Menú móvil */}
         {mobileOpen && (
           <div
             id={mobileMenuId}
@@ -205,38 +412,81 @@ export function SiteHeader() {
             role="dialog"
             aria-modal="true"
             aria-label="Menú de navegación"
+            style={{
+              position: "fixed",
+              top: 0,
+              right: 0,
+              bottom: 0,
+              width: "min(82vw, 340px)",
+              background: "var(--bg-elevated)",
+              borderLeft: "1px solid var(--line)",
+              zIndex: 200,
+              overflowY: "auto",
+              padding: "16px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
+            }}
           >
             <button
-              className="mobile-menu-close"
               onClick={() => setMobileOpen(false)}
               aria-label="Cerrar menú"
+              style={{
+                alignSelf: "flex-end",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "42px",
+                height: "42px",
+                border: "1px solid var(--line)",
+                borderRadius: "999px",
+                background: "none",
+                cursor: "pointer",
+                marginBottom: "8px",
+              }}
             >
               <X aria-hidden="true" />
             </button>
-            <nav aria-label="Menú móvil principal">
+            <nav aria-label="Menú móvil principal" style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               {mainNavigation.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="mobile-nav-link"
                   onClick={() => setMobileOpen(false)}
+                  style={{
+                    display: "block",
+                    padding: "12px 16px",
+                    borderRadius: "var(--radius, 8px)",
+                    fontSize: "1rem",
+                    fontWeight: 600,
+                    color: "var(--text)",
+                    borderBottom: "1px solid var(--line)",
+                  }}
                 >
                   {item.label}
                 </Link>
               ))}
             </nav>
-            <div className="mobile-mega-grid">
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: "16px" }}>
               {megaItems.map((mi) => (
                 <Link
                   key={mi.href}
                   href={mi.href}
-                  className="mobile-mega-item"
                   onClick={() => setMobileOpen(false)}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    padding: "12px",
+                    border: "1px solid var(--line)",
+                    borderRadius: "var(--radius, 8px)",
+                    color: "var(--text-muted)",
+                  }}
                 >
                   {mi.icon}
                   <span>
-                    <strong>{mi.label}</strong>
-                    <span>{mi.sub}</span>
+                    <strong style={{ display: "block", color: "var(--text)" }}>{mi.label}</strong>
+                    <span style={{ fontSize: "0.8rem" }}>{mi.sub}</span>
                   </span>
                 </Link>
               ))}
@@ -247,12 +497,16 @@ export function SiteHeader() {
         {/* Overlay */}
         {mobileOpen && (
           <div
-            className="mobile-overlay"
             aria-hidden="true"
             onClick={() => setMobileOpen(false)}
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(0,0,0,0.5)",
+              zIndex: 190,
+            }}
           />
         )}
-
       </div>
     </>
   );
