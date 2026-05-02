@@ -22,7 +22,6 @@ import { assets } from "@/content/assets";
 import { brand } from "@/config/brand";
 import { mainNavigation } from "@/config/navigation";
 
-// Icono por href de ítem de navegación
 const navIcon = (href: string) => {
   if (href.startsWith("/productos")) return <Package aria-hidden="true" size={18} />;
   if (href.startsWith("/servicios/its")) return <Wrench aria-hidden="true" size={18} />;
@@ -34,7 +33,6 @@ const navIcon = (href: string) => {
   return <MapPin aria-hidden="true" size={18} />;
 };
 
-// Ítem de mega-strip
 const megaItems = [
   { icon: <Wrench size={18} aria-hidden="true" />, label: "ITS Servicio Técnico", sub: "Revisiones e informes", href: "/servicios/its-servicio-tecnico" },
   { icon: <ShieldCheck size={18} aria-hidden="true" />, label: "Revisa trazabilidad", sub: "Control y alertas", href: "/servicios/revisa-trazabilidad" },
@@ -78,7 +76,7 @@ export function SiteHeader() {
 
       <div
         ref={navRef}
-        className="site-header"
+        className={`site-header${scrolled ? " site-header--scrolled" : ""}`}
         style={{
           position: "sticky",
           top: 0,
@@ -99,7 +97,7 @@ export function SiteHeader() {
             padding: "8px 24px",
             fontSize: "0.8rem",
             color: "var(--text-muted)",
-            borderBottom: "1px solid var(--line)",
+            borderBottom: "1px solid color-mix(in srgb, var(--line) 72%, transparent)",
           }}
         >
           <span>{brand.claim}</span>
@@ -109,7 +107,7 @@ export function SiteHeader() {
           </nav>
         </div>
 
-        {/* Navbar */}
+        {/* Navbar principal */}
         <header
           className="navbar"
           role="banner"
@@ -119,21 +117,24 @@ export function SiteHeader() {
             gap: "14px",
             minHeight: "var(--header-height, 78px)",
             padding: "0 24px",
-            maxWidth: "var(--max-width, 1240px)",
+            width: "min(100%, var(--max-width, 1240px))",
             margin: "0 auto",
-            width: "100%",
           }}
         >
           {/* Logo */}
           <Link
             href="/"
             aria-label="Tranluz - inicio"
-            className="brand-mark"
+            className="navbar-logo"
             style={{
               display: "inline-flex",
               flex: "0 0 auto",
               alignItems: "center",
               justifyContent: "center",
+              border: "1px solid var(--line)",
+              borderRadius: "999px",
+              padding: "7px 12px",
+              background: "var(--bg-elevated)",
             }}
           >
             <Image
@@ -145,7 +146,7 @@ export function SiteHeader() {
             />
           </Link>
 
-          {/* Desktop nav - hidden on mobile via CSS */}
+          {/* Nav escritorio */}
           <nav
             aria-label="Principal"
             className="navbar-nav"
@@ -162,11 +163,7 @@ export function SiteHeader() {
               const hasChildren = item.children && item.children.length > 0;
               const isOpen = openMega === item.href;
               return (
-                <div
-                  key={item.href}
-                  className="nav-item"
-                  style={{ position: "relative" }}
-                >
+                <div key={item.href} style={{ position: "relative" }}>
                   {hasChildren ? (
                     <>
                       <button
@@ -194,7 +191,6 @@ export function SiteHeader() {
                       </button>
                       {isOpen && (
                         <ul
-                          className="mega-menu"
                           role="menu"
                           style={{
                             position: "absolute",
@@ -216,7 +212,6 @@ export function SiteHeader() {
                               <Link
                                 href={child.href}
                                 role="menuitem"
-                                className="mega-menu-item"
                                 onClick={() => setOpenMega(null)}
                                 style={{
                                   display: "flex",
@@ -239,7 +234,6 @@ export function SiteHeader() {
                   ) : (
                     <Link
                       href={item.href}
-                      className="nav-link"
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
@@ -262,7 +256,7 @@ export function SiteHeader() {
           {/* Buscador */}
           <form
             role="search"
-            className="site-search"
+            className="navbar-search"
             style={{
               display: "flex",
               alignItems: "center",
@@ -294,12 +288,11 @@ export function SiteHeader() {
 
           {/* Acciones */}
           <div
-            className="header-actions"
+            className="navbar-actions"
             style={{
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              marginLeft: "auto",
               flexShrink: 0,
             }}
           >
@@ -307,7 +300,7 @@ export function SiteHeader() {
             <LanguageSelector />
             <Link
               href="/presupuesto"
-              className="button button-primary"
+              className="btn-presupuesto"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -326,25 +319,13 @@ export function SiteHeader() {
             </Link>
           </div>
 
-          {/* Hamburguesa móvil */}
+          {/* Hamburguesa */}
           <button
-            className="icon-button"
+            className="hamburger"
             aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
             aria-controls={mobileMenuId}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen(!mobileOpen)}
-            style={{
-              display: "none",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "42px",
-              height: "42px",
-              border: "1px solid var(--line)",
-              borderRadius: "999px",
-              background: "none",
-              cursor: "pointer",
-              flexShrink: 0,
-            }}
           >
             {mobileOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
@@ -359,9 +340,8 @@ export function SiteHeader() {
             gridTemplateColumns: "repeat(6, minmax(0, 1fr))",
             gap: "8px",
             padding: "0 24px 14px",
-            maxWidth: "var(--max-width, 1240px)",
+            width: "min(100%, var(--max-width, 1240px))",
             margin: "0 auto",
-            width: "100%",
           }}
         >
           {megaItems.map((mi) => (
@@ -377,8 +357,6 @@ export function SiteHeader() {
                 border: "1px solid var(--line)",
                 borderRadius: "var(--radius-lg, 14px)",
                 padding: "9px 12px",
-                fontSize: "0.8rem",
-                fontWeight: 720,
               }}
             >
               <span
@@ -408,7 +386,6 @@ export function SiteHeader() {
         {mobileOpen && (
           <div
             id={mobileMenuId}
-            className="mobile-menu"
             role="dialog"
             aria-modal="true"
             aria-label="Menú de navegación"
@@ -447,7 +424,7 @@ export function SiteHeader() {
             >
               <X aria-hidden="true" />
             </button>
-            <nav aria-label="Menú móvil principal" style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+            <nav aria-label="Menú móvil" style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
               {mainNavigation.map((item) => (
                 <Link
                   key={item.href}
@@ -494,7 +471,7 @@ export function SiteHeader() {
           </div>
         )}
 
-        {/* Overlay */}
+        {/* Overlay móvil */}
         {mobileOpen && (
           <div
             aria-hidden="true"
