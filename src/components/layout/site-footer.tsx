@@ -1,10 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Mail, MapPin, PhoneCall } from "lucide-react";
-import { assets } from "@/content/assets";
 import { brand } from "@/config/brand";
 
-// \u2500\u2500 Iconos SVG para RRSS (inline, sin dependencia externa) \u2500\u2500
+// ── Inline SVG icons for social media ──
 function IconLinkedIn({ className = "" }: { className?: string }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true" focusable="false" width="20" height="20">
@@ -16,7 +14,7 @@ function IconLinkedIn({ className = "" }: { className?: string }) {
 function IconInstagram({ className = "" }: { className?: string }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true" focusable="false" width="20" height="20">
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
     </svg>
   );
 }
@@ -51,192 +49,245 @@ const footerNav = [
   {
     heading: "Soporte",
     links: [
-      { label: "Cat\u00e1logos", href: "/soporte/catalogos" },
-      { label: "Centro t\u00e9cnico", href: "/soporte" },
+      { label: "Cat\u00e1logos", href: "/soporte" },
+      { label: "Centro t\u00e9cnico", href: "/servicios/its-servicio-tecnico" },
       { label: "Presupuesto", href: "/presupuesto" },
       { label: "Contacto", href: "/contacto" },
     ],
   },
 ];
 
-// Logos de certificaci\u00f3n: solo los que tienen imagen v\u00e1lida
-const certLogos = [
-  {
-    src: assets.footerLogo,
-    alt: "Tranluz - Logo oficial",
-    width: 120,
-    height: 48,
-  },
-  {
-    src: assets.footerFunding,
-    alt: "Financiaci\u00f3n europea - Next Generation EU",
-    width: 180,
-    height: 48,
-  },
-];
-
 export function SiteFooter() {
   return (
-    <footer className="site-footer">
-
-      {/* \u2500\u2500 CTA Band \u2500\u2500 */}
-      <div className="footer-cta">
+    <>
+      {/* ─── Hero CTA Band ─── */}
+      <section
+        className="section"
+        style={{
+          background: "var(--bg-inverse)",
+          color: "#ffffff",
+          borderRadius: "var(--radius-xl)",
+          display: "grid",
+          gridTemplateColumns: "1fr auto",
+          gap: "32px",
+          alignItems: "center",
+          margin: "0 auto 0",
+        }}
+        aria-label="CTA final"
+      >
         <div>
-          <p className="eyebrow">Respuesta profesional</p>
-          <h2>Producto, alquiler, servicio t\u00e9cnico y formaci\u00f3n desde un \u00fanico partner.</h2>
+          <p style={{ fontSize: "0.78rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--brand)", marginBottom: "8px" }}>RESPUESTA PROFESIONAL</p>
+          <h2 style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", fontWeight: 800, lineHeight: 1.2, margin: "0 0 16px" }}>
+            Producto, alquiler, servicio t\u00e9cnico y formaci\u00f3n desde un \u00fanico partner.
+          </h2>
         </div>
-        <div className="footer-cta-actions">
-          <Link className="button button-primary" href="/presupuesto">
-            Solicitar presupuesto t\u00e9cnico
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", flexShrink: 0 }}>
+          <Link
+            href="/presupuesto"
+            style={{
+              display: "inline-flex", alignItems: "center", gap: "8px",
+              background: "var(--brand)", color: "#fff",
+              padding: "12px 22px", borderRadius: "999px",
+              fontWeight: 700, fontSize: "0.95rem", textDecoration: "none",
+            }}
+          >
+            Solicitar presupuesto t\u00e9cnico →
           </Link>
           <a
-            className="button button-secondary"
             href={`tel:${brand.phone.replaceAll(" ", "")}`}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: "8px",
+              border: "2px solid rgba(255,255,255,0.35)", color: "#fff",
+              padding: "12px 22px", borderRadius: "999px",
+              fontWeight: 600, fontSize: "0.95rem", textDecoration: "none",
+            }}
           >
             <PhoneCall aria-hidden="true" size={18} />
             Hablar con Tranluz
           </a>
         </div>
-      </div>
+      </section>
 
-      {/* \u2500\u2500 Main Footer \u2500\u2500 */}
-      <div className="footer-main">
+      {/* ─── Main Footer ─── */}
+      <footer className="site-footer" aria-label="Pie de p\u00e1gina Tranluz">
+        {/* Top grid: brand + nav cols + contact */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "minmax(180px, 1.2fr) repeat(3, minmax(120px, 1fr)) minmax(200px, 1.3fr)",
+            gap: "32px",
+            paddingBottom: "40px",
+            borderBottom: "1px solid var(--line)",
+          }}
+        >
+          {/* Brand column */}
+          <div>
+            <h3 style={{ fontSize: "0.9rem", fontWeight: 700, marginBottom: "10px", color: "var(--text)" }}>
+              {brand.name}
+            </h3>
+            <p style={{ fontSize: "0.82rem", color: "var(--text-muted)", lineHeight: 1.6, marginBottom: "20px" }}>
+              {brand.claim}
+            </p>
+            <nav aria-label="Redes sociales" style={{ display: "flex", gap: "10px" }}>
+              <a
+                href={brand.social.linkedin}
+                target="_blank" rel="noopener noreferrer"
+                aria-label="Tranluz en LinkedIn"
+                style={{ display: "grid", placeItems: "center", width: "36px", height: "36px", borderRadius: "50%", border: "1px solid var(--line)", color: "var(--text-muted)", transition: "color 0.2s, border-color 0.2s" }}
+              >
+                <IconLinkedIn />
+              </a>
+              <a
+                href={brand.social.instagram}
+                target="_blank" rel="noopener noreferrer"
+                aria-label="Tranluz en Instagram"
+                style={{ display: "grid", placeItems: "center", width: "36px", height: "36px", borderRadius: "50%", border: "1px solid var(--line)", color: "var(--text-muted)", transition: "color 0.2s, border-color 0.2s" }}
+              >
+                <IconInstagram />
+              </a>
+              <a
+                href={brand.social.youtube}
+                target="_blank" rel="noopener noreferrer"
+                aria-label="Tranluz en YouTube"
+                style={{ display: "grid", placeItems: "center", width: "36px", height: "36px", borderRadius: "50%", border: "1px solid var(--line)", color: "var(--text-muted)", transition: "color 0.2s, border-color 0.2s" }}
+              >
+                <IconYouTube />
+              </a>
+            </nav>
+          </div>
 
-        {/* Brand col */}
-        <div className="footer-brand">
-          <Image
-            src={assets.footerLogo}
-            alt="Tranluz \u2013 Especialistas en maquinaria el\u00e9ctrica desde 1987"
-            width={176}
-            height={56}
-            className="footer-brand img"
-            style={{ objectFit: "contain", objectPosition: "left" }}
-          />
-          <p>{brand.claim}</p>
+          {/* Nav columns: Plataforma, Empresa, Soporte */}
+          {footerNav.map((col) => (
+            <div key={col.heading}>
+              <h4 style={{ fontSize: "0.78rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--text)", marginBottom: "14px" }}>
+                {col.heading}
+              </h4>
+              <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "9px" }}>
+                {col.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      style={{ fontSize: "0.875rem", color: "var(--text-muted)", textDecoration: "none", transition: "color 0.15s" }}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
-          {/* RRSS */}
-          <div className="social-links">
-            <a
-              href={brand.social.linkedin}
-              aria-label="Tranluz en LinkedIn"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <IconLinkedIn />
-            </a>
-            <a
-              href={brand.social.instagram}
-              aria-label="Tranluz en Instagram"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <IconInstagram />
-            </a>
-            <a
-              href={brand.social.youtube}
-              aria-label="Tranluz en YouTube"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <IconYouTube />
-            </a>
+          {/* Contacto column */}
+          <div>
+            <h4 style={{ fontSize: "0.78rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--text)", marginBottom: "14px" }}>
+              Contacto
+            </h4>
+            <address style={{ fontStyle: "normal", display: "flex", flexDirection: "column", gap: "10px" }}>
+              <span style={{ display: "flex", alignItems: "flex-start", gap: "8px", fontSize: "0.875rem", color: "var(--text-muted)" }}>
+                <MapPin aria-hidden="true" size={16} style={{ flexShrink: 0, marginTop: "2px", color: "var(--brand)" }} />
+                {brand.address}
+              </span>
+              <a
+                href={`tel:${brand.phone.replaceAll(" ", "")}`}
+                style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.875rem", color: "var(--text-muted)", textDecoration: "none" }}
+              >
+                <PhoneCall aria-hidden="true" size={16} style={{ color: "var(--brand)" }} />
+                {brand.phone}
+              </a>
+              <a
+                href={`mailto:${brand.email}`}
+                style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.875rem", color: "var(--text-muted)", textDecoration: "none" }}
+              >
+                <Mail aria-hidden="true" size={16} style={{ color: "var(--brand)" }} />
+                {brand.email}
+              </a>
+            </address>
           </div>
         </div>
 
-        {/* Nav columns */}
-        {footerNav.map((col) => (
-          <nav key={col.heading} aria-label={col.heading}>
-            <strong>{col.heading}</strong>
-            {col.links.map((link) => (
-              <Link key={link.href} href={link.href}>
-                {link.label}
+        {/* Trust / Certificaciones */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr auto",
+            gap: "24px",
+            alignItems: "center",
+            paddingTop: "28px",
+            paddingBottom: "28px",
+            borderBottom: "1px solid var(--line)",
+          }}
+        >
+          <div>
+            <p style={{ fontSize: "0.82rem", fontWeight: 700, color: "var(--text)", marginBottom: "4px" }}>Confianza y cumplimiento</p>
+            <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", margin: 0 }}>
+              Calidad, financiaci\u00f3n europea, accesibilidad, privacidad y criterios web para Kit Digital.
+            </p>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+            {/* AENOR badge */}
+            <div
+              style={{
+                display: "inline-flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                border: "1px solid var(--line)", borderRadius: "var(--radius)",
+                background: "#ffffff", padding: "8px 14px", minWidth: "70px", minHeight: "50px", gap: 2,
+              }}
+            >
+              <span style={{ color: "#003DA5", fontWeight: 900, fontSize: "0.78rem", lineHeight: 1 }}>AENOR</span>
+              <span style={{ color: "#888", fontWeight: 700, fontSize: "0.62rem", lineHeight: 1 }}>Calidad</span>
+            </div>
+            {/* NextGenerationEU badge */}
+            <div
+              style={{
+                display: "inline-flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                border: "1px solid var(--line)", borderRadius: "var(--radius)",
+                background: "#ffffff", padding: "8px 14px", minWidth: "100px", minHeight: "50px", gap: 2,
+              }}
+            >
+              <span style={{ color: "#003DA5", fontWeight: 800, fontSize: "0.68rem", lineHeight: 1 }}>NextGenerationEU</span>
+              <span style={{ color: "#888", fontWeight: 600, fontSize: "0.58rem", lineHeight: 1 }}>Plan de Recuperaci\u00f3n</span>
+            </div>
+            {/* Kit Digital badge */}
+            <div
+              style={{
+                display: "inline-flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                border: "1px solid var(--line)", borderRadius: "var(--radius)",
+                background: "#ffffff", padding: "8px 12px", minWidth: "80px", minHeight: "50px", gap: 2,
+              }}
+            >
+              <span style={{ color: "#003DA5", fontWeight: 900, fontSize: "0.78rem", lineHeight: 1 }}>Kit Digital</span>
+              <span style={{ color: "#888", fontWeight: 700, fontSize: "0.62rem", lineHeight: 1 }}>Agente Digitalizador</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer bottom bar */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: "12px",
+            paddingTop: "20px",
+          }}
+        >
+          <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", margin: 0 }}>
+            \u00a9 {new Date().getFullYear()} Tranluz, S.L. Todos los derechos reservados.
+          </p>
+          <nav aria-label="Navegaci\u00f3n legal" style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+            {[
+              { href: "/accesibilidad", label: "Accesibilidad" },
+              { href: "/privacidad", label: "Privacidad" },
+              { href: "/cookies", label: "Cookies" },
+              { href: "/aviso-legal", label: "Aviso legal" },
+            ].map((l) => (
+              <Link key={l.href} href={l.href} style={{ fontSize: "0.8rem", color: "var(--text-muted)", textDecoration: "none" }}>
+                {l.label}
               </Link>
             ))}
           </nav>
-        ))}
-
-        {/* Contacto col */}
-        <address className="footer-contact">
-          <strong>Contacto</strong>
-          <span>
-            <MapPin size={16} aria-hidden="true" />
-            {brand.address}
-          </span>
-          <a href={`tel:${brand.phone.replaceAll(" ", "")}`}>
-            <PhoneCall size={16} aria-hidden="true" />
-            {brand.phone}
-          </a>
-          <a href={`mailto:${brand.email}`}>
-            <Mail size={16} aria-hidden="true" />
-            {brand.email}
-          </a>
-        </address>
-      </div>
-
-      {/* \u2500\u2500 Trust / Certificaciones \u2500\u2500 */}
-      <div className="footer-trust">
-        <div>
-          <strong>Confianza y cumplimiento</strong>
-          <p>Calidad, financiaci\u00f3n europea, accesibilidad, privacidad y criterios web para Kit Digital.</p>
         </div>
-        <div className="footer-certifications">
-          {certLogos.map((cert) => (
-            <div
-              key={cert.alt}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "1px solid var(--line)",
-                borderRadius: "var(--radius)",
-                background: "#ffffff",
-                padding: 8,
-                minWidth: 80,
-                minHeight: 50,
-              }}
-            >
-              <Image
-                src={cert.src}
-                alt={cert.alt}
-                width={cert.width}
-                height={cert.height}
-                style={{ objectFit: "contain", maxWidth: cert.width, height: "auto", maxHeight: 46 }}
-                unoptimized
-              />
-            </div>
-          ))}
-          {/* Badge textual Kit Digital (sin imagen externa) */}
-          <div
-            style={{
-              display: "inline-flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              border: "1px solid var(--line)",
-              borderRadius: "var(--radius)",
-              background: "#ffffff",
-              padding: "8px 12px",
-              minWidth: 80,
-              minHeight: 50,
-              gap: 2,
-            }}
-          >
-            <span style={{ color: "#003DA5", fontWeight: 900, fontSize: "0.78rem", lineHeight: 1 }}>Kit Digital</span>
-            <span style={{ color: "#888", fontWeight: 700, fontSize: "0.68rem", lineHeight: 1 }}>Agente Digitalizador</span>
-          </div>
-        </div>
-      </div>
-
-      {/* \u2500\u2500 Footer Bottom Bar \u2500\u2500 */}
-      <div className="footer-bottom">
-        <p>\u00a9 {new Date().getFullYear()} Tranluz, S.L. Todos los derechos reservados.</p>
-        <nav aria-label="Navegaci\u00f3n legal">
-          <Link href="/accesibilidad">Accesibilidad</Link>
-          <Link href="/privacidad">Privacidad</Link>
-          <Link href="/cookies">Cookies</Link>
-          <Link href="/aviso-legal">Aviso legal</Link>
-        </nav>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 }
