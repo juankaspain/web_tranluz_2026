@@ -11,7 +11,7 @@ export function HeroSection() {
       <div className="hero-media" aria-hidden="true">
         <Image
           src={assets.hero}
-          alt=""
+          alt="Obras de tendido eléctrico con equipos Tranluz"
           fill
           priority
           sizes="100vw"
@@ -66,10 +66,13 @@ export function HeroSection() {
           ))}
         </div>
       </div>
-      <aside className="hero-command" aria-label="Resumen operativo">
-        <div className="command-label">Panel operativo Tranluz</div>
-        <div className="command-card command-card-main">
-          <ShieldCheck aria-hidden="true" size={20} />
+      <div className="hero-command" role="complementary" aria-label="Panel operativo Tranluz">
+        <p className="command-label">
+          <ShieldCheck aria-hidden="true" size={14} />
+          Panel operativo Tranluz
+        </p>
+        <div className="command-card">
+          <ShieldCheck aria-hidden="true" size={22} />
           <div>
             <span>Operación segura</span>
             <strong>Compra, alquiler, revisión y formación desde un único partner.</strong>
@@ -77,13 +80,13 @@ export function HeroSection() {
         </div>
         <div className="metric-grid">
           {proofPoints.map((point) => (
-            <div className="metric-card" key={point.label}>
+            <div className="metric-card" key={point.value}>
               <strong>{point.value}</strong>
               <span>{point.label}</span>
             </div>
           ))}
         </div>
-      </aside>
+      </div>
     </section>
   );
 }
