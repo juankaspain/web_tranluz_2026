@@ -2623,3 +2623,140 @@ address {
     height: 17px;
   }
 }
+
+
+/* ============================================================
+   INTENT CARDS (hero quick-nav)
+   ============================================================ */
+.hero-intent {
+  display: grid;
+  gap: 8px;
+  margin-top: 24px;
+  max-width: 620px;
+}
+
+.intent-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 12px 16px;
+  font-size: 0.88rem;
+  backdrop-filter: blur(14px);
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.intent-card:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.38);
+  transform: translateY(-1px);
+}
+
+.intent-card-primary {
+  background: var(--brand);
+  border-color: transparent;
+}
+
+.intent-card-primary:hover {
+  background: var(--brand-strong);
+}
+
+.intent-card strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 760;
+}
+
+.intent-card small {
+  display: block;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.8rem;
+}
+
+.intent-card-primary small {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ============================================================
+   TRUST BAND
+   ============================================================ */
+.trust-band {
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.trust-credentials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  padding: 9px 14px;
+  font-size: 0.84rem;
+  font-weight: 760;
+  box-shadow: var(--shadow-soft);
+}
+
+.trust-item svg {
+  color: var(--brand);
+  flex: 0 0 auto;
+}
+
+.trust-brands {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.trust-brands span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg-muted);
+  color: var(--text-muted);
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+@media (max-width: 760px) {
+  .hero-intent {
+    max-width: min(22rem, 82vw);
+  }
+
+  .intent-card {
+    min-height: 58px;
+    font-size: 0.84rem;
+  }
+
+  .trust-band {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-brands {
+    justify-content: flex-start;
+  }
+}
