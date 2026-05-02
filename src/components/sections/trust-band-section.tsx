@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import { Award, Clock, MapPin, ShieldCheck, Users, Wrench } from "lucide-react";
 
 /* ================================================================
