@@ -18,7 +18,7 @@ export default function ServicesPage() {
         <PageHeroPro
           eyebrow="Servicios"
           title="Servicio técnico, trazabilidad, revisiones y soporte durante todo el ciclo de vida."
-          text="Los servicios se presentan como soluciones premium con alcance claro, proceso, entregables, documentos y conversion B2B propia."
+          text="Los servicios se presentan como soluciones premium con alcance claro, proceso, entregables, documentos y conversión B2B propia."
           image={assets.its}
           actions={[
             { label: "Solicitar soporte", href: "/presupuesto" },
