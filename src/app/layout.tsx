@@ -18,11 +18,11 @@ export const metadata: Metadata = {
   creator: "Tranluz",
   publisher: "Tranluz",
   title: {
-    default: "Tranluz | Equipos, servicio técnico, alquiler y formación",
-    template: "%s | Tranluz"
+    default: "Tranluz | Equipos eléctricos, servicio técnico, alquiler y formación",
+    template: "%s | Tranluz",
   },
   description:
-    "Especialistas desde 1987 en equipos eléctricos, alquiler de cabrestantes, servicio técnico ITS, formación y trazabilidad para obras eléctricas críticas en Sevilla.",
+    "Especialistas desde 1987 en equipos eléctricos, alquiler de cabrestantes, servicio técnico ITS, formación y trazabilidad para obras eléctricas críticas. Sede en Madrid, atención nacional.",
   keywords: [
     "Tranluz",
     "equipos eléctricos",
@@ -35,25 +35,34 @@ export const metadata: Metadata = {
     "Rent Puller alquiler",
     "Revisa trazabilidad EPI",
     "herramientas alta tensión",
-    "Sevilla",
+    "Madrid",
     "obras eléctricas",
     "cabrestantes frenadoras",
     "Tesmec",
     "Plumett",
     "Tractel",
-    "Cembre"
+    "Cembre",
+    "mantenimiento preventivo equipos",
+    "revisiones certificadas EPI",
+    "líneas de vida",
+    "seguridad eléctrica",
+    "fibra óptica tendido",
+    "maquinaria tendido cable",
+    "prevención riesgos laborales eléctrico",
+    "kit digital equipos",
+    "repuestos equipos eléctricos",
   ],
   authors: [{ name: "Tranluz", url: "https://www.tranluz.es" }],
   category: "industrial equipment",
   classification: "business",
   alternates: {
     canonical: "/",
-    languages: { "es-ES": "/" }
+    languages: { "es-ES": "/" },
   },
   openGraph: {
     title: "Tranluz | Equipos eléctricos, alquiler y soporte técnico",
     description:
-      "Equipos, servicio técnico, alquiler, formación y trazabilidad para trabajos eléctricos y de telecomunicaciones desde 1987.",
+      "Equipos, servicio técnico ITS, alquiler de cabrestantes, formación y trazabilidad para trabajos eléctricos y de telecomunicaciones desde 1987. Sede en Madrid.",
     url: "https://www.tranluz.es",
     locale: "es_ES",
     siteName: "Tranluz",
@@ -63,16 +72,16 @@ export const metadata: Metadata = {
         url: assets.ogImage,
         width: 1536,
         height: 1024,
-        alt: "Tranluz – Equipos y soporte técnico para obras eléctricas críticas"
-      }
-    ]
+        alt: "Tranluz – Equipos y soporte técnico para obras eléctricas críticas",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Tranluz | Equipos, alquiler y servicio técnico eléctrico",
     description:
-      "Especialistas desde 1987: equipos, alquiler, ITS, formación y trazabilidad en Sevilla.",
-    images: [assets.ogImage]
+      "Especialistas desde 1987: equipos, alquiler de cabrestantes, ITS, formación y trazabilidad. Atención nacional desde Madrid.",
+    images: [assets.ogImage],
   },
   robots: {
     index: true,
@@ -82,28 +91,28 @@ export const metadata: Metadata = {
       follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
-      "max-video-preview": -1
-    }
+      "max-video-preview": -1,
+    },
   },
   verification: {
-    // Sustituir por el código real si se tiene Google Search Console
-    // google: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-  }
+    // Sustituir por el código real de Google Search Console
+    // google: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  },
 };
 
 export const viewport: Viewport = {
   colorScheme: "light dark",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f4f6f7" },
-    { media: "(prefers-color-scheme: dark)", color: "#0c1116" }
+    { media: "(prefers-color-scheme: dark)", color: "#0c1116" },
   ],
   width: "device-width",
   initialScale: 1,
-  minimumScale: 1
+  minimumScale: 1,
 };
 
 export default async function RootLayout({
-  children
+  children,
 }: Readonly<{ children: ReactNode }>) {
   const requestHeaders = await headers();
   const cookieStore = await cookies();
@@ -118,18 +127,19 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://www.tranluz.es" />
+        <ThemeScript />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <meta name="geo.region" content="ES-MD" />
+        <meta name="geo.placename" content="Madrid" />
+        <meta name="geo.position" content="40.416775;-3.703790" />
+        <meta name="ICBM" content="40.416775, -3.703790" />
       </head>
       <body>
-        <ThemeScript />
+        <a href="#contenido" className="skip-link">Saltar al contenido</a>
         <AutoTranslate locale={locale} />
-        <a className="skip-link" href="#contenido">
-          Saltar al contenido
-        </a>
         <StructuredData />
-        {children}
         <ActionDock />
+        <main id="contenido">{children}</main>
       </body>
     </html>
   );
