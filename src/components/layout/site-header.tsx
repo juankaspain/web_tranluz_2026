@@ -74,83 +74,86 @@ export function SiteHeader() {
             className="icon-button icon-button-link"
             href={`tel:${brand.phone.replaceAll(" ", "")}`}
             aria-label="Llamar a Tranluz"
-            title="Llamar"
           >
             <Phone aria-hidden="true" size={18} />
           </a>
           <Link className="button button-primary button-compact" href="/presupuesto">
             Presupuesto
-            <ChevronRight aria-hidden="true" size={17} />
           </Link>
-        </div>
-        <details className="mobile-menu">
-          <summary aria-label="Abrir menú">
-            <Menu aria-hidden="true" size={22} />
-          </summary>
-          <div className="mobile-menu-panel">
-            <nav aria-label="Menú móvil">
+          <details className="mobile-menu">
+            <summary aria-label="Abrir menú">
+              <Menu aria-hidden="true" size={20} />
+            </summary>
+            <div className="mobile-menu-panel">
+              <nav>
+                {mainNavigation.map((item) => (
+                  <Link href={item.href} key={item.href}>
+                    {item.label}
+                  </Link>
+                ))}
+                {utilityNavigation.map((item) => (
+                  <Link href={item.href} key={item.href}>
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
               <LanguageSelector />
-              {mainNavigation.map((item) => (
-                <Link href={item.href} key={item.href}>
-                  {item.label}
-                </Link>
-              ))}
-              {utilityNavigation.map((item) => (
-                <Link href={item.href} key={item.href}>
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        </details>
+            </div>
+          </details>
+        </div>
       </div>
-      <div className="mega-strip" aria-label="Accesos destacados">
+      <nav className="mega-strip" aria-label="Accesos directos">
         <Link href="/servicios/its-servicio-tecnico">
           <span className="mega-icon">
-            <Wrench aria-hidden="true" size={17} />
+            <Wrench aria-hidden="true" size={16} />
           </span>
           <span>
-            <strong>ITS Servicio Tecnico</strong>
+            <strong>ITS Servicio Técnico</strong>
             <small>Revisiones e informes</small>
           </span>
+          <ChevronRight aria-hidden="true" size={14} />
         </Link>
         <Link href="/servicios/revisa-trazabilidad">
           <span className="mega-icon">
-            <ShieldCheck aria-hidden="true" size={17} />
+            <ShieldCheck aria-hidden="true" size={16} />
           </span>
           <span>
             <strong>Revisa trazabilidad</strong>
             <small>Control y alertas</small>
           </span>
+          <ChevronRight aria-hidden="true" size={14} />
         </Link>
         <Link href="/alquiler">
           <span className="mega-icon">
-            <FileDown aria-hidden="true" size={17} />
+            <FileDown aria-hidden="true" size={16} />
           </span>
           <span>
             <strong>Rent Puller</strong>
             <small>Alquiler para obra</small>
           </span>
+          <ChevronRight aria-hidden="true" size={14} />
         </Link>
         <Link href="/formacion">
           <span className="mega-icon">
-            <BookOpenText aria-hidden="true" size={17} />
+            <BookOpenText aria-hidden="true" size={16} />
           </span>
           <span>
-            <strong>Formacion</strong>
+            <strong>Formación</strong>
             <small>Operadores y equipos</small>
           </span>
+          <ChevronRight aria-hidden="true" size={14} />
         </Link>
         <Link href="/contacto">
           <span className="mega-icon">
-            <MapPin aria-hidden="true" size={17} />
+            <MapPin aria-hidden="true" size={16} />
           </span>
           <span>
             <strong>Sevilla</strong>
-            <small>Atencion tecnica</small>
+            <small>Atención técnica</small>
           </span>
+          <ChevronRight aria-hidden="true" size={14} />
         </Link>
-      </div>
+      </nav>
     </header>
   );
 }
