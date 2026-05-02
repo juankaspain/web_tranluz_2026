@@ -87,7 +87,7 @@ export function SiteHeader() {
       <div className="topbar" aria-label="Barra de informaci\u00f3n r\u00e1pida">
         <span className="topbar-kicker">
           <ShieldCheck size={14} aria-hidden="true" />
-          {brand.tagline}
+          {brand.claim}
         </span>
         <div className="topbar-actions">
           <a href="/soporte/catalogos">
