@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle, Clock, FileText, MapPin, Package, PhoneCall, ShieldCheck, Wrench } from "lucide-react";
+import { Clock, FileText, MapPin, Package, PhoneCall, ShieldCheck, Wrench } from "lucide-react";
 import { brand } from "@/config/brand";
 import { assets } from "@/content/assets";
 
@@ -8,33 +8,6 @@ const heroMetrics = [
   { value: "+35", label: "años de especializ." },
   { value: "4", label: "líneas de servicio" },
   { value: "B2B", label: "sector eléctrico" },
-];
-
-const commandItems = [
-  {
-    icon: <Package aria-hidden="true" size={20} />,
-    label: "Equipos y catálogo",
-    sub: "Cabrestantes, frenadoras, EPIs y herramientas",
-    href: "/productos",
-  },
-  {
-    icon: <Wrench aria-hidden="true" size={20} />,
-    label: "ITS Servicio técnico",
-    sub: "Revisiones, calibración y certificación",
-    href: "/servicios/its-servicio-tecnico",
-  },
-  {
-    icon: <ShieldCheck aria-hidden="true" size={20} />,
-    label: "Revisa trazabilidad",
-    sub: "Control de EPIs con alertas automáticas",
-    href: "/servicios/revisa-trazabilidad",
-  },
-  {
-    icon: <FileText aria-hidden="true" size={20} />,
-    label: "Catálogo 2025/2026",
-    sub: "Descarga el catálogo general actualizado",
-    href: "/soporte/catalogos",
-  },
 ];
 
 /* Partner brands con colores corporativos para los chips del hero */
@@ -139,7 +112,7 @@ export function HeroSection() {
                   fontSize: "0.78rem",
                   fontWeight: 800,
                   letterSpacing: "0.04em",
-                  fontFamily: "\"Arial Black\", Arial, sans-serif",
+                  fontFamily: '"Arial Black", Arial, sans-serif',
                   whiteSpace: "nowrap",
                 }}
               >
