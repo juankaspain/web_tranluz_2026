@@ -5,7 +5,7 @@ const icons = [PackageSearch, Wrench, ClipboardCheck, GraduationCap];
 
 export function QuickAccessSection() {
   return (
-    <section className="section quick-access" aria-label="Accesos rapidos">
+    <section className="section quick-access" aria-label="Accesos rápidos">
       {quickActions.map((item, index) => {
         const Icon = icons[index] ?? PackageSearch;
         return (
