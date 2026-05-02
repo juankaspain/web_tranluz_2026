@@ -19,7 +19,7 @@ export function ServiceGrid() {
             <div className="service-card-media" aria-hidden="true">
               <Image
                 src={service.image}
-                alt=""
+                alt={`${service.title} - ${service.kicker}`}
                 fill
                 sizes="(max-width: 760px) 100vw, (max-width: 1120px) 45vw, 28vw"
               />
