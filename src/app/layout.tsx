@@ -136,7 +136,7 @@ export default async function RootLayout({
       </head>
       <body>
         <a href="#contenido" className="skip-link">Saltar al contenido</a>
-        <AutoTranslate locale={locale} />
+        <AutoTranslate />
         <StructuredData />
         <ActionDock />
         <main id="contenido">{children}</main>
