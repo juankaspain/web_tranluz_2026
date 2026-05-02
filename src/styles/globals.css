@@ -3817,3 +3817,54 @@ img.lazy.loaded {
 
 
 /* ── End Iter-9 ── */
+
+
+/* =====================================================
+   RESPONSIVE: Trust-band, Footer 5-col, Company-proof
+   ===================================================== */
+
+/* Trust-band: 2-col → 1-col on mobile */
+@media (max-width: 768px) {
+  [aria-label="Credenciales y partners"] > div,
+  [aria-label="Confianza industrial Tranluz"] > div {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* Partner logo grid: 3-col → 2-col on mobile */
+  [aria-label="Partners oficiales"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Footer: 5-col → 1-col on mobile */
+  footer > div:first-child {
+    grid-template-columns: 1fr !important;
+    padding: 40px 20px !important;
+  }
+
+  /* Company proof: 2-col → 1-col */
+  [aria-label="Confianza industrial Tranluz"] > div > div:first-child {
+    border-radius: 16px !important;
+    padding: 32px 24px !important;
+  }
+
+  /* CTA buttons: stack on mobile */
+  [aria-label="Solicitar presupuesto"] > div > div {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+}
+
+/* Footer tablet: 5-col → 2+3 cols */
+@media (max-width: 1100px) and (min-width: 769px) {
+  footer > div:first-child {
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+}
+
+/* Trust-band partner logos hover effect */
+[aria-label="Partners oficiales"] > div:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12) !important;
+  transform: translateY(-1px);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
