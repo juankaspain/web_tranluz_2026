@@ -34,12 +34,12 @@ const navIcon = (href: string) => {
 };
 
 const megaItems = [
-  { icon: <Wrench size={18} aria-hidden="true" />, label: "ITS Servicio T\u00e9cnico", sub: "Revisiones e informes", href: "/servicios/its-servicio-tecnico" },
+  { icon: <Wrench size={18} aria-hidden="true" />, label: "ITS Servicio Técnico", sub: "Revisiones e informes", href: "/servicios/its-servicio-tecnico" },
   { icon: <ShieldCheck size={18} aria-hidden="true" />, label: "Revisa trazabilidad", sub: "Control y alertas", href: "/servicios/revisa-trazabilidad" },
   { icon: <Layers size={18} aria-hidden="true" />, label: "Rent Puller", sub: "Alquiler para obra", href: "/alquiler" },
-  { icon: <BookOpen size={18} aria-hidden="true" />, label: "Formaci\u00f3n", sub: "Operadores y equipos", href: "/formacion" },
-  { icon: <Package size={18} aria-hidden="true" />, label: "Cat\u00e1logo t\u00e9cnico", sub: "Productos y referencias", href: "/productos" },
-  { icon: <MapPin size={18} aria-hidden="true" />, label: "Sevilla", sub: "Atenci\u00f3n t\u00e9cnica presencial", href: "/contacto" },
+  { icon: <BookOpen size={18} aria-hidden="true" />, label: "Formación", sub: "Operadores y equipos", href: "/formacion" },
+  { icon: <Package size={18} aria-hidden="true" />, label: "Catálogo técnico", sub: "Productos y referencias", href: "/productos" },
+  { icon: <MapPin size={18} aria-hidden="true" />, label: "Sevilla", sub: "Atención técnica presencial", href: "/contacto" },
 ];
 
 export function SiteHeader() {
@@ -77,8 +77,8 @@ export function SiteHeader() {
       {/* Topbar */}
       <div className="topbar">
         <span className="topbar-claim">{brand.claim}</span>
-        <nav className="topbar-links" aria-label="Informaci\u00f3n de contacto">
-          <span>Cat\u00e1logo 2025/2026</span>
+        <nav className="topbar-links" aria-label="Información de contacto">
+          <span>Catálogo 2025/2026</span>
           <a href={`tel:${brand.phone}`}>{brand.phone}</a>
         </nav>
       </div>
@@ -99,7 +99,7 @@ export function SiteHeader() {
           </Link>
 
           {/* Nav escritorio */}
-          <nav className="main-nav desktop-nav" aria-label="Navegaci\u00f3n principal">
+          <nav className="main-nav desktop-nav" aria-label="Navegación principal">
             {mainNavigation.map((item) => {
               const hasChildren = item.children && item.children.length > 0;
               const isOpen = openMega === item.href;
@@ -146,7 +146,7 @@ export function SiteHeader() {
             <Search size={16} aria-hidden="true" />
             <input
               type="search"
-              placeholder="Buscar equipo\u2026"
+              placeholder="Buscar equipo…"
               aria-label="Buscar equipo"
               autoComplete="off"
             />
@@ -162,7 +162,7 @@ export function SiteHeader() {
           {/* Hamburguesa */}
           <button
             className="hamburger mobile-only"
-            aria-label={mobileOpen ? "Cerrar men\u00fa" : "Abrir men\u00fa"}
+            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={mobileOpen}
             aria-controls={mobileMenuId}
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -185,24 +185,24 @@ export function SiteHeader() {
         </div>
       </header>
 
-      {/* Men\u00fa m\u00f3vil */}
+      {/* Menú móvil */}
       {mobileOpen && (
         <div
           id={mobileMenuId}
           className="mobile-menu-panel"
           role="dialog"
           aria-modal="true"
-          aria-label="Men\u00fa de navegaci\u00f3n"
+          aria-label="Menú de navegación"
         >
           <button
             className="mobile-menu-close"
             onClick={() => setMobileOpen(false)}
-            aria-label="Cerrar men\u00fa"
+            aria-label="Cerrar menú"
           >
             <X size={20} aria-hidden="true" />
           </button>
 
-          <nav aria-label="Navegaci\u00f3n m\u00f3vil">
+          <nav aria-label="Navegación móvil">
             {mainNavigation.map((item) => (
               <Link
                 key={item.href}
@@ -234,7 +234,7 @@ export function SiteHeader() {
         </div>
       )}
 
-      {/* Overlay m\u00f3vil */}
+      {/* Overlay móvil */}
       {mobileOpen && (
         <div
           className="mobile-overlay"
