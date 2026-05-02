@@ -1,17 +1,14 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef, useId } from "react";
 import {
   BookOpen,
   ChevronDown,
-  FileDown,
   Layers,
   Menu,
   MapPin,
   Package,
-  Phone,
   Search,
   Settings,
   ShieldCheck,
@@ -23,7 +20,7 @@ import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { LanguageSelector } from "@/components/i18n/language-selector";
 import { assets } from "@/content/assets";
 import { brand } from "@/config/brand";
-import { mainNavigation, utilityNavigation } from "@/config/navigation";
+import { mainNavigation } from "@/config/navigation";
 
 // Icono por href de ítem de navegación
 const navIcon = (href: string) => {
@@ -75,133 +72,132 @@ export function SiteHeader() {
   // Bloquear scroll del body al abrir menú móvil
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   return (
-    <header className="site-header" data-scrolled={scrolled || undefined}>
+    <>
       <a href="#contenido" className="skip-link">Saltar al contenido</a>
 
       {/* —— Topbar —— */}
       <div className="topbar">
-        <span className="topbar-kicker">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          {brand.claim}
-        </span>
-        <span className="topbar-actions">
-          <Link href="/soporte/catalogos">Catálogo 2025/2026</Link>
-          <Link href={`tel:${brand.phone.replaceAll(" ", "")}`}>
-            <Phone size={13} aria-hidden="true" />
+        <span>{brand.claim}</span>
+        <nav aria-label="Utilidades" className="topbar-nav">
+          <a href={assets.catalogUrl} className="topbar-link">
+            Catálogo 2025/2026
+          </a>
+          <a href={`tel:${brand.phone}`} className="topbar-link topbar-phone">
             {brand.phone}
-          </Link>
-        </span>
+          </a>
+        </nav>
       </div>
 
       {/* —— Navbar —— */}
-      <nav className="navbar" ref={navRef} aria-label="Navegación principal">
+      <header
+        ref={navRef}
+        className={`navbar${scrolled ? " navbar--scrolled" : ""}`}
+        role="banner"
+      >
         {/* Logo */}
-        <Link href="/" className="brand-mark" aria-label="Tranluz – inicio">
+        <Link href="/" aria-label="Tranluz – inicio" className="navbar-logo">
           <Image
             src={assets.logo}
             alt="Tranluz"
-            width={104}
-            height={27}
+            width={120}
+            height={36}
             priority
           />
         </Link>
 
         {/* Desktop nav */}
-        <div className="desktop-nav">
-          <ul className="main-nav" role="list">
-            {mainNavigation.map((item) => {
-              const hasChildren = item.children && item.children.length > 0;
-              const isOpen = openMega === item.href;
-              return (
-                <li key={item.href} style={{ position: "relative" }}>
-                  {hasChildren ? (
-                    <>
-                      <button
-                        className="main-nav-btn"
-                        style={{ display: "inline-flex", alignItems: "center", gap: "4px", border: 0, background: "transparent", cursor: "pointer", borderRadius: "999px", padding: "10px 7px", fontSize: "0.86rem", fontWeight: 760, color: "var(--text-muted)", whiteSpace: "nowrap" }}
-                        aria-expanded={isOpen}
-                        onClick={() => setOpenMega(isOpen ? null : item.href)}
-                      >
-                        {item.label}
-                        <ChevronDown size={14} aria-hidden="true" style={{ transition: "transform 180ms", transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }} />
-                      </button>
-                      {isOpen && (
-                        <ul
-                          role="list"
-                          style={{ position: "absolute", top: "calc(100% + 8px)", left: 0, minWidth: "200px", border: "1px solid var(--line)", borderRadius: "var(--radius-lg)", background: "var(--bg-elevated)", boxShadow: "var(--shadow)", padding: "8px", zIndex: 100, listStyle: "none", margin: 0 }}
-                        >
-                          {item.children!.map((child) => (
-                            <li key={child.href}>
-                              <Link
-                                href={child.href}
-                                style={{ display: "flex", alignItems: "center", gap: "10px", padding: "10px 12px", borderRadius: "var(--radius)", color: "var(--text-muted)", fontSize: "0.86rem", fontWeight: 720 }}
-                                onClick={() => setOpenMega(null)}
-                              >
-                                {navIcon(child.href)}
-                                {child.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </>
-                  ) : (
-                    <Link href={item.href}>{item.label}</Link>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+        <nav aria-label="Principal" className="navbar-nav">
+          {mainNavigation.map((item) => {
+            const hasChildren = item.children && item.children.length > 0;
+            const isOpen = openMega === item.href;
+            return (
+              <div key={item.href} className="nav-item">
+                {hasChildren ? (
+                  <>
+                    <button
+                      className="nav-btn"
+                      aria-haspopup="true"
+                      aria-expanded={isOpen}
+                      onClick={() => setOpenMega(isOpen ? null : item.href)}
+                    >
+                      {item.label}
+                      <ChevronDown size={14} aria-hidden="true" />
+                    </button>
+                    {isOpen && (
+                      <ul className="mega-menu" role="menu">
+                        {item.children!.map((child) => (
+                          <li key={child.href} role="none">
+                            <Link
+                              href={child.href}
+                              role="menuitem"
+                              className="mega-menu-item"
+                              onClick={() => setOpenMega(null)}
+                            >
+                              {navIcon(child.href)}
+                              {child.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </>
+                ) : (
+                  <Link href={item.href} className="nav-link">
+                    {item.label}
+                  </Link>
+                )}
+              </div>
+            );
+          })}
+        </nav>
 
-          {/* Buscador */}
-          <div className="site-search">
-            <Search size={16} aria-hidden="true" />
-            <input
-              type="search"
-              placeholder="Buscar equipo…"
-              aria-label="Buscar equipo"
-              autoComplete="off"
-            />
-          </div>
-        </div>
+        {/* Buscador */}
+        <form role="search" className="navbar-search">
+          <Search size={16} aria-hidden="true" className="search-icon" />
+          <input
+            type="search"
+            placeholder="Buscar equipo…"
+            aria-label="Buscar equipo"
+            autoComplete="off"
+            className="search-input"
+          />
+        </form>
 
         {/* Acciones header */}
-        <div className="header-actions">
+        <div className="navbar-actions">
           <ThemeToggle />
           <LanguageSelector />
-          <Link href={`tel:${brand.phone.replaceAll(" ", "")}`} className="icon-button icon-button-link" aria-label="Llamar">
-            <Phone size={17} aria-hidden="true" />
-          </Link>
-          <Link href="/presupuesto" className="button button-primary button-compact">
+          <a href="/presupuesto" className="btn-presupuesto">
             Presupuesto
-          </Link>
-
-          {/* Botón hamburguesa móvil */}
-          <button
-            className="icon-button mobile-menu-btn"
-            style={{ display: "none" }}
-            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-            aria-expanded={mobileOpen}
-            aria-controls={mobileMenuId}
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          </a>
         </div>
-      </nav>
+
+        {/* Botón hamburguesa móvil */}
+        <button
+          className="hamburger"
+          aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-controls={mobileMenuId}
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          {mobileOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+        </button>
+      </header>
 
       {/* —— Mega-strip: accesos directos clave —— */}
-      <nav className="mega-strip" aria-label="Accesos rápidos">
+      <nav aria-label="Accesos rápidos" className="mega-strip">
         {megaItems.map((mi) => (
-          <Link key={mi.href} href={mi.href}>
-            <span className="mega-icon" aria-hidden="true">{mi.icon}</span>
+          <Link key={mi.href} href={mi.href} className="mega-strip-item">
+            {mi.icon}
             <span>
               <strong>{mi.label}</strong>
-              <small>{mi.sub}</small>
+              <span>{mi.sub}</span>
             </span>
           </Link>
         ))}
@@ -211,49 +207,58 @@ export function SiteHeader() {
       {mobileOpen && (
         <div
           id={mobileMenuId}
-          className="mobile-menu-panel"
-          style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 200, background: "var(--bg-elevated)", padding: "24px", overflowY: "auto" }}
+          className="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menú de navegación"
         >
-          <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "16px" }}>
-            <button className="icon-button" onClick={() => setMobileOpen(false)} aria-label="Cerrar menú">
-              <X size={20} />
-            </button>
-          </div>
-          <nav>
+          <button
+            className="mobile-menu-close"
+            onClick={() => setMobileOpen(false)}
+            aria-label="Cerrar menú"
+          >
+            <X aria-hidden="true" />
+          </button>
+          <nav aria-label="Menú móvil principal">
             {mainNavigation.map((item) => (
-              <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}>
+              <Link
+                key={item.href}
+                href={item.href}
+                className="mobile-nav-link"
+                onClick={() => setMobileOpen(false)}
+              >
                 {item.label}
               </Link>
             ))}
           </nav>
-          <div style={{ marginTop: "24px", display: "grid", gap: "8px" }}>
+          <div className="mobile-mega-grid">
             {megaItems.map((mi) => (
               <Link
                 key={mi.href}
                 href={mi.href}
+                className="mobile-mega-item"
                 onClick={() => setMobileOpen(false)}
                 style={{ display: "flex", alignItems: "center", gap: "12px", padding: "12px", border: "1px solid var(--line)", borderRadius: "var(--radius)", color: "var(--text-muted)" }}
               >
-                <span className="mega-icon" aria-hidden="true">{mi.icon}</span>
+                {mi.icon}
                 <span>
-                  <strong style={{ display: "block" }}>{mi.label}</strong>
-                  <small style={{ color: "var(--text-soft)" }}>{mi.sub}</small>
+                  <strong>{mi.label}</strong>
+                  <span>{mi.sub}</span>
                 </span>
               </Link>
             ))}
           </div>
-          <div style={{ marginTop: "24px" }}>
-            <LanguageSelector />
-          </div>
         </div>
       )}
+
       {/* Overlay */}
       {mobileOpen && (
         <div
-          style={{ position: "fixed", inset: 0, zIndex: 199, background: "rgba(0,0,0,0.5)" }}
+          className="mobile-overlay"
+          aria-hidden="true"
           onClick={() => setMobileOpen(false)}
         />
       )}
-    </header>
+    </>
   );
 }
