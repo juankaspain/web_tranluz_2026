@@ -65,4 +65,7 @@ export const assets = {
 
   // ANTES: Logo_Formate_Tranluz-9a46c893.png  → WebP
   trainingLogo: `${baseUrl}/images/Tranluz/logo-formate-tranluz.webp`,
+  
+  // — Catálogo PDF URL
+  catalogUrl: "/soporte/catalogos",
 };
