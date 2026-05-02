@@ -6,7 +6,6 @@ import { AutoTranslate } from "@/components/i18n/auto-translate";
 import { ActionDock } from "@/components/layout/action-dock";
 import { StructuredData } from "@/components/seo/structured-data";
 import { ThemeScript } from "@/components/theme/theme-script";
-import { assets } from "@/content/assets";
 import { defaultLocale, isLocale } from "@/i18n/config";
 import "@fontsource-variable/manrope";
 import "@fontsource-variable/archivo";
