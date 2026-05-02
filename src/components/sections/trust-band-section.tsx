@@ -1,183 +1,65 @@
-import type { ReactElement } from "react";
 import { Award, Clock, MapPin, ShieldCheck, Users, Wrench } from "lucide-react";
 
 /* ================================================================
-   Logos SVG oficiales de partners – inline, contraste AAA garantizado.
-   Cada SVG usa width completo y height proporcional al viewBox.
+   Logo badges HTML puros - más fiables que SVG text en SSR/React.
+   Cada logo usa un div con fondo de color corporativo y el nombre
+   en tipografía blanca, simulando wordmark oficial.
    ================================================================ */
 
-function LogoTesmec() {
+function LogoBadge({
+  name,
+  bg,
+  textColor = "#ffffff",
+  subtitle,
+}: {
+  name: string;
+  bg: string;
+  textColor?: string;
+  subtitle?: string;
+}) {
   return (
-    <svg
-      width="110"
-      height="40"
-      viewBox="0 0 110 40"
-      aria-label="Tesmec"
-      role="img"
-      focusable="false"
+    <div
+      aria-label={name}
+      style={{
+        display: "inline-flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        background: bg,
+        borderRadius: "6px",
+        padding: subtitle ? "6px 14px" : "8px 16px",
+        minWidth: "90px",
+        gap: "2px",
+      }}
     >
-      {/* Barra roja fondo */}
-      <rect width="110" height="40" rx="6" fill="#C8102E" />
-      {/* Wordmark blanco */}
-      <text
-        x="55"
-        y="27"
-        textAnchor="middle"
-        fontFamily="Arial Black, Arial, sans-serif"
-        fontWeight="900"
-        fontSize="22"
-        fill="#ffffff"
-        letterSpacing="1"
+      <span
+        style={{
+          color: textColor,
+          fontFamily: "\"Arial Black\", Arial, sans-serif",
+          fontWeight: 900,
+          fontSize: name.length > 6 ? "0.85rem" : "1.05rem",
+          letterSpacing: "0.06em",
+          lineHeight: 1.1,
+          whiteSpace: "nowrap",
+        }}
       >
-        TESMEC
-      </text>
-    </svg>
-  );
-}
-
-function LogoPlumett() {
-  return (
-    <svg
-      width="110"
-      height="40"
-      viewBox="0 0 110 40"
-      aria-label="Plumett"
-      role="img"
-      focusable="false"
-    >
-      <rect width="110" height="40" rx="6" fill="#005BAC" />
-      <text
-        x="55"
-        y="27"
-        textAnchor="middle"
-        fontFamily="Arial, sans-serif"
-        fontWeight="800"
-        fontSize="20"
-        fill="#ffffff"
-        letterSpacing="0.5"
-      >
-        PLUMETT
-      </text>
-    </svg>
-  );
-}
-
-function LogoWorkItalia() {
-  return (
-    <svg
-      width="110"
-      height="40"
-      viewBox="0 0 110 40"
-      aria-label="Work Italia"
-      role="img"
-      focusable="false"
-    >
-      <rect width="110" height="40" rx="6" fill="#C15000" />
-      <text
-        x="55"
-        y="17"
-        textAnchor="middle"
-        fontFamily="Arial, sans-serif"
-        fontWeight="900"
-        fontSize="14"
-        fill="#ffffff"
-        letterSpacing="0.5"
-      >
-        WORK
-      </text>
-      <text
-        x="55"
-        y="33"
-        textAnchor="middle"
-        fontFamily="Arial, sans-serif"
-        fontWeight="700"
-        fontSize="13"
-        fill="#ffffff"
-        letterSpacing="0.5"
-      >
-        ITALIA
-      </text>
-    </svg>
-  );
-}
-
-function Logo3M() {
-  return (
-    <svg
-      width="60"
-      height="40"
-      viewBox="0 0 60 40"
-      aria-label="3M"
-      role="img"
-      focusable="false"
-    >
-      <rect width="60" height="40" rx="6" fill="#B00000" />
-      <text
-        x="30"
-        y="30"
-        textAnchor="middle"
-        fontFamily="Arial Black, Arial, sans-serif"
-        fontWeight="900"
-        fontSize="26"
-        fill="#ffffff"
-      >
-        3M
-      </text>
-    </svg>
-  );
-}
-
-function LogoTractel() {
-  return (
-    <svg
-      width="110"
-      height="40"
-      viewBox="0 0 110 40"
-      aria-label="Tractel"
-      role="img"
-      focusable="false"
-    >
-      <rect width="110" height="40" rx="6" fill="#1A3F6F" />
-      <text
-        x="55"
-        y="27"
-        textAnchor="middle"
-        fontFamily="Arial Black, Arial, sans-serif"
-        fontWeight="900"
-        fontSize="20"
-        fill="#ffffff"
-        letterSpacing="1"
-      >
-        TRACTEL
-      </text>
-    </svg>
-  );
-}
-
-function LogoCembre() {
-  return (
-    <svg
-      width="110"
-      height="40"
-      viewBox="0 0 110 40"
-      aria-label="Cembre"
-      role="img"
-      focusable="false"
-    >
-      <rect width="110" height="40" rx="6" fill="#004d26" />
-      <text
-        x="55"
-        y="27"
-        textAnchor="middle"
-        fontFamily="Arial, sans-serif"
-        fontWeight="800"
-        fontSize="20"
-        fill="#ffffff"
-        letterSpacing="1"
-      >
-        CEMBRE
-      </text>
-    </svg>
+        {name}
+      </span>
+      {subtitle && (
+        <span
+          style={{
+            color: `${textColor}cc`,
+            fontFamily: "Arial, sans-serif",
+            fontWeight: 600,
+            fontSize: "0.6rem",
+            letterSpacing: "0.04em",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {subtitle}
+        </span>
+      )}
+    </div>
   );
 }
 
@@ -194,21 +76,15 @@ const credentials = [
 ];
 
 /* ======================================================
-   Partners con Logo SVG incrustado + metadatos AAA
+   Partners con Logo badge incrustado + metadatos AAA
    ====================================================== */
-const partners: Array<{
-  name: string;
-  sector: string;
-  color: string;
-  bg: string;
-  Logo: () => ReactElement;
-}> = [
-  { name: "Tesmec", sector: "Tendido de conductores", color: "#C8102E", bg: "#fff5f5", Logo: LogoTesmec },
-  { name: "Plumett", sector: "Herramienta industrial", color: "#005BAC", bg: "#f0f6ff", Logo: LogoPlumett },
-  { name: "Work Italia", sector: "EPI y seguridad", color: "#C15000", bg: "#fff8f0", Logo: LogoWorkItalia },
-  { name: "3M", sector: "Materiales técnicos", color: "#B00000", bg: "#fff0f0", Logo: Logo3M },
-  { name: "Tractel", sector: "Polipastos y tracción", color: "#1A3F6F", bg: "#f0f4ff", Logo: LogoTractel },
-  { name: "Cembre", sector: "Conectores y terminales", color: "#004d26", bg: "#f0fff5", Logo: LogoCembre },
+const partners = [
+  { name: "Tesmec",       sector: "Tendido de conductores", color: "#C8102E", bg: "#fff5f5", logoBg: "#C8102E", logoSub: "GROUP" },
+  { name: "Plumett",      sector: "Herramienta industrial",  color: "#005BAC", bg: "#f0f6ff", logoBg: "#005BAC", logoSub: "TOOLS" },
+  { name: "Work Italia",  sector: "EPI y seguridad",         color: "#C15000", bg: "#fff8f0", logoBg: "#C15000", logoSub: "SAFETY" },
+  { name: "3M",           sector: "Materiales técnicos",      color: "#B00000", bg: "#fff0f0", logoBg: "#B00000", logoSub: "SCIENCE" },
+  { name: "Tractel",      sector: "Polipastos y tracción",   color: "#1A3F6F", bg: "#f0f4ff", logoBg: "#1A3F6F", logoSub: "LIFTING" },
+  { name: "Cembre",       sector: "Conectores y terminales",  color: "#004d26", bg: "#f0fff5", logoBg: "#004d26", logoSub: "CONNECT" },
 ];
 
 export function TrustBandSection() {
@@ -314,67 +190,44 @@ export function TrustBandSection() {
               margin: 0,
             }}
           >
-            {partners.map((p) => {
-              const { Logo } = p;
-              return (
-                <li
-                  key={p.name}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    gap: "10px",
-                    border: `2px solid ${p.color}22`,
-                    borderRadius: "var(--radius-lg)",
-                    background: p.bg,
-                    padding: "20px 16px",
-                    transition: "transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease",
-                    cursor: "default",
-                    minHeight: "110px",
-                  }}
-                  aria-label={`Partner oficial: ${p.name} – ${p.sector}`}
-                >
-                  {/* Logo SVG incrustado */}
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      minHeight: "44px",
-                    }}
-                  >
-                    <Logo />
-                  </div>
+            {partners.map((p) => (
+              <li
+                key={p.name}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "12px",
+                  border: `2px solid ${p.color}33`,
+                  borderRadius: "var(--radius-lg)",
+                  background: p.bg,
+                  padding: "20px 16px",
+                  minHeight: "120px",
+                }}
+                aria-label={`Partner oficial: ${p.name} – ${p.sector}`}
+              >
+                {/* Logo badge incrustado */}
+                <LogoBadge
+                  name={p.name}
+                  bg={p.logoBg}
+                  subtitle={p.logoSub}
+                />
 
-                  {/* Nombre + sector con contraste AAA */}
-                  <div style={{ textAlign: "center" }}>
-                    <strong
-                      style={{
-                        display: "block",
-                        fontSize: "0.9rem",
-                        fontWeight: 800,
-                        color: p.color,
-                        letterSpacing: "0.02em",
-                      }}
-                    >
-                      {p.name}
-                    </strong>
-                    <span
-                      style={{
-                        display: "block",
-                        marginTop: "4px",
-                        fontSize: "0.76rem",
-                        fontWeight: 500,
-                        color: "#3a4550",
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      {p.sector}
-                    </span>
-                  </div>
-                </li>
-              );
-            })}
+                {/* Sector con contraste AAA */}
+                <span
+                  style={{
+                    display: "block",
+                    textAlign: "center",
+                    fontSize: "0.76rem",
+                    fontWeight: 500,
+                    color: "#3a4550",
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {p.sector}
+                </span>
+              </li>
+            ))}
           </ul>
         </div>
       </section>
