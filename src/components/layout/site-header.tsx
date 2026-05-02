@@ -90,7 +90,7 @@ export function SiteHeader() {
           {/* Logo */}
           <Link href="/" className="brand-mark" aria-label="Tranluz inicio">
             <Image
-              src={assets.logoUrl}
+              src={assets.logo}
               alt="Tranluz"
               width={96}
               height={28}
