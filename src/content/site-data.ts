@@ -241,7 +241,7 @@ export const rentalEquipment = [
 // ─── Training ───────────────────────────────────────────────────────────────────
 export const trainingIntro = {
   title: "Formación técnico-práctica para operadores y equipos de empresa.",
-  text: "Formate Tranluz nace para cubrir necesidades específicas de responsables que deben formar técnicos en el uso seguro de maquinaria y equipos eléctricos. Cursos homologados, presenciales o en instalaciones del cliente.",
+  text: "Fórmate Tranluz nace para cubrir necesidades específicas de responsables que deben formar técnicos en el uso seguro de maquinaria y equipos eléctricos. Cursos homologados, presenciales o en instalaciones del cliente.",
   imageOne: assets.trainingOne,
   imageTwo: assets.trainingTwo,
   logo: assets.trainingLogo,
@@ -306,10 +306,10 @@ export const catalogGroups = [
       "Principales áreas del catálogo separadas por familia para consulta rápida y descarga independiente.",
     items: [
       { name: "01 Alta Tensión", version: "V4 - 18/02/2025", size: "17,8 KB", status: "Actual" },
-      { name: "02 Tendidos Subterráneos", version: "V2 - 23/03/2022", size: "3.047 KB", status: "Historico operativo" },
-      { name: "03 Protección Laboral", version: "V2.2 - 08/07/2021", size: "8.318 KB", status: "Historico operativo" },
-      { name: "04 Seguridad Eléctrica", version: "V4.1 - 22/12/2022", size: "10.891 KB", status: "Historico operativo" },
-      { name: "05 Herramientas Hidráulica", version: "V1.3 - 21/01/2022", size: "8.768 KB", status: "Historico operativo" },
+      { name: "02 Tendidos Subterráneos", version: "V2 - 23/03/2022", size: "3.047 KB", status: "Histórico operativo" },
+      { name: "03 Protección Laboral", version: "V2.2 - 08/07/2021", size: "8.318 KB", status: "Histórico operativo" },
+      { name: "04 Seguridad Eléctrica", version: "V4.1 - 22/12/2022", size: "10.891 KB", status: "Histórico operativo" },
+      { name: "05 Herramientas Hidráulica", version: "V1.3 - 21/01/2022", size: "8.768 KB", status: "Histórico operativo" },
       { name: "06 Fibra Óptica", version: "V1 - 12/2019", size: "4.621 KB", status: "Archivo" },
     ],
   },
@@ -321,7 +321,7 @@ export const catalogGroups = [
       { name: "Folleto ITS-Tranluz", version: "V2 - 05/2024", size: "2,4 Mb", status: "Actual" },
       { name: "Folleto RentPuller-Tranluz", version: "V5 - 05/2024", size: "2,3 Mb", status: "Actual" },
       { name: "Folleto Revisa-Tranluz", version: "V1 - 04/2019", size: "2,19 Mb", status: "Archivo" },
-      { name: "Folleto Formate-Tranluz", version: "V1 - 05/2024", size: "2,9 Mb", status: "Actual" },
+      { name: "Folleto Fórmate-Tranluz", version: "V1 - 05/2024", size: "2,9 Mb", status: "Actual" },
     ],
   },
 ];
