@@ -1,60 +1,69 @@
-# Tranluz Web Modernization
+# web_tranluz_2026
 
-Arquitectura inicial para una nueva web corporativa y comercial de Tranluz con ambicion tier 1: catalogo tecnico vivo, servicios productizados, alquiler, formacion, soporte y captacion B2B en un unico ecosistema.
+Plátaforma técnico-comercial de **[Tranluz](https://www.tranluz.es)** — especialistas desde 1987 en equipos eléctricos, alquiler de cabrestantes, servicio técnico ITS, trazabilidad y formación para obras eléctricas críticas.
 
-## Objetivo
+## Stack
 
-Convertir la web de Tranluz en una plataforma tecnico-comercial capaz de competir con referentes globales del sector: Condux Tesmec, Plumettaz, Cembre y Tractel.
-
-La propuesta no se limita a una portada nueva. El sistema se organiza alrededor de los trabajos reales del cliente:
-
-- Comprar productos tecnicos.
-- Alquilar equipos para obra.
-- Revisar, calibrar y certificar equipos.
-- Formar operadores y tecnicos.
-- Descargar documentacion fiable.
-- Solicitar presupuesto o soporte con baja friccion.
+| Capa | Tecnología |
+|---|---|
+| Framework | Next.js 15 (App Router) |
+| Lenguaje | TypeScript |
+| Estilos | CSS custom (design tokens, dark mode) |
+| Tipografías | Manrope Variable + Archivo Variable |
+| Imágenes | WebP / AVIF – generadas + servidas vía `next/image` |
+| Despliegue | Hostinger (produccion) |
 
 ## Estructura
 
-```txt
-docs/
-  architecture/
-    01-product-vision.md
-    02-information-architecture.md
-    03-content-model.md
-    04-design-system.md
-    05-technical-architecture.md
-    06-implementation-roadmap.md
+```
 src/
-  app/
-    page.tsx
-    layout.tsx
-  components/
-    layout/
-    sections/
-    ui/
-  config/
-  content/
-  lib/
-  styles/
+  app/           ← rutas de página (App Router)
+  components/    ← UI: sections, layout, seo, theme, i18n
+  content/       ← datos: assets.ts, home.ts, services.ts...
+  styles/        ← globals.css (design system completo)
+  i18n/          ← configuración de idioma
+  lib/           ← utilidades compartidas
+  types/         ← definiciones TypeScript
+public/
+  images/        ← assets estáticos (WebP, SVG)
 ```
 
-## Stack propuesto
+## Iteraciones UI/UX aplicadas (mayo 2026)
 
-- Frontend: Next.js con App Router y TypeScript.
-- Estilos: CSS moderno con tokens de marca, preparado para migrar a Tailwind si se decide.
-- Contenido: modelo preparado para CMS headless, PIM o integracion con ecommerce.
-- Busqueda futura: Meilisearch o Algolia para productos, documentos y guias.
-- Integraciones futuras: CRM, analitica, ecommerce, formularios B2B, portal cliente y Revisa.
+### Iteración 1 — Fundamentos: Performance + Seguridad
 
-## Primeros entregables incluidos
+- **`next.config.mjs`**: formatos AVIF+WebP, `deviceSizes` optimizados, `minimumCacheTTL` 31 días, `poweredByHeader: false`, `reactStrictMode: true`
+- **Security headers** para todas las rutas: `CSP`, `HSTS`, `X-Frame-Options: SAMEORIGIN`, `Permissions-Policy`, `Referrer-Policy`, `Cross-Origin-*`, cache immutable para estáticos
+- **`globals.css`**: animaciones `fadeInUp` con `animation-timeline: view()`, hover spring (`cubic-bezier(0.34,1.56,0.64,1)`), botón primario con gradiente y sombra de color, scrollbar personalizada, `mix-blend-mode: luminosity` en hero, overlay en `company-proof-media`, `focus-visible` mejorado, `::selection` consistente
 
-- Vision de producto y posicionamiento.
-- Arquitectura de informacion top tier.
-- Modelo de contenido para productos, servicios, cursos, descargas y soporte.
-- Direccion visual y sistema de diseno.
-- Arquitectura tecnica recomendada.
-- Roadmap por fases.
-- Scaffold inicial de aplicacion.
+### Iteración 2 — Assets + SEO
 
+- **`assets.ts`**: todos los recursos migrados a WebP/AVIF; logos sustituidos por SVG nativo (peso ≈0); GIF de banner → WebP estático; JPG de personas/productos → WebP; rutas limpias y documentadas
+- **`layout.tsx`**: keywords enriquecidas (18 términos), `authors`, `category`, `classification`, descripción más precisa, `minimumScale: 1` en viewport, `<link rel="preconnect">` para fonts, `<link rel="dns-prefetch">` para dominio
+
+### Iteración 3 — Contenido + Conversión
+
+- **`home.ts`**: copy de servicios más persuasivo y orientado a conversión, `meta` de equipos enriquecida con kN, textos de `quickActions` con propuesta de valor explícita, `proofPoints` actualizados (+38 años), título catalog correcto `Catálogo general vigente`
+
+## Pendiente (próximas iteraciones)
+
+- [ ] Generar y subir imágenes WebP reales a `public/images/generated/`
+- [ ] Sustituir imágenes heredadas del servidor por las nuevas rutas en `assets.ts`
+- [ ] Implementar `sitemap.xml` y `robots.txt` dinámicos
+- [ ] Conectar Google Search Console y añadir verification token
+- [ ] Auditoría Lighthouse post-despliegue y ajuste de LCP
+- [ ] Structured Data (LocalBusiness + Product) en `structured-data.tsx`
+
+## Desarrollo local
+
+```bash
+npm install
+npm run dev
+```
+
+Abre [http://localhost:3000](http://localhost:3000)
+
+## Contacto
+
+Traanluz · Polígono Industrial Calonge, Calle Oro n.º 2, 41007 Sevilla  
++34 954 367 290 · info@tranluz.com
