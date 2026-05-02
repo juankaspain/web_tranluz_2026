@@ -74,7 +74,7 @@ export function PageHeroPro({ eyebrow, title, text, image, actions = [] }: PageH
         />
         <div className="visual-status-card">
           <BadgeCheck aria-hidden="true" size={20} />
-          <span>Arquitectura tecnica B2B</span>
+          <span>Arquitectura técnica B2B</span>
         </div>
       </div>
     </section>
@@ -189,7 +189,7 @@ export function RentalLanding() {
             <h2>Fichas orientadas a seleccion rapida en obra.</h2>
           </div>
           <Link className="button button-secondary" href="/contacto">
-            Asesoria tecnica
+            Asesoria técnica
             <PhoneCall aria-hidden="true" size={18} />
           </Link>
         </div>
@@ -228,7 +228,7 @@ export function RentalEquipmentDetail({ slug }: { slug: string }) {
           </div>
         </aside>
         <div className="detail-main">
-          <ProcessPanel items={["Confirmar obra", "Validar capacidad", "Preparar equipo", "Asistencia tecnica"]} />
+          <ProcessPanel items={["Confirmar obra", "Validar capacidad", "Preparar equipo", "Asistencia técnica"]} />
           <div className="extras-panel">
             <p className="eyebrow">Accesorios disponibles</p>
             <div className="pill-list">
@@ -431,7 +431,7 @@ export function QuoteExperience() {
   return (
     <>
       <PageHeroPro
-        eyebrow="Solicitud tecnica"
+        eyebrow="Solicitud técnica"
         title="Presupuesto con contexto: producto, alquiler, revision o formacion."
         text="El flujo esta preparado para capturar la necesidad real y derivarla al departamento correcto con datos utiles desde el primer contacto."
         image={assets.rentPuller}
