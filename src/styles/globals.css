@@ -2357,3 +2357,195 @@ button {
 :root[data-theme="dark"] .footer-social a {
   background: var(--bg-muted);
 }
+
+
+/* ============================================================
+   ITERACIÓN 4 — Clases faltantes: nav, mega-strip, btn-brand,
+   mega-card-icon, mega-card-body, hamburger, mobile-only
+   ============================================================ */
+
+/* ---- Mega-strip: 6 items, auto-fill ----------------------- */
+.mega-strip {
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+}
+
+/* ---- Mega-card icon & body alias -------------------------- */
+.mega-card-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  flex-shrink: 0;
+}
+
+.mega-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.mega-card-body strong {
+  display: block;
+  color: var(--text);
+  font-size: 0.84rem;
+  line-height: 1.15;
+}
+
+.mega-card-body span {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  line-height: 1.1;
+}
+
+/* ---- btn-brand: CTA button in header ---------------------- */
+.btn-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 42px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0 18px;
+  font-weight: 760;
+  font-family: var(--font-display);
+  white-space: nowrap;
+  background: var(--brand);
+  color: #ffffff;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.btn-brand:hover {
+  background: var(--brand-strong);
+  transform: translateY(-1px);
+}
+
+/* ---- Navigation items ------------------------------------- */
+.nav-item {
+  position: relative;
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  padding: 10px 7px;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 760;
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.nav-btn:hover {
+  color: var(--brand);
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 10px 7px;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 760;
+  white-space: nowrap;
+  transition: color 160ms ease;
+}
+
+.nav-link:hover {
+  color: var(--brand);
+}
+
+/* ---- Chevron icon ----------------------------------------- */
+.chevron {
+  transition: transform 200ms ease;
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+/* ---- Dropdown panel --------------------------------------- */
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow);
+  padding: 8px;
+  z-index: 49;
+  animation: fadeSlideDown 180ms ease;
+}
+
+.nav-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 720;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.nav-dropdown-item:hover {
+  background: var(--bg-muted);
+  color: var(--brand);
+}
+
+/* ---- Hamburger button (mobile) ---------------------------- */
+.hamburger {
+  display: none;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 1120px) {
+  .hamburger,
+  .mobile-only {
+    display: inline-flex;
+  }
+}
+
+/* ---- Dark mode nav fixes ---------------------------------- */
+:root[data-theme="dark"] .nav-btn,
+:root[data-theme="dark"] .nav-link {
+  color: var(--text-muted);
+}
+
+:root[data-theme="dark"] .nav-btn:hover,
+:root[data-theme="dark"] .nav-link:hover {
+  color: var(--brand);
+}
+
+:root[data-theme="dark"] .nav-dropdown {
+  background: var(--bg-elevated);
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] .btn-brand {
+  background: var(--brand);
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .mega-card-icon {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
