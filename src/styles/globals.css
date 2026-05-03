@@ -4013,3 +4013,139 @@ tr:hover td { background: color-mix(in srgb, var(--brand-soft) 40%, transparent)
     padding: 24px 16px;
   }
 }
+
+
+/* ============================================================
+   ITER 8 — Accesibilidad WCAG 2.2 AA: contraste, font-sizes,
+   focus visible, motion, skip-link, ARIA utils
+   ============================================================ */
+
+/* ---- Mejora de contraste: --text-soft más oscuro ---------- */
+/* #6a7680 da ~4.6:1 sobre blanco (limíte WCAG AA 4.5:1).
+   Mejoramos a #596570 para margen de seguridad (~5.2:1) */
+:root {
+  --text-soft: #596570;
+}
+
+/* ---- Font-size mínimo 12px en elementos pequeños ---------- */
+.eyebrow {
+  font-size: 0.8rem; /* 12.8px — WCAG ok */
+}
+.mega-strip small {
+  font-size: 0.8rem; /* 12.8px */
+}
+.topbar {
+  font-size: 0.82rem; /* 13.12px */
+}
+.footer-bottom {
+  font-size: 0.82rem;
+}
+.product-card-cat {
+  font-size: 0.76rem; /* <12px — se deja porque es decorativo uppercase */
+}
+/* Subir al mínimo los items que estaban en 0.72rem */
+.badge {
+  font-size: 0.76rem;
+}
+.command-label {
+  font-size: 0.78rem;
+}
+.command-card span {
+  font-size: 0.8rem;
+}
+.footer-nav strong,
+.footer-nav-heading,
+.footer-bottom {
+  font-size: 0.78rem;
+}
+
+/* ---- Focus-visible mejorado (ring más visible) ----------- */
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--brand) 80%, white);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+.button:focus-visible {
+  outline-offset: 4px;
+}
+a:focus-visible {
+  border-radius: 3px;
+}
+
+/* ---- Skip-link visible on focus (full styles) ------------- */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  transform: translateY(-140%);
+  transition: transform 200ms ease;
+  border-radius: var(--radius);
+  background: var(--brand);
+  color: #ffffff;
+  padding: 10px 16px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  box-shadow: var(--shadow);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ---- Interactive elements min touch target 44×44px -------- */
+.button {
+  min-height: 44px;
+}
+.icon-button,
+.mobile-menu summary {
+  width: 44px;
+  height: 44px;
+}
+
+/* ---- Reduced motion: disable all animations on demand ----- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-delay: 0ms !important;
+    animation-delay: 0ms !important;
+  }
+}
+
+/* ---- ARIA live region helper ------------------------------ */
+[aria-live] {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+[aria-live]:not(:empty) {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+}
+
+/* ---- High contrast mode support -------------------------- */
+@media (forced-colors: active) {
+  .button-primary {
+    border: 2px solid ButtonText;
+  }
+  .product-card,
+  .service-card,
+  .equipment-card,
+  .op-card {
+    border: 1px solid ButtonText;
+  }
+}
+
+/* ---- Dark mode text-soft WCAG fix ------------------------ */
+:root[data-theme="dark"] {
+  --text-soft: #9daab3; /* Contrast against dark bg ~5.1:1 */
+}
