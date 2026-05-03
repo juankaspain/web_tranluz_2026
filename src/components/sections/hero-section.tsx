@@ -1,16 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, FileText, MapPin, Package, PhoneCall, ShieldCheck, Wrench } from "lucide-react";
+import { Clock, MapPin, Package, PhoneCall, ShieldCheck, Wrench } from "lucide-react";
 import { brand } from "@/config/brand";
 import { assets } from "@/content/assets";
 
 const heroMetrics = [
   { value: "+38", label: "años de especializ." },
-  { value: "4", label: "líneas de servicio" },
+  { value: "4",   label: "líneas de servicio" },
   { value: "B2B", label: "sector eléctrico" },
 ];
 
-/* Partner brands con colores corporativos para los chips del hero */
+/* Métricas extendidas para el aside de confianza */
+const asideMetrics = [
+  { value: "+38", label: "Años de experiencia en sector eléctrico" },
+  { value: "4",   label: "Líneas: producto, ITS, Revisa y formación" },
+  { value: "B2B", label: "Especialistas en empresas eléctricas y telco" },
+  { value: "Sevilla", label: "Atención técnica presencial en obra" },
+];
+
 const heroBrands: Array<{ name: string; bg: string }> = [
   { name: "Tesmec",      bg: "#C8102E" },
   { name: "Plumettaz",   bg: "#005BAC" },
@@ -127,22 +134,12 @@ export function HeroSection() {
           <div>
             <p className="eyebrow">Partner oficial desde {brand.founded}</p>
             <div className="metric-grid">
-              <div className="metric-card">
-                <strong>+38</strong>
-                <span>Años de experiencia en sector eléctrico</span>
-              </div>
-              <div className="metric-card">
-                <strong>4</strong>
-                <span>Líneas: producto, ITS, Revisa y formación</span>
-              </div>
-              <div className="metric-card">
-                <strong>B2B</strong>
-                <span>Especialistas en empresas eléctricas y telco</span>
-              </div>
-              <div className="metric-card">
-                <strong>Sevilla</strong>
-                <span>Atención técnica presencial en obra</span>
-              </div>
+              {asideMetrics.map((m) => (
+                <div key={m.value} className="metric-card">
+                  <strong>{m.value}</strong>
+                  <span>{m.label}</span>
+                </div>
+              ))}
             </div>
             <div className="command-card">
               <MapPin size={20} aria-hidden="true" style={{ flexShrink: 0, color: "var(--brand)" }} />

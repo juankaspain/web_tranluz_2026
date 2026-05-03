@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { productCategories } from "@/content/product-categories";
 
@@ -31,15 +32,15 @@ export function ProductCategoryGrid({ query = "" }: ProductCategoryGridProps) {
               ? `Resultados para «${query}» en categorías técnicas.`
               : `No hay coincidencia directa para «${query}». Te mostramos categorías relacionadas y acceso a presupuesto técnico.`}
           </span>
-          <a className="button button-secondary" href="/presupuesto">
+          <Link className="button button-secondary" href="/presupuesto">
             Pedir ayuda técnica
             <ArrowRight aria-hidden="true" size={16} />
-          </a>
+          </Link>
         </div>
       ) : null}
       <div className="grid grid-three">
         {(visibleCategories.length > 0 ? visibleCategories : productCategories).map((category, index) => (
-          <a className="content-card" href={category.href} key={category.href}>
+          <Link className="content-card" href={category.href} key={category.href}>
             <span className="card-index">{String(index + 1).padStart(2, "0")}</span>
             <h3>{category.title}</h3>
             <p>{category.summary}</p>
@@ -47,7 +48,7 @@ export function ProductCategoryGrid({ query = "" }: ProductCategoryGridProps) {
               Explorar
               <ArrowRight aria-hidden="true" size={16} />
             </strong>
-          </a>
+          </Link>
         ))}
       </div>
     </section>

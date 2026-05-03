@@ -1,11 +1,5 @@
 import { Award, Clock, MapPin, ShieldCheck, Users, Wrench } from "lucide-react";
 
-/* ================================================================
-   Logo badges HTML puros - más fiables que SVG text en SSR/React.
-   Cada logo usa un div con fondo de color corporativo y el nombre
-   en tipografía blanca, simulando wordmark oficial.
-   ================================================================ */
-
 function LogoBadge({
   name,
   bg,
@@ -63,28 +57,22 @@ function LogoBadge({
   );
 }
 
-/* ======================================================
-   Datos de credenciales
-   ====================================================== */
 const credentials = [
-  { icon: Clock, value: "+38 años", label: "Especialización sectorial", color: "var(--brand)" },
-  { icon: ShieldCheck, value: "Servicio oficial", label: "Acuerdos con fabricantes líderes", color: "var(--field)" },
-  { icon: Wrench, value: "ITS certificado", label: "Revisiones, mantenimiento y calibración", color: "var(--technical)" },
-  { icon: MapPin, value: "Sevilla", label: "Atención técnica presencial y en obra", color: "var(--brand)" },
-  { icon: Award, value: "B2B industrial", label: "Eléctricas, telco e industria", color: "var(--safety)" },
-  { icon: Users, value: "Formación", label: "Cursos homologados para operadores", color: "var(--field)" },
+  { icon: Clock,       value: "+38 años",       label: "Especialización sectorial",              color: "var(--brand)" },
+  { icon: ShieldCheck, value: "Servicio oficial", label: "Acuerdos con fabricantes líderes",       color: "var(--field)" },
+  { icon: Wrench,      value: "ITS certificado",  label: "Revisiones, mantenimiento y calibración", color: "var(--technical)" },
+  { icon: MapPin,      value: "Sevilla",           label: "Atención técnica presencial y en obra",  color: "var(--brand)" },
+  { icon: Award,       value: "B2B industrial",    label: "Eléctricas, telco e industria",           color: "var(--safety)" },
+  { icon: Users,       value: "Formación",         label: "Cursos homologados para operadores",     color: "var(--field)" },
 ];
 
-/* ======================================================
-   Partners con Logo badge incrustado + metadatos AAA
-   ====================================================== */
 const partners = [
-  { name: "Tesmec",       sector: "Tendido de conductores", color: "#C8102E", bg: "#fff5f5", logoBg: "#C8102E", logoSub: "GROUP" },
-  { name: "Plumettaz",    sector: "Herramienta industrial",  color: "#005BAC", bg: "#f0f6ff", logoBg: "#005BAC", logoSub: "TOOLS" },
-  { name: "Work Italia",  sector: "EPI y seguridad",         color: "#C15000", bg: "#fff8f0", logoBg: "#C15000", logoSub: "SAFETY" },
-  { name: "3M",           sector: "Materiales técnicos",      color: "#B00000", bg: "#fff0f0", logoBg: "#B00000", logoSub: "SCIENCE" },
-  { name: "Tractel",      sector: "Polipastos y tracción",   color: "#1A3F6F", bg: "#f0f4ff", logoBg: "#1A3F6F", logoSub: "LIFTING" },
-  { name: "Cembre",       sector: "Conectores y terminales",  color: "#004d26", bg: "#f0fff5", logoBg: "#004d26", logoSub: "CONNECT" },
+  { name: "Tesmec",      sector: "Tendido de conductores", logoBg: "#C8102E", logoSub: "GROUP" },
+  { name: "Plumettaz",   sector: "Herramienta industrial",  logoBg: "#005BAC", logoSub: "TOOLS" },
+  { name: "Work Italia", sector: "EPI y seguridad",         logoBg: "#C15000", logoSub: "SAFETY" },
+  { name: "3M",          sector: "Materiales técnicos",      logoBg: "#B00000", logoSub: "SCIENCE" },
+  { name: "Tractel",     sector: "Polipastos y tracción",   logoBg: "#1A3F6F", logoSub: "LIFTING" },
+  { name: "Cembre",      sector: "Conectores y terminales",  logoBg: "#004d26", logoSub: "CONNECT" },
 ];
 
 export function TrustBandSection() {
@@ -93,7 +81,7 @@ export function TrustBandSection() {
       {/* === Por qué Tranluz === */}
       <section aria-labelledby="trust-heading" style={{ padding: "48px 24px", background: "var(--bg)" }}>
         <div style={{ maxWidth: "var(--max-width)", margin: "0 auto" }}>
-          <h2
+          <p
             id="trust-heading"
             style={{
               textAlign: "center",
@@ -106,7 +94,7 @@ export function TrustBandSection() {
             }}
           >
             Por qué Tranluz
-          </h2>
+          </p>
           <ul
             role="list"
             style={{
@@ -165,7 +153,7 @@ export function TrustBandSection() {
       {/* === Partners oficiales === */}
       <section aria-labelledby="partners-heading" style={{ padding: "48px 24px", background: "var(--bg-muted)" }}>
         <div style={{ maxWidth: "var(--max-width)", margin: "0 auto" }}>
-          <h2
+          <p
             id="partners-heading"
             style={{
               textAlign: "center",
@@ -178,7 +166,7 @@ export function TrustBandSection() {
             }}
           >
             Partners oficiales
-          </h2>
+          </p>
           <ul
             role="list"
             style={{
@@ -198,29 +186,26 @@ export function TrustBandSection() {
                   flexDirection: "column",
                   alignItems: "center",
                   gap: "12px",
-                  border: `2px solid ${p.color}33`,
+                  border: "1px solid var(--line)",
                   borderRadius: "var(--radius-lg)",
-                  background: p.bg,
+                  background: "var(--bg-elevated)",
                   padding: "20px 16px",
                   minHeight: "120px",
                 }}
                 aria-label={`Partner oficial: ${p.name} – ${p.sector}`}
               >
-                {/* Logo badge incrustado */}
                 <LogoBadge
                   name={p.name}
                   bg={p.logoBg}
                   subtitle={p.logoSub}
                 />
-
-                {/* Sector con contraste AAA */}
                 <span
                   style={{
                     display: "block",
                     textAlign: "center",
                     fontSize: "0.76rem",
                     fontWeight: 500,
-                    color: "#3a4550",
+                    color: "var(--text-muted)",
                     lineHeight: 1.4,
                   }}
                 >

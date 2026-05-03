@@ -1,6 +1,8 @@
 import { ArrowRight, Download, FileCheck2, LifeBuoy } from "lucide-react";
 import { downloads } from "@/content/home";
 
+const downloadIcons = [Download, FileCheck2, LifeBuoy];
+
 export function SupportBand() {
   return (
     <section className="support-band">
@@ -18,23 +20,20 @@ export function SupportBand() {
         </a>
       </div>
       <div className="download-stack" aria-label="Descargas destacadas">
-        {downloads.map((download, index) => (
-          <a className="download-item" href={download.href} key={download.title}>
-            {index === 0 ? (
-              <Download aria-hidden="true" size={20} />
-            ) : index === 1 ? (
-              <FileCheck2 aria-hidden="true" size={20} />
-            ) : (
-              <LifeBuoy aria-hidden="true" size={20} />
-            )}
-            <span>
-              <strong>{download.title}</strong>
-              <small>
-                {download.version} · {download.size}
-              </small>
-            </span>
-          </a>
-        ))}
+        {downloads.map((download, index) => {
+          const Icon = downloadIcons[index % downloadIcons.length];
+          return (
+            <a className="download-item" href={download.href} key={download.title}>
+              <Icon aria-hidden="true" size={20} />
+              <span>
+                <strong>{download.title}</strong>
+                <small>
+                  {download.version} · {download.size}
+                </small>
+              </span>
+            </a>
+          );
+        })}
       </div>
     </section>
   );
