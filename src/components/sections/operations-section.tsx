@@ -52,21 +52,21 @@ export function OperationsSection() {
         <h2 id="ops-heading">Todo lo que necesita una empresa eléctrica o de telecomunicaciones, en un mismo lugar.</h2>
         <p>Cinco servicios integrados. Un único partner en Sevilla.</p>
       </div>
-
       <div className="ops-grid">
         {ops.map((op) => {
           const Icon = op.icon;
           return (
-            <div key={op.title} className="op-card" data-accent={op.accent}>
+            <article key={op.title} className="op-card" data-accent={op.accent}>
               <div className="op-card-icon">
-                <Icon size={22} aria-hidden="true" />
+                <Icon size={22} aria-hidden="true" focusable="false" />
               </div>
               <strong className="op-card-title">{op.title}</strong>
               <p className="op-card-body">{op.body}</p>
               <Link href={op.href} className="op-card-cta">
-                {op.cta} <ArrowRight size={15} aria-hidden="true" />
+                {op.cta}
+                <ArrowRight size={15} aria-hidden="true" focusable="false" />
               </Link>
-            </div>
+            </article>
           );
         })}
       </div>
