@@ -12,6 +12,9 @@ import "@fontsource-variable/archivo";
 import "@/styles/globals.css";
 import { assets } from "@/content/assets";
 
+// Forzar renderizado dinámico en Hostinger (next/headers requiere runtime dinámico)
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.tranluz.es"),
   applicationName: "Tranluz",
@@ -22,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | Tranluz",
   },
   description:
-    "Especialistas desde 1987 en equipos eléctricos, alquiler de cabrestantes, servicio técnico ITS, formación y trazabilidad para obras eléctricas críticas. Sede en Madrid, atención nacional.",
+    "Especialistas desde 1987 en equipos eléctricos, alquiler de cabrestantes, servicio técnico ITS, formación y trazabilidad para obras eléctricas críticas. Sede en Sevilla, atención nacional.",
   keywords: [
     "Tranluz",
     "equipos eléctricos",
@@ -35,7 +38,7 @@ export const metadata: Metadata = {
     "Rent Puller alquiler",
     "Revisa trazabilidad EPI",
     "herramientas alta tensión",
-    "Madrid",
+    "Sevilla",
     "obras eléctricas",
     "cabrestantes frenadoras",
     "Tesmec",
@@ -62,7 +65,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Tranluz | Equipos eléctricos, alquiler y soporte técnico",
     description:
-      "Equipos, servicio técnico ITS, alquiler de cabrestantes, formación y trazabilidad para trabajos eléctricos y de telecomunicaciones desde 1987. Sede en Madrid.",
+      "Equipos, servicio técnico ITS, alquiler de cabrestantes, formación y trazabilidad para trabajos eléctricos y de telecomunicaciones desde 1987. Sede en Sevilla.",
     url: "https://www.tranluz.es",
     locale: "es_ES",
     siteName: "Tranluz",
@@ -80,7 +83,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tranluz | Equipos, alquiler y servicio técnico eléctrico",
     description:
-      "Especialistas desde 1987: equipos, alquiler de cabrestantes, ITS, formación y trazabilidad. Atención nacional desde Madrid.",
+      "Especialistas desde 1987: equipos, alquiler de cabrestantes, ITS, formación y trazabilidad. Atención nacional desde Sevilla.",
     images: [assets.ogImage],
   },
   robots: {
@@ -93,10 +96,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
       "max-video-preview": -1,
     },
-  },
-  verification: {
-    // Sustituir por el código real de Google Search Console
-    // google: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
   },
 };
 
@@ -114,32 +113,39 @@ export const viewport: Viewport = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  const requestHeaders = await headers();
-  const cookieStore = await cookies();
-  const cookieLocale = cookieStore.get("tranluz_locale")?.value;
-  const headerLocale = requestHeaders.get("x-tranluz-locale");
-  const locale = isLocale(cookieLocale)
-    ? cookieLocale
-    : isLocale(headerLocale)
-      ? headerLocale
-      : defaultLocale;
+  // Lectura defensiva: si headers/cookies fallan en el entorno, usar locale por defecto
+  let locale = defaultLocale;
+  try {
+    const requestHeaders = await headers();
+    const cookieStore = await cookies();
+    const cookieLocale = cookieStore.get("tranluz_locale")?.value;
+    const headerLocale = requestHeaders.get("x-tranluz-locale");
+    locale = isLocale(cookieLocale)
+      ? cookieLocale
+      : isLocale(headerLocale)
+        ? headerLocale
+        : defaultLocale;
+  } catch {
+    // Fallback silencioso: locale español por defecto
+    locale = defaultLocale;
+  }
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
         <ThemeScript />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <meta name="geo.region" content="ES-MD" />
-        <meta name="geo.placename" content="Madrid" />
-        <meta name="geo.position" content="40.416775;-3.703790" />
-        <meta name="ICBM" content="40.416775, -3.703790" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <meta name="geo.region" content="ES-AN" />
+        <meta name="geo.placename" content="Sevilla" />
+        <meta name="geo.position" content="37.389092;-5.984459" />
+        <meta name="ICBM" content="37.389092, -5.984459" />
       </head>
       <body>
-        
         <AutoTranslate />
         <StructuredData />
         <ActionDock />
-                  {children}
+        {children}
       </body>
     </html>
   );
