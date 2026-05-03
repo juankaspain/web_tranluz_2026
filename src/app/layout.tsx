@@ -15,7 +15,7 @@ import { assets } from "@/content/assets";
 // Forzar renderizado dinámico en Hostinger (next/headers requiere runtime dinámico)
 export const dynamic = "force-dynamic";
 
-const BASE_URL = "https://deepskyblue-eel-381189.hostingersite.com";
+const BASE_URL = "https://www.tranluz.es";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -62,7 +62,14 @@ export const metadata: Metadata = {
   classification: "business",
   alternates: {
     canonical: "/",
-    languages: { "es-ES": "/" },
+    languages: {
+      "es-ES": "/",
+      "en-GB": "/en",
+      "de-DE": "/de",
+      "it-IT": "/it",
+      "fr-FR": "/fr",
+      "x-default": "/",
+    },
   },
   openGraph: {
     title: "Tranluz | Equipos eléctricos, alquiler y soporte técnico",
@@ -70,11 +77,11 @@ export const metadata: Metadata = {
       "Equipos, servicio técnico ITS, alquiler de cabrestantes, formación y trazabilidad para trabajos eléctricos y de telecomunicaciones desde 1987. Sede en Sevilla.",
     url: BASE_URL,
     locale: "es_ES",
+    alternateLocale: ["en_GB", "de_DE", "it_IT", "fr_FR"],
     siteName: "Tranluz",
     type: "website",
     images: [
       {
-        // URL absoluta obligatoria para OpenGraph
         url: `${BASE_URL}${assets.ogImage}`,
         width: 1536,
         height: 1024,
@@ -139,6 +146,12 @@ export default async function RootLayout({
         <ThemeScript />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="alternate" hrefLang="es-ES" href="https://www.tranluz.es/" />
+        <link rel="alternate" hrefLang="en-GB" href="https://www.tranluz.es/en" />
+        <link rel="alternate" hrefLang="de-DE" href="https://www.tranluz.es/de" />
+        <link rel="alternate" hrefLang="it-IT" href="https://www.tranluz.es/it" />
+        <link rel="alternate" hrefLang="fr-FR" href="https://www.tranluz.es/fr" />
+        <link rel="alternate" hrefLang="x-default" href="https://www.tranluz.es/" />
         <meta name="geo.region" content="ES-AN" />
         <meta name="geo.placename" content="Sevilla" />
         <meta name="geo.position" content="37.389092;-5.984459" />
