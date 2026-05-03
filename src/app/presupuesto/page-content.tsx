@@ -94,10 +94,10 @@ export default function PresupuestoPageContent() {
                 <li><a href={`tel:${brand.phone?.replace(/\s/g, "")}`} className="text-link"><strong>Teléfono</strong> &mdash; {brand.phone}</a></li>
                 <li><a href={`mailto:${brand.email}`} className="text-link"><strong>Email</strong> &mdash; {brand.email}</a></li>
               </ul>
-              <hr style={{ margin: "24px 0", borderColor: "var(--border)" }} />
+              <hr style={{ margin: "24px 0", borderColor: "var(--line)" }} />
               <h3>Horario</h3>
               <p>Lunes a viernes: 08:30&ndash;18:00<br />Sábados y festivos: cerrado</p>
-              <hr style={{ margin: "24px 0", borderColor: "var(--border)" }} />
+              <hr style={{ margin: "24px 0", borderColor: "var(--line)" }} />
               <h3>Respuesta garantizada</h3>
               <p>Respondemos todas las solicitudes en menos de <strong>24 horas laborables</strong>. Para urgencias, llámanos.</p>
             </aside>
