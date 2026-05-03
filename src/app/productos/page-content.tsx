@@ -32,6 +32,7 @@ export default function ProductosPageContent() {
     <>
       <SiteHeader />
       <main id="contenido">
+        {/* Hero */}
         <section className="page-hero">
           <p className="eyebrow">Catálogo técnico</p>
           <h1>Equipos y herramientas para obras eléctricas</h1>
@@ -51,8 +52,8 @@ export default function ProductosPageContent() {
                 aria-label="Buscar producto"
               />
             </div>
-            <div className="filter-pills" role="group" aria-label="Filtrar por categoría">
-              <Filter size={14} aria-hidden="true" />
+            <div className="filter-pills">
+              <Filter size={14} aria-hidden="true" style={{ color: "var(--text-soft)", flexShrink: 0, alignSelf: "center" }} />
               {categorias.map((c) => (
                 <button
                   key={c}
@@ -68,26 +69,31 @@ export default function ProductosPageContent() {
 
           {/* Grid de productos */}
           {filtrados.length === 0 ? (
-            <p style={{ textAlign: "center", color: "var(--text-muted)", padding: "48px 0" }}>No se encontraron productos con esos criterios.</p>
+            <div className="product-grid">
+              <div className="catalog-empty">
+                <Package size={40} />
+                <p>No se encontraron productos con esos criterios.</p>
+              </div>
+            </div>
           ) : (
-            <div className="equipment-grid">
+            <div className="product-grid">
               {filtrados.map((p) => (
-                <article key={p.nombre} className="equipment-card">
-                  <div className="equipment-card-head">
+                <article key={p.nombre} className="product-card">
+                  <div className="product-card-brand">
                     <Package size={16} aria-hidden="true" />
-                    <span style={{ fontSize: "0.78rem", fontWeight: 900 }}>{p.marca}</span>
+                    {p.marca}
                   </div>
-                  <div>
-                    <span style={{ fontSize: "0.78rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em" }}>{p.cat}</span>
-                    <h3 style={{ marginTop: 4 }}>{p.nombre}</h3>
-                    <p style={{ color: "var(--text-muted)", fontSize: "0.92rem", lineHeight: 1.55, marginTop: 8 }}>{p.desc}</p>
+                  <span className="product-card-cat">{p.cat}</span>
+                  <h3>{p.nombre}</h3>
+                  <p className="product-card-desc">{p.desc}</p>
+                  <div className="product-tags">
+                    {p.tags.map((t) => (
+                      <span key={t} className="product-tag">{t}</span>
+                    ))}
                   </div>
-                  <div>
-                    <div className="pill-list" style={{ marginBottom: 12 }}>
-                      {p.tags.map((t) => <span key={t}>{t}</span>)}
-                    </div>
-                    <Link href="/presupuesto" className="text-link">Solicitar oferta <span aria-hidden="true">→</span></Link>
-                  </div>
+                  <Link href="/presupuesto" className="product-card-action">
+                    Solicitar oferta  →
+                  </Link>
                 </article>
               ))}
             </div>
