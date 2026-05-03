@@ -110,7 +110,7 @@ export const translations: Record<Exclude<Locale, "es">, TranslationTable> = {
   de: {
     "Productos": "Produkte",
     "Soluciones": "Lösungen",
-        "años de especialización": "years of specialization",
+        "años de especialización": "Jahre der Spezialisierung",
     "líneas de servicio": "service lines",
     "Años de experiencia": "Years of experience",
     "Empresas eléctricas y telco": "Electrical and telecom companies",
