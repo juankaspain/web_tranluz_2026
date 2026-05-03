@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState, useEffect, useRef, useId } from "react";
 import {
+  LifeBuoy,
   BookOpen,
   ChevronDown,
   Layers,
@@ -27,6 +28,7 @@ const navIcon = (href: string) => {
   if (href.startsWith("/productos")) return <Package aria-hidden="true" size={18} />;
   if (href.startsWith("/servicios/its")) return <Wrench aria-hidden="true" size={18} />;
   if (href.startsWith("/servicios/revisa")) return <ShieldCheck aria-hidden="true" size={18} />;
+    if (href.startsWith("/soporte")) return <LifeBuoy aria-hidden="true" size={18} />;
   if (href.startsWith("/servicios")) return <Settings aria-hidden="true" size={18} />;
   if (href.startsWith("/alquiler")) return <Layers aria-hidden="true" size={18} />;
   if (href.startsWith("/formacion")) return <BookOpen aria-hidden="true" size={18} />;
