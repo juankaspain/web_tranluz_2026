@@ -1993,8 +1993,8 @@ button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: auto; min-width: 32px; padding: 4px 8px; white-space: nowrap;
+    min-height: 32px;
   border-radius: var(--radius);
   background: var(--brand-soft);
   color: var(--brand);
