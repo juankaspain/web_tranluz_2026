@@ -27,12 +27,17 @@ export const mainNavigation = [
     children: [
       { label: "ITS Servicio Técnico", href: "/servicios/its-servicio-tecnico" },
       { label: "Revisa trazabilidad", href: "/servicios/revisa-trazabilidad" },
-      { label: "Revisiones certificadas", href: "/servicios/revisiones-certificadas" },
-      { label: "Repuestos", href: "/servicios/repuestos" }
+      { label: "Soporte", href: "/soporte" },
+      { label: "Alquiler", href: "/alquiler" },
+      { label: "Formacion", href: "/formacion" }
     ]
   },
-  { label: "Alquiler", href: "/alquiler" },
-  { label: "Formación", href: "/formacion" },
-  { label: "Soporte", href: "/soporte" },
-  { label: "Empresa", href: "/empresa" }
+  {
+    label: "Empresa",
+    href: "/empresa"
+  },
+  {
+    label: "Contacto",
+    href: "/contacto"
+  }
 ];
