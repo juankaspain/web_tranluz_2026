@@ -3720,3 +3720,296 @@ tr:hover td { background: color-mix(in srgb, var(--brand-soft) 40%, transparent)
   .decision-section { padding: 48px 0; }
   .section-heading h2 { font-size: clamp(1.4rem, 5vw, 2rem); }
 }
+
+
+/* ============================================================
+   ITER 7 — Layout de páginas interiores: page-hero-pro,
+   detail-layout, training-showcase, catalog-group, quote-layout,
+   command-surface, hitos, valores
+   ============================================================ */
+
+/* ---- Page hero pro (empresa, servicios, formación...) ---- */
+.page-hero-pro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 40px;
+  align-items: center;
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  padding: 56px 24px 48px;
+}
+.page-hero-pro-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.page-hero-pro-copy h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.2vw, 3rem);
+  line-height: 1.08;
+  font-weight: 790;
+  color: var(--text);
+}
+.page-hero-pro-copy p {
+  max-width: 560px;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: clamp(0.98rem, 1.2vw, 1.1rem);
+  line-height: 1.65;
+}
+.page-hero-pro-visual {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--bg-muted);
+  aspect-ratio: 16 / 10;
+}
+.page-hero-pro-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+@media (max-width: 1120px) {
+  .page-hero-pro {
+    grid-template-columns: 1fr;
+    padding: 40px 24px 32px;
+  }
+  .page-hero-pro-visual {
+    max-height: 320px;
+  }
+}
+@media (max-width: 760px) {
+  .page-hero-pro {
+    padding: 32px 16px;
+  }
+}
+
+/* ---- Detail layout (páginas de producto/servicio) -------- */
+.detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 40px;
+  align-items: start;
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+.detail-main {
+  min-width: 0;
+}
+.detail-aside {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+}
+.detail-aside-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  padding: 24px;
+  box-shadow: var(--shadow-soft);
+}
+
+/* ---- Training showcase (formación) ----------------------- */
+.training-showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.training-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: var(--bg-elevated);
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+.training-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+/* ---- Catalog group (alquiler, líneas) -------------------- */
+.catalog-group {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 32px;
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.catalog-sidebar {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.catalog-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 720;
+  transition: background 160ms ease, color 160ms ease;
+}
+.catalog-nav-item:hover,
+.catalog-nav-item.is-active {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+/* ---- Quote layout (presupuesto) -------------------------- */
+.quote-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 40px;
+  align-items: start;
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+/* ---- Command surface (zona de acción técnica) ------------ */
+.command-surface {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 40px;
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+/* ---- Hitos / timeline ------------------------------------ */
+.hitos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 28px;
+}
+.hitos-list::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--line);
+}
+.hito-item {
+  position: relative;
+  padding: 0 0 28px 20px;
+}
+.hito-item::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--brand);
+  border: 2px solid var(--bg);
+}
+.hito-year {
+  display: inline-block;
+  margin-bottom: 4px;
+  font-size: 0.78rem;
+  font-weight: 820;
+  color: var(--brand);
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.hito-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ---- Valores grid ---------------------------------------- */
+.valores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.valor-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+.valor-card:hover {
+  box-shadow: var(--shadow-soft);
+  border-color: color-mix(in srgb, var(--brand) 28%, var(--line));
+}
+.valor-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  flex-shrink: 0;
+}
+.valor-card h3 {
+  margin: 0 0 4px;
+  font-size: 0.95rem;
+  font-weight: 780;
+}
+.valor-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ---- Responsive shared layout breakpoints ---------------- */
+@media (max-width: 1024px) {
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+  .detail-aside {
+    position: static;
+  }
+  .catalog-group {
+    grid-template-columns: 1fr;
+  }
+  .catalog-sidebar {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .quote-layout {
+    grid-template-columns: 1fr;
+  }
+  .command-surface {
+    grid-template-columns: 1fr;
+  }
+  .training-showcase {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .detail-layout,
+  .catalog-group,
+  .quote-layout,
+  .command-surface,
+  .training-showcase {
+    padding: 24px 16px;
+  }
+}
