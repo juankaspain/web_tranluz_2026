@@ -9,6 +9,7 @@ import {
   ChevronDown,
   Layers,
   Mail,
+    MapPin,
   Menu,
   Package,
   Phone,
@@ -35,6 +36,7 @@ const navIcon = (href: string) => {
   if (href.startsWith("/formacion")) return <BookOpen aria-hidden="true" size={18} />;
   if (href.startsWith("/soluciones")) return <Zap aria-hidden="true" size={18} />;
   if (href.startsWith("/empresa")) return <Building2 aria-hidden="true" size={18} />;
+    if (href.startsWith("/contacto")) return <MapPin aria-hidden="true" size={18} />;
   return <Building2 aria-hidden="true" size={18} />;
 };
 
