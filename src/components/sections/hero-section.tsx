@@ -5,7 +5,7 @@ import { brand } from "@/config/brand";
 import { assets } from "@/content/assets";
 
 const heroMetrics = [
-  { value: "+35", label: "años de especializ." },
+  { value: "+38", label: "años de especializ." },
   { value: "4", label: "líneas de servicio" },
   { value: "B2B", label: "sector eléctrico" },
 ];
@@ -13,7 +13,7 @@ const heroMetrics = [
 /* Partner brands con colores corporativos para los chips del hero */
 const heroBrands: Array<{ name: string; bg: string }> = [
   { name: "Tesmec",      bg: "#C8102E" },
-  { name: "Plumett",     bg: "#005BAC" },
+  { name: "Plumettaz",   bg: "#005BAC" },
   { name: "Work Italia", bg: "#C15000" },
   { name: "3M",          bg: "#B00000" },
   { name: "Tractel",     bg: "#1A3F6F" },
@@ -128,7 +128,7 @@ export function HeroSection() {
             <p className="eyebrow">Partner oficial desde {brand.founded}</p>
             <div className="metric-grid">
               <div className="metric-card">
-                <strong>+35</strong>
+                <strong>+38</strong>
                 <span>Años de experiencia en sector eléctrico</span>
               </div>
               <div className="metric-card">

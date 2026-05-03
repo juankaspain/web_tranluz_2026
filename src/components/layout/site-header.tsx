@@ -71,13 +71,11 @@ export function SiteHeader() {
 
   return (
     <>
-      <a href="#contenido" className="skip-link">Saltar al contenido</a>
-
       {/* Topbar */}
       <div className="topbar">
         <span className="topbar-claim">{brand.claim}</span>
         <nav className="topbar-actions" aria-label="Información de contacto">
-          <span>Catálogo 2025/2026</span>
+          <span>Catálogo 2026</span>
           <a href={`tel:${brand.phone}`}>{brand.phone}</a>
         </nav>
       </div>

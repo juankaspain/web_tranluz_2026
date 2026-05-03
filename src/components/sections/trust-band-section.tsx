@@ -67,7 +67,7 @@ function LogoBadge({
    Datos de credenciales
    ====================================================== */
 const credentials = [
-  { icon: Clock, value: "+35 años", label: "Especialización sectorial", color: "var(--brand)" },
+  { icon: Clock, value: "+38 años", label: "Especialización sectorial", color: "var(--brand)" },
   { icon: ShieldCheck, value: "Servicio oficial", label: "Acuerdos con fabricantes líderes", color: "var(--field)" },
   { icon: Wrench, value: "ITS certificado", label: "Revisiones, mantenimiento y calibración", color: "var(--technical)" },
   { icon: MapPin, value: "Sevilla", label: "Atención técnica presencial y en obra", color: "var(--brand)" },
@@ -80,7 +80,7 @@ const credentials = [
    ====================================================== */
 const partners = [
   { name: "Tesmec",       sector: "Tendido de conductores", color: "#C8102E", bg: "#fff5f5", logoBg: "#C8102E", logoSub: "GROUP" },
-  { name: "Plumett",      sector: "Herramienta industrial",  color: "#005BAC", bg: "#f0f6ff", logoBg: "#005BAC", logoSub: "TOOLS" },
+  { name: "Plumettaz",    sector: "Herramienta industrial",  color: "#005BAC", bg: "#f0f6ff", logoBg: "#005BAC", logoSub: "TOOLS" },
   { name: "Work Italia",  sector: "EPI y seguridad",         color: "#C15000", bg: "#fff8f0", logoBg: "#C15000", logoSub: "SAFETY" },
   { name: "3M",           sector: "Materiales técnicos",      color: "#B00000", bg: "#fff0f0", logoBg: "#B00000", logoSub: "SCIENCE" },
   { name: "Tractel",      sector: "Polipastos y tracción",   color: "#1A3F6F", bg: "#f0f4ff", logoBg: "#1A3F6F", logoSub: "LIFTING" },
@@ -93,7 +93,7 @@ export function TrustBandSection() {
       {/* === Por qué Tranluz === */}
       <section aria-labelledby="trust-heading" style={{ padding: "48px 24px", background: "var(--bg)" }}>
         <div style={{ maxWidth: "var(--max-width)", margin: "0 auto" }}>
-          <p
+          <h2
             id="trust-heading"
             style={{
               textAlign: "center",
@@ -106,7 +106,7 @@ export function TrustBandSection() {
             }}
           >
             Por qué Tranluz
-          </p>
+          </h2>
           <ul
             role="list"
             style={{
@@ -165,7 +165,7 @@ export function TrustBandSection() {
       {/* === Partners oficiales === */}
       <section aria-labelledby="partners-heading" style={{ padding: "48px 24px", background: "var(--bg-muted)" }}>
         <div style={{ maxWidth: "var(--max-width)", margin: "0 auto" }}>
-          <p
+          <h2
             id="partners-heading"
             style={{
               textAlign: "center",
@@ -178,7 +178,7 @@ export function TrustBandSection() {
             }}
           >
             Partners oficiales
-          </p>
+          </h2>
           <ul
             role="list"
             style={{
