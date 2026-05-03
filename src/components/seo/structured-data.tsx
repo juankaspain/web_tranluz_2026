@@ -1,28 +1,33 @@
 import { brand } from "@/config/brand";
 import { assets } from "@/content/assets";
 
-const baseUrl = "https://www.tranluz.es";
+const BASE_URL = "https://www.tranluz.es";
 
 export function StructuredData() {
   const graph = [
-    // ── Organization ──────────────────────────────────────────────────────────
+    // ── Organization ────────────────────────────────────────────────────────────────────────
     {
       "@type": "Organization",
-      "@id": `${baseUrl}/#organization`,
+      "@id": `${BASE_URL}/#organization`,
       name: brand.name,
-      url: baseUrl,
+      url: BASE_URL,
       logo: {
         "@type": "ImageObject",
-        url: assets.logo,
-        width: 300,
-        height: 85,
+        // MUST be absolute URL for JSON-LD (assets.logo is relative /images/...)
+        url: assets.logoAbsolute,
+        width: 200,
+        height: 52,
       },
       foundingDate: brand.founded,
       email: brand.email,
       telephone: brand.phone,
       description:
         "Especialistas desde 1987 en equipos eléctricos, alquiler de cabrestantes, servicio técnico ITS, formación y trazabilidad para obras eléctricas críticas.",
-      sameAs: [brand.social.linkedin, brand.social.instagram, brand.social.youtube],
+      sameAs: [
+        brand.social.linkedin,
+        brand.social.instagram,
+        brand.social.youtube,
+      ],
       address: {
         "@type": "PostalAddress",
         streetAddress: brand.address,
@@ -33,13 +38,13 @@ export function StructuredData() {
       },
     },
 
-    // ── LocalBusiness ─────────────────────────────────────────────────────────
+    // ── LocalBusiness ──────────────────────────────────────────────────────────────────
     {
       "@type": ["LocalBusiness", "ProfessionalService"],
-      "@id": `${baseUrl}/#localbusiness`,
+      "@id": `${BASE_URL}/#localbusiness`,
       name: brand.name,
-      url: baseUrl,
-      image: `${baseUrl}${assets.ogImage}`,
+      url: BASE_URL,
+      image: `${BASE_URL}${assets.ogImage}`,
       telephone: brand.phone,
       email: brand.email,
       priceRange: "$$",
@@ -69,27 +74,27 @@ export function StructuredData() {
       ],
     },
 
-    // ── WebSite ───────────────────────────────────────────────────────────────
+    // ── WebSite ───────────────────────────────────────────────────────────────────────────
     {
       "@type": "WebSite",
-      "@id": `${baseUrl}/#website`,
-      url: baseUrl,
+      "@id": `${BASE_URL}/#website`,
+      url: BASE_URL,
       name: brand.name,
       inLanguage: ["es-ES", "en-GB", "de-DE", "it-IT", "fr-FR"],
-      publisher: { "@id": `${baseUrl}/#organization` },
+      publisher: { "@id": `${BASE_URL}/#organization` },
       potentialAction: {
         "@type": "SearchAction",
-        target: `${baseUrl}/productos?q={search_term_string}`,
+        target: `${BASE_URL}/productos?q={search_term_string}`,
         "query-input": "required name=search_term_string",
       },
     },
 
-    // ── Service principal ─────────────────────────────────────────────────────
+    // ── Service ─────────────────────────────────────────────────────────────────────────
     {
       "@type": "Service",
-      "@id": `${baseUrl}/#technical-service`,
+      "@id": `${BASE_URL}/#technical-service`,
       name: "Servicio técnico integral ITS para equipos eléctricos",
-      provider: { "@id": `${baseUrl}/#organization` },
+      provider: { "@id": `${BASE_URL}/#organization` },
       serviceType: [
         "Servicio técnico integral",
         "Alquiler de equipos de tendido",
@@ -97,66 +102,65 @@ export function StructuredData() {
         "Trazabilidad de equipos (Revisa)",
       ],
       areaServed: "ES",
-      url: `${baseUrl}/servicios/its-servicio-tecnico`,
+      url: `${BASE_URL}/servicios/its-servicio-tecnico`,
     },
 
-    // ── Alquiler — Product ────────────────────────────────────────────────────
+    // ── Product ────────────────────────────────────────────────────────────────────────
     {
       "@type": "Product",
-      "@id": `${baseUrl}/alquiler/#product`,
+      "@id": `${BASE_URL}/alquiler/#product`,
       name: "Alquiler de equipos de tendido eléctrico — Rent Puller",
       description:
-        "Alquiler de cabrestantes, frenadoras y equipos de soplado de fibra óptica con asistencia técnica personalizada. Solución rápida y rentable para obras de tendido eléctrico.",
-      brand: { "@id": `${baseUrl}/#organization` },
-      url: `${baseUrl}/alquiler`,
+        "Alquiler de cabrestantes, frenadoras y equipos de soplado de fibra óptica con asistencia técnica personalizada.",
+      brand: { "@id": `${BASE_URL}/#organization` },
+      url: `${BASE_URL}/alquiler`,
       offers: {
         "@type": "Offer",
-        url: `${baseUrl}/presupuesto`,
+        url: `${BASE_URL}/presupuesto`,
         priceCurrency: "EUR",
         availability: "https://schema.org/InStock",
-        seller: { "@id": `${baseUrl}/#organization` },
+        seller: { "@id": `${BASE_URL}/#organization` },
       },
     },
 
-    // ── Formación — Course ────────────────────────────────────────────────────
+    // ── Course ──────────────────────────────────────────────────────────────────────────
     {
       "@type": "Course",
-      "@id": `${baseUrl}/formacion/#course`,
+      "@id": `${BASE_URL}/formacion/#course`,
       name: "Formación técnica para operadores de equipos eléctricos y de tendido",
       description:
         "Cursos especializados para operadores de equipos eléctricos, tendido de fibra óptica y prevención de riesgos laborales en obras eléctricas críticas.",
-      provider: { "@id": `${baseUrl}/#organization` },
-      url: `${baseUrl}/formacion`,
+      provider: { "@id": `${BASE_URL}/#organization` },
+      url: `${BASE_URL}/formacion`,
       hasCourseInstance: [
         {
           "@type": "CourseInstance",
           name: "Operador de equipos eléctricos",
           courseMode: "onsite",
           courseWorkload: "PT16H",
-          url: `${baseUrl}/formacion/operador-equipos-electricos`,
+          url: `${BASE_URL}/formacion/operador-equipos-electricos`,
         },
         {
           "@type": "CourseInstance",
           name: "Operador de equipos de tendido de fibra óptica",
           courseMode: "onsite",
           courseWorkload: "PT8H",
-          url: `${baseUrl}/formacion/operador-equipos-tendido-fibra-optica`,
+          url: `${BASE_URL}/formacion/operador-equipos-tendido-fibra-optica`,
         },
       ],
     },
 
-    // ── FAQ Global ────────────────────────────────────────────────────────────
+    // ── FAQ ───────────────────────────────────────────────────────────────────────────────
     {
       "@type": "FAQPage",
-      "@id": `${baseUrl}/#faq`,
+      "@id": `${BASE_URL}/#faq`,
       mainEntity: [
         {
           "@type": "Question",
           name: "¿Qué es el servicio ITS de Tranluz?",
           acceptedAnswer: {
             "@type": "Answer",
-            text:
-              "ITS (Integral Technical Service) es el servicio técnico integral de Tranluz: mantenimiento preventivo y correctivo, reparación, calibración y certificación de equipos eléctricos y herramientas de alta tensión con atención nacional.",
+            text: "ITS (Integral Technical Service) es el servicio técnico integral de Tranluz: mantenimiento preventivo y correctivo, reparación, calibración y certificación de equipos eléctricos con atención nacional.",
           },
         },
         {
@@ -164,8 +168,7 @@ export function StructuredData() {
           name: "¿Qué es Rent Puller?",
           acceptedAnswer: {
             "@type": "Answer",
-            text:
-              "Rent Puller es el servicio de alquiler de equipos de tendido de Tranluz: cabrestantes, frenadoras y equipos de soplado de fibra óptica con asistencia técnica y soporte telefónico incluidos.",
+            text: "Rent Puller es el servicio de alquiler de equipos de tendido de Tranluz: cabrestantes, frenadoras y equipos de soplado de fibra óptica con asistencia técnica incluida.",
           },
         },
         {
@@ -173,8 +176,7 @@ export function StructuredData() {
           name: "¿Qué es Revisa?",
           acceptedAnswer: {
             "@type": "Answer",
-            text:
-              "Revisa es la plataforma de trazabilidad de Tranluz para la gestión y control de EPI y herramientas de protección, garantizando el cumplimiento normativo y las revisiones certificadas.",
+            text: "Revisa es la plataforma de trazabilidad de Tranluz para la gestión y control de EPI y herramientas de protección, garantizando el cumplimiento normativo y las revisiones certificadas.",
           },
         },
         {
@@ -182,8 +184,7 @@ export function StructuredData() {
           name: "¿En qué zonas opera Tranluz?",
           acceptedAnswer: {
             "@type": "Answer",
-            text:
-              "Tranluz tiene sede en Sevilla y ofrece atención técnica a nivel nacional en España, con presencia en Portugal y distribución de productos en Europa.",
+            text: "Tranluz tiene sede en Sevilla y ofrece atención técnica a nivel nacional en España, con presencia en Portugal y distribución de productos en Europa.",
           },
         },
         {
@@ -191,8 +192,7 @@ export function StructuredData() {
           name: "¿Cómo solicito un presupuesto?",
           acceptedAnswer: {
             "@type": "Answer",
-            text:
-              "Puedes solicitar un presupuesto a través del formulario en tranluz.es/presupuesto, por email a info@tranluz.es o llamando al teléfono de contacto disponible en la web.",
+            text: "Puedes solicitar un presupuesto a través del formulario en tranluz.es/presupuesto, por email a info@tranluz.es o llamando al teléfono de contacto disponible en la web.",
           },
         },
         {
@@ -200,24 +200,18 @@ export function StructuredData() {
           name: "¿Tranluz ofrece formación certificada?",
           acceptedAnswer: {
             "@type": "Answer",
-            text:
-              "Sí. Tranluz imparte formación técnica especializada para operadores de equipos eléctricos y de tendido de fibra óptica, con certificación propia y orientada a la prevención de riesgos laborales.",
+            text: "Sí. Tranluz imparte formación técnica especializada para operadores de equipos eléctricos y de tendido de fibra óptica, con certificación propia y orientada a la prevención de riesgos laborales.",
           },
         },
       ],
     },
 
-    // ── BreadcrumbList — Home ─────────────────────────────────────────────────
+    // ── BreadcrumbList ──────────────────────────────────────────────────────────────────────
     {
       "@type": "BreadcrumbList",
-      "@id": `${baseUrl}/#breadcrumb`,
+      "@id": `${BASE_URL}/#breadcrumb`,
       itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Inicio",
-          item: baseUrl,
-        },
+        { "@type": "ListItem", position: 1, name: "Inicio", item: BASE_URL },
       ],
     },
   ];

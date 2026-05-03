@@ -1,7 +1,10 @@
 /**
  * assets.ts – Rutas centralizadas de todos los recursos visuales.
- * ITER-4: Logo SVG local (no externo) para garantizar disponibilidad.
+ * ITER-5: logoAbsolute para JSON-LD/structured-data (URL completa requerida).
+ *         Rutas de logo locales para header/footer.
  */
+
+const SITE_URL = "https://www.tranluz.es";
 
 // ─── Imágenes AI provisionales (Pollinations.ai – seed fijo = reproducibles) ───
 const aiImg = {
@@ -15,29 +18,32 @@ const aiImg = {
 };
 
 export const assets = {
-  // ─── Imágenes hero principal ───────────────────────────────────────────
-  hero: "/images/generated/tranluz-hero-ai.png",
+  // ─── Logotipos – rutas LOCALES para <img> en header/footer ───────────────────
+  logo:        "/images/Tranluz/Logo-Tranluz-PM.svg",
+  logoWhite:   "/images/Tranluz/Logo-Tranluz-PM-white.svg",
+  mark:        "/images/Tranluz/Logo-Tranluz-PM.svg",
 
-  // Imágenes generadas locales (existen en /public/images/generated/)
-  generatedHero:     "/images/generated/tranluz-hero-ai.png",
-  generatedService:  "/images/generated/tranluz-service-ai.png",
-  generatedTraining: "/images/generated/tranluz-training-ai.png",
+  // URL ABSOLUTA requerida para JSON-LD / structured-data / og:image
+  logoAbsolute: `${SITE_URL}/images/Tranluz/Logo-Tranluz-PM.svg`,
+
+  // ─── Footer ────────────────────────────────────────────────────────
+  footerLogo:    "/images/Tranluz/Logo-Tranluz-PM-white.svg",
+  footerFunding: `${SITE_URL}/images/Tranluz/logos-financiacion.webp`,
+  footerMoves:   `${SITE_URL}/images/Tranluz/moves-iii-tranluz.webp`,
 
   // ─── OG / Social ───────────────────────────────────────────────────
   ogImage: "/images/generated/tranluz-hero-ai.png",
 
-  // ─── Logotipos – SVG LOCAL (vector, no depende de dominio externo) ──
-  logo:        "/images/Tranluz/Logo-Tranluz-PM.svg",
-  logoWhite:   "/images/Tranluz/Logo-Tranluz-PM-white.svg",
-  mark:        "/images/Tranluz/Logo-Tranluz-PM.svg",
-  signature:   "https://www.tranluz.es/images/Tranluz/Firma-Manuel-Ramos.svg",
-  quality:     "https://www.tranluz.es/images/Tranluz/AenorTranluz.svg",
-  itsLogo:     "https://www.tranluz.es/images/Tranluz/Logo_ITS_TRANLUZ.svg",
+  // Imágenes locales generadas
+  hero:              "/images/generated/tranluz-hero-ai.png",
+  generatedHero:     "/images/generated/tranluz-hero-ai.png",
+  generatedService:  "/images/generated/tranluz-service-ai.png",
+  generatedTraining: "/images/generated/tranluz-training-ai.png",
 
-  // ─── Footer ────────────────────────────────────────────────────────
-  footerLogo:    "/images/Tranluz/Logo-Tranluz-PM-white.svg",
-  footerFunding: "https://www.tranluz.es/images/Tranluz/logos-financiacion.webp",
-  footerMoves:   "https://www.tranluz.es/images/Tranluz/moves-iii-tranluz.webp",
+  // ─── Logos de terceros (siguen en externo) ───────────────────────────
+  signature:   `${SITE_URL}/images/Tranluz/Firma-Manuel-Ramos.svg`,
+  quality:     `${SITE_URL}/images/Tranluz/AenorTranluz.svg`,
+  itsLogo:     `${SITE_URL}/images/Tranluz/Logo_ITS_TRANLUZ.svg`,
 
   // ─── Personas / Equipo ─────────────────────────────────────────────────
   ceo: aiImg.ceo,
@@ -45,6 +51,7 @@ export const assets = {
   // ─── Catálogo ────────────────────────────────────────────────────
   catalogBanner:     aiImg.catalog,
   presentationCover: aiImg.catalog,
+  catalogUrl:        "/soporte/catalogos",
 
   // ─── Servicios ─────────────────────────────────────────────────────
   its:           "/images/generated/tranluz-service-ai.png",
@@ -61,8 +68,5 @@ export const assets = {
   training:    "/images/generated/tranluz-training-ai.png",
   trainingOne: "/images/generated/tranluz-training-ai.png",
   trainingTwo:  aiImg.training,
-  trainingLogo: "https://www.tranluz.es/images/Tranluz/logo-formate-tranluz.webp",
-
-  // — Catálogo PDF URL
-  catalogUrl: "/soporte/catalogos",
+  trainingLogo: `${SITE_URL}/images/Tranluz/logo-formate-tranluz.webp`,
 };
