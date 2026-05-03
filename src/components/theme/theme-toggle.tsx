@@ -9,13 +9,12 @@ function getInitialTheme(): Theme {
   if (typeof window === "undefined") {
     return "light";
   }
-
   const stored = window.localStorage.getItem("tranluz-theme");
   if (stored === "dark" || stored === "light") {
     return stored;
   }
-
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  // Always default to light on first visit
+  return "light";
 }
 
 export function ThemeToggle() {
@@ -41,8 +40,7 @@ export function ThemeToggle() {
       aria-label={isDark ? "Activar tema claro" : "Activar tema oscuro"}
       title={isDark ? "Tema claro" : "Tema oscuro"}
     >
-      {isDark ? <Sun aria-hidden="true" size={18} /> : <Moon aria-hidden="true" size={18} />}
+      {isDark ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
     </button>
   );
 }
-
