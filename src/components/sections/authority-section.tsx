@@ -1,29 +1,33 @@
+import Link from "next/link";
 import { brand } from "@/config/brand";
+
+const metrics = [
+  { value: "+38", label: "Años en el sector eléctrico" },
+  { value: "Oficial", label: "Distribuidor Tesmec y Plumettaz" },
+  { value: "B2B", label: "Infraestructura eléctrica y telecom" },
+];
 
 export function AuthoritySection() {
   return (
-    <section className="authority-section">
+    <section className="authority-section" aria-labelledby="authority-heading">
       <div className="container">
-        <h2>Empresas eléctricas confían en Tranluz para obra crítica</h2>
-
-        <div className="authority-metrics">
-          <div>
-            <strong>+38 años</strong>
-            <span>en el sector eléctrico</span>
-          </div>
-          <div>
-            <strong>Distribuidor oficial</strong>
-            <span>Tesmec y Plumettaz</span>
-          </div>
-          <div>
-            <strong>B2B especializado</strong>
-            <span>infraestructura eléctrica y telecom</span>
-          </div>
+        <div className="section-heading">
+          <p className="eyebrow">Confianza industrial</p>
+          <h2 id="authority-heading">Empresas eléctricas confían en Tranluz para obra crítica</h2>
         </div>
 
-        <div className="authority-brands">
+        <div className="authority-metrics">
+          {metrics.map((m) => (
+            <div key={m.label}>
+              <strong>{m.value}</strong>
+              <span>{m.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="authority-brands" aria-label="Marcas asociadas">
           {brand.partners.map((p) => (
-            <a key={p.name} href={p.href} target="_blank">
+            <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer">
               {p.name}
             </a>
           ))}
