@@ -235,8 +235,8 @@ export function ServiceGrid() {
                   <span
                     style={{
                       display: "block",
-                      color: "rgba(255,255,255,0.5)",
-                      fontSize: "0.7rem",
+                      color: "rgba(255,255,255,0.75)",
+                      fontSize: "0.75rem",
                       fontWeight: 700,
                       letterSpacing: "0.1em",
                       textTransform: "uppercase",
