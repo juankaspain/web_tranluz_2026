@@ -121,7 +121,7 @@ export const translations: Record<Exclude<Locale, "es">, TranslationTable> = {
     "Lun–Vie 8:00–18:00 · Urgencias 24h": "Mon–Fri 8:00 AM–6:00 PM · 24h emergencies",
     "Todo lo que necesitas para ejecutar obras eléctricas críticas, en un solo proveedor.": "Everything you need to execute critical electrical works, in a single provider.",
     "Especialistas desde": "Specialists since",
-    "PARTNER OFICIAL DESDE": "OFFICIAL PARTNER SINCE",
+    
     "Servicios": "Services",
     "Alquiler": "Miete",
     "Formacion": "Schulung",
@@ -236,7 +236,7 @@ export const translations: Record<Exclude<Locale, "es">, TranslationTable> = {
     "Lun–Vie 8:00–18:00 · Urgencias 24h": "Mo–Fr 8:00–18:00 Uhr · 24h Notdienst",
     "Todo lo que necesitas para ejecutar obras eléctricas críticas, en un solo proveedor.": "Alles, was Sie für kritische Elektroprojekte benötigen, von einem einzigen Anbieter.",
     "Especialistas desde": "Spezialisten seit",
-    "PARTNER OFICIAL DESDE": "OFFIZIELLER PARTNER SEIT"
+    "PARTNER OFICIAL DESDE": "OFFIZIELLER PARTNER SEIT",
     "Servicios": "Servizi",
     "Alquiler": "Noleggio",
     "Formacion": "Formazione",
@@ -351,7 +351,7 @@ export const translations: Record<Exclude<Locale, "es">, TranslationTable> = {
     "Lun–Vie 8:00–18:00 · Urgencias 24h": "Lun–Ven 8:00–18:00 · Emergenze 24h",
     "Todo lo que necesitas para ejecutar obras eléctricas críticas, en un solo proveedor.": "Tutto ciò che serve per eseguire lavori elettrici critici, da un unico fornitore.",
     "Especialistas desde": "Specialisti dal",
-    "PARTNER OFICIAL DESDE": "PARTNER UFFICIALE DAL"
+    "PARTNER OFICIAL DESDE": "PARTNER UFFICIALE DAL",
     "Servicios": "Services",
     "Alquiler": "Location",
     "Formacion": "Formation",
@@ -450,7 +450,7 @@ export const translations: Record<Exclude<Locale, "es">, TranslationTable> = {
     "Preparacion para requisitos de presencia avanzada en internet": "Préparation aux exigences de présence avancée sur internet",
     "SEO y estructura": "SEO et structure",
     "Rendimiento y seguridad": "Performance et sécurité",
-    "Escalabilidad": "Évolutivité"
+    "Escalabilidad": "Évolutivité",
         "años de especialización": "années de spécialisation",
     "líneas de servicio": "lignes de service",
     "Años de experiencia": "Années d'expérience",
@@ -462,6 +462,6 @@ export const translations: Record<Exclude<Locale, "es">, TranslationTable> = {
     "Lun–Vie 8:00–18:00 · Urgencias 24h": "Lun–Ven 8h00–18h00 · Urgences 24h",
     "Todo lo que necesitas para ejecutar obras eléctricas críticas, en un solo proveedor.": "Tout ce dont vous avez besoin pour réaliser des chantiers électriques critiques, avec un seul fournisseur.",
     "Especialistas desde": "Spécialistes depuis",
-    "PARTNER OFICIAL DESDE": "PARTENAIRE OFFICIEL DEPUIS"
+    "PARTNER OFICIAL DESDE": "PARTENAIRE OFFICIEL DEPUIS",
   }
 };
