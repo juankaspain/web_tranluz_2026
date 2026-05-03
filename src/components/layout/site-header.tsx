@@ -75,18 +75,14 @@ export function SiteHeader() {
       <div className="topbar">
         <span className="topbar-claim">{brand.claim}</span>
         <nav className="topbar-actions" aria-label="Información de contacto">
-          <span>Catálogo 2026</span>
-          <a href={`tel:${brand.phone}`}>{brand.phone}</a>
+          <span>· Catálogo 2026</span>
+          <a href={`tel:${brand.phone.replace(/\s/g, "")}`}>{brand.phone}</a>
         </nav>
       </div>
 
-      {/* Navbar principal */}
       <header className={`site-header${scrolled ? " scrolled" : ""}`}>
         <div className="navbar" ref={navRef}>
-
-          {/* Logo – img nativo para evitar restricciones SVG de next/image */}
           <Link href="/" className="brand-mark" aria-label="Tranluz inicio">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={assets.logo}
               alt="Tranluz"
@@ -98,7 +94,6 @@ export function SiteHeader() {
             />
           </Link>
 
-          {/* Nav escritorio */}
           <nav className="main-nav desktop-nav" aria-label="Navegación principal">
             {mainNavigation.map((item) => {
               const hasChildren = item.children && item.children.length > 0;
@@ -141,7 +136,6 @@ export function SiteHeader() {
             })}
           </nav>
 
-          {/* Buscador */}
           <div className="site-search">
             <Search size={16} aria-hidden="true" />
             <input
@@ -152,14 +146,12 @@ export function SiteHeader() {
             />
           </div>
 
-          {/* Acciones */}
           <div className="header-actions">
             <ThemeToggle />
             <LanguageSelector />
             <Link href="/presupuesto" className="btn-brand">Presupuesto</Link>
           </div>
 
-          {/* Hamburguesa */}
           <button
             className="hamburger mobile-only"
             aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
@@ -171,7 +163,6 @@ export function SiteHeader() {
           </button>
         </div>
 
-        {/* Mega-strip */}
         <div className="mega-strip">
           {megaItems.map((mi) => (
             <Link key={mi.href} href={mi.href} className="mega-card">
@@ -185,7 +176,6 @@ export function SiteHeader() {
         </div>
       </header>
 
-      {/* Menú móvil */}
       {mobileOpen && (
         <div
           id={mobileMenuId}
@@ -232,7 +222,6 @@ export function SiteHeader() {
             ))}
           </div>
 
-          {/* CTA móvil */}
           <div style={{ padding: "20px 16px 0", borderTop: "1px solid var(--border)" }}>
             <Link
               href="/presupuesto"
@@ -246,7 +235,6 @@ export function SiteHeader() {
         </div>
       )}
 
-      {/* Overlay móvil */}
       {mobileOpen && (
         <div
           className="mobile-overlay"
