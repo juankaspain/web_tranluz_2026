@@ -1,6 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="4" fill="#1a2f5e"/>
-  <rect x="4" y="2" width="9" height="28" rx="2" fill="#e8580a" transform="skewX(-10)"/>
-  <rect x="13" y="2" width="9" height="28" rx="2" fill="#e8580a" transform="skewX(-10)"/>
-  <text x="22" y="24" font-size="17" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="#ffffff" letter-spacing="-1">T</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Tranluz">
+  <rect width="32" height="32" rx="5" fill="#1a2f5e"/>
+  <rect x="5" y="3" width="7" height="26" rx="2" fill="#e8580a" transform="skewX(-8)"/>
+  <rect x="15" y="3" width="7" height="26" rx="2" fill="#e8580a" transform="skewX(-8)"/>
 </svg>

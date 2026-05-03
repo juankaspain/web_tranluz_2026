@@ -534,7 +534,8 @@ button {
 .mega-strip small {
   margin-top: 3px;
   color: var(--text-soft);
-  font-size: 0.76rem;
+  /* Subido de 0.76rem (12.1px) a 0.8rem (12.8px) — mejor legibilidad */
+  font-size: 0.8rem;
   line-height: 1.1;
 }
 
@@ -628,8 +629,9 @@ button {
   color: #ffffff;
 }
 
+/* FIX contraste placeholder hero: de 0.66 a 0.82 — cumple WCAG AA sobre fondo oscuro */
 .hero-search input::placeholder {
-  color: rgba(255, 255, 255, 0.66);
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .hero-search button {
@@ -2197,6 +2199,7 @@ address {
   gap: 12px;
 }
 
+/* ─── Action Dock: oculto por defecto, visible en mobile ─────────────────── */
 .action-dock {
   position: fixed;
   right: max(18px, env(safe-area-inset-right));
@@ -2415,6 +2418,7 @@ address {
     margin-bottom: 28px;
   }
 
+  /* Action Dock: visible en mobile ≤ 760px */
   .action-dock {
     display: flex;
     flex-direction: column;

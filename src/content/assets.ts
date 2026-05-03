@@ -1,10 +1,7 @@
 /**
  * assets.ts – Rutas centralizadas de todos los recursos visuales.
- * ITER-3: Imágenes AI generadas (Pollinations.ai) como provisionales
- * para todas las secciones que no tienen imagen real todavía.
- * Las imágenes locales /images/generated/*.png ya existen en el repo.
+ * ITER-4: Logo SVG local (no externo) para garantizar disponibilidad.
  */
-const baseUrl = "https://www.tranluz.es";
 
 // ─── Imágenes AI provisionales (Pollinations.ai – seed fijo = reproducibles) ───
 const aiImg = {
@@ -22,27 +19,27 @@ export const assets = {
   hero: "/images/generated/tranluz-hero-ai.png",
 
   // Imágenes generadas locales (existen en /public/images/generated/)
-  generatedHero:    "/images/generated/tranluz-hero-ai.png",
-  generatedService: "/images/generated/tranluz-service-ai.png",
+  generatedHero:     "/images/generated/tranluz-hero-ai.png",
+  generatedService:  "/images/generated/tranluz-service-ai.png",
   generatedTraining: "/images/generated/tranluz-training-ai.png",
 
   // ─── OG / Social ───────────────────────────────────────────────────
   ogImage: "/images/generated/tranluz-hero-ai.png",
 
-  // ─── Logotipos (SVG nativo – vector, peso mínimo) ────────────────
-  logo:      `${baseUrl}/images/Tranluz/Logo-Tranluz-PM.svg`,
-  mark:      `${baseUrl}/images/Tranluz/Logo-Tranluz.svg`,
-  signature: `${baseUrl}/images/Tranluz/Firma-Manuel-Ramos.svg`,
-  quality:   `${baseUrl}/images/Tranluz/AenorTranluz.svg`,
-  itsLogo:   `${baseUrl}/images/Tranluz/Logo_ITS_TRANLUZ.svg`,
+  // ─── Logotipos – SVG LOCAL (vector, no depende de dominio externo) ──
+  logo:        "/images/Tranluz/Logo-Tranluz-PM.svg",
+  logoWhite:   "/images/Tranluz/Logo-Tranluz-PM-white.svg",
+  mark:        "/images/Tranluz/Logo-Tranluz-PM.svg",
+  signature:   "https://www.tranluz.es/images/Tranluz/Firma-Manuel-Ramos.svg",
+  quality:     "https://www.tranluz.es/images/Tranluz/AenorTranluz.svg",
+  itsLogo:     "https://www.tranluz.es/images/Tranluz/Logo_ITS_TRANLUZ.svg",
 
   // ─── Footer ────────────────────────────────────────────────────────
-  footerLogo:    `${baseUrl}/images/Tranluz/Logo-Tranluz-PM.svg`,
-  footerFunding: `${baseUrl}/images/Tranluz/logos-financiacion.webp`,
-  footerMoves:   `${baseUrl}/images/Tranluz/moves-iii-tranluz.webp`,
+  footerLogo:    "/images/Tranluz/Logo-Tranluz-PM-white.svg",
+  footerFunding: "https://www.tranluz.es/images/Tranluz/logos-financiacion.webp",
+  footerMoves:   "https://www.tranluz.es/images/Tranluz/moves-iii-tranluz.webp",
 
   // ─── Personas / Equipo ─────────────────────────────────────────────────
-  // PROVISIONAL AI – reemplazar por foto real cuando esté disponible
   ceo: aiImg.ceo,
 
   // ─── Catálogo ────────────────────────────────────────────────────
@@ -52,22 +49,19 @@ export const assets = {
   // ─── Servicios ─────────────────────────────────────────────────────
   its:           "/images/generated/tranluz-service-ai.png",
   itsTechnician: "/images/generated/tranluz-service-ai.png",
-  // PROVISIONAL AI – revisa trazabilidad
-  revisa: aiImg.service,
+  revisa:        aiImg.service,
 
   // ─── Alquiler ──────────────────────────────────────────────────────
   rentPuller: aiImg.rental,
 
   // ─── Empresa ──────────────────────────────────────────────────────
-  // PROVISIONAL AI – hero de empresa
   empresa: aiImg.empresa,
 
   // ─── Formación ─────────────────────────────────────────────────────
   training:    "/images/generated/tranluz-training-ai.png",
   trainingOne: "/images/generated/tranluz-training-ai.png",
-  // PROVISIONAL AI – formación práctica segunda imagen
   trainingTwo:  aiImg.training,
-  trainingLogo: `${baseUrl}/images/Tranluz/logo-formate-tranluz.webp`,
+  trainingLogo: "https://www.tranluz.es/images/Tranluz/logo-formate-tranluz.webp",
 
   // — Catálogo PDF URL
   catalogUrl: "/soporte/catalogos",

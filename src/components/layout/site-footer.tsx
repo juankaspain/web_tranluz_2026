@@ -72,7 +72,14 @@ export function SiteFooter() {
         <div className="footer-brand">
           <div style={{ marginBottom: "16px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={assets.footerLogo} alt="Tranluz" style={{ height: "32px", width: "auto", objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.9 }} loading="lazy" />
+            <img
+              src={assets.footerLogo}
+              alt="Tranluz"
+              width={160}
+              height={42}
+              style={{ height: "32px", width: "auto", objectFit: "contain", opacity: 0.92 }}
+              loading="lazy"
+            />
           </div>
           <p style={{ fontSize: "0.88rem", lineHeight: 1.6, margin: "0 0 20px", color: "rgba(238,243,245,0.65)" }}>
             Especialistas en máquinas y herramientas para montadores eléctricos desde {brand.founded}. Equipos, servicio técnico, alquiler, formación y trazabilidad.
