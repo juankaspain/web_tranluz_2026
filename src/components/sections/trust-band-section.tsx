@@ -85,8 +85,8 @@ export function TrustBandSection() {
             id="trust-heading"
             style={{
               textAlign: "center",
-              fontSize: "0.72rem",
-              fontWeight: 800,
+              fontSize: "0.8rem",
+              fontWeight: 820,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               color: "var(--brand)",
@@ -127,7 +127,7 @@ export function TrustBandSection() {
                     style={{
                       display: "block",
                       fontSize: "0.95rem",
-                      fontWeight: 800,
+                      fontWeight: 820,
                       color: "var(--text)",
                     }}
                   >
@@ -157,8 +157,8 @@ export function TrustBandSection() {
             id="partners-heading"
             style={{
               textAlign: "center",
-              fontSize: "0.72rem",
-              fontWeight: 800,
+              fontSize: "0.8rem",
+              fontWeight: 820,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               color: "var(--brand)",
