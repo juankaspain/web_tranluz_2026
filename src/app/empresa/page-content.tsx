@@ -52,7 +52,7 @@ export default function EmpresaPageContent() {
               <div key={v.title} className="quick-link" style={{ pointerEvents: "none" }}>
                 <span className="quick-kicker">Tranluz</span>
                 {v.icon}
-                <span><strong>{v.title}</strong><small>{v.sub}</small></span>
+                              <div className="quick-text"><strong>{v.title}</strong><span>{v.sub}</span></div>
               </div>
             ))}
           </div>
