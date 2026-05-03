@@ -36,13 +36,46 @@ const routes = [
   "/productos/herramienta-hidraulica"
 ];
 
+// Mapeo de locales a prefijos de URL y hreflang
+const localeMap: Record<string, string> = {
+  es: "es-ES",
+  en: "en-GB",
+  de: "de-DE",
+  it: "it-IT",
+  fr: "fr-FR",
+};
+
+const localeOrder = ["es", "en", "de", "it", "fr"] as const;
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.tranluz.es";
 
-  return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: route === "" ? "weekly" : "monthly",
-    priority: route === "" ? 1 : 0.8
-  }));
+  const entries: MetadataRoute.Sitemap = [];
+
+  for (const route of routes) {
+    const isHome = route === "";
+    const priority = isHome ? 1 : 0.8;
+    const changeFrequency = isHome ? "weekly" : "monthly";
+
+    // Entrada canónica en español (sin prefijo)
+    const alternates: Record<string, string> = {};
+    for (const locale of localeOrder) {
+      const hreflang = localeMap[locale];
+      // Español: URL sin prefijo; otros: /locale/route
+      const url = locale === "es" ? `${baseUrl}${route}` : `${baseUrl}/${locale}${route}`;
+      alternates[hreflang] = url;
+    }
+    // x-default apunta a la versión española
+    alternates["x-default"] = `${baseUrl}${route}`;
+
+    entries.push({
+      url: `${baseUrl}${route}`,
+      lastModified: new Date(),
+      changeFrequency,
+      priority,
+      alternates: { languages: alternates },
+    });
+  }
+
+  return entries;
 }
