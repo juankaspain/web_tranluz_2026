@@ -11,6 +11,7 @@ import { defaultLocale, isLocale } from "@/i18n/config";
 import "@fontsource-variable/manrope";
 import "@fontsource-variable/archivo";
 import "@/styles/globals.css";
+import "@/styles/form-errors.css";
 import { assets } from "@/content/assets";
 
 // Forzar renderizado dinámico en Hostinger (next/headers requiere runtime dinámico)
