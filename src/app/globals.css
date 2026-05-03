@@ -1,5 +1,5 @@
 /* =========================================
-   RESET BASE
+   PREMIUM DESIGN SYSTEM
 ========================================= */
 
 *,
@@ -22,12 +22,12 @@ body {
 }
 
 /* =========================================
-   TIPOGRAFÍA PRO
+   TYPOGRAPHY
 ========================================= */
 
 h1, h2, h3 {
   letter-spacing: -0.02em;
-  margin: 0 0 16px;
+  margin-bottom: 16px;
 }
 
 h1 { font-size: 2.4rem; }
@@ -35,7 +35,7 @@ h2 { font-size: 1.9rem; }
 h3 { font-size: 1.3rem; }
 
 p {
-  margin: 0 0 12px;
+  margin-bottom: 12px;
   color: #334155;
 }
 
@@ -95,9 +95,8 @@ header {
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(0,0,0,0.7) 0%,
-    rgba(0,0,0,0.4) 60%,
-    rgba(0,0,0,0.15) 100%
+    rgba(0,0,0,0.7),
+    rgba(0,0,0,0.3)
   );
 }
 
@@ -114,13 +113,13 @@ header {
 }
 
 /* =========================================
-   QUICK ACCESS (CRÍTICO)
+   QUICK ACCESS (FIX CRÍTICO)
 ========================================= */
 
 .quick-access {
-  margin-top: -60px;
   position: relative;
   z-index: 2;
+  margin-top: -60px;
 }
 
 .quick-access-inner {
@@ -153,7 +152,7 @@ header {
 }
 
 /* =========================================
-   BOTONES
+   BUTTONS
 ========================================= */
 
 .button-primary {
@@ -182,7 +181,7 @@ header {
 }
 
 /* =========================================
-   CARDS / MÉTRICAS
+   CARDS
 ========================================= */
 
 .metric-card,
@@ -231,13 +230,8 @@ header {
   margin-top: 40px;
 }
 
-.ps-bad {
-  background: #fff5f5;
-}
-
-.ps-good {
-  background: #f0fdf4;
-}
+.ps-bad { background: #fff5f5; }
+.ps-good { background: #f0fdf4; }
 
 /* =========================================
    CTA FINAL
