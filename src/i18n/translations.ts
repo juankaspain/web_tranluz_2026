@@ -121,7 +121,7 @@ export const translations: Record<Exclude<Locale, "es">, TranslationTable> = {
     "Lun–Vie 8:00–18:00 · Urgencias 24h": "Mon–Fri 8:00 AM–6:00 PM · 24h emergencies",
     "Todo lo que necesitas para ejecutar obras eléctricas críticas, en un solo proveedor.": "Everything you need to execute critical electrical works, in a single provider.",
     "Especialistas desde": "Specialists since",
-    "PARTNER OFICIAL DESDE": "OFFICIAL PARTNER SINCE"
+    "PARTNER OFICIAL DESDE": "OFFICIAL PARTNER SINCE",
     "Servicios": "Services",
     "Alquiler": "Miete",
     "Formacion": "Schulung",
