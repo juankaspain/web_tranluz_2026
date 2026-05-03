@@ -11,6 +11,7 @@ import { ServiceGrid } from "@/components/sections/service-grid";
 import { ProductCategoryGrid } from "@/components/sections/product-category-grid";
 import { SupportBand } from "@/components/sections/support-band";
 import { AuthoritySection } from "@/components/sections/authority-section";
+import { ProblemSolutionSection } from "@/components/sections/problem-solution-section";
 
 export default function HomePage() {
   return (
@@ -18,9 +19,9 @@ export default function HomePage() {
       <SiteHeader />
       <main id="contenido">
         <HeroSection />
-        {/* NUEVA: autoridad inmediata tras hero */}
         <AuthoritySection />
         <TrustBandSection />
+        <ProblemSolutionSection />
         <QuickAccessSection />
         <OperationsSection />
         <ProductCategoryGrid />
