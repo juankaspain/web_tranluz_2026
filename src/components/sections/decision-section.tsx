@@ -11,10 +11,10 @@ export function DecisionSection() {
         </p>
 
         <div className="cta-actions">
-          <Link href="/presupuesto" className="button-primary">
+                    <Link href="/presupuesto" className="button button-primary">
             Presupuesto en 24h
           </Link>
-          <a href="tel:+34954367290" className="button-secondary">
+                    <a href="tel:+34954367290" className="button button-secondary">
             Hablar con técnico
           </a>
         </div>
