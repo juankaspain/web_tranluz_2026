@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, MapPin, PhoneCall } from "lucide-react";
+import { Clock, MapPin, ArrowRight } from "lucide-react";
 import { brand } from "@/config/brand";
 import { assets } from "@/content/assets";
 
@@ -51,42 +51,48 @@ export function HeroSection() {
         </div>
 
         <div className="hero-actions">
-          <Link href="/presupuesto" className="button-primary">
+          <Link href="/presupuesto" className="button button-primary">
             Solicitar presupuesto
           </Link>
-          <Link href="/alquiler" className="button-secondary">
+          <Link href="/alquiler" className="button button-secondary">
             Ver equipos en alquiler
           </Link>
         </div>
       </div>
 
-      <aside className="hero-aside" aria-label="Datos de confianza Tranluz">
-        <div>
-          <p className="eyebrow">Partner oficial desde {brand.founded}</p>
-          <div className="metric-grid">
-            {asideMetrics.map((m) => (
-              <div key={m.value} className="metric-card">
-                <strong>{m.value}</strong>
-                <span>{m.label}</span>
-              </div>
-            ))}
-          </div>
-          <div className="command-card">
-            <MapPin size={20} aria-hidden="true" />
+      <div className="hero-aside">
+        <p className="command-label">Partner oficial desde {brand.founded}</p>
+
+        <div className="metric-grid">
+          {asideMetrics.map((m) => (
+            <div key={m.label} className="metric-card">
+              <strong>{m.value}</strong>
+              <span>{m.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="hero-aside-info">
+          <div className="hero-aside-row">
+            <MapPin size={16} aria-hidden="true" />
             <div>
-              <span>Ubicación</span>
+              <span className="hero-aside-label">Ubicación</span>
               <strong>Polígono Industrial Calonge, Sevilla</strong>
             </div>
           </div>
-          <div className="command-card">
-            <Clock size={20} aria-hidden="true" />
+          <div className="hero-aside-row">
+            <Clock size={16} aria-hidden="true" />
             <div>
-              <span>Horario</span>
+              <span className="hero-aside-label">Horario</span>
               <strong>Lun–Vie 8:00–18:00 · Urgencias 24h</strong>
             </div>
           </div>
         </div>
-      </aside>
+
+        <Link href="/presupuesto" className="button button-primary hero-aside-cta">
+          Solicitar presupuesto <ArrowRight size={16} aria-hidden="true" />
+        </Link>
+      </div>
     </section>
   );
 }
