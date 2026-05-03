@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { cookies, headers } from "next/headers";
 import { AutoTranslate } from "@/components/i18n/auto-translate";
 import { ActionDock } from "@/components/layout/action-dock";
+import { CookieConsent } from "@/components/layout/cookie-consent";
 import { StructuredData } from "@/components/seo/structured-data";
 import { ThemeScript } from "@/components/theme/theme-script";
 import { defaultLocale, isLocale } from "@/i18n/config";
@@ -191,6 +192,8 @@ export default async function RootLayout({
         <StructuredData />
         <ActionDock />
         {children}
+        {/* Banner de cookies LSSI/RGPD — se renderiza en cliente */}
+        <CookieConsent />
       </body>
     </html>
   );
