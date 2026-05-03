@@ -15,10 +15,10 @@ export function FinalCtaSection() {
         </ul>
 
         <div className="cta-actions">
-          <Link href="/presupuesto" className="button-primary">
+                    <Link href="/presupuesto" className="button button-primary">
             Solicitar presupuesto
           </Link>
-          <a href="tel:+34954000000" className="button-secondary">
+                    <a href="tel:+34954367290" className="button button-ghost">
             Llamar ahora
           </a>
         </div>
