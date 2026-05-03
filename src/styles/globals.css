@@ -1995,6 +1995,7 @@ button {
   justify-content: center;
   width: auto; min-width: 32px; padding: 4px 8px; white-space: nowrap;
     min-height: 32px;
+      align-self: flex-start;
   border-radius: var(--radius);
   background: var(--brand-soft);
   color: var(--brand);
