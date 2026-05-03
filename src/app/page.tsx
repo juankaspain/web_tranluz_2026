@@ -10,31 +10,24 @@ import { QuickAccessSection } from "@/components/sections/quick-access-section";
 import { ServiceGrid } from "@/components/sections/service-grid";
 import { ProductCategoryGrid } from "@/components/sections/product-category-grid";
 import { SupportBand } from "@/components/sections/support-band";
+import { AuthoritySection } from "@/components/sections/authority-section";
 
 export default function HomePage() {
   return (
     <>
       <SiteHeader />
       <main id="contenido">
-        {/* 1. Hero con segmentación por intención */}
         <HeroSection />
-        {/* 2. Franja de confianza: marcas, años, servicio oficial, ubicación */}
+        {/* NUEVA: autoridad inmediata tras hero */}
+        <AuthoritySection />
         <TrustBandSection />
-        {/* 3. Accesos rápidos a las 4 líneas de negocio */}
         <QuickAccessSection />
-        {/* 4. Líneas de negocio en detalle */}
         <OperationsSection />
-        {/* 5. Categorías de producto */}
         <ProductCategoryGrid />
-        {/* 6. Servicios diferenciales */}
         <ServiceGrid />
-        {/* 7. Equipos destacados */}
         <FeaturedEquipmentSection />
-        {/* 8. Credenciales y confianza corporativa */}
         <CompanyProofSection />
-        {/* 9. Recursos técnicos */}
         <SupportBand />
-        {/* 10. CTA final directo */}
         <FinalCtaSection />
       </main>
       <SiteFooter />
