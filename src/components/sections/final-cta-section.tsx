@@ -20,7 +20,6 @@ export function FinalCtaSection() {
         overflow: "hidden",
       }}
     >
-      {/* Decorative accent */}
       <div
         aria-hidden="true"
         style={{
@@ -40,7 +39,6 @@ export function FinalCtaSection() {
           textAlign: "center",
         }}
       >
-        {/* Eyebrow */}
         <p
           style={{
             fontSize: "0.72rem",
@@ -53,8 +51,6 @@ export function FinalCtaSection() {
         >
           ¿Listo para empezar?
         </p>
-
-        {/* Headline */}
         <h2
           style={{
             fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
@@ -69,8 +65,6 @@ export function FinalCtaSection() {
           <br />
           <span style={{ color: "#E8820C" }}>Te respondemos en menos de 24 horas.</span>
         </h2>
-
-        {/* Description */}
         <p
           style={{
             fontSize: "1.05rem",
@@ -83,8 +77,6 @@ export function FinalCtaSection() {
           Presupuesto de producto, disponibilidad de alquiler, programa de revisión
           o consulta técnica: un solo equipo lo gestiona todo desde Sevilla.
         </p>
-
-        {/* Guarantees */}
         <div
           style={{
             display: "flex",
@@ -105,17 +97,11 @@ export function FinalCtaSection() {
                 color: "rgba(255,255,255,0.75)",
               }}
             >
-              <CheckCircle2
-                size={15}
-                style={{ color: "#4ade80", flexShrink: 0 }}
-                aria-hidden="true"
-              />
+              <CheckCircle2 size={15} style={{ color: "#4ade80", flexShrink: 0 }} aria-hidden="true" />
               {g}
             </div>
           ))}
         </div>
-
-        {/* CTA buttons */}
         <div
           style={{
             display: "flex",
@@ -165,8 +151,6 @@ export function FinalCtaSection() {
             {brand.phone}
           </a>
         </div>
-
-        {/* Time indicator */}
         <div
           style={{
             marginTop: "32px",
@@ -179,7 +163,7 @@ export function FinalCtaSection() {
           }}
         >
           <Clock size={13} aria-hidden="true" />
-          Lunes a viernes 8:00–18:00 · info@tranluz.com
+          Lunes a viernes 8:00–18:00 · {brand.email}
         </div>
       </div>
     </section>

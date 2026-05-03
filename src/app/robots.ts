@@ -14,10 +14,8 @@ export default function robots(): MetadataRoute.Robots {
           "/admin/",
           "/*.json$",
         ],
-        crawlDelay: 1,
       },
       {
-        // Bloquear scrapers agresivos
         userAgent: ["GPTBot", "CCBot", "anthropic-ai", "Claude-Web"],
         disallow: "/",
       },

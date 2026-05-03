@@ -3,7 +3,7 @@ import { Award, Building2, CheckCircle2, Factory, Users2 } from "lucide-react";
 
 const stats = [
   { value: "1987", label: "Año de fundación" },
-  { value: "+35", label: "Años de especialización" },
+  { value: "+38", label: "Años de especialización" },
   { value: "4", label: "Líneas de negocio" },
   { value: "B2B", label: "Exclusivamente industrial" },
 ];
@@ -16,13 +16,9 @@ const proofPoints = [
   { icon: Users2, text: "Equipo técnico cualificado y formación especializada" },
 ];
 
-/* ================================================================
-   Partner brand badges – inline HTML, sin dependencia de archivos SVG
-   externos. Colores corporativos oficiales de cada marca.
-   ================================================================ */
 const partnerBrands: Array<{ name: string; bg: string; sub: string }> = [
   { name: "Tesmec",      bg: "#C8102E", sub: "GROUP" },
-  { name: "Plumett",     bg: "#005BAC", sub: "TOOLS" },
+  { name: "Plumettaz",   bg: "#005BAC", sub: "TOOLS" },
   { name: "Work Italia", bg: "#C15000", sub: "SAFETY" },
   { name: "3M",          bg: "#B00000", sub: "SCIENCE" },
   { name: "Tractel",     bg: "#1A3F6F", sub: "LIFTING" },
@@ -61,7 +57,6 @@ export function CompanyProofSection() {
             overflow: "hidden",
           }}
         >
-          {/* Accent line */}
           <div
             aria-hidden="true"
             style={{
@@ -73,7 +68,6 @@ export function CompanyProofSection() {
               background: "linear-gradient(90deg, var(--brand), #e8700a)",
             }}
           />
-
           <p
             style={{
               fontSize: "0.72rem",
@@ -86,8 +80,6 @@ export function CompanyProofSection() {
           >
             Tranluz en números
           </p>
-
-          {/* Stats grid */}
           <div
             style={{
               display: "grid",
@@ -114,7 +106,6 @@ export function CompanyProofSection() {
                   style={{
                     fontSize: "0.8rem",
                     color: "rgba(238,243,245,0.6)",
-                    marginTop: "4px",
                     margin: "4px 0 0",
                   }}
                 >
@@ -123,8 +114,6 @@ export function CompanyProofSection() {
               </div>
             ))}
           </div>
-
-          {/* Proof points */}
           <ul
             role="list"
             style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}
@@ -136,15 +125,8 @@ export function CompanyProofSection() {
                   key={p.text}
                   style={{ display: "flex", alignItems: "center", gap: "10px" }}
                 >
-                  <Icon
-                    size={16}
-                    color="var(--brand)"
-                    aria-hidden="true"
-                    style={{ flexShrink: 0 }}
-                  />
-                  <span style={{ fontSize: "0.85rem", color: "rgba(238,243,245,0.8)" }}>
-                    {p.text}
-                  </span>
+                  <Icon size={16} color="var(--brand)" aria-hidden="true" style={{ flexShrink: 0 }} />
+                  <span style={{ fontSize: "0.85rem", color: "rgba(238,243,245,0.8)" }}>{p.text}</span>
                 </li>
               );
             })}
@@ -175,7 +157,7 @@ export function CompanyProofSection() {
                 margin: "0 0 16px",
               }}
             >
-              Partner oficial de las marcas líderes del sector
+              Partner oficial de las marcas líderes del sector
             </h2>
             <p
               style={{
@@ -190,8 +172,6 @@ export function CompanyProofSection() {
               oficial, stock permanente y soporte técnico de primer nivel.
             </p>
           </div>
-
-          {/* Partner brand badges – HTML inline, sin imagen externa */}
           <div
             role="list"
             aria-label="Marcas distribuidoras"
@@ -247,28 +227,16 @@ export function CompanyProofSection() {
               </div>
             ))}
           </div>
-
-          {/* CTA */}
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-            <Link
-              href="/empresa"
-              className="button-primary"
-              aria-label="Conocer la historia de Tranluz"
-            >
+            <Link href="/empresa" className="button-primary" aria-label="Conocer la historia de Tranluz">
               Conoce nuestra historia
             </Link>
-            <Link
-              href="/empresa#partners"
-              className="button-secondary"
-              aria-label="Ver todos los partners de Tranluz"
-            >
+            <Link href="/empresa#partners" className="button-secondary" aria-label="Ver todos los partners de Tranluz">
               Ver todos los partners
             </Link>
           </div>
         </div>
       </div>
-
-      {/* Responsive: apilar en móvil */}
       <style>{`
         @media (max-width: 768px) {
           .company-proof-grid {

@@ -86,6 +86,7 @@ export function ServiceGrid() {
       </div>
 
       <div
+        role="list"
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
@@ -98,6 +99,7 @@ export function ServiceGrid() {
             <Link
               key={service.href}
               href={service.href}
+              role="listitem"
               style={{
                 display: "grid",
                 gridTemplateColumns: "minmax(0, 1fr) 220px",
@@ -112,7 +114,6 @@ export function ServiceGrid() {
                 transition: "transform 0.18s ease, border-color 0.18s ease",
               }}
             >
-              {/* Card body */}
               <div
                 style={{
                   display: "grid",
@@ -156,7 +157,6 @@ export function ServiceGrid() {
                     {service.summary}
                   </p>
                 </div>
-
                 <ul style={{ listStyle: "none", padding: 0, margin: "12px 0 0", display: "grid", gap: "8px" }}>
                   {service.bullets.map((b) => (
                     <li
@@ -169,16 +169,11 @@ export function ServiceGrid() {
                         color: "var(--text-muted)",
                       }}
                     >
-                      <CheckCircle2
-                        aria-hidden="true"
-                        size={15}
-                        style={{ color: "var(--field)", flexShrink: 0 }}
-                      />
+                      <CheckCircle2 aria-hidden="true" size={15} style={{ color: "var(--field)", flexShrink: 0 }} />
                       {b}
                     </li>
                   ))}
                 </ul>
-
                 <span
                   style={{
                     display: "inline-flex",
@@ -194,8 +189,6 @@ export function ServiceGrid() {
                   <ArrowRight aria-hidden="true" size={14} />
                 </span>
               </div>
-
-              {/* Visual panel con gradiente e icón */}
               <div
                 style={{
                   position: "relative",
@@ -208,7 +201,6 @@ export function ServiceGrid() {
                 }}
                 aria-hidden="true"
               >
-                {/* Decorative circles */}
                 <div
                   style={{
                     position: "absolute",
@@ -231,7 +223,6 @@ export function ServiceGrid() {
                     background: "rgba(255,255,255,0.04)",
                   }}
                 />
-                {/* Service name watermark */}
                 <div
                   style={{
                     position: "absolute",
@@ -255,14 +246,7 @@ export function ServiceGrid() {
                     {service.kicker}
                   </span>
                 </div>
-                {/* Icon */}
-                <Icon
-                  size={72}
-                  style={{
-                    color: "rgba(255,255,255,0.22)",
-                    strokeWidth: 1.2,
-                  }}
-                />
+                <Icon size={72} style={{ color: "rgba(255,255,255,0.22)", strokeWidth: 1.2 }} />
               </div>
             </Link>
           );

@@ -15,7 +15,6 @@ import "@/styles/globals.css";
 import "@/styles/form-errors.css";
 import { assets } from "@/content/assets";
 
-// Forzar renderizado dinámico en Hostinger (next/headers requiere runtime dinámico)
 export const dynamic = "force-dynamic";
 
 const BASE_URL = "https://www.tranluz.es";
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
     "obras eléctricas",
     "cabrestantes frenadoras",
     "Tesmec",
-    "Plumett",
+    "Plumettaz",
     "Tractel",
     "Cembre",
     "mantenimiento preventivo equipos",
@@ -159,7 +158,6 @@ export default async function RootLayout({
         <meta name="ICBM" content="37.389092, -5.984459" />
       </head>
       <body suppressHydrationWarning>
-        {/* Skip link WCAG 2.1 — Client Component para poder usar onFocus/onBlur */}
         <SkipLink />
         <AutoTranslate />
         <StructuredData />
