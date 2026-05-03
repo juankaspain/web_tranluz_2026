@@ -6,7 +6,7 @@
   --bg-inverse: #111820;
   --text: #111820;
   --text-muted: #4a5668;
-  --text-soft: #6a7680;
+  --text-soft:#596570;
   --line: rgba(17, 24, 32, 0.12);
   --line-strong: rgba(17, 24, 32, 0.2);
   --brand: #bd500e;
@@ -601,7 +601,7 @@ button {
 .eyebrow {
   margin: 0 0 14px;
   color: var(--brand);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 820;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -717,7 +717,7 @@ button {
   display: block;
   margin-bottom: 6px;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 900;
   text-transform: uppercase;
 }
@@ -1723,7 +1723,7 @@ button {
 
 .final-cta p {
   margin: 0;
-  color: rgba(255,255,255,0.72);
+  color: rgba(255,255,255,0.82);
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -1782,7 +1782,7 @@ button {
 .footer-nav strong {
   display: block;
   margin-bottom: 8px;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 820;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -1999,7 +1999,7 @@ button {
   border-radius: var(--radius);
   background: var(--brand-soft);
   color: var(--brand);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 820;
   font-family: var(--font-display);
   flex-shrink: 0;
@@ -2071,7 +2071,7 @@ button {
 }
 
 .equipment-card-head span {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 760;
   color: var(--text-soft);
   text-transform: uppercase;
@@ -2180,7 +2180,7 @@ button {
 }
 
 .final-cta .cta-benefits li {
-  color: rgba(255,255,255,0.72);
+  color: rgba(255,255,255,0.82);
 }
 
 /* ---- Footer real ----------------------------------------- */
@@ -3569,7 +3569,7 @@ button:focus-visible,
   border-radius: var(--radius);
   background: var(--bg-inverse);
   color: var(--bg);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 600;
   white-space: nowrap;
   pointer-events: none;
@@ -3612,7 +3612,7 @@ th, td {
   border-bottom: 1px solid var(--line);
 }
 th {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 820;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -3924,7 +3924,7 @@ tr:hover td { background: color-mix(in srgb, var(--brand-soft) 40%, transparent)
 .hito-year {
   display: inline-block;
   margin-bottom: 4px;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 820;
   color: var(--brand);
   font-family: var(--font-display);
@@ -4049,7 +4049,7 @@ tr:hover td { background: color-mix(in srgb, var(--brand-soft) 40%, transparent)
   font-size: 0.76rem;
 }
 .command-label {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
 }
 .command-card span {
   font-size: 0.8rem;
@@ -4057,7 +4057,7 @@ tr:hover td { background: color-mix(in srgb, var(--brand-soft) 40%, transparent)
 .footer-nav strong,
 .footer-nav-heading,
 .footer-bottom {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
 }
 
 /* ---- Focus-visible mejorado (ring más visible) ----------- */
@@ -4555,7 +4555,7 @@ a:focus-visible {
 }
 .download-item small {
   display: block;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--text-soft);
   margin-top: 2px;
 }
@@ -4806,11 +4806,11 @@ a:focus-visible {
   gap: 18px;
   padding: 7px max(1rem, calc((100% - var(--max-width)) / 2 + 1rem));
   color: var(--text-muted);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
   border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
 }
-.top-bar-left { font-size: 0.78rem; }
+.top-bar-left { font-size: 0.8rem; }
 .top-bar-right {
   display: flex;
   align-items: center;
@@ -4821,7 +4821,7 @@ a:focus-visible {
   align-items: center;
   gap: 5px;
   color: var(--text-muted);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   text-decoration: none;
   transition: color 140ms;
 }
