@@ -33,11 +33,11 @@ export const mainNavigation = [
     ]
   },
   {
-    label: "Empresa",
-    href: "/empresa"
+    label: "Tienda",
+    href: "https://tienda.tranluz.es/tienda/"
   },
   {
-    label: "Contacto",
-    href: "/contacto"
+    label: "Empresa",
+    href: "/empresa"
   }
 ];
