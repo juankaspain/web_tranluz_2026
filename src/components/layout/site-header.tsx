@@ -89,9 +89,11 @@ export function SiteHeader() {
     <>
       {/* Top bar */}
       <div className="top-bar">
-        <span className="top-bar-claim">{brand.claim}</span>
-        <span className="top-bar-sep">· Catálogo 2026 ·</span>
-        <a href={phoneHref} className="top-bar-phone">{phoneDisplay}</a>
+        <div className="topbar">
+          <span className="top-bar-claim">{brand.claim}</span>
+          <span className="top-bar-sep">· Catálogo 2026 ·</span>
+          <a href={phoneHref} className="top-bar-phone">{phoneDisplay}</a>
+        </div>
       </div>
 
       {/* Main header */}
@@ -99,148 +101,142 @@ export function SiteHeader() {
         className={`site-header${scrolled ? " site-header--scrolled" : ""}`}
         ref={navRef}
       >
-        {/* Logo */}
-        <Link href="/" className="header-logo" aria-label="Tranluz – inicio">
-          <img
-            src={assets.logo}
-            alt="Tranluz logo"
-            width={120}
-            height={40}
-            className="header-logo-img"
-          />
-        </Link>
-
-        {/* Mega nav trigger */}
-        <button
-          className="mega-trigger"
-          onClick={() => setOpenMega(openMega === "mega" ? null : "mega")}
-          aria-label="Menú de servicios"
-        >
-          <Menu size={20} aria-hidden="true" />
-        </button>
-
-        {/* Desktop navigation */}
-        <nav className="header-nav" aria-label="Navegación principal">
-          {mainNavigation.map((item) => (
-            <div key={item.href} className="nav-item">
-              {item.children ? (
-                <>
-                  <button
-                    className={`nav-link nav-link--has-children${openMega === item.href ? " nav-link--open" : ""}`}
-                    onClick={() =>
-                      setOpenMega(openMega === item.href ? null : item.href)
-                    }
-                  >
-                    {navIcon(item.href)}
-                    {item.label}
-                    <ChevronDown size={14} aria-hidden="true" className="nav-chevron" />
-                  </button>
-                  {openMega === item.href && (
-                    <div className="nav-dropdown">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className="nav-dropdown-item"
-                          onClick={() => setOpenMega(null)}
-                        >
-                          {navIcon(child.href)}
-                          <span>{child.label}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <Link href={item.href} className="nav-link">
-                  {navIcon(item.href)}
-                  {item.label}
-                </Link>
-              )}
-            </div>
-          ))}
-        </nav>
-
-        {/* Search */}
-        <div className="header-search">
-          <Search size={16} aria-hidden="true" className="search-icon" />
-          <input
-            type="search"
-            className="search-input"
-            placeholder="Buscar equipo…"
-            aria-label="Buscar equipo en Tranluz"
-          />
-        </div>
-
-        {/* Header actions: Phone > Email > Language > Theme */}
-        <div className="header-actions">
-          {/* Phone icon with tooltip */}
-          <div
-            className="contact-icon-wrap"
-            onMouseEnter={() => setPhoneVisible(true)}
-            onMouseLeave={() => setPhoneVisible(false)}
-          >
-            <a
-              href={phoneHref}
-              className="icon-button icon-button-link contact-icon-phone"
-              aria-label={`Llamar a Tranluz: ${phoneDisplay}`}
-              title={phoneDisplay}
-            >
-              <Phone size={18} aria-hidden="true" />
-            </a>
-            {phoneVisible && (
-              <div className="contact-tooltip" role="tooltip">
-                <Phone size={13} aria-hidden="true" />
-                <span>{phoneDisplay}</span>
-              </div>
-            )}
-          </div>
-
-          {/* Email / presupuesto icon */}
-          <Link
-            href="/presupuesto"
-            className="icon-button icon-button-link contact-icon-email"
-            aria-label="Solicitar presupuesto por email"
-            title="Solicitar presupuesto"
-          >
-            <Mail size={18} aria-hidden="true" />
+        <div className="header-inner">
+          {/* Logo */}
+          <Link href="/" className="header-logo" aria-label="Tranluz – inicio">
+            <img
+              src={assets.logo}
+              alt="Tranluz logo"
+              width={120}
+              height={40}
+            />
           </Link>
 
-          {/* Language selector */}
-          <LanguageSelector />
+          {/* Desktop navigation */}
+          <nav className="main-nav" aria-label="Navegación principal">
+            {mainNavigation.map((item) => (
+              <div key={item.href} className="nav-item">
+                {item.children ? (
+                  <>
+                    <button
+                      className={`nav-link${openMega === item.href ? " nav-link--open" : ""}`}
+                      onClick={() =>
+                        setOpenMega(openMega === item.href ? null : item.href)
+                      }
+                    >
+                      {navIcon(item.href)}
+                      <span>{item.label}</span>
+                      <ChevronDown size={14} aria-hidden="true" />
+                    </button>
+                    {openMega === item.href && (
+                      <div className="nav-dropdown">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className="nav-dropdown-item"
+                            onClick={() => setOpenMega(null)}
+                          >
+                            {navIcon(child.href)}
+                            <span>{child.label}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Link href={item.href} className="nav-link">
+                    {navIcon(item.href)}
+                    <span>{item.label}</span>
+                  </Link>
+                )}
+              </div>
+            ))}
+          </nav>
 
-          {/* Theme toggle - last */}
-          <ThemeToggle />
+          {/* Search */}
+          <div className="header-search">
+            <Search size={16} aria-hidden="true" className="search-icon" />
+            <input
+              type="search"
+              className="search-input"
+              placeholder="Buscar equipo…"
+              aria-label="Buscar equipo en Tranluz"
+            />
+          </div>
 
-          {/* Mobile menu toggle */}
-          <button
-            className="mobile-menu-btn"
-            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-            aria-expanded={mobileOpen}
-            aria-controls={mobileMenuId}
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
-          </button>
+          {/* Header actions: Phone > Email > Language > Theme > Mobile toggle */}
+          <div className="header-actions">
+            {/* Phone icon with tooltip */}
+            <div
+              className="contact-icon-wrap"
+              onMouseEnter={() => setPhoneVisible(true)}
+              onMouseLeave={() => setPhoneVisible(false)}
+            >
+              <a
+                href={phoneHref}
+                className="icon-button icon-button-link contact-icon-phone"
+                aria-label={`Llamar a Tranluz: ${phoneDisplay}`}
+                title={phoneDisplay}
+              >
+                <Phone size={18} aria-hidden="true" />
+              </a>
+              {phoneVisible && (
+                <div className="contact-tooltip" role="tooltip">
+                  <Phone size={13} aria-hidden="true" />
+                  <span>{phoneDisplay}</span>
+                </div>
+              )}
+            </div>
+
+            {/* Email / presupuesto icon */}
+            <Link
+              href="/presupuesto"
+              className="icon-button icon-button-link contact-icon-email"
+              aria-label="Solicitar presupuesto por email"
+              title="Solicitar presupuesto"
+            >
+              <Mail size={18} aria-hidden="true" />
+            </Link>
+
+            {/* Language selector */}
+            <LanguageSelector />
+
+            {/* Theme toggle - last */}
+            <ThemeToggle />
+
+            {/* Mobile menu toggle */}
+            <button
+              className="mobile-menu-btn"
+              aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={mobileOpen}
+              aria-controls={mobileMenuId}
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >
+              {mobileOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+            </button>
+          </div>
         </div>
 
         {/* Mega panel */}
         {openMega === "mega" && (
           <div className="mega-panel">
-            {megaItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="mega-item"
-                onClick={() => setOpenMega(null)}
-              >
-                <span className="mega-item-icon">{item.icon}</span>
-                <span className="mega-item-body">
-                  <span className="mega-item-label">{item.label}</span>
-                  <span className="mega-item-sub">{item.sub}</span>
-                </span>
-              </Link>
-            ))}
+            <div className="topbar">
+              {megaItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="mega-item"
+                  onClick={() => setOpenMega(null)}
+                >
+                  <span className="mega-item-icon">{item.icon}</span>
+                  <span className="mega-item-body">
+                    <span className="mega-item-label">{item.label}</span>
+                    <span className="mega-item-sub">{item.sub}</span>
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
         )}
       </header>
