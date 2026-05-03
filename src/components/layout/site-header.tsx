@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef, useId } from "react";
 import {
@@ -87,16 +86,17 @@ export function SiteHeader() {
       <header className={`site-header${scrolled ? " scrolled" : ""}`}>
         <div className="navbar" ref={navRef}>
 
-          {/* Logo – limpio, sin pastilla ni contenedor decorativo */}
+          {/* Logo – img nativo para evitar restricciones SVG de next/image */}
           <Link href="/" className="brand-mark" aria-label="Tranluz inicio">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={assets.logo}
               alt="Tranluz"
               width={120}
               height={34}
-              priority
+              loading="eager"
+              decoding="async"
               style={{ display: "block", objectFit: "contain" }}
-              unoptimized
             />
           </Link>
 

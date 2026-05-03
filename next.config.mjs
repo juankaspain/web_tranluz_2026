@@ -6,7 +6,9 @@ const nextConfig = {
     deviceSizes: [375, 640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 2678400,
-    dangerouslyAllowSVG: false,
+    // SVG habilitado para logos externos (tranluz.es)
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     contentDispositionType: "attachment",
     remotePatterns: [
       { protocol: "https", hostname: "www.tranluz.es" },
@@ -93,7 +95,8 @@ const nextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
               // Fonts: Google Fonts + Fontshare + self
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.fontshare.com",
-              "font-src 'self' https://fonts.gstatic.com https://api.fontshare.com data:",
+              // font-src: incluye fonts.googleapis.com para resolver @font-face correctamente
+              "font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://api.fontshare.com data:",
               // Imágenes: self + tranluz.es + hostinger + pollinations + partners logos
               [
                 "img-src 'self' data: blob:",

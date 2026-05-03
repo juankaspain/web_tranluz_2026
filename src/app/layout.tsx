@@ -15,8 +15,10 @@ import { assets } from "@/content/assets";
 // Forzar renderizado dinámico en Hostinger (next/headers requiere runtime dinámico)
 export const dynamic = "force-dynamic";
 
+const BASE_URL = "https://deepskyblue-eel-381189.hostingersite.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.tranluz.es"),
+  metadataBase: new URL(BASE_URL),
   applicationName: "Tranluz",
   creator: "Tranluz",
   publisher: "Tranluz",
@@ -55,7 +57,7 @@ export const metadata: Metadata = {
     "kit digital equipos",
     "repuestos equipos eléctricos",
   ],
-  authors: [{ name: "Tranluz", url: "https://www.tranluz.es" }],
+  authors: [{ name: "Tranluz", url: BASE_URL }],
   category: "industrial equipment",
   classification: "business",
   alternates: {
@@ -66,13 +68,14 @@ export const metadata: Metadata = {
     title: "Tranluz | Equipos eléctricos, alquiler y soporte técnico",
     description:
       "Equipos, servicio técnico ITS, alquiler de cabrestantes, formación y trazabilidad para trabajos eléctricos y de telecomunicaciones desde 1987. Sede en Sevilla.",
-    url: "https://www.tranluz.es",
+    url: BASE_URL,
     locale: "es_ES",
     siteName: "Tranluz",
     type: "website",
     images: [
       {
-        url: assets.ogImage,
+        // URL absoluta obligatoria para OpenGraph
+        url: `${BASE_URL}${assets.ogImage}`,
         width: 1536,
         height: 1024,
         alt: "Tranluz – Equipos y soporte técnico para obras eléctricas críticas",
@@ -84,7 +87,7 @@ export const metadata: Metadata = {
     title: "Tranluz | Equipos, alquiler y servicio técnico eléctrico",
     description:
       "Especialistas desde 1987: equipos, alquiler de cabrestantes, ITS, formación y trazabilidad. Atención nacional desde Sevilla.",
-    images: [assets.ogImage],
+    images: [`${BASE_URL}${assets.ogImage}`],
   },
   robots: {
     index: true,
@@ -141,7 +144,7 @@ export default async function RootLayout({
         <meta name="geo.position" content="37.389092;-5.984459" />
         <meta name="ICBM" content="37.389092, -5.984459" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <AutoTranslate />
         <StructuredData />
         <ActionDock />
