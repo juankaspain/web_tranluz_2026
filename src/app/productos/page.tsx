@@ -1,45 +1,11 @@
 import type { Metadata } from "next";
-import { ProductCategoryGrid } from "@/components/sections/product-category-grid";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
-import { PageHeroPro, ProductsLandingContent } from "@/components/sections/detail-sections";
-import { assets } from "@/content/assets";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Catálogo técnico de productos",
-  description:
-    "Productos para trabajos eléctricos, telecomunicaciones, tendido, seguridad, fibra óptica e industria."
-};
+export const metadata: Metadata = buildMetadata({
+  title: "Catálogo de equipos de tendido eléctrico",
+  description: "Equipos eléctricos especializados: cabrestantes, frenadoras, herramientas de alta tensión, fibra óptica y seguridad eléctrica. Catálogo técnico completo.",
+  path: "/productos",
+  ogImage: "/og/productos.jpg",
+});
 
-type ProductsPageProps = {
-  searchParams?: Promise<{
-    q?: string;
-  }>;
-};
-
-export default async function ProductsPage({ searchParams }: ProductsPageProps) {
-  const params = await searchParams;
-  const query = typeof params?.q === "string" ? params.q.trim() : "";
-
-  return (
-    <>
-      <SiteHeader />
-      <main id="contenido">
-        <PageHeroPro
-          eyebrow="Catálogo técnico"
-          title="Productos para trabajos eléctricos, telecomunicaciones y obra industrial."
-          text="Una arquitectura preparada para búsqueda, filtros, fichas técnicas, documentos, presupuesto, compra y alquiler."
-          image={assets.presentationCover}
-          actions={[
-            { label: "Solicitar producto", href: "/presupuesto" },
-            { label: "Ver catalogos", href: "/soporte/catalogos", variant: "secondary" }
-          ]}
-        />
-        <ProductsLandingContent />
-        <ProductCategoryGrid query={query} />
-      </main>
-      <SiteFooter />
-    </>
-  );
-}
-
+export { default } from "./page-content";

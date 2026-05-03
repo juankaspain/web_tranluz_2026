@@ -1,22 +1,11 @@
 import type { Metadata } from "next";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
-import { CompanyStory } from "@/components/sections/detail-sections";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Empresa",
-  description:
-        "Tranluz, especialista desde 1987 en equipos, máquinas y soluciones para el sector eléctrico y telecomunicaciones."};
+export const metadata: Metadata = buildMetadata({
+  title: "Sobre Tranluz — Especialistas desde 1987",
+  description: "Conoce a Tranluz: más de 35 años especializados en equipos eléctricos, alquiler de maquinaria de tendido y servicio técnico para obras eléctricas críticas en España.",
+  path: "/empresa",
+  ogImage: "/og/empresa.jpg",
+});
 
-export default function CompanyPage() {
-  return (
-    <>
-      <SiteHeader />
-      <main id="contenido">
-        <CompanyStory />
-      </main>
-      <SiteFooter />
-    </>
-  );
-}
-
+export { default } from "./page-content";

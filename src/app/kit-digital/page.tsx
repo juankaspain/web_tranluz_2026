@@ -1,21 +1,11 @@
 import type { Metadata } from "next";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
-import { LegalContent } from "@/components/sections/legal-content";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-    title: "Preparación Kit Digital",
-    description: "Criterios técnicos de presencia web avanzada, SEO, accesibilidad y seguridad para Tranluz."
-};
+export const metadata: Metadata = buildMetadata({
+  title: "Kit Digital para empresas eléctricas — Tranluz",
+  description: "Aprovecha las ayudas Kit Digital del Gobierno de España para digitalizar tu empresa eléctrica. Tranluz te acompaña en la solicitud y la implantación.",
+  path: "/kit-digital",
+  ogImage: "/og/kit-digital.jpg",
+});
 
-export default function KitDigitalPage() {
-    return (
-        <>
-            <SiteHeader />
-            <main id="contenido">
-                <LegalContent page="kit-digital" />
-            </main>
-            <SiteFooter />
-        </>
-    );
-}
+export { default } from "./page-content";

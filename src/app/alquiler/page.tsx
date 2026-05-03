@@ -1,23 +1,11 @@
 import type { Metadata } from "next";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
-import { RentalLanding } from "@/components/sections/detail-sections";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Alquiler de equipos de tendido",
-  description:
-    "Rent Puller: alquiler de cabrestantes, frenadoras y equipos de tendido con asistencia técnica."
-};
+export const metadata: Metadata = buildMetadata({
+  title: "Alquiler de equipos de tendido — Rent Puller",
+  description: "Alquiler rápido de cabrestantes, frenadoras y equipos de soplado de fibra óptica con asistencia técnica incluida. Solución flexible para obras eléctricas.",
+  path: "/alquiler",
+  ogImage: "/og/alquiler.jpg",
+});
 
-export default function RentalPage() {
-  return (
-    <>
-      <SiteHeader />
-      <main id="contenido">
-        <RentalLanding />
-      </main>
-      <SiteFooter />
-    </>
-  );
-}
-
+export { default } from "./page-content";

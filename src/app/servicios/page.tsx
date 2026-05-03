@@ -1,34 +1,11 @@
 import type { Metadata } from "next";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
-import { PageHeroPro, ServicesOverview } from "@/components/sections/detail-sections";
-import { assets } from "@/content/assets";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Servicios técnicos",
-  description:
-    "Servicio técnico integral, trazabilidad Revisa, revisiones certificadas y repuestos para equipos eléctricos."
-};
+export const metadata: Metadata = buildMetadata({
+  title: "Servicios de traducción técnica e interpretación",
+  description: "Servicios profesionales de traducción técnica, interpretación simultánea, revisión y trazabilidad de documentos para empresas. Sede en Sevilla, atención nacional.",
+  path: "/servicios",
+  ogImage: "/og/servicios.jpg",
+});
 
-export default function ServicesPage() {
-  return (
-    <>
-      <SiteHeader />
-      <main id="contenido">
-        <PageHeroPro
-          eyebrow="Servicios"
-          title="Servicio técnico, trazabilidad, revisiones y soporte durante todo el ciclo de vida."
-          text="Los servicios se presentan como soluciones premium con alcance claro, proceso, entregables, documentos y conversión B2B propia."
-          image={assets.its}
-          actions={[
-            { label: "Solicitar soporte", href: "/presupuesto" },
-            { label: "Ver ITS", href: "/servicios/its-servicio-tecnico", variant: "secondary" }
-          ]}
-        />
-        <ServicesOverview />
-      </main>
-      <SiteFooter />
-    </>
-  );
-}
-
+export { default } from "./page-content";
