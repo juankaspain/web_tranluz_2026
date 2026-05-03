@@ -27,71 +27,73 @@ export function HeroSection() {
           fill
           priority
           sizes="100vw"
+          className="hero-bg"
         />
       </div>
 
-      <div className="hero-copy">
-        <p className="eyebrow">Especialistas desde {brand.founded} · Sevilla</p>
+      <div className="content-wrap">
+        <div className="hero-content">
+          <p className="hero-eyebrow">
+            <span>Especialistas desde {brand.founded}</span> · Sevilla
+          </p>
+          <h1 id="hero-title" className="hero-title">
+            Todo lo que necesitas para ejecutar obras eléctricas críticas, en
+            un solo proveedor.
+          </h1>
+          <p className="hero-subtitle">
+            Equipos, alquiler, servicio técnico, formación y trazabilidad con
+            soporte real en obra.
+          </p>
 
-        <h1 id="hero-title">
-          Todo lo que necesitas para ejecutar obras eléctricas críticas, en un solo proveedor.
-        </h1>
+          <div className="hero-metrics">
+            {heroMetrics.map((m) => (
+              <div key={m.label} className="metric">
+                <strong>{m.value}</strong> <span>{m.label}</span>
+              </div>
+            ))}
+          </div>
 
-        <p className="hero-desc">
-          Equipos, alquiler, servicio técnico, formación y trazabilidad con soporte real en obra.
-        </p>
-
-        <div className="hero-metrics" aria-label="Cifras clave Tranluz">
-          {heroMetrics.map((m) => (
-            <div key={m.label} className="metric-card">
-              <strong>{m.value}</strong>
-              <span>{m.label}</span>
-            </div>
-          ))}
+          <div className="hero-actions">
+            <Link href="/presupuesto" className="btn-primary">
+              Solicitar presupuesto <ArrowRight size={18} />
+            </Link>
+            <Link href="/alquiler" className="btn-secondary">
+              Ver equipos en alquiler
+            </Link>
+          </div>
         </div>
 
-        <div className="hero-actions">
-          <Link href="/presupuesto" className="button button-primary">
+        <aside className="hero-aside">
+          <p className="aside-label">PARTNER OFICIAL DESDE {brand.founded}</p>
+          <div className="aside-metrics">
+            {asideMetrics.map((m) => (
+              <div key={m.label} className="metric">
+                <strong>{m.value}</strong> <span>{m.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="aside-info">
+            <p>
+              <MapPin size={16} aria-hidden="true" />
+              <span>
+                <strong>Ubicación</strong> <br />
+                Polígono Industrial Calonge, Sevilla
+              </span>
+            </p>
+            <p>
+              <Clock size={16} aria-hidden="true" />
+              <span>
+                <strong>Horario</strong> <br />
+                Lun–Vie 8:00–18:00 · Urgencias 24h
+              </span>
+            </p>
+          </div>
+
+          <Link href="/presupuesto" className="btn-aside">
             Solicitar presupuesto
           </Link>
-          <Link href="/alquiler" className="button button-secondary">
-            Ver equipos en alquiler
-          </Link>
-        </div>
-      </div>
-
-      <div className="hero-aside">
-        <p className="command-label">Partner oficial desde {brand.founded}</p>
-
-        <div className="metric-grid">
-          {asideMetrics.map((m) => (
-            <div key={m.label} className="metric-card">
-              <strong>{m.value}</strong>
-              <span>{m.label}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="hero-aside-info">
-          <div className="hero-aside-row">
-            <MapPin size={16} aria-hidden="true" />
-            <div>
-              <span className="hero-aside-label">Ubicación</span>
-              <strong>Polígono Industrial Calonge, Sevilla</strong>
-            </div>
-          </div>
-          <div className="hero-aside-row">
-            <Clock size={16} aria-hidden="true" />
-            <div>
-              <span className="hero-aside-label">Horario</span>
-              <strong>Lun–Vie 8:00–18:00 · Urgencias 24h</strong>
-            </div>
-          </div>
-        </div>
-
-        <Link href="/presupuesto" className="button button-primary hero-aside-cta">
-          Solicitar presupuesto <ArrowRight size={16} aria-hidden="true" />
-        </Link>
+        </aside>
       </div>
     </section>
   );
