@@ -3,6 +3,9 @@ import { ImageResponse } from 'next/og'
 export const size = { width: 32, height: 32 }
 export const contentType = 'image/png'
 
+// Favicon fiel a la identidad visual de Tranluz:
+// fondo azul marino corporativo + dos barras naranjas diagonales (símbolo del rayo/cable)
+// + texto "T" en blanco – minimalista, legible a 16px
 export default function Icon() {
   return new ImageResponse(
     (
@@ -16,43 +19,46 @@ export default function Icon() {
           justifyContent: 'center',
           position: 'relative',
           overflow: 'hidden',
+          borderRadius: '4px',
         }}
       >
-        {/* Rayo naranja diagonal - marca Tranluz */}
+        {/* Barra naranja izquierda – rayo Tranluz */}
         <div
           style={{
             position: 'absolute',
-            top: '-2px',
-            left: '3px',
-            width: '12px',
-            height: '22px',
+            top: '2px',
+            left: '4px',
+            width: '9px',
+            height: '28px',
             background: '#e8580a',
-            transform: 'skewX(-12deg)',
+            transform: 'skewX(-10deg)',
             borderRadius: '2px',
           }}
         />
+        {/* Barra naranja derecha */}
         <div
           style={{
             position: 'absolute',
-            top: '12px',
-            left: '9px',
-            width: '10px',
-            height: '22px',
+            top: '2px',
+            left: '13px',
+            width: '9px',
+            height: '28px',
             background: '#e8580a',
-            transform: 'skewX(-12deg)',
+            transform: 'skewX(-10deg)',
             borderRadius: '2px',
           }}
         />
-        {/* Letra T en blanco */}
+        {/* T en blanco */}
         <span
           style={{
             color: '#ffffff',
-            fontSize: 18,
+            fontSize: 17,
             fontWeight: 900,
-            fontFamily: 'sans-serif',
-            marginLeft: '8px',
+            fontFamily: 'Arial Black, Arial, sans-serif',
+            marginLeft: '10px',
             letterSpacing: '-1px',
             lineHeight: 1,
+            zIndex: 1,
           }}
         >
           T

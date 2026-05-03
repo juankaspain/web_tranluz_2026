@@ -87,14 +87,16 @@ export function SiteHeader() {
       <header className={`site-header${scrolled ? " scrolled" : ""}`}>
         <div className="navbar" ref={navRef}>
 
-          {/* Logo */}
+          {/* Logo – limpio, sin pastilla ni contenedor decorativo */}
           <Link href="/" className="brand-mark" aria-label="Tranluz inicio">
             <Image
               src={assets.logo}
               alt="Tranluz"
-              width={96}
-              height={28}
+              width={120}
+              height={34}
               priority
+              style={{ display: "block", objectFit: "contain" }}
+              unoptimized
             />
           </Link>
 
@@ -230,6 +232,18 @@ export function SiteHeader() {
                 </span>
               </Link>
             ))}
+          </div>
+
+          {/* CTA móvil */}
+          <div style={{ padding: "20px 16px 0", borderTop: "1px solid var(--border)" }}>
+            <Link
+              href="/presupuesto"
+              className="btn-brand"
+              style={{ display: "block", textAlign: "center", width: "100%" }}
+              onClick={() => setMobileOpen(false)}
+            >
+              Solicitar presupuesto
+            </Link>
           </div>
         </div>
       )}

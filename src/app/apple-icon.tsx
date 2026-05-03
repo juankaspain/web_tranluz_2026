@@ -16,45 +16,46 @@ export default function AppleIcon() {
           justifyContent: 'center',
           position: 'relative',
           overflow: 'hidden',
-          borderRadius: '20px',
+          borderRadius: '28px',
         }}
       >
-        {/* Rayo naranja - trazo superior */}
+        {/* Barra naranja izquierda */}
         <div
           style={{
             position: 'absolute',
-            top: '10px',
-            left: '18px',
-            width: '62px',
-            height: '110px',
+            top: '16px',
+            left: '28px',
+            width: '42px',
+            height: '148px',
             background: '#e8580a',
-            transform: 'skewX(-12deg)',
-            borderRadius: '6px',
+            transform: 'skewX(-10deg)',
+            borderRadius: '8px',
           }}
         />
-        {/* Rayo naranja - trazo inferior */}
+        {/* Barra naranja derecha */}
         <div
           style={{
             position: 'absolute',
-            top: '70px',
-            left: '50px',
-            width: '52px',
-            height: '110px',
+            top: '16px',
+            left: '74px',
+            width: '42px',
+            height: '148px',
             background: '#e8580a',
-            transform: 'skewX(-12deg)',
-            borderRadius: '6px',
+            transform: 'skewX(-10deg)',
+            borderRadius: '8px',
           }}
         />
-        {/* Letra T en blanco */}
+        {/* T en blanco */}
         <span
           style={{
             color: '#ffffff',
-            fontSize: 100,
+            fontSize: 84,
             fontWeight: 900,
-            fontFamily: 'sans-serif',
-            marginLeft: '45px',
+            fontFamily: 'Arial Black, Arial, sans-serif',
+            marginLeft: '50px',
             letterSpacing: '-4px',
             lineHeight: 1,
+            zIndex: 1,
           }}
         >
           T

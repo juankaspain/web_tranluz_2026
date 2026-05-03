@@ -1,6 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, MapPin, PhoneCall } from "lucide-react";
 import { brand } from "@/config/brand";
+import { assets } from "@/content/assets";
 
 // — Inline SVG icons para redes sociales —
 function IconLinkedIn() {
@@ -35,41 +37,56 @@ const footerNav = [
       { label: "Alquiler", href: "/alquiler" },
       { label: "Servicios", href: "/servicios" },
       { label: "Formación", href: "/formacion" },
+      { label: "Soluciones", href: "/soluciones" },
     ],
   },
   {
     heading: "Empresa",
     links: [
       { label: "Quiénes somos", href: "/empresa" },
-      { label: "Partners", href: "/empresa#partners" },
+      { label: "Kit Digital", href: "/kit-digital" },
+      { label: "Soporte", href: "/soporte" },
       { label: "Trabaja con nosotros", href: "/empresa#empleo" },
-      { label: "Blog técnico", href: "/blog" },
     ],
   },
 ];
 
-/* Trust badges – AENOR / NextGenerationEU / Kit Digital */
-const trustBadges = [
+// Partners reales de Tranluz (fuentes: web oficial + LinkedIn)
+const partners = [
   {
-    label: "AENOR",
-    sub: "Calidad certificada",
+    name: "Tesmec",
+    logo: "https://www.tesmec.com/themes/custom/tesmec/logo.svg",
+    href: "https://www.tesmec.com/es",
+    fallback: "TM",
+    color: "#E30613",
+  },
+  {
+    name: "Plumett",
+    logo: "https://www.plumettaz.com/sites/default/files/plumettaz-logo.svg",
+    href: "https://www.plumettaz.com",
+    fallback: "PL",
+    color: "#0057A8",
+  },
+  {
+    name: "AENOR",
+    logo: "https://www.aenor.com/recursos/image/logos/logo-aenor.svg",
     href: "https://www.aenor.com",
-    bg: "#003087",
-    line2: "ISO 9001",
+    fallback: "AE",
+    color: "#003087",
   },
   {
-    label: "NextGen EU",
-    sub: "Plan Recuperación",
-    href: "https://next-generation-eu.europa.eu",
-    bg: "#003399",
-    line2: "NextGeneration",
-  },
-  {
-    label: "Kit Digital",
-    sub: "Agente digitalizador",
+    name: "Kit Digital",
+    logo: "https://www.acelerapyme.gob.es/sites/acelerapyme/files/2022-01/Kit_Digital_transparente.png",
     href: "https://www.acelerapyme.gob.es/kit-digital",
-    bg: "#0066cc",
-    line2: "Gob. España",
+    fallback: "KD",
+    color: "#0066CC",
+  },
+  {
+    name: "NextGen EU",
+    logo: "https://commission.europa.eu/sites/default/files/styles/oe_theme_medium_no_crop/public/2021-11/nextgeneu_logo_0.png",
+    href: "https://next-generation-eu.europa.eu",
+    fallback: "NG",
+    color: "#003399",
   },
 ];
 
@@ -80,24 +97,95 @@ export function SiteFooter() {
       aria-label="Pie de página Tranluz"
       className="site-footer"
     >
+      {/* Partners strip */}
+      <div
+        style={{
+          borderBottom: "1px solid rgba(238,243,245,0.08)",
+          padding: "28px 40px",
+          display: "flex",
+          flexDirection: "column",
+          gap: "16px",
+        }}
+      >
+        <p
+          style={{
+            fontSize: "0.7rem",
+            fontWeight: 700,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            color: "rgba(238,243,245,0.35)",
+            margin: 0,
+          }}
+        >
+          Partners y acreditaciones
+        </p>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: "28px",
+          }}
+          aria-label="Logos de partners y certificaciones"
+        >
+          {partners.map((p) => (
+            <Link
+              key={p.name}
+              href={p.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={p.name}
+              style={{ textDecoration: "none", display: "flex", alignItems: "center" }}
+            >
+              <div
+                style={{
+                  background: "rgba(255,255,255,0.07)",
+                  borderRadius: "8px",
+                  padding: "8px 16px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  minWidth: "80px",
+                  height: "40px",
+                  transition: "background 160ms ease",
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={p.logo}
+                  alt={p.name}
+                  style={{ maxHeight: "22px", maxWidth: "90px", objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.7 }}
+                  loading="lazy"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                    if (target.parentElement) {
+                      target.parentElement.innerHTML = `<span style="color:rgba(238,243,245,0.6);font-weight:700;font-size:0.75rem;letter-spacing:0.05em">${p.fallback}</span>`;
+                    }
+                  }}
+                />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
       {/* Main footer grid */}
       <div className="footer-main">
         {/* Brand column */}
         <div className="footer-brand">
-          <p
-            style={{
-              fontSize: "1.2rem",
-              fontWeight: 900,
-              color: "#ffffff",
-              margin: "0 0 10px",
-              fontFamily: "\"Archivo Variable\", sans-serif",
-            }}
-          >
-            {brand.name}
-          </p>
-          <p style={{ fontSize: "0.88rem", lineHeight: 1.6, margin: "0 0 20px" }}>
-            Equipos, servicio técnico, alquiler, formación y trazabilidad para
-            trabajos eléctricos y de telecomunicaciones.
+          {/* Logo Tranluz en footer */}
+          <div style={{ marginBottom: "16px" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={assets.footerLogo}
+              alt="Tranluz"
+              style={{ height: "32px", width: "auto", objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.9 }}
+              loading="lazy"
+            />
+          </div>
+          <p style={{ fontSize: "0.88rem", lineHeight: 1.6, margin: "0 0 20px", color: "rgba(238,243,245,0.65)" }}>
+            Especialistas en máquinas y herramientas para montadores eléctricos desde {brand.founded}. Equipos, servicio técnico, alquiler, formación y trazabilidad.
           </p>
 
           {/* Redes sociales */}
@@ -120,67 +208,12 @@ export function SiteFooter() {
                   width: "38px",
                   height: "38px",
                   borderRadius: "8px",
-                  background: "rgba(238,243,245,0.1)",
-                  color: "rgba(238,243,245,0.75)",
+                  background: "rgba(238,243,245,0.08)",
+                  color: "rgba(238,243,245,0.7)",
                   transition: "background 160ms ease, color 160ms ease",
                 }}
               >
                 <Icon />
-              </Link>
-            ))}
-          </div>
-
-          {/* Trust badges */}
-          <div
-            style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "20px" }}
-            aria-label="Certificaciones y acreditaciones"
-          >
-            {trustBadges.map((b) => (
-              <Link
-                key={b.label}
-                href={b.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${b.label}: ${b.sub}`}
-                style={{ textDecoration: "none" }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    background: b.bg,
-                    borderRadius: "6px",
-                    padding: "6px 10px",
-                    minWidth: "80px",
-                    gap: "1px",
-                  }}
-                >
-                  <span
-                    style={{
-                      color: "#ffffff",
-                      fontFamily: "\"Arial Black\", Arial, sans-serif",
-                      fontWeight: 900,
-                      fontSize: "0.72rem",
-                      letterSpacing: "0.04em",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {b.label}
-                  </span>
-                  <span
-                    style={{
-                      color: "rgba(255,255,255,0.7)",
-                      fontFamily: "Arial, sans-serif",
-                      fontWeight: 500,
-                      fontSize: "0.55rem",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {b.sub}
-                  </span>
-                </div>
               </Link>
             ))}
           </div>
@@ -195,7 +228,7 @@ export function SiteFooter() {
                 fontWeight: 800,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: "rgba(238,243,245,0.45)",
+                color: "rgba(238,243,245,0.4)",
                 marginBottom: "14px",
               }}
             >
@@ -208,7 +241,7 @@ export function SiteFooter() {
                     href={l.href}
                     style={{
                       fontSize: "0.88rem",
-                      color: "rgba(238,243,245,0.7)",
+                      color: "rgba(238,243,245,0.65)",
                       textDecoration: "none",
                       transition: "color 160ms ease",
                     }}
@@ -229,7 +262,7 @@ export function SiteFooter() {
               fontWeight: 800,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "rgba(238,243,245,0.45)",
+              color: "rgba(238,243,245,0.4)",
               marginBottom: "14px",
             }}
           >
@@ -238,14 +271,14 @@ export function SiteFooter() {
           <address style={{ fontStyle: "normal", display: "flex", flexDirection: "column", gap: "10px" }}>
             <p style={{ display: "flex", alignItems: "flex-start", gap: "8px", margin: 0, fontSize: "0.88rem" }}>
               <MapPin size={14} aria-hidden="true" style={{ flexShrink: 0, marginTop: "3px", color: "var(--brand)" }} />
-              Polígono Industrial Calonge – Calle Oro n.º 2, 41007 Sevilla
+              <span style={{ color: "rgba(238,243,245,0.65)" }}>Polígono Industrial Calonge – Calle Oro n.º 2, 41007 Sevilla</span>
             </p>
             <p style={{ display: "flex", alignItems: "center", gap: "8px", margin: 0, fontSize: "0.88rem" }}>
               <PhoneCall size={14} aria-hidden="true" style={{ flexShrink: 0, color: "var(--brand)" }} />
               <a
                 href={`tel:${brand.phone?.replace(/\s/g, "")}`}
                 aria-label={`Llamar al ${brand.phone}`}
-                style={{ color: "rgba(238,243,245,0.7)", textDecoration: "none" }}
+                style={{ color: "rgba(238,243,245,0.65)", textDecoration: "none" }}
               >
                 {brand.phone}
               </a>
@@ -255,7 +288,7 @@ export function SiteFooter() {
               <a
                 href={`mailto:${brand.email}`}
                 aria-label={`Enviar email a ${brand.email}`}
-                style={{ color: "rgba(238,243,245,0.7)", textDecoration: "none" }}
+                style={{ color: "rgba(238,243,245,0.65)", textDecoration: "none" }}
               >
                 {brand.email}
               </a>
@@ -267,7 +300,7 @@ export function SiteFooter() {
       {/* Footer bottom bar */}
       <div className="footer-bottom">
         <p style={{ margin: 0 }}>
-          &copy; {new Date().getFullYear()} Tranluz, S.L. Todos los derechos reservados.
+          &copy; {new Date().getFullYear()} Tranluz, S.L. — Especialistas en máquinas y herramientas para montadores eléctricos desde {brand.founded}.
         </p>
         <nav aria-label="Legal">
           {[
@@ -279,7 +312,7 @@ export function SiteFooter() {
             <Link
               key={l.href}
               href={l.href}
-              style={{ color: "rgba(238,243,245,0.55)", textDecoration: "none", fontSize: "0.82rem" }}
+              style={{ color: "rgba(238,243,245,0.45)", textDecoration: "none", fontSize: "0.82rem" }}
             >
               {l.label}
             </Link>
