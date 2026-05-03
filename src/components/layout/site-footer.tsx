@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Mail, MapPin, PhoneCall } from "lucide-react";
 import { brand } from "@/config/brand";
 import { assets } from "@/content/assets";
@@ -51,43 +50,12 @@ const footerNav = [
   },
 ];
 
-// Partners reales de Tranluz (fuentes: web oficial + LinkedIn)
 const partners = [
-  {
-    name: "Tesmec",
-    logo: "https://www.tesmec.com/themes/custom/tesmec/logo.svg",
-    href: "https://www.tesmec.com/es",
-    fallback: "TM",
-    color: "#E30613",
-  },
-  {
-    name: "Plumett",
-    logo: "https://www.plumettaz.com/sites/default/files/plumettaz-logo.svg",
-    href: "https://www.plumettaz.com",
-    fallback: "PL",
-    color: "#0057A8",
-  },
-  {
-    name: "AENOR",
-    logo: "https://www.aenor.com/recursos/image/logos/logo-aenor.svg",
-    href: "https://www.aenor.com",
-    fallback: "AE",
-    color: "#003087",
-  },
-  {
-    name: "Kit Digital",
-    logo: "https://www.acelerapyme.gob.es/sites/acelerapyme/files/2022-01/Kit_Digital_transparente.png",
-    href: "https://www.acelerapyme.gob.es/kit-digital",
-    fallback: "KD",
-    color: "#0066CC",
-  },
-  {
-    name: "NextGen EU",
-    logo: "https://commission.europa.eu/sites/default/files/styles/oe_theme_medium_no_crop/public/2021-11/nextgeneu_logo_0.png",
-    href: "https://next-generation-eu.europa.eu",
-    fallback: "NG",
-    color: "#003399",
-  },
+  { name: "Tesmec", logo: "https://www.tesmec.com/themes/custom/tesmec/logo.svg", href: "https://www.tesmec.com/es", fallback: "TM" },
+  { name: "Plumett", logo: "https://www.plumettaz.com/sites/default/files/plumettaz-logo.svg", href: "https://www.plumettaz.com", fallback: "PL" },
+  { name: "AENOR", logo: "https://www.aenor.com/recursos/image/logos/logo-aenor.svg", href: "https://www.aenor.com", fallback: "AE" },
+  { name: "Kit Digital", logo: "https://www.acelerapyme.gob.es/sites/acelerapyme/files/2022-01/Kit_Digital_transparente.png", href: "https://www.acelerapyme.gob.es/kit-digital", fallback: "KD" },
+  { name: "NextGen EU", logo: "https://commission.europa.eu/sites/default/files/styles/oe_theme_medium_no_crop/public/2021-11/nextgeneu_logo_0.png", href: "https://next-generation-eu.europa.eu", fallback: "NG" },
 ];
 
 export function SiteFooter() {
@@ -98,58 +66,14 @@ export function SiteFooter() {
       className="site-footer"
     >
       {/* Partners strip */}
-      <div
-        style={{
-          borderBottom: "1px solid rgba(238,243,245,0.08)",
-          padding: "28px 40px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "16px",
-        }}
-      >
-        <p
-          style={{
-            fontSize: "0.7rem",
-            fontWeight: 700,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "rgba(238,243,245,0.35)",
-            margin: 0,
-          }}
-        >
+      <div style={{ borderBottom: "1px solid rgba(238,243,245,0.08)", padding: "28px 40px", display: "flex", flexDirection: "column", gap: "16px" }}>
+        <p style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "rgba(238,243,245,0.35)", margin: 0 }}>
           Partners y acreditaciones
         </p>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            gap: "28px",
-          }}
-          aria-label="Logos de partners y certificaciones"
-        >
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "28px" }} aria-label="Logos de partners y certificaciones">
           {partners.map((p) => (
-            <Link
-              key={p.name}
-              href={p.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={p.name}
-              style={{ textDecoration: "none", display: "flex", alignItems: "center" }}
-            >
-              <div
-                style={{
-                  background: "rgba(255,255,255,0.07)",
-                  borderRadius: "8px",
-                  padding: "8px 16px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  minWidth: "80px",
-                  height: "40px",
-                  transition: "background 160ms ease",
-                }}
-              >
+            <Link key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" aria-label={p.name} style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+              <div style={{ background: "rgba(255,255,255,0.07)", borderRadius: "8px", padding: "8px 16px", display: "flex", alignItems: "center", justifyContent: "center", minWidth: "80px", height: "40px" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={p.logo}
@@ -174,45 +98,21 @@ export function SiteFooter() {
       <div className="footer-main">
         {/* Brand column */}
         <div className="footer-brand">
-          {/* Logo Tranluz en footer */}
           <div style={{ marginBottom: "16px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={assets.footerLogo}
-              alt="Tranluz"
-              style={{ height: "32px", width: "auto", objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.9 }}
-              loading="lazy"
-            />
+            <img src={assets.footerLogo} alt="Tranluz" style={{ height: "32px", width: "auto", objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.9 }} loading="lazy" />
           </div>
           <p style={{ fontSize: "0.88rem", lineHeight: 1.6, margin: "0 0 20px", color: "rgba(238,243,245,0.65)" }}>
             Especialistas en máquinas y herramientas para montadores eléctricos desde {brand.founded}. Equipos, servicio técnico, alquiler, formación y trazabilidad.
           </p>
-
-          {/* Redes sociales */}
           <div className="social-links" aria-label="Redes sociales">
             {[
               { Icon: IconLinkedIn, href: brand.social?.linkedin ?? "https://linkedin.com", label: "LinkedIn" },
               { Icon: IconInstagram, href: brand.social?.instagram ?? "https://instagram.com", label: "Instagram" },
               { Icon: IconYouTube, href: brand.social?.youtube ?? "https://youtube.com", label: "YouTube" },
             ].map(({ Icon, href, label }) => (
-              <Link
-                key={label}
-                href={href}
-                aria-label={label}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "38px",
-                  height: "38px",
-                  borderRadius: "8px",
-                  background: "rgba(238,243,245,0.08)",
-                  color: "rgba(238,243,245,0.7)",
-                  transition: "background 160ms ease, color 160ms ease",
-                }}
-              >
+              <Link key={label} href={href} aria-label={label} target="_blank" rel="noopener noreferrer"
+                style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "38px", height: "38px", borderRadius: "8px", background: "rgba(238,243,245,0.08)", color: "rgba(238,243,245,0.7)", transition: "background 160ms ease, color 160ms ease" }}>
                 <Icon />
               </Link>
             ))}
@@ -222,30 +122,13 @@ export function SiteFooter() {
         {/* Nav columns */}
         {footerNav.map((col) => (
           <nav key={col.heading} aria-label={`${col.heading} navegación`}>
-            <p
-              style={{
-                fontSize: "0.72rem",
-                fontWeight: 800,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: "rgba(238,243,245,0.4)",
-                marginBottom: "14px",
-              }}
-            >
+            <p style={{ fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(238,243,245,0.4)", marginBottom: "14px" }}>
               {col.heading}
             </p>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
               {col.links.map((l) => (
                 <li key={l.label}>
-                  <Link
-                    href={l.href}
-                    style={{
-                      fontSize: "0.88rem",
-                      color: "rgba(238,243,245,0.65)",
-                      textDecoration: "none",
-                      transition: "color 160ms ease",
-                    }}
-                  >
+                  <Link href={l.href} style={{ fontSize: "0.88rem", color: "rgba(238,243,245,0.65)", textDecoration: "none", transition: "color 160ms ease" }}>
                     {l.label}
                   </Link>
                 </li>
@@ -256,16 +139,7 @@ export function SiteFooter() {
 
         {/* Contact column */}
         <div className="footer-contact">
-          <p
-            style={{
-              fontSize: "0.72rem",
-              fontWeight: 800,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "rgba(238,243,245,0.4)",
-              marginBottom: "14px",
-            }}
-          >
+          <p style={{ fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(238,243,245,0.4)", marginBottom: "14px" }}>
             Contacto
           </p>
           <address style={{ fontStyle: "normal", display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -275,21 +149,13 @@ export function SiteFooter() {
             </p>
             <p style={{ display: "flex", alignItems: "center", gap: "8px", margin: 0, fontSize: "0.88rem" }}>
               <PhoneCall size={14} aria-hidden="true" style={{ flexShrink: 0, color: "var(--brand)" }} />
-              <a
-                href={`tel:${brand.phone?.replace(/\s/g, "")}`}
-                aria-label={`Llamar al ${brand.phone}`}
-                style={{ color: "rgba(238,243,245,0.65)", textDecoration: "none" }}
-              >
+              <a href={`tel:${brand.phone?.replace(/\s/g, "")}`} aria-label={`Llamar al ${brand.phone}`} style={{ color: "rgba(238,243,245,0.65)", textDecoration: "none" }}>
                 {brand.phone}
               </a>
             </p>
             <p style={{ display: "flex", alignItems: "center", gap: "8px", margin: 0, fontSize: "0.88rem" }}>
               <Mail size={14} aria-hidden="true" style={{ flexShrink: 0, color: "var(--brand)" }} />
-              <a
-                href={`mailto:${brand.email}`}
-                aria-label={`Enviar email a ${brand.email}`}
-                style={{ color: "rgba(238,243,245,0.65)", textDecoration: "none" }}
-              >
+              <a href={`mailto:${brand.email}`} aria-label={`Enviar email a ${brand.email}`} style={{ color: "rgba(238,243,245,0.65)", textDecoration: "none" }}>
                 {brand.email}
               </a>
             </p>
@@ -309,11 +175,7 @@ export function SiteFooter() {
             { href: "/cookies", label: "Cookies" },
             { href: "/aviso-legal", label: "Aviso legal" },
           ].map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              style={{ color: "rgba(238,243,245,0.45)", textDecoration: "none", fontSize: "0.82rem" }}
-            >
+            <Link key={l.href} href={l.href} style={{ color: "rgba(238,243,245,0.45)", textDecoration: "none", fontSize: "0.82rem" }}>
               {l.label}
             </Link>
           ))}
