@@ -35,12 +35,12 @@ const navIcon = (href: string) => {
 };
 
 const megaItems = [
-  { icon: <Wrench size={18} aria-hidden="true" />, label: "ITS Servicio T\u00e9cnico", sub: "Revisiones e informes", href: "/servicios/its-servicio-tecnico" },
+  { icon: <Wrench size={18} aria-hidden="true" />, label: "ITS Servicio Técnico", sub: "Revisiones e informes", href: "/servicios/its-servicio-tecnico" },
   { icon: <ShieldCheck size={18} aria-hidden="true" />, label: "Revisa trazabilidad", sub: "Control y alertas", href: "/servicios/revisa-trazabilidad" },
   { icon: <Layers size={18} aria-hidden="true" />, label: "Rent Puller", sub: "Alquiler para obra", href: "/alquiler" },
-  { icon: <BookOpen size={18} aria-hidden="true" />, label: "Formaci\u00f3n", sub: "Operadores y equipos", href: "/formacion" },
-  { icon: <Package size={18} aria-hidden="true" />, label: "Cat\u00e1logo t\u00e9cnico", sub: "Productos y referencias", href: "/productos" },
-  { icon: <MapPin size={18} aria-hidden="true" />, label: "Sevilla", sub: "Atenci\u00f3n t\u00e9cnica presencial", href: "/contacto" },
+  { icon: <BookOpen size={18} aria-hidden="true" />, label: "Formación", sub: "Operadores y equipos", href: "/formacion" },
+  { icon: <Package size={18} aria-hidden="true" />, label: "Catálogo técnico", sub: "Productos y referencias", href: "/productos" },
+  { icon: <MapPin size={18} aria-hidden="true" />, label: "Sevilla", sub: "Atención técnica presencial", href: "/contacto" },
 ];
 
 export function SiteHeader() {
@@ -68,7 +68,11 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
@@ -77,71 +81,106 @@ export function SiteHeader() {
 
   return (
     <>
-      {/* Topbar */}
-      <header className={`site-header${scrolled ? " is-scrolled" : ""}`} ref={navRef}>
-        <div className="topbar">
-          <span className="topbar-kicker">
-            <Zap size={14} aria-hidden="true" />
-            {brand.claim}
-          </span>
-          <nav className="topbar-actions" aria-label="Acciones r\u00e1pidas">
-            <span>\u00b7 Cat\u00e1logo 2026</span>
-            <a href={phoneHref}>{phoneDisplay}</a>
-          </nav>
-        </div>
+      {/* Top bar */}
+      <div className="top-bar" role="banner" aria-label="Información de contacto">
+        <span className="top-bar-left">{brand.claim}</span>
+        <nav className="top-bar-right" aria-label="Accesos rápidos superiores">
+          <Link href="/catalogo" className="top-bar-link">
+            <BookOpen size={13} aria-hidden="true" />
+            <span>· Catálogo 2026</span>
+          </Link>
+          <a href={phoneHref} className="top-bar-link">
+            <Phone size={13} aria-hidden="true" />
+            <span>{phoneDisplay}</span>
+          </a>
+        </nav>
+      </div>
 
-        <nav className="navbar" aria-label="Navegaci\u00f3n principal">
+      {/* Main header */}
+      <header
+        ref={navRef}
+        className={`site-header${scrolled ? " site-header--scrolled" : ""}`}
+        role="banner"
+      >
+        <div className="header-inner">
           {/* Logo */}
-          <Link href="/" className="brand-mark" aria-label="Tranluz - Inicio">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={assets.logo} alt="Tranluz" width={104} height={27} />
+          <Link href="/" className="site-logo" aria-label="Tranluz – inicio">
+            <img
+              src={assets.logo}
+              alt="Tranluz logo"
+              width={120}
+              height={36}
+              className="logo-img"
+            />
           </Link>
 
-          {/* Desktop nav */}
-          <div className="desktop-nav">
-            <ul className="main-nav" role="list">
-              {mainNavigation.map((item) => {
-                const hasChildren = item.children && item.children.length > 0;
-                const isOpen = openMega === item.href;
-                return (
-                  <li key={item.href} style={{ position: "relative" }}>
-                    {hasChildren ? (
-                      <>
-                        <button
-                          className="main-nav-btn"
-                          aria-expanded={isOpen}
-                          aria-haspopup="true"
-                          onClick={() => setOpenMega(isOpen ? null : item.href)}
-                        >
-                          {item.label}
-                          <ChevronDown size={14} aria-hidden="true" style={{ transition: "transform 200ms", transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }} />
-                        </button>
-                        {isOpen && (
-                          <ul className="mega-dropdown-list" role="list">
-                            {item.children!.map((child) => (
-                              <li key={child.href}>
-                                <Link href={child.href} onClick={() => setOpenMega(null)}>
-                                  {navIcon(child.href)}
-                                  {child.label}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </>
-                    ) : (
-                      <Link href={item.href}>{item.label}</Link>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
+          {/* Mega nav trigger */}
+          <button
+            className="mega-trigger"
+            aria-expanded={openMega === "mega"}
+            aria-controls="mega-panel"
+            onClick={() => setOpenMega(openMega === "mega" ? null : "mega")}
+            aria-label="Menú de servicios"
+          >
+            <span className="mega-dot" aria-hidden="true" />
+          </button>
 
-            {/* Search */}
-            <div className="site-search" role="search">
-              <Search size={16} aria-hidden="true" />
-              <input type="search" placeholder="Buscar equipo\u2026" aria-label="Buscar equipo" autoComplete="off" />
-            </div>
+          {/* Desktop navigation */}
+          <nav className="main-nav" aria-label="Navegación principal">
+            <ul className="nav-list" role="list">
+              {mainNavigation.map((item) => (
+                <li key={item.href} className="nav-item">
+                  {item.children ? (
+                    <>
+                      <button
+                        className="nav-link nav-link--dropdown"
+                        aria-expanded={openMega === item.href}
+                        aria-haspopup="true"
+                        onClick={() =>
+                          setOpenMega(openMega === item.href ? null : item.href)
+                        }
+                      >
+                        {navIcon(item.href)}
+                        {item.label}
+                        <ChevronDown
+                          size={14}
+                          className={`nav-chevron${openMega === item.href ? " nav-chevron--open" : ""}`}
+                          aria-hidden="true"
+                        />
+                      </button>
+                      {openMega === item.href && (
+                        <ul className="dropdown-menu" role="list">
+                          {item.children.map((child) => (
+                            <li key={child.href}>
+                              <Link href={child.href} className="dropdown-item" onClick={() => setOpenMega(null)}>
+                                {navIcon(child.href)}
+                                <span>{child.label}</span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </>
+                  ) : (
+                    <Link href={item.href} className="nav-link">
+                      {navIcon(item.href)}
+                      {item.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Search */}
+          <div className="header-search" role="search">
+            <Search size={16} className="search-icon" aria-hidden="true" />
+            <input
+              type="search"
+              className="search-input"
+              placeholder="Buscar equipo…"
+              aria-label="Buscar equipo en Tranluz"
+            />
           </div>
 
           {/* Header actions */}
@@ -149,8 +188,12 @@ export function SiteHeader() {
             <ThemeToggle />
             <LanguageSelector />
 
-            {/* Icono tel\u00e9fono con tooltip */}
-            <div className="contact-icon-wrap" onMouseEnter={() => setPhoneVisible(true)} onMouseLeave={() => setPhoneVisible(false)}>
+            {/* Phone icon with tooltip */}
+            <div
+              className="contact-icon-wrap"
+              onMouseEnter={() => setPhoneVisible(true)}
+              onMouseLeave={() => setPhoneVisible(false)}
+            >
               <a
                 href={phoneHref}
                 className="icon-button icon-button-link contact-icon-phone"
@@ -167,7 +210,7 @@ export function SiteHeader() {
               )}
             </div>
 
-            {/* Icono email \u2192 formulario de presupuesto */}
+            {/* Email / presupuesto icon */}
             <Link
               href="/presupuesto"
               className="icon-button icon-button-link contact-icon-email"
@@ -177,90 +220,110 @@ export function SiteHeader() {
               <Mail size={18} aria-hidden="true" />
             </Link>
 
-            {/* Bot\u00f3n men\u00fa m\u00f3vil */}
+            {/* Mobile menu toggle */}
             <button
-              className="icon-button mobile-menu-toggle"
-              aria-label={mobileOpen ? "Cerrar men\u00fa" : "Abrir men\u00fa"}
+              className="mobile-menu-btn"
+              aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={mobileOpen}
               aria-controls={mobileMenuId}
               onClick={() => setMobileOpen(!mobileOpen)}
             >
-              {mobileOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+              {mobileOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
             </button>
           </div>
-        </nav>
-
-        {/* Mega strip */}
-        <div className="mega-strip" aria-label="Acceso r\u00e1pido a servicios">
-          {megaItems.map((mi) => (
-            <Link key={mi.href} href={mi.href}>
-              <span className="mega-icon" aria-hidden="true">{mi.icon}</span>
-              <span>
-                <strong>{mi.label}</strong>
-                <small>{mi.sub}</small>
-              </span>
-            </Link>
-          ))}
         </div>
-      </header>
 
-      {/* Mobile panel */}
-      {mobileOpen && (
-        <div
-          id={mobileMenuId}
-          className="mobile-menu-panel"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Men\u00fa de navegaci\u00f3n"
-        >
-          <button
-            className="icon-button"
-            style={{ marginLeft: "auto", display: "flex" }}
-            onClick={() => setMobileOpen(false)}
-            aria-label="Cerrar men\u00fa"
+        {/* Mega panel */}
+        {openMega === "mega" && (
+          <div id="mega-panel" className="mega-panel" role="dialog" aria-label="Menú rápido de servicios">
+            <ul className="mega-grid" role="list">
+              {megaItems.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="mega-item" onClick={() => setOpenMega(null)}>
+                    <span className="mega-icon" aria-hidden="true">{item.icon}</span>
+                    <span className="mega-label">{item.label}</span>
+                    <span className="mega-sub">{item.sub}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Mobile overlay */}
+        {mobileOpen && (
+          <div
+            className="mobile-overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menú móvil de navegación"
+            id={mobileMenuId}
           >
-            <X size={20} aria-hidden="true" />
-          </button>
-          <nav style={{ marginTop: 12 }}>
-            {mainNavigation.map((item) => (
-              <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}>
-                {item.label}
+            <div className="mobile-header">
+              <Link href="/" className="site-logo" onClick={() => setMobileOpen(false)} aria-label="Tranluz – inicio">
+                <img src={assets.logo} alt="Tranluz" width={100} height={30} className="logo-img" />
               </Link>
-            ))}
-          </nav>
-          <div style={{ borderTop: "1px solid var(--line)", paddingTop: 12, marginTop: 12, display: "grid", gap: 6 }}>
-            {megaItems.map((mi) => (
-              <Link key={mi.href} href={mi.href} onClick={() => setMobileOpen(false)} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: "var(--radius)", color: "var(--text-muted)", fontWeight: 720 }}>
-                {mi.icon}
-                <span>
-                  <strong style={{ display: "block", fontSize: "0.88rem" }}>{mi.label}</strong>
-                  <small style={{ color: "var(--text-soft)", fontSize: "0.78rem" }}>{mi.sub}</small>
-                </span>
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="mobile-close-btn"
+                aria-label="Cerrar menú móvil"
+              >
+                <X size={22} aria-hidden="true" />
+              </button>
+            </div>
+            <nav aria-label="Navegación móvil">
+              <ul className="mobile-nav" role="list">
+                {mainNavigation.map((item) => (
+                  <li key={item.href} className="mobile-nav-item">
+                    {item.children ? (
+                      <details className="mobile-details">
+                        <summary className="mobile-summary">
+                          {navIcon(item.href)}
+                          {item.label}
+                          <ChevronDown size={14} className="mobile-chevron" aria-hidden="true" />
+                        </summary>
+                        <ul className="mobile-sub" role="list">
+                          {item.children.map((child) => (
+                            <li key={child.href}>
+                              <Link
+                                href={child.href}
+                                className="mobile-sub-link"
+                                onClick={() => setMobileOpen(false)}
+                              >
+                                {navIcon(child.href)}
+                                {child.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className="mobile-nav-link"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {navIcon(item.href)}
+                        {item.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <div className="mobile-footer">
+              <a href={phoneHref} className="mobile-contact-btn mobile-contact-btn--phone">
+                <Phone size={16} aria-hidden="true" />
+                {phoneDisplay}
+              </a>
+              <Link href="/presupuesto" className="mobile-contact-btn mobile-contact-btn--email" onClick={() => setMobileOpen(false)}>
+                <Mail size={16} aria-hidden="true" />
+                Solicitar presupuesto
               </Link>
-            ))}
+            </div>
           </div>
-          <div style={{ borderTop: "1px solid var(--line)", paddingTop: 12, marginTop: 12, display: "flex", gap: 10 }}>
-            <a href={phoneHref} className="button button-primary" style={{ flex: 1, justifyContent: "center" }} onClick={() => setMobileOpen(false)}>
-              <Phone size={16} aria-hidden="true" />
-              Llamar
-            </a>
-            <Link href="/presupuesto" className="button button-secondary" style={{ flex: 1, justifyContent: "center" }} onClick={() => setMobileOpen(false)}>
-              <Mail size={16} aria-hidden="true" />
-              Presupuesto
-            </Link>
-          </div>
-          <div style={{ marginTop: 12 }}>
-            <LanguageSelector />
-          </div>
-        </div>
-      )}
-      {mobileOpen && (
-        <div
-          className="mobile-overlay"
-          onClick={() => setMobileOpen(false)}
-          aria-hidden="true"
-        />
-      )}
+        )}
+      </header>
     </>
   );
 }
