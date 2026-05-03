@@ -1,5 +1,16 @@
 export const mainNavigation = [
   {
+    label: "Servicios",
+    href: "/servicios",
+    children: [
+      { label: "ITS Servicio Técnico", href: "/servicios/its-servicio-tecnico" },
+      { label: "Revisa trazabilidad", href: "/servicios/revisa-trazabilidad" },
+      { label: "Soporte", href: "/soporte" },
+      { label: "Alquiler", href: "/alquiler" },
+      { label: "Formacion", href: "/formacion" }
+    ]
+  },
+  {
     label: "Productos",
     href: "/productos",
     children: [
@@ -19,17 +30,6 @@ export const mainNavigation = [
       { label: "Telecomunicaciones", href: "/soluciones/telecomunicaciones" },
       { label: "Industria", href: "/soluciones/industria" },
       { label: "Obra y mantenimiento", href: "/soluciones/obra-y-mantenimiento" }
-    ]
-  },
-  {
-    label: "Servicios",
-    href: "/servicios",
-    children: [
-      { label: "ITS Servicio Técnico", href: "/servicios/its-servicio-tecnico" },
-      { label: "Revisa trazabilidad", href: "/servicios/revisa-trazabilidad" },
-      { label: "Soporte", href: "/soporte" },
-      { label: "Alquiler", href: "/alquiler" },
-      { label: "Formacion", href: "/formacion" }
     ]
   },
   {
