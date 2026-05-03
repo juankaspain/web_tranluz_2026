@@ -12,6 +12,7 @@ import { ProductCategoryGrid } from "@/components/sections/product-category-grid
 import { SupportBand } from "@/components/sections/support-band";
 import { AuthoritySection } from "@/components/sections/authority-section";
 import { ProblemSolutionSection } from "@/components/sections/problem-solution-section";
+import { DecisionSection } from "@/components/sections/decision-section";
 
 export default function HomePage() {
   return (
@@ -22,6 +23,7 @@ export default function HomePage() {
         <AuthoritySection />
         <TrustBandSection />
         <ProblemSolutionSection />
+        <DecisionSection />
         <QuickAccessSection />
         <OperationsSection />
         <ProductCategoryGrid />
