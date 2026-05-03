@@ -5,16 +5,16 @@ import { brand } from "@/config/brand";
 import { assets } from "@/content/assets";
 
 const heroMetrics = [
-  { value: "+38", label: "a\u00f1os" },
+  { value: "+38", label: "años" },
   { value: "4", label: "servicios" },
   { value: "B2B", label: "sector" },
 ];
 
 const asideMetrics = [
-  { value: "+38", label: "A\u00f1os de experiencia" },
-  { value: "4", label: "L\u00edneas de servicio" },
-  { value: "B2B", label: "Empresas el\u00e9ctricas y telco" },
-  { value: "Sevilla", label: "Atenci\u00f3n t\u00e9cnica en obra" },
+  { value: "+38", label: "años de experiencia" },
+  { value: "4", label: "Líneas de servicio" },
+  { value: "B2B", label: "Empresas eléctricas y telco" },
+  { value: "Sevilla", label: "Atención técnica en obra" },
 ];
 
 export function HeroSection() {
@@ -24,7 +24,7 @@ export function HeroSection() {
       <div className="hero-media" aria-hidden="true">
         <Image
           src={assets.hero}
-          alt="Obras de tendido el\u00e9ctrico con equipos Tranluz"
+          alt="Obras de tendido eléctrico con equipos Tranluz"
           fill
           priority
           sizes="100vw"
@@ -37,16 +37,16 @@ export function HeroSection() {
         <div className="hero-copy">
           <p className="eyebrow">
             <span>Especialistas desde {brand.founded}</span>
-            {" \u00b7 "}
+            {" · "}
             Sevilla
           </p>
 
           <h1 id="hero-title" className="hero-title">
-            Todo lo que necesitas para ejecutar obras el\u00e9ctricas cr\u00edticas, en un solo proveedor.
+            Todo lo que necesitas para ejecutar obras eléctricas críticas, en un solo proveedor.
           </h1>
 
           <p>
-            Equipos, alquiler, servicio t\u00e9cnico, formaci\u00f3n y trazabilidad con soporte real en obra.
+            Equipos, alquiler, servicio t\u00e9cnico, formación y trazabilidad con soporte real en obra.
           </p>
 
           {/* Metric pills */}
@@ -81,7 +81,7 @@ export function HeroSection() {
       </div>
 
       {/* Aside card */}
-      <aside className="hero-aside" aria-label="Informaci\u00f3n de partner">
+      <aside className="hero-aside" aria-label="Información de partner">
         {/* Badge */}
         <div style={{
           display: "flex",
@@ -135,15 +135,15 @@ export function HeroSection() {
           <div className="hero-aside-row">
             <MapPin size={14} style={{ color: "var(--brand)", flexShrink: 0, marginTop: "2px" }} aria-hidden="true" />
             <div>
-              <span className="hero-aside-label">Ubicaci\u00f3n</span>
-              <strong>Pol\u00edgono Industrial Calonge, Sevilla</strong>
+              <span className="hero-aside-label">Ubicación</span>
+              <strong>Polígono Industrial Calonge, Sevilla</strong>
             </div>
           </div>
           <div className="hero-aside-row">
             <Clock size={14} style={{ color: "var(--brand)", flexShrink: 0, marginTop: "2px" }} aria-hidden="true" />
             <div>
               <span className="hero-aside-label">Horario</span>
-              <strong>Lun\u2013Vie 8:00\u201318:00 \u00b7 Urgencias 24h</strong>
+              <strong>Lun–Vie 8:00–18:00 · Urgencias 24h</strong>
             </div>
           </div>
         </div>
