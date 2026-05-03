@@ -5414,3 +5414,7 @@ a:focus-visible {
 .solucion-body { flex: 1; min-width: 0; }
 .solucion-body h2 { font-size: 1.15rem; font-weight: 720; margin: 0 0 8px; color: var(--text); }
 .solucion-body p { font-size: 0.9rem; color: var(--text-muted); margin: 0 0 12px; line-height: 1.6; }
+
+.doc-list li > div { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.doc-list li > div > strong { display: block; font-size: 0.9rem; font-weight: 700; color: var(--text); }
+.doc-list li > div > small { display: block; font-size: 0.77rem; color: var(--text-soft); font-weight: 400; }
