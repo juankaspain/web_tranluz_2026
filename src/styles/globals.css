@@ -2628,3 +2628,39 @@ button {
 .decision-section .button-primary:hover {
   background: var(--brand-strong);
 }
+
+
+/* ---- Final CTA: buttons on dark background ---------------- */
+.final-cta .button-ghost,
+.final-cta a.button-ghost {
+  border-color: rgba(238,243,245,0.22);
+  background: rgba(238,243,245,0.08);
+  color: rgba(238,243,245,0.9);
+}
+
+.final-cta .button-ghost:hover,
+.final-cta a.button-ghost:hover {
+  border-color: rgba(238,243,245,0.4);
+  background: rgba(238,243,245,0.14);
+  color: #ffffff;
+}
+
+.final-cta .button-primary,
+.final-cta a.button-primary {
+  background: var(--brand);
+  border-color: transparent;
+  color: #ffffff;
+}
+
+/* ---- Ensure .final-cta h2 and p are visible on dark bg ---- */
+.final-cta h2 {
+  color: #ffffff;
+}
+
+.final-cta p {
+  color: rgba(238,243,245,0.72);
+}
+
+.final-cta .cta-benefits li {
+  color: rgba(238,243,245,0.72);
+}
