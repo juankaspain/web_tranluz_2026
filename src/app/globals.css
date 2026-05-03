@@ -1,12 +1,14 @@
 /* ===== RESET BASE ===== */
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
   color: #0f172a;
   background: #ffffff;
-  padding-bottom: 100px;
+  padding-bottom: 100px; /* evita solape con CTA */
 }
 
 /* ===== HEADER ===== */
@@ -29,13 +31,17 @@ section {
   margin: 0 auto;
 }
 
-/* ===== HERO ===== */
+/* =========================================
+   HERO
+========================================= */
+
 .hero-section {
   position: relative;
   color: white;
   min-height: 100vh;
   display: flex;
   align-items: center;
+  overflow: hidden; /* evita desbordes */
 }
 
 .hero-media {
@@ -52,7 +58,12 @@ section {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.3) 60%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
 }
 
 .hero-copy {
@@ -61,14 +72,58 @@ section {
   max-width: 600px;
 }
 
-/* ===== FIX FLOATING CARDS ===== */
-.mega-strip {
+/* =========================================
+   QUICK ACCESS (FIX CRÍTICO DEL OVERLAY)
+========================================= */
+
+.quick-access {
   position: relative !important;
   z-index: 1 !important;
   margin-top: 20px;
+  padding: 20px;
 }
 
-/* ===== BUTTONS ===== */
+.quick-access-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quick-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f1f5f9;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+.quick-link:hover {
+  transform: translateY(-2px);
+  background: #e2e8f0;
+}
+
+.quick-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.quick-text strong {
+  font-weight: 600;
+}
+
+.quick-text span {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
 .button-primary {
   background: linear-gradient(135deg, #005bac, #003f7a);
   color: white;
@@ -85,7 +140,10 @@ section {
   color: white;
 }
 
-/* ===== AUTHORITY ===== */
+/* =========================================
+   AUTHORITY
+========================================= */
+
 .authority-section {
   background: #f8fafc;
   text-align: center;
@@ -104,7 +162,10 @@ section {
   border-radius: 12px;
 }
 
-/* ===== PROBLEM SOLUTION ===== */
+/* =========================================
+   PROBLEM / SOLUTION
+========================================= */
+
 .problem-solution-section {
   text-align: center;
 }
@@ -129,7 +190,10 @@ section {
   background: #f0fdf4;
 }
 
-/* ===== FLOATING CTA ===== */
+/* =========================================
+   FLOATING CTA
+========================================= */
+
 .floating-cta {
   position: fixed;
   bottom: 16px;
@@ -140,8 +204,27 @@ section {
   z-index: 40;
 }
 
-/* ===== MOBILE ===== */
+/* =========================================
+   FIX GLOBAL ANTI-OVERLAY
+========================================= */
+
+/* Evita que cualquier bloque vuelva a flotar */
+.mega-strip,
+.quick-access,
+section {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
 @media (max-width: 768px) {
+  section {
+    padding: 60px 16px;
+  }
+
   .ps-grid {
     grid-template-columns: 1fr;
   }
@@ -164,5 +247,14 @@ section {
   .hero-section {
     min-height: auto;
     padding-top: 100px;
+  }
+
+  .quick-access {
+    margin-top: 10px;
+    padding: 16px;
+  }
+
+  .quick-link {
+    padding: 14px;
   }
 }
