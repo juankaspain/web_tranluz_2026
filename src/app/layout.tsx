@@ -5,6 +5,7 @@ import { cookies, headers } from "next/headers";
 import { AutoTranslate } from "@/components/i18n/auto-translate";
 import { ActionDock } from "@/components/layout/action-dock";
 import { CookieConsent } from "@/components/layout/cookie-consent";
+import { SkipLink } from "@/components/layout/skip-link";
 import { StructuredData } from "@/components/seo/structured-data";
 import { ThemeScript } from "@/components/theme/theme-script";
 import { defaultLocale, isLocale } from "@/i18n/config";
@@ -125,7 +126,6 @@ export const viewport: Viewport = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  // Lectura defensiva: si headers/cookies fallan en el entorno, usar locale por defecto
   let locale = defaultLocale;
   try {
     const requestHeaders = await headers();
@@ -138,7 +138,6 @@ export default async function RootLayout({
         ? headerLocale
         : defaultLocale;
   } catch {
-    // Fallback silencioso: locale español por defecto
     locale = defaultLocale;
   }
 
@@ -160,40 +159,12 @@ export default async function RootLayout({
         <meta name="ICBM" content="37.389092, -5.984459" />
       </head>
       <body suppressHydrationWarning>
-        {/* Skip link WCAG 2.1 — primer elemento enfocable de la página */}
-        <a
-          href="#contenido"
-          className="skip-link"
-          style={{
-            position: "absolute",
-            top: "-9999px",
-            left: "-9999px",
-            zIndex: 9999,
-            background: "var(--color-primary, #01696f)",
-            color: "#fff",
-            padding: "0.75rem 1.5rem",
-            borderRadius: "0 0 0.5rem 0",
-            fontWeight: 600,
-            fontSize: "1rem",
-            textDecoration: "none",
-            outline: "3px solid transparent",
-          }}
-          onFocus={(e) => {
-            (e.target as HTMLAnchorElement).style.top = "0";
-            (e.target as HTMLAnchorElement).style.left = "0";
-          }}
-          onBlur={(e) => {
-            (e.target as HTMLAnchorElement).style.top = "-9999px";
-            (e.target as HTMLAnchorElement).style.left = "-9999px";
-          }}
-        >
-          Ir al contenido principal
-        </a>
+        {/* Skip link WCAG 2.1 — Client Component para poder usar onFocus/onBlur */}
+        <SkipLink />
         <AutoTranslate />
         <StructuredData />
         <ActionDock />
         {children}
-        {/* Banner de cookies LSSI/RGPD — se renderiza en cliente */}
         <CookieConsent />
       </body>
     </html>
