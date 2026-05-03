@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { brand } from "@/config/brand";
 
 const metrics = [
@@ -16,22 +15,32 @@ export function AuthoritySection() {
           <h2 id="authority-heading">Empresas eléctricas confían en Tranluz para obra crítica</h2>
         </div>
 
-        <div className="authority-metrics">
+        <ul className="authority-metrics" role="list">
           {metrics.map((m) => (
-            <div key={m.label}>
+            <li key={m.label}>
               <strong>{m.value}</strong>
               <span>{m.label}</span>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
 
-        <div className="authority-brands" aria-label="Marcas asociadas">
+        <ul
+          className="authority-brands"
+          aria-label="Marcas asociadas"
+          role="list"
+        >
           {brand.partners.map((p) => (
-            <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer">
-              {p.name}
-            </a>
+            <li key={p.name}>
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {p.name}
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
