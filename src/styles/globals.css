@@ -2664,3 +2664,10 @@ button {
 .final-cta .cta-benefits li {
   color: rgba(238,243,245,0.72);
 }
+
+
+/* ---- Fix search-field width in catalog-controls ----------- */
+.catalog-controls .search-field {
+  width: 100%;
+  flex: 1 1 auto;
+}
