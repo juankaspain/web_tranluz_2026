@@ -5462,3 +5462,25 @@ a:focus-visible {
   border: 1px solid var(--line);
   color: var(--text);
 }
+
+/* ============================================================
+   HERO LOGO
+   ============================================================ */
+.hero-logo-wrap {
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.hero-logo {
+  width: 280px;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35));
+}
+
+@media (max-width: 640px) {
+  .hero-logo {
+    width: 200px;
+  }
+}
