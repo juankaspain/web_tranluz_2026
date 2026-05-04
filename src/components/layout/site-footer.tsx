@@ -256,7 +256,7 @@ export function SiteFooter() {
           <a href="/" style={S.brandLogo}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={assets.logoLight}
+              src={assets.logoWhite}
               alt="Tranluz"
               width={120}
               height={48}
