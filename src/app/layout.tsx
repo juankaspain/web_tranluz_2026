@@ -63,12 +63,12 @@ export const metadata: Metadata = {
   classification: "business",
   icons: {
     icon: [
-      { url: "/images/Tranluz/Logo-Tranluz-PM.svg", type: "image/svg+xml" },
+              { url: "/images/Tranluz/Tranluz_Logo.svg", type: "image/svg+xml" },
     ],
     apple: [
-      { url: "/images/Tranluz/Logo-Tranluz-PM.svg", type: "image/svg+xml" },
+              { url: "/images/Tranluz/Tranluz_Logo.svg", type: "image/svg+xml" },
     ],
-    shortcut: "/images/Tranluz/Logo-Tranluz-PM.svg",
+          shortcut: "/images/Tranluz/Tranluz_Logo.svg",
   },
   alternates: {
     canonical: "/",
@@ -156,8 +156,8 @@ export default async function RootLayout({
     >
       <head>
         <ThemeScript />
-        <link rel="icon" href="/images/Tranluz/Logo-Tranluz-PM.svg" type="image/svg+xml" />
-        <link rel="shortcut icon" href="/images/Tranluz/Logo-Tranluz-PM.svg" type="image/svg+xml" />
+                <link rel="icon" href="/images/Tranluz/Tranluz_Logo.svg" type="image/svg+xml" />
+                <link rel="shortcut icon" href="/images/Tranluz/Tranluz_Logo.svg" type="image/svg+xml" />
       </head>
       <body className="bg-background text-foreground antialiased">
         <SkipLink />
