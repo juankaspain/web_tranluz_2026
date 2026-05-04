@@ -9,14 +9,14 @@ import {
   ChevronDown,
   Layers,
   Mail,
-    ShoppingCart,
-    MapPin,
+  MapPin,
   Menu,
   Package,
   Phone,
   Search,
   Settings,
   ShieldCheck,
+  ShoppingCart,
   Wrench,
   X,
   Zap,
@@ -36,9 +36,10 @@ const navIcon = (href: string) => {
   if (href.startsWith("/alquiler")) return <Layers aria-hidden="true" size={18} />;
   if (href.startsWith("/formacion")) return <BookOpen aria-hidden="true" size={18} />;
   if (href.startsWith("/soluciones")) return <Zap aria-hidden="true" size={18} />;
-    if (href.startsWith("https://tienda")) return <ShoppingCart aria-hidden="true" size={18} />;
+  if (href.startsWith("https://tienda")) return <ShoppingCart aria-hidden="true" size={18} />;
   if (href.startsWith("/empresa")) return <Building2 aria-hidden="true" size={18} />;
-      return <Building2 aria-hidden="true" size={18} />;
+  if (href.startsWith("/contacto")) return <MapPin aria-hidden="true" size={18} />;
+  return <Building2 aria-hidden="true" size={18} />;
 };
 
 const megaItems = [
@@ -147,16 +148,23 @@ export function SiteHeader() {
                       </div>
                     )}
                   </>
-                  {item.href.startsWith("http") ? (
-                    <a href={item.href} className="nav-link" target="_blank" rel="noopener noreferrer">
-      {navIcon(item.href)}
-      <span>{item.label}</span>
-    </a>
-  ) : (
-                  <Link href={item.href} className="nav-link">
-                    {navIcon(item.href)}
-                    <span>{item.label}</span>
-                  </Link>
+                ) : (
+                  item.href.startsWith("http") ? (
+                    <a
+                      href={item.href}
+                      className="nav-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {navIcon(item.href)}
+                      <span>{item.label}</span>
+                    </a>
+                  ) : (
+                    <Link href={item.href} className="nav-link">
+                      {navIcon(item.href)}
+                      <span>{item.label}</span>
+                    </Link>
+                  )
                 )}
               </div>
             ))}
@@ -288,14 +296,27 @@ export function SiteHeader() {
                     </div>
                   </details>
                 ) : (
-                  <Link
-                    href={item.href}
-                    className="mobile-nav-link"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {navIcon(item.href)}
-                    {item.label}
-                  </Link>
+                  item.href.startsWith("http") ? (
+                    <a
+                      href={item.href}
+                      className="mobile-nav-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {navIcon(item.href)}
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="mobile-nav-link"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {navIcon(item.href)}
+                      {item.label}
+                    </Link>
+                  )
                 )}
               </div>
             ))}
