@@ -76,6 +76,17 @@ function HeaderSearch() {
     return () => document.removeEventListener("mousedown", h);
   }, []);
 
+    // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileOpen) {
+        setMobileOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [mobileOpen]);
+
   return (
     <div ref={wrapRef} className="hs-wrap" role="search">
       <form onSubmit={onSubmit} style={{ display: "contents" }}>
