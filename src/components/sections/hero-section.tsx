@@ -35,6 +35,16 @@ export function HeroSection() {
       {/* Main hero copy */}
       <div className="content-wrap">
         <div className="hero-copy">
+                    {/* Logo Tranluz */}
+          <div className="hero-logo-wrap">
+            <img
+              src={assets.logo}
+              alt="Tranluz"
+              width={280}
+              height={95}
+              className="hero-logo"
+            />
+          </div>
           <p className="eyebrow">
             <span>Especialistas desde {brand.founded}</span>
             {" · "}
