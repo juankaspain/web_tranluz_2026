@@ -270,6 +270,9 @@ button {
   display: flex;
   align-items: center;
   gap: 16px;
+    list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .main-nav {
@@ -5797,6 +5800,8 @@ a:focus-visible {
 .hs-wrap {
   position: relative;
   flex-shrink: 0;
+    display: inline-flex;
+  align-items: center;
 }
 
 .hs-form {
