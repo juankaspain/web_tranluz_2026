@@ -3,7 +3,6 @@ import type { Viewport } from "next";
 import type { ReactNode } from "react";
 import { cookies, headers } from "next/headers";
 import { AutoTranslate } from "@/components/i18n/auto-translate";
-import { ActionDock } from "@/components/layout/action-dock";
 import { CookieConsent } from "@/components/layout/cookie-consent";
 import { SkipLink } from "@/components/layout/skip-link";
 import { StructuredData } from "@/components/seo/structured-data";
@@ -161,7 +160,6 @@ export default async function RootLayout({
         <SkipLink />
         <AutoTranslate />
         <StructuredData />
-        <ActionDock />
         {children}
         <CookieConsent />
       </body>
