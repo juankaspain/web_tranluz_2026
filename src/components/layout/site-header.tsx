@@ -127,6 +127,43 @@ function HeaderSearch() {
   );
 }
 
+/* ---- PhoneTooltip ------------------------------------------------ */
+function PhoneTooltip() {
+  const [show, setShow] = useState(false);
+  const phone     = brand.phone ?? "+34 954 367 290";
+  const phoneHref = `tel:${phone.replace(/\s/g, "")}`;
+  const wrapRef   = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const h = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node))
+        setShow(false);
+    };
+    document.addEventListener("mousedown", h);
+    return () => document.removeEventListener("mousedown", h);
+  }, []);
+
+  return (
+    <div ref={wrapRef} className="contact-icon-wrap">
+      <button
+        className="icon-button"
+        onClick={() => setShow(!show)}
+        onMouseEnter={() => setShow(true)}
+        aria-label="Ver teléfono de contacto"
+        aria-expanded={show}
+        aria-haspopup="true"
+      >
+        <Phone size={17} className="contact-icon-phone" />
+      </button>
+      {show && (
+        <div className="contact-tooltip" role="tooltip">
+          <a href={phoneHref}>{phone}</a>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ---- SiteHeader -------------------------------------------------- */
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -167,26 +204,6 @@ export function SiteHeader() {
         role="banner"
       >
         <div className="container">
-
-          {/* ---- Topbar: tel + email ---- */}
-          <div className="topbar" aria-label="Contacto rápido">
-            <div className="topbar-actions">
-              <a href={phoneHref} aria-label={`Llamar a ${phone}`}>
-                <Phone size={13} aria-hidden="true" className="contact-icon-phone" />
-                {phone}
-              </a>
-              <a href={emailHref} aria-label={`Enviar email a ${email}`}>
-                <Mail size={13} aria-hidden="true" className="contact-icon-email" />
-                {email}
-              </a>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <ThemeToggle />
-              <LanguageSelector />
-            </div>
-          </div>
-
-          {/* ---- Navbar ---- */}
           <nav
             ref={navRef}
             className="navbar"
@@ -296,9 +313,15 @@ export function SiteHeader() {
                 ))}
               </ul>
 
-              {/* Search */}
+              {/* Actions: Search → Phone → Email → Theme → Language */}
               <div className="header-actions">
                 <HeaderSearch />
+                <PhoneTooltip />
+                <Link href="/contacto" className="icon-button" aria-label="Contacto">
+                  <Mail size={17} className="contact-icon-email" />
+                </Link>
+                <ThemeToggle />
+                <LanguageSelector />
               </div>
             </div>
 
