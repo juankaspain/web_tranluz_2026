@@ -1,5 +1,6 @@
 "use client";
 
+// Fixed: removed duplicate onMouseEnter (lines 539-550)
 import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
