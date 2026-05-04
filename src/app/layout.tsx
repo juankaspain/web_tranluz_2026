@@ -162,7 +162,7 @@ export default async function RootLayout({
       </head>
       <body className="bg-background text-foreground antialiased">
         <SkipLink />
-        <AutoTranslate locale={locale} />
+        <AutoTranslate />
         <StructuredData />
         {children}
         <CookieConsent />
