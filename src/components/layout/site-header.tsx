@@ -91,15 +91,6 @@ export function SiteHeader() {
 
   return (
     <>
-      {/* Top bar */}
-      <div className="top-bar">
-        <div className="topbar">
-          <span className="top-bar-claim">{brand.claim}</span>
-          <span className="top-bar-sep">· Catálogo 2026 ·</span>
-          <a href={phoneHref} className="top-bar-phone">{phoneDisplay}</a>
-        </div>
-      </div>
-
       {/* Main header */}
       <header
         className={`site-header${scrolled ? " site-header--scrolled" : ""}`}
@@ -111,8 +102,8 @@ export function SiteHeader() {
             <img
               src={assets.logo}
               alt="Tranluz logo"
-              width={120}
-              height={40}
+              width={180}
+                          height={60}
             />
           </Link>
 
