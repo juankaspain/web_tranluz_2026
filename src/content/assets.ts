@@ -1,10 +1,10 @@
 /**
  * assets.ts – Rutas centralizadas de todos los recursos visuales.
- * Logo oficial: /images/Tranluz/Logo-Tranluz-PM.svg
+  * Logo oficial: /images/Tranluz/Tranluz_Logo.svg
  */
 
 const SITE_URL = "https://www.tranluz.es";
-const LOGO = "/images/Tranluz/Logo-Tranluz-PM.svg";
+const LOGO = "/images/Tranluz/Tranluz_Logo.svg";
 
 // ─── Imágenes AI provisionales (Pollinations.ai – seed fijo = reproducibles) ───
 const aiImg = {
