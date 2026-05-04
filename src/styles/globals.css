@@ -6077,6 +6077,14 @@ a:focus-visible {
   font-size: 0.78rem;
   font-weight: 760;
   padding: 4px 10px;
+  
+/* ---- Mobile toggle: visible solo en <1120px ----------- */
+@media (max-width: 1120px) {
+  #mobile-toggle {
+    display: inline-flex !important;
+  }
+}
+
   border-radius: var(--radius);
   pointer-events: none;
   z-index: 70;
