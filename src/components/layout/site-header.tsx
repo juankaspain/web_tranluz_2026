@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useRef, useId } from "react";
+import { useState, useEffect, useRef, useId, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import {
   LifeBuoy,
   BookOpen,
@@ -27,34 +28,131 @@ import { assets } from "@/content/assets";
 import { brand } from "@/config/brand";
 import { mainNavigation } from "@/config/navigation";
 
+// ─── Nav icon helper ───────────────────────────────────────────────────
 const navIcon = (href: string) => {
-  if (href.startsWith("/productos")) return <Package aria-hidden="true" size={18} />;
-  if (href.startsWith("/servicios/its")) return <Wrench aria-hidden="true" size={18} />;
-  if (href.startsWith("/servicios/revisa")) return <ShieldCheck aria-hidden="true" size={18} />;
-  if (href.startsWith("/soporte")) return <LifeBuoy aria-hidden="true" size={18} />;
-  if (href.startsWith("/servicios")) return <Settings aria-hidden="true" size={18} />;
-  if (href.startsWith("/alquiler")) return <Layers aria-hidden="true" size={18} />;
-  if (href.startsWith("/formacion")) return <BookOpen aria-hidden="true" size={18} />;
-  if (href.startsWith("/soluciones")) return <Zap aria-hidden="true" size={18} />;
-  if (href.startsWith("https://tienda")) return <ShoppingCart aria-hidden="true" size={18} />;
-  if (href.startsWith("/empresa")) return <Building2 aria-hidden="true" size={18} />;
-  if (href.startsWith("/contacto")) return <MapPin aria-hidden="true" size={18} />;
-  return <Building2 aria-hidden="true" size={18} />;
+  if (href.startsWith("/productos"))         return <Package     aria-hidden="true" size={16} />;
+  if (href.startsWith("/servicios/its"))      return <Wrench      aria-hidden="true" size={16} />;
+  if (href.startsWith("/servicios/revisa"))   return <ShieldCheck aria-hidden="true" size={16} />;
+  if (href.startsWith("/soporte"))            return <LifeBuoy    aria-hidden="true" size={16} />;
+  if (href.startsWith("/servicios"))          return <Settings    aria-hidden="true" size={16} />;
+  if (href.startsWith("/alquiler"))           return <Layers      aria-hidden="true" size={16} />;
+  if (href.startsWith("/formacion"))          return <BookOpen    aria-hidden="true" size={16} />;
+  if (href.startsWith("/soluciones"))         return <Zap         aria-hidden="true" size={16} />;
+  if (href.startsWith("https://tienda"))      return <ShoppingCart aria-hidden="true" size={16} />;
+  if (href.startsWith("/empresa"))            return <Building2   aria-hidden="true" size={16} />;
+  if (href.startsWith("/contacto"))           return <MapPin      aria-hidden="true" size={16} />;
+  return <Building2 aria-hidden="true" size={16} />;
 };
 
-const megaItems = [
-  { icon: <Wrench size={18} aria-hidden="true" />, label: "ITS Servicio Técnico", sub: "Revisiones e informes", href: "/servicios/its-servicio-tecnico" },
-  { icon: <ShieldCheck size={18} aria-hidden="true" />, label: "Revisa trazabilidad", sub: "Control y alertas", href: "/servicios/revisa-trazabilidad" },
-  { icon: <Layers size={18} aria-hidden="true" />, label: "Rent Puller", sub: "Alquiler para obra", href: "/alquiler" },
-  { icon: <BookOpen size={18} aria-hidden="true" />, label: "Formación", sub: "Operadores y equipos", href: "/formacion" },
-  { icon: <Package size={18} aria-hidden="true" />, label: "Catálogo técnico", sub: "Productos y referencias", href: "/productos" },
-  { icon: <Building2 size={18} aria-hidden="true" />, label: "Sevilla", sub: "Atención técnica presencial", href: "/contacto" },
+// ─── Search suggestions ───────────────────────────────────────────────
+const SEARCH_INDEX = [
+  { label: "Productos",               href: "/productos" },
+  { label: "Alquiler de equipos",      href: "/alquiler" },
+  { label: "ITS Servicio Técnico",     href: "/servicios/its-servicio-tecnico" },
+  { label: "Revisa Trazabilidad",      href: "/servicios/revisa-trazabilidad" },
+  { label: "Soporte técnico",          href: "/soporte" },
+  { label: "Formación",               href: "/formacion" },
+  { label: "Soluciones eléctricas",   href: "/soluciones" },
+  { label: "Empresa / Quiénes somos",  href: "/empresa" },
+  { label: "Kit Digital",              href: "/kit-digital" },
+  { label: "Tienda online",            href: "https://tienda.tranluz.es" },
+  { label: "Contacto",                 href: "/contacto" },
+  { label: "Cabrestantes eléctricos",  href: "/productos" },
+  { label: "Certificación ITS",        href: "/servicios/its-servicio-tecnico" },
+  { label: "Trazabilidad de equipos",  href: "/servicios/revisa-trazabilidad" },
 ];
 
+// ─── HeaderSearch component ───────────────────────────────────────────
+function HeaderSearch() {
+  const router = useRouter();
+  const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  const results = query.trim().length > 0
+    ? SEARCH_INDEX.filter((item) =>
+        item.label.toLowerCase().includes(query.toLowerCase())
+      ).slice(0, 6)
+    : [];
+
+  const handleSubmit = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    if (results.length > 0) {
+      router.push(results[0].href);
+      setQuery("");
+      setOpen(false);
+    }
+  }, [results, router]);
+
+  const handleSelect = useCallback((href: string) => {
+    router.push(href);
+    setQuery("");
+    setOpen(false);
+  }, [router]);
+
+  // Close on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <div ref={wrapRef} className={`hs-wrap${focused ? " hs-wrap--focused" : ""}`}>
+      <form onSubmit={handleSubmit} role="search" className="hs-form">
+        <Search size={14} className="hs-icon" aria-hidden="true" />
+        <input
+          type="search"
+          value={query}
+          onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+          onFocus={() => { setFocused(true); setOpen(true); }}
+          onBlur={() => setFocused(false)}
+          placeholder="Buscar..."
+          aria-label="Buscar en Tranluz"
+          autoComplete="off"
+          className="hs-input"
+        />
+        {query && (
+          <button
+            type="button"
+            onClick={() => { setQuery(""); setOpen(false); }}
+            className="hs-clear"
+            aria-label="Limpiar búsqueda"
+          >
+            <X size={12} />
+          </button>
+        )}
+      </form>
+      {open && results.length > 0 && (
+        <ul className="hs-dropdown" role="listbox">
+          {results.map((item) => (
+            <li key={item.href} role="option">
+              <button
+                type="button"
+                className="hs-dropdown__item"
+                onMouseDown={() => handleSelect(item.href)}
+              >
+                <Search size={12} className="hs-dropdown__icon" aria-hidden="true" />
+                {item.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+// ─── SiteHeader ─────────────────────────────────────────────────────────────
 export function SiteHeader() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [openMega, setOpenMega] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen]   = useState(false);
+  const [scrolled, setScrolled]       = useState(false);
+  const [openMega, setOpenMega]       = useState<string | null>(null);
   const [phoneVisible, setPhoneVisible] = useState(false);
   const mobileMenuId = useId();
   const navRef = useRef<HTMLElement>(null);
@@ -76,247 +174,222 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  const phoneHref = `tel:${brand.phone?.replace(/\s/g, "")}`;
+  const phoneHref    = `tel:${brand.phone?.replace(/\s/g, "")}`;
   const phoneDisplay = brand.phone ?? "+34 954 367 290";
 
   return (
     <>
-      {/* Main header */}
+      {/* ── Main header ── */}
       <header
         className={`site-header${scrolled ? " site-header--scrolled" : ""}`}
-        ref={navRef}
+        aria-label="Cabecera principal"
       >
         <div className="header-inner">
+
           {/* Logo */}
-          <Link href="/" className="header-logo" aria-label="Tranluz – inicio">
+          <Link href="/" aria-label="Tranluz – inicio" className="header-logo">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={assets.logo}
               alt="Tranluz logo"
-              width={180}
-                          height={60}
+              width={140}
+              height={46}
+              className="header-logo__img"
             />
           </Link>
 
           {/* Desktop navigation */}
-          <nav className="main-nav" aria-label="Navegación principal">
+          <nav
+            ref={navRef}
+            className="header-nav"
+            aria-label="Navegación principal"
+          >
             {mainNavigation.map((item) => (
               <div key={item.href} className="nav-item">
                 {item.children ? (
                   <>
                     <button
-                      className={`nav-link${openMega === item.href ? " nav-link--open" : ""}`}
+                      className="nav-link"
+                      aria-expanded={openMega === item.href}
+                      aria-haspopup="true"
                       onClick={() =>
                         setOpenMega(openMega === item.href ? null : item.href)
                       }
                     >
                       {navIcon(item.href)}
                       <span>{item.label}</span>
-                      <ChevronDown size={14} aria-hidden="true" />
+                      <ChevronDown
+                        size={13}
+                        className={`nav-chevron${openMega === item.href ? " nav-chevron--open" : ""}`}
+                        aria-hidden="true"
+                      />
                     </button>
                     {openMega === item.href && (
-                      <div className="nav-dropdown">
+                      <ul className="nav-dropdown" role="menu">
                         {item.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className="nav-dropdown-item"
-                            onClick={() => setOpenMega(null)}
-                          >
-                            {navIcon(child.href)}
-                            <span>{child.label}</span>
-                          </Link>
+                          <li key={child.href} role="none">
+                            <Link
+                              href={child.href}
+                              role="menuitem"
+                              className="nav-dropdown__item"
+                              onClick={() => setOpenMega(null)}
+                            >
+                              {navIcon(child.href)}
+                              <span>{child.label}</span>
+                            </Link>
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     )}
                   </>
+                ) : item.href.startsWith("http") ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="nav-link"
+                  >
+                    {navIcon(item.href)}
+                    <span>{item.label}</span>
+                  </a>
                 ) : (
-                  item.href.startsWith("http") ? (
-                    <a
-                      href={item.href}
-                      className="nav-link"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {navIcon(item.href)}
-                      <span>{item.label}</span>
-                    </a>
-                  ) : (
-                    <Link href={item.href} className="nav-link">
-                      {navIcon(item.href)}
-                      <span>{item.label}</span>
-                    </Link>
-                  )
+                  <Link href={item.href} className="nav-link">
+                    {navIcon(item.href)}
+                    <span>{item.label}</span>
+                  </Link>
                 )}
               </div>
             ))}
           </nav>
 
-          {/* Search */}
-          <div className="header-search">
-            <Search size={16} aria-hidden="true" className="search-icon" />
-            <input
-              type="search"
-              className="search-input"
-              placeholder="Buscar equipo…"
-              aria-label="Buscar equipo en Tranluz"
-            />
-          </div>
+          {/* Search – compact + functional */}
+          <HeaderSearch />
 
-          {/* Header actions: Phone > Email > Language > Theme > Mobile toggle */}
+          {/* Header actions */}
           <div className="header-actions">
-            {/* Phone icon with tooltip */}
+
+            {/* Phone */}
             <div
-              className="contact-icon-wrap"
+              className="header-action-wrap"
               onMouseEnter={() => setPhoneVisible(true)}
               onMouseLeave={() => setPhoneVisible(false)}
             >
               <a
                 href={phoneHref}
-                className="icon-button icon-button-link contact-icon-phone"
-                aria-label={`Llamar a Tranluz: ${phoneDisplay}`}
-                title={phoneDisplay}
+                className="header-action-btn"
+                aria-label="Llamar a Tranluz"
               >
-                <Phone size={18} aria-hidden="true" />
+                <Phone size={17} />
               </a>
               {phoneVisible && (
-                <div className="contact-tooltip" role="tooltip">
-                  <Phone size={13} aria-hidden="true" />
-                  <span>{phoneDisplay}</span>
-                </div>
+                <div className="header-tooltip">{phoneDisplay}</div>
               )}
             </div>
 
-            {/* Email / presupuesto icon */}
-            <Link
-              href="/presupuesto"
-              className="icon-button icon-button-link contact-icon-email"
-              aria-label="Solicitar presupuesto por email"
-              title="Solicitar presupuesto"
+            {/* Email */}
+            <a
+              href={`mailto:${brand.email}`}
+              className="header-action-btn"
+              aria-label="Enviar email a Tranluz"
             >
-              <Mail size={18} aria-hidden="true" />
-            </Link>
+              <Mail size={17} />
+            </a>
 
-            {/* Language selector */}
+            {/* Language */}
             <LanguageSelector />
 
-            {/* Theme toggle - last */}
+            {/* Theme toggle – last */}
             <ThemeToggle />
 
-            {/* Mobile menu toggle */}
+            {/* Mobile toggle */}
             <button
-              className="mobile-menu-btn"
-              aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+              className="header-action-btn header-mobile-toggle"
               aria-expanded={mobileOpen}
               aria-controls={mobileMenuId}
+              aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
               onClick={() => setMobileOpen(!mobileOpen)}
             >
-              {mobileOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
-          </div>
-        </div>
 
-        {/* Mega panel */}
-        {openMega === "mega" && (
-          <div className="mega-panel">
-            <div className="topbar">
-              {megaItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="mega-item"
-                  onClick={() => setOpenMega(null)}
-                >
-                  <span className="mega-item-icon">{item.icon}</span>
-                  <span className="mega-item-body">
-                    <span className="mega-item-label">{item.label}</span>
-                    <span className="mega-item-sub">{item.sub}</span>
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
+          </div>{/* /header-actions */}
+        </div>{/* /header-inner */}
       </header>
 
-      {/* Mobile overlay */}
+      {/* ── Mobile overlay ── */}
       {mobileOpen && (
-        <div className="mobile-overlay" id={mobileMenuId}>
-          <div className="mobile-header">
+        <div className="mobile-overlay" id={mobileMenuId} aria-modal="true" role="dialog">
+          <div className="mobile-overlay__header">
             <Link href="/" onClick={() => setMobileOpen(false)} aria-label="Tranluz – inicio">
-              Tranluz
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={assets.logo} alt="Tranluz" width={120} height={40} className="header-logo__img" />
             </Link>
             <button
               onClick={() => setMobileOpen(false)}
               className="mobile-close-btn"
               aria-label="Cerrar menú móvil"
             >
-              <X size={20} aria-hidden="true" />
+              <X size={22} />
             </button>
           </div>
+
           <nav className="mobile-nav">
             {mainNavigation.map((item) => (
-              <div key={item.href} className="mobile-nav-item">
+              <div key={item.href} className="mobile-nav__section">
                 {item.children ? (
-                  <details>
-                    <summary className="mobile-nav-summary">
+                  <>
+                    <div className="mobile-nav__group-label">
                       {navIcon(item.href)}
-                      {item.label}
-                    </summary>
-                    <div className="mobile-nav-children">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className="mobile-nav-child"
-                          onClick={() => setMobileOpen(false)}
-                        >
-                          {navIcon(child.href)}
-                          {child.label}
-                        </Link>
-                      ))}
+                      <span>{item.label}</span>
                     </div>
-                  </details>
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="mobile-nav__child"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {navIcon(child.href)}
+                        <span>{child.label}</span>
+                      </Link>
+                    ))}
+                  </>
+                ) : item.href.startsWith("http") ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mobile-nav__link"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {navIcon(item.href)}
+                    <span>{item.label}</span>
+                  </a>
                 ) : (
-                  item.href.startsWith("http") ? (
-                    <a
-                      href={item.href}
-                      className="mobile-nav-link"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {navIcon(item.href)}
-                      {item.label}
-                    </a>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className="mobile-nav-link"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {navIcon(item.href)}
-                      {item.label}
-                    </Link>
-                  )
+                  <Link
+                    href={item.href}
+                    className="mobile-nav__link"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {navIcon(item.href)}
+                    <span>{item.label}</span>
+                  </Link>
                 )}
               </div>
             ))}
           </nav>
-          <div className="mobile-footer">
-            <a href={phoneHref} className="mobile-phone">{phoneDisplay}</a>
+
+          <div className="mobile-overlay__footer">
+            <a href={phoneHref} className="mobile-cta-btn mobile-cta-btn--phone">
+              <Phone size={16} /> {phoneDisplay}
+            </a>
             <Link
-              href="/presupuesto"
-              className="btn btn-primary"
+              href="/contacto"
+              className="mobile-cta-btn mobile-cta-btn--contact"
               onClick={() => setMobileOpen(false)}
             >
               Solicitar presupuesto
