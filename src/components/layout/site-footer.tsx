@@ -39,14 +39,14 @@ const NAV_COLS = [
       { label: "Productos", href: "/productos" },
       { label: "Alquiler", href: "/alquiler" },
       { label: "Servicios", href: "/servicios" },
-      { label: "Formación", href: "/formacion" },
+      { label: "Formacion", href: "/formacion" },
       { label: "Soluciones", href: "/soluciones" },
     ],
   },
   {
     heading: "Empresa",
     links: [
-      { label: "Quiénes somos", href: "/empresa" },
+      { label: "Quienes somos", href: "/empresa" },
       { label: "Kit Digital", href: "/kit-digital" },
       { label: "Soporte", href: "/soporte" },
       { label: "Trabaja con nosotros", href: "/empresa#empleo" },
@@ -62,54 +62,21 @@ const SOCIALS = [
 
 const ACCREDITATIONS = [
   { src: "/images/Otros/Aenor_Logo.svg", alt: "AENOR", href: "https://www.aenor.com", w: 64, h: 32 },
-  { src: "/images/Otros/Logos_Financiacion.png", alt: "Financiación EU", href: "#", w: 160, h: 40 },
+  { src: "/images/Otros/Logos_Financiacion.png", alt: "Financiacion EU", href: "#", w: 160, h: 40 },
   { src: "/images/Otros/Moves_III_Logo.png", alt: "Programa MOVES III", href: "https://www.miteco.gob.es", w: 96, h: 40 },
 ];
 
 /* ------------------------------------------------------------------ */
-/* Styles (all inline so they are never overridden by cascade)          */
+/* Styles                                                                */
 /* ------------------------------------------------------------------ */
 const S = {
   footer: {
-    background: "#0d1117",
+    background: "linear-gradient(160deg, #0a1628 0%, #0d2444 40%, #0a3060 70%, #0d1f3c 100%)",
     color: "#94a3b8",
     fontFamily: "inherit",
     fontSize: "14px",
     lineHeight: "1.6",
-  } as React.CSSProperties,
-  accrBar: {
-    background: "#080d12",
-    borderTop: "1px solid rgba(255,255,255,0.07)",
-    borderBottom: "1px solid rgba(255,255,255,0.07)",
-    padding: "20px 0",
-  } as React.CSSProperties,
-  accrInner: {
-    maxWidth: "1200px",
-    margin: "0 auto",
-    padding: "0 32px",
-    display: "flex",
-    alignItems: "center",
-    gap: "32px",
-    flexWrap: "wrap" as const,
-  } as React.CSSProperties,
-  accrLabel: {
-    fontSize: "10px",
-    fontWeight: 700,
-    letterSpacing: "0.14em",
-    textTransform: "uppercase" as const,
-    color: "#f97316",
-    flexShrink: 0,
-    whiteSpace: "nowrap" as const,
-  } as React.CSSProperties,
-  accrLogos: {
-    display: "flex",
-    alignItems: "center",
-    gap: "32px",
-    flexWrap: "wrap" as const,
-  } as React.CSSProperties,
-  accrImg: {
-    objectFit: "contain" as const,
-    opacity: 0.8,
+    position: "relative" as const,
   } as React.CSSProperties,
   main: {
     maxWidth: "1200px",
@@ -127,12 +94,10 @@ const S = {
     height: "48px",
     width: "auto",
     objectFit: "contain" as const,
-    filter: "brightness(0) invert(1)",
-    opacity: 0.9,
   } as React.CSSProperties,
   brandTagline: {
     fontSize: "13px",
-    color: "#64748b",
+    color: "#93b5d6",
     lineHeight: "1.7",
     marginBottom: "20px",
     maxWidth: "280px",
@@ -140,6 +105,7 @@ const S = {
   socials: {
     display: "flex",
     gap: "8px",
+    marginBottom: "28px",
   } as React.CSSProperties,
   socialLink: {
     display: "inline-flex",
@@ -148,9 +114,32 @@ const S = {
     width: "34px",
     height: "34px",
     borderRadius: "50%",
-    background: "rgba(255,255,255,0.06)",
-    color: "#94a3b8",
+    background: "rgba(255,255,255,0.10)",
+    color: "#cbd5e1",
     textDecoration: "none",
+    border: "1px solid rgba(255,255,255,0.12)",
+  } as React.CSSProperties,
+  accrSection: {
+    marginTop: "8px",
+  } as React.CSSProperties,
+  accrLabel: {
+    fontSize: "10px",
+    fontWeight: 700,
+    letterSpacing: "0.12em",
+    textTransform: "uppercase" as const,
+    color: "#f97316",
+    marginBottom: "12px",
+  } as React.CSSProperties,
+  accrLogos: {
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    flexWrap: "wrap" as const,
+  } as React.CSSProperties,
+  accrImg: {
+    objectFit: "contain" as const,
+    opacity: 0.85,
+    filter: "brightness(0) invert(1)",
   } as React.CSSProperties,
   navHeading: {
     fontSize: "11px",
@@ -160,7 +149,7 @@ const S = {
     color: "#e2e8f0",
     marginBottom: "16px",
     paddingBottom: "10px",
-    borderBottom: "1px solid rgba(255,255,255,0.07)",
+    borderBottom: "1px solid rgba(255,255,255,0.10)",
   } as React.CSSProperties,
   navList: {
     listStyle: "none",
@@ -171,7 +160,7 @@ const S = {
     gap: "8px",
   } as React.CSSProperties,
   navLink: {
-    color: "#64748b",
+    color: "#93b5d6",
     textDecoration: "none",
     fontSize: "13.5px",
     display: "block",
@@ -182,7 +171,7 @@ const S = {
     gap: "10px",
     marginBottom: "14px",
     fontSize: "13.5px",
-    color: "#64748b",
+    color: "#93b5d6",
   } as React.CSSProperties,
   contactIcon: {
     color: "#f97316",
@@ -190,12 +179,12 @@ const S = {
     marginTop: "2px",
   } as React.CSSProperties,
   contactLink: {
-    color: "#64748b",
+    color: "#93b5d6",
     textDecoration: "none",
   } as React.CSSProperties,
   bottomBar: {
-    borderTop: "1px solid rgba(255,255,255,0.07)",
-    background: "#080d12",
+    borderTop: "1px solid rgba(255,255,255,0.10)",
+    background: "rgba(5,15,35,0.60)",
     padding: "16px 0",
   } as React.CSSProperties,
   bottomInner: {
@@ -210,7 +199,7 @@ const S = {
   } as React.CSSProperties,
   bottomCopy: {
     fontSize: "12px",
-    color: "#475569",
+    color: "#64748b",
     margin: 0,
   } as React.CSSProperties,
   legalNav: {
@@ -220,7 +209,7 @@ const S = {
   } as React.CSSProperties,
   legalLink: {
     fontSize: "12px",
-    color: "#475569",
+    color: "#64748b",
     textDecoration: "none",
   } as React.CSSProperties,
 } as const;
@@ -233,47 +222,45 @@ export function SiteFooter() {
   return (
     <footer style={S.footer}>
 
-      {/* Accreditations bar */}
-      <div style={S.accrBar}>
-        <div style={S.accrInner}>
-          <span style={S.accrLabel}>Certificaciones y acreditaciones</span>
-          <div style={S.accrLogos}>
-            {ACCREDITATIONS.map(({ src, alt, href, w, h }) => (
-              <a key={src} href={href} target="_blank" rel="noopener noreferrer">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt={alt} width={w} height={h} style={S.accrImg} />
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Main grid */}
       <div style={S.main}>
 
         {/* Brand column */}
         <div>
-          <a href="/" style={S.brandLogo}>
+          <Link href="/" style={S.brandLogo}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={assets.logoWhite}
+              src={assets.logoWhite ?? assets.logo}
               alt="Tranluz"
-              width={120}
-              height={48}
               style={S.brandLogoImg}
             />
-          </a>
+          </Link>
           <p style={S.brandTagline}>
-            Especialistas en máquinas y herramientas para montadores eléctricos desde{" "}
-            <strong style={{ color: "#94a3b8", fontWeight: 600 }}>{brand.founded}</strong>.<br />
-            Servicio técnico, alquiler, formación y trazabilidad.
+            Especialistas en maquinas y herramientas para montadores electricos desde{" "}
+            <strong>{brand.founded}</strong>.<br />
+            Servicio tecnico, alquiler, formacion y trazabilidad.
           </p>
+
+          {/* Social icons */}
           <div style={S.socials}>
             {SOCIALS.map(({ Icon, href, label }) => (
-              <a key={label} href={href} target="_blank" rel="noopener noreferrer" style={S.socialLink} aria-label={label}>
+              <a key={label} href={href} style={S.socialLink} aria-label={label} target="_blank" rel="noopener noreferrer">
                 <Icon />
               </a>
             ))}
+          </div>
+
+          {/* Accreditations */}
+          <div style={S.accrSection}>
+            <p style={S.accrLabel}>Certificaciones y acreditaciones</p>
+            <div style={S.accrLogos}>
+              {ACCREDITATIONS.map(({ src, alt, href, w, h }) => (
+                <a key={alt} href={href} target="_blank" rel="noopener noreferrer" title={alt}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={src} alt={alt} width={w} height={h} style={S.accrImg} />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -295,20 +282,20 @@ export function SiteFooter() {
         <div>
           <p style={S.navHeading}>Contacto</p>
           <div style={S.contactRow}>
-            <MapPin size={15} style={S.contactIcon} />
+            <MapPin size={16} style={S.contactIcon} />
             <span>
-              Polígono Industrial Calonge<br />
-              Calle Oro n.º 2, 41007 Sevilla
+              Poligono Industrial Calonge<br />
+              Calle Oro n. 2, 41007 Sevilla
             </span>
           </div>
           <div style={S.contactRow}>
-            <PhoneCall size={15} style={S.contactIcon} />
+            <PhoneCall size={16} style={S.contactIcon} />
             <a href={phoneHref} style={S.contactLink}>
               {brand.phone ?? "+34 954 367 290"}
             </a>
           </div>
           <div style={S.contactRow}>
-            <Mail size={15} style={S.contactIcon} />
+            <Mail size={16} style={S.contactIcon} />
             <a href={`mailto:${brand.email ?? "info@tranluz.com"}`} style={S.contactLink}>
               {brand.email ?? "info@tranluz.com"}
             </a>
@@ -321,7 +308,7 @@ export function SiteFooter() {
       <div style={S.bottomBar}>
         <div style={S.bottomInner}>
           <p style={S.bottomCopy}>
-            © {new Date().getFullYear()} Tranluz, S.L. — Todos los derechos reservados.
+            &copy; {new Date().getFullYear()} Tranluz, S.L. &mdash; Todos los derechos reservados.
           </p>
           <nav style={S.legalNav}>
             {[
@@ -330,7 +317,13 @@ export function SiteFooter() {
               { href: "/cookies", label: "Cookies" },
               { href: "/aviso-legal", label: "Aviso legal" },
             ].map((l) => (
-              <Link key={l.href} href={l.href} style={S.legalLink}>{l.label}</Link>
+              <Link
+                key={l.href}
+                href={l.href}
+                style={S.legalLink}
+              >
+                {l.label}
+              </Link>
             ))}
           </nav>
         </div>
