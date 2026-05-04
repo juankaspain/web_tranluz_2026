@@ -54,14 +54,24 @@ export default function PresupuestoPageContent() {
                     </div>
                     <div className="field">
                       <label htmlFor="empresa">Empresa</label>
-                      <input id="empresa" name="empresa" type="text" autoComplete="organization" placeholder="Instalaciones Eléctricas SL" />
+                      <input id="empresa" name="empresa" type="text" autoComplete="organization" placeholder="Instalaciones Eléctricas SL"  aria-required="true" aria-invalid={!!errors.nombre} aria-describedby={errors.nombre ? "nombre-error" : undefined}/>
                     </div>
                   </div>
+                                  {errors.nombre && (
+                  <div id="nombre-error" role="alert" aria-live="polite" className="form-error">
+                    {errors.nombre}
+                  </div>
+                )}
                   <div className="form-row">
                     <div className="field">
                       <label htmlFor="email">Email <span aria-hidden="true">*</span></label>
-                      <input id="email" name="email" type="email" required autoComplete="email" placeholder="ana@empresa.com" />
+                      <input id="email" name="email" type="email" required autoComplete="email" placeholder="ana@empresa.com" aria-required="true" aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-error" : undefined} />
                     </div>
+                                    {errors.email && (
+                  <div id="email-error" role="alert" aria-live="polite" className="form-error">
+                    {errors.email}
+                  </div>
+                )}
                     <div className="field">
                       <label htmlFor="telefono">Teléfono</label>
                       <input id="telefono" name="telefono" type="tel" autoComplete="tel" placeholder="+34 600 000 000" />
@@ -69,7 +79,7 @@ export default function PresupuestoPageContent() {
                   </div>
                   <div className="field">
                     <label htmlFor="servicio">Tipo de consulta <span aria-hidden="true">*</span></label>
-                    <select id="servicio" name="servicio" required value={servicio} onChange={(e) => setServicio(e.target.value)}>
+                    <select id="servicio" name="servicio" required value={servicio} onChange={(e) => setServicio(e.target.value)} aria-required="true" aria-invalid={!!errors.servicio} aria-describedby={errors.servicio ? "servicio-error" : undefined}>
                       <option value="">Selecciona una opción…</option>
                       {servicios.map((s) => <option key={s} value={s}>{s}</option>)}
                     </select>
@@ -77,6 +87,11 @@ export default function PresupuestoPageContent() {
                   <div className="field">
                     <label htmlFor="mensaje">Describe tu proyecto o consulta <span aria-hidden="true">*</span></label>
                     <textarea id="mensaje" name="mensaje" required rows={5} placeholder="Indica el tipo de equipo, la obra, los plazos o cualquier detalle relevante…" />
+                                  {errors.servicio && (
+                <div id="servicio-error" role="alert" aria-live="polite" className="form-error">
+                  {errors.servicio}
+                </div>
+              )}
                   </div>
                   <button type="submit" className="button button-primary" style={{ width: "100%", justifyContent: "center" }}>
                     <Send size={16} aria-hidden="true" />
