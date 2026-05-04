@@ -18,6 +18,7 @@ const servicios = [
 export default function PresupuestoPageContent() {
   const [enviado, setEnviado] = useState(false);
   const [servicio, setServicio] = useState("");
+    const [errors, setErrors] = useState<Record<string, string>>({});
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
