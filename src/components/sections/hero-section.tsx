@@ -520,7 +520,6 @@ export function HeroSection() {
               <div ref={phoneRef} style={{ position: "relative", display: "inline-block" }}>
                 <button
                   onClick={() => setPhoneOpen(v => !v)}
-                  onMouseEnter={() => setPhoneOpen(true)}
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -538,6 +537,7 @@ export function HeroSection() {
                     whiteSpace: "nowrap",
                   }}
                   onMouseEnter={e => {
+                          setPhoneOpen(true);
                     e.currentTarget.style.background = "rgba(255, 255, 255, 0.12)";
                     e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.24)";
                   }}
