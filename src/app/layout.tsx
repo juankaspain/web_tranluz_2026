@@ -61,6 +61,16 @@ export const metadata: Metadata = {
   authors: [{ name: "Tranluz", url: BASE_URL }],
   category: "industrial equipment",
   classification: "business",
+  icons: {
+    icon: [
+      { url: "/images/Tranluz/Logo-Tranluz-PM.svg", type: "image/svg+xml" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/images/Tranluz/Logo-Tranluz-PM.svg",
+  },
   alternates: {
     canonical: "/",
     languages: {
@@ -133,32 +143,24 @@ export default async function RootLayout({
     locale = isLocale(cookieLocale)
       ? cookieLocale
       : isLocale(headerLocale)
-        ? headerLocale
-        : defaultLocale;
+      ? headerLocale
+      : defaultLocale;
   } catch {
     locale = defaultLocale;
   }
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className="scroll-smooth"
+    >
       <head>
         <ThemeScript />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="alternate" hrefLang="es-ES" href="https://www.tranluz.es/" />
-        <link rel="alternate" hrefLang="en-GB" href="https://www.tranluz.es/en" />
-        <link rel="alternate" hrefLang="de-DE" href="https://www.tranluz.es/de" />
-        <link rel="alternate" hrefLang="it-IT" href="https://www.tranluz.es/it" />
-        <link rel="alternate" hrefLang="fr-FR" href="https://www.tranluz.es/fr" />
-        <link rel="alternate" hrefLang="x-default" href="https://www.tranluz.es/" />
-        <meta name="geo.region" content="ES-AN" />
-        <meta name="geo.placename" content="Sevilla" />
-        <meta name="geo.position" content="37.389092;-5.984459" />
-        <meta name="ICBM" content="37.389092, -5.984459" />
       </head>
-      <body suppressHydrationWarning>
+      <body className="bg-background text-foreground antialiased">
         <SkipLink />
-        <AutoTranslate />
+        <AutoTranslate locale={locale} />
         <StructuredData />
         {children}
         <CookieConsent />
