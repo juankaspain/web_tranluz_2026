@@ -196,7 +196,7 @@ export function SiteHeader() {
             <Link href="/" className="logo-link" aria-label="Tranluz – inicio">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={assets.logoLight}
+                src={assets.logo}
                 alt="Tranluz"
                 width={110}
                 height={36}
@@ -334,7 +334,7 @@ export function SiteHeader() {
             <div className="mobile-panel-top">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={assets.logoLight}
+                src={assets.logo}
                 alt="Tranluz"
                 width={100}
                 height={32}
