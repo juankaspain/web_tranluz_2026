@@ -1,10 +1,11 @@
+import React from "react";
 import Link from "next/link";
 import { Mail, MapPin, PhoneCall } from "lucide-react";
 import { brand } from "@/config/brand";
 import { assets } from "@/content/assets";
 
 /* ------------------------------------------------------------------ */
-/* Social icon SVGs                                                     */
+/* Social icon SVGs                                                      */
 /* ------------------------------------------------------------------ */
 function LinkedInIcon() {
   return (
@@ -16,7 +17,7 @@ function LinkedInIcon() {
 function InstagramIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-4.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-4.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-4.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
     </svg>
   );
 }
@@ -29,44 +30,44 @@ function YouTubeIcon() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Data                                                                 */
+/* Data                                                                  */
 /* ------------------------------------------------------------------ */
 const NAV_COLS = [
   {
     heading: "Plataforma",
     links: [
-      { label: "Productos",  href: "/productos" },
-      { label: "Alquiler",   href: "/alquiler" },
-      { label: "Servicios",  href: "/servicios" },
-      { label: "Formaci\u00f3n",  href: "/formacion" },
+      { label: "Productos", href: "/productos" },
+      { label: "Alquiler", href: "/alquiler" },
+      { label: "Servicios", href: "/servicios" },
+      { label: "Formación", href: "/formacion" },
       { label: "Soluciones", href: "/soluciones" },
     ],
   },
   {
     heading: "Empresa",
     links: [
-      { label: "Qui\u00e9nes somos",       href: "/empresa" },
-      { label: "Kit Digital",          href: "/kit-digital" },
-      { label: "Soporte",              href: "/soporte" },
+      { label: "Quiénes somos", href: "/empresa" },
+      { label: "Kit Digital", href: "/kit-digital" },
+      { label: "Soporte", href: "/soporte" },
       { label: "Trabaja con nosotros", href: "/empresa#empleo" },
     ],
   },
 ];
 
 const SOCIALS = [
-  { Icon: LinkedInIcon,  href: brand.social?.linkedin  ?? "https://linkedin.com",  label: "LinkedIn" },
+  { Icon: LinkedInIcon, href: brand.social?.linkedin ?? "https://linkedin.com", label: "LinkedIn" },
   { Icon: InstagramIcon, href: brand.social?.instagram ?? "https://instagram.com", label: "Instagram" },
-  { Icon: YouTubeIcon,   href: brand.social?.youtube   ?? "https://youtube.com",   label: "YouTube" },
+  { Icon: YouTubeIcon, href: brand.social?.youtube ?? "https://youtube.com", label: "YouTube" },
 ];
 
 const ACCREDITATIONS = [
-  { src: "/images/Otros/Aenor_Logo.svg",       alt: "AENOR",              href: "https://www.aenor.com",            w: 64,  h: 32 },
-  { src: "/images/Otros/Logos_Financiacion.png", alt: "Financiaci\u00f3n EU",    href: "#",                               w: 160, h: 40 },
-  { src: "/images/Otros/Moves_III_Logo.png",   alt: "Programa MOVES III", href: "https://www.miteco.gob.es",        w: 96,  h: 40 },
+  { src: "/images/Otros/Aenor_Logo.svg", alt: "AENOR", href: "https://www.aenor.com", w: 64, h: 32 },
+  { src: "/images/Otros/Logos_Financiacion.png", alt: "Financiación EU", href: "#", w: 160, h: 40 },
+  { src: "/images/Otros/Moves_III_Logo.png", alt: "Programa MOVES III", href: "https://www.miteco.gob.es", w: 96, h: 40 },
 ];
 
 /* ------------------------------------------------------------------ */
-/* Styles (all inline so they are never overridden by cascade)         */
+/* Styles (all inline so they are never overridden by cascade)          */
 /* ------------------------------------------------------------------ */
 const S = {
   footer: {
@@ -76,8 +77,6 @@ const S = {
     fontSize: "14px",
     lineHeight: "1.6",
   } as React.CSSProperties,
-
-  // ─ Accreditations bar
   accrBar: {
     background: "#080d12",
     borderTop: "1px solid rgba(255,255,255,0.07)",
@@ -112,8 +111,6 @@ const S = {
     objectFit: "contain" as const,
     opacity: 0.8,
   } as React.CSSProperties,
-
-  // ─ Main body
   main: {
     maxWidth: "1200px",
     margin: "0 auto",
@@ -122,8 +119,6 @@ const S = {
     gridTemplateColumns: "2fr 1fr 1fr 1.4fr",
     gap: "48px",
   } as React.CSSProperties,
-
-  // ─ Brand column
   brandLogo: {
     display: "block",
     marginBottom: "16px",
@@ -142,10 +137,6 @@ const S = {
     marginBottom: "20px",
     maxWidth: "280px",
   } as React.CSSProperties,
-  brandTaglineYear: {
-    color: "#94a3b8",
-    fontWeight: 600,
-  } as React.CSSProperties,
   socials: {
     display: "flex",
     gap: "8px",
@@ -160,10 +151,7 @@ const S = {
     background: "rgba(255,255,255,0.06)",
     color: "#94a3b8",
     textDecoration: "none",
-    transition: "background 0.2s, color 0.2s",
   } as React.CSSProperties,
-
-  // ─ Nav column
   navHeading: {
     fontSize: "11px",
     fontWeight: 700,
@@ -187,10 +175,7 @@ const S = {
     textDecoration: "none",
     fontSize: "13.5px",
     display: "block",
-    transition: "color 0.15s",
   } as React.CSSProperties,
-
-  // ─ Contact column
   contactRow: {
     display: "flex",
     alignItems: "flex-start",
@@ -207,10 +192,7 @@ const S = {
   contactLink: {
     color: "#64748b",
     textDecoration: "none",
-    transition: "color 0.15s",
   } as React.CSSProperties,
-
-  // ─ Bottom bar
   bottomBar: {
     borderTop: "1px solid rgba(255,255,255,0.07)",
     background: "#080d12",
@@ -240,80 +222,55 @@ const S = {
     fontSize: "12px",
     color: "#475569",
     textDecoration: "none",
-    transition: "color 0.15s",
   } as React.CSSProperties,
 } as const;
 
 /* ------------------------------------------------------------------ */
-/* Component                                                            */
+/* Component                                                             */
 /* ------------------------------------------------------------------ */
-import React from "react";
-
 export function SiteFooter() {
   const phoneHref = `tel:${brand.phone?.replace(/\s/g, "") ?? ""}`;
-
   return (
-    <footer style={S.footer} aria-label="Pie de p\u00e1gina">
+    <footer style={S.footer}>
 
-      {/* ── Accreditations bar ── */}
+      {/* Accreditations bar */}
       <div style={S.accrBar}>
         <div style={S.accrInner}>
           <span style={S.accrLabel}>Certificaciones y acreditaciones</span>
           <div style={S.accrLogos}>
             {ACCREDITATIONS.map(({ src, alt, href, w, h }) => (
-              <a
-                key={alt}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={alt}
-                style={{ display: "flex", alignItems: "center" }}
-              >
+              <a key={src} href={href} target="_blank" rel="noopener noreferrer">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={src}
-                  alt={alt}
-                  width={w}
-                  height={h}
-                  loading="lazy"
-                  style={S.accrImg}
-                />
+                <img src={src} alt={alt} width={w} height={h} style={S.accrImg} />
               </a>
             ))}
           </div>
         </div>
       </div>
 
-      {/* ── Main grid ── */}
+      {/* Main grid */}
       <div style={S.main}>
 
-        {/* Brand */}
+        {/* Brand column */}
         <div>
-          <Link href="/" aria-label="Tranluz" style={S.brandLogo}>
+          <a href="/" style={S.brandLogo}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={assets.logo}
+              src={assets.logoLight}
               alt="Tranluz"
-              width={160}
+              width={120}
               height={48}
               style={S.brandLogoImg}
             />
-          </Link>
+          </a>
           <p style={S.brandTagline}>
-            Especialistas en m\u00e1quinas y herramientas para montadores el\u00e9ctricos desde{" "}
-            <strong style={S.brandTaglineYear}>{brand.founded}</strong>.<br />
-            Servicio t\u00e9cnico, alquiler, formaci\u00f3n y trazabilidad.
+            Especialistas en máquinas y herramientas para montadores eléctricos desde{" "}
+            <strong style={{ color: "#94a3b8", fontWeight: 600 }}>{brand.founded}</strong>.<br />
+            Servicio técnico, alquiler, formación y trazabilidad.
           </p>
           <div style={S.socials}>
             {SOCIALS.map(({ Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-                style={S.socialLink}
-              >
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" style={S.socialLink} aria-label={label}>
                 <Icon />
               </a>
             ))}
@@ -323,47 +280,36 @@ export function SiteFooter() {
         {/* Nav columns */}
         {NAV_COLS.map((col) => (
           <div key={col.heading}>
-            <h3 style={S.navHeading}>{col.heading}</h3>
+            <p style={S.navHeading}>{col.heading}</p>
             <ul style={S.navList}>
               {col.links.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} style={S.navLink}>
-                    {l.label}
-                  </Link>
+                  <Link href={l.href} style={S.navLink}>{l.label}</Link>
                 </li>
               ))}
             </ul>
           </div>
         ))}
 
-        {/* Contact */}
+        {/* Contact column */}
         <div>
-          <h3 style={S.navHeading}>Contacto</h3>
-
+          <p style={S.navHeading}>Contacto</p>
           <div style={S.contactRow}>
             <MapPin size={15} style={S.contactIcon} />
-            <span style={{ lineHeight: "1.5" }}>
-              Pol\u00edgono Industrial Calonge<br />
-              Calle Oro n.\u00ba 2, 41007 Sevilla
+            <span>
+              Polígono Industrial Calonge<br />
+              Calle Oro n.º 2, 41007 Sevilla
             </span>
           </div>
-
           <div style={S.contactRow}>
             <PhoneCall size={15} style={S.contactIcon} />
-            <a
-              href={phoneHref}
-              style={S.contactLink}
-            >
+            <a href={phoneHref} style={S.contactLink}>
               {brand.phone ?? "+34 954 367 290"}
             </a>
           </div>
-
           <div style={S.contactRow}>
             <Mail size={15} style={S.contactIcon} />
-            <a
-              href={`mailto:${brand.email ?? "info@tranluz.com"}`}
-              style={S.contactLink}
-            >
+            <a href={`mailto:${brand.email ?? "info@tranluz.com"}`} style={S.contactLink}>
               {brand.email ?? "info@tranluz.com"}
             </a>
           </div>
@@ -371,22 +317,20 @@ export function SiteFooter() {
 
       </div>{/* /main grid */}
 
-      {/* ── Bottom bar ── */}
+      {/* Bottom bar */}
       <div style={S.bottomBar}>
         <div style={S.bottomInner}>
           <p style={S.bottomCopy}>
-            &copy; {new Date().getFullYear()} Tranluz, S.L. \u2014 Todos los derechos reservados.
+            © {new Date().getFullYear()} Tranluz, S.L. — Todos los derechos reservados.
           </p>
-          <nav aria-label="Legal" style={S.legalNav}>
+          <nav style={S.legalNav}>
             {[
               { href: "/accesibilidad", label: "Accesibilidad" },
-              { href: "/privacidad",    label: "Privacidad" },
-              { href: "/cookies",       label: "Cookies" },
-              { href: "/aviso-legal",   label: "Aviso legal" },
+              { href: "/privacidad", label: "Privacidad" },
+              { href: "/cookies", label: "Cookies" },
+              { href: "/aviso-legal", label: "Aviso legal" },
             ].map((l) => (
-              <Link key={l.href} href={l.href} style={S.legalLink}>
-                {l.label}
-              </Link>
+              <Link key={l.href} href={l.href} style={S.legalLink}>{l.label}</Link>
             ))}
           </nav>
         </div>
