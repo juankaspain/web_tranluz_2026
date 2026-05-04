@@ -3,10 +3,10 @@ export const mainNavigation = [
     label: "Servicios",
     href: "/servicios",
     children: [
+      { label: "Alquiler", href: "/alquiler" },
       { label: "ITS Servicio Técnico", href: "/servicios/its-servicio-tecnico" },
       { label: "Revisa trazabilidad", href: "/servicios/revisa-trazabilidad" },
       { label: "Soporte", href: "/soporte" },
-      { label: "Alquiler", href: "/alquiler" },
       { label: "Formacion", href: "/formacion" }
     ]
   },
