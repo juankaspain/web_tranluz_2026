@@ -1,5 +1,7 @@
 /* ============================================================
    FOOTER — Site footer con fondo oscuro y columnas de nav
+   ============================================================
+   Fix M7: Logos de partners en color al hover (filter: none)
    ============================================================ */
 
 .site-footer {
@@ -19,6 +21,24 @@
 .footer-partners {
   border-bottom: 1px solid var(--line);
   padding: 20px 0;
+}
+
+/* M7: Logos de partners — monocromo por defecto, color al hover */
+.partner-logo-img {
+  filter: brightness(0) invert(0.3);
+  opacity: 0.7;
+  transition: filter 220ms ease, opacity 220ms ease;
+}
+
+:root[data-theme="dark"] .partner-logo-img {
+  filter: brightness(0) invert(0.7);
+  opacity: 0.6;
+}
+
+.partner-logo-chip:hover .partner-logo-img,
+.partner-logo-chip:focus-visible .partner-logo-img {
+  filter: none;
+  opacity: 1;
 }
 
 /* ---- Footer main grid ------------------------------------ */
@@ -101,7 +121,7 @@
   display: block;
   margin-bottom: 12px;
   font-size: 0.75rem;
-  font-weight: 820;
+  font-weight: var(--fw-extrabold, 800);
   text-transform: uppercase;
   letter-spacing: 0.07em;
   color: rgba(238, 243, 245, 0.9);

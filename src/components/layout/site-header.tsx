@@ -134,7 +134,6 @@ function PhoneTooltip() {
   const wrapRef   = useRef<HTMLDivElement>(null);
   const tooltipId = useId();
 
-  // Cierre al hacer click fuera
   useEffect(() => {
     const h = (e: MouseEvent) => {
       if (wrapRef.current && !wrapRef.current.contains(e.target as Node))
@@ -144,7 +143,6 @@ function PhoneTooltip() {
     return () => document.removeEventListener("mousedown", h);
   }, []);
 
-  // Cierre con Escape
   useEffect(() => {
     if (!show) return;
     const h = (e: KeyboardEvent) => { if (e.key === "Escape") setShow(false); };
@@ -154,7 +152,6 @@ function PhoneTooltip() {
 
   return (
     <div ref={wrapRef} className="contact-icon-wrap">
-      {/* C3: solo onClick — eliminado onMouseEnter */}
       <button
         className="icon-button"
         onClick={() => setShow(s => !s)}
@@ -186,7 +183,6 @@ export function SiteHeader() {
   const [menuPos,    setMenuPos]    = useState<{ left: number; top: number } | null>(null);
   const mobileMenuId = useId();
   const navRef       = useRef<HTMLElement>(null);
-  // A5: refs para gestionar focus en items del dropdown abierto
   const dropdownRef  = useRef<HTMLDivElement>(null);
 
   const phone      = brand.phone ?? "+34 954 367 290";
@@ -194,12 +190,14 @@ export function SiteHeader() {
   const phoneHref  = `tel:${phone.replace(/\s/g, "")}`;
   const emailHref  = `mailto:${email}`;
 
+  /* Scrolled state para header shadow */
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 4);
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
+  /* Cerrar dropdown al hacer click fuera del nav */
   useEffect(() => {
     const fn = (e: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
@@ -211,24 +209,41 @@ export function SiteHeader() {
     return () => document.removeEventListener("mousedown", fn);
   }, []);
 
+  /* M6: scroll con threshold 20px — evita cerrar dropdown en micro-scroll
+     El listener trackea el scrollY anterior y solo cierra si el
+     desplazamiento acumulado supera 20px. */
   useEffect(() => {
-    const closeFloatingMenu = () => {
+    let lastScrollY = window.scrollY;
+
+    const onScroll = () => {
+      const delta = Math.abs(window.scrollY - lastScrollY);
+      if (delta > 20) {
+        setOpenMenu(null);
+        setMenuPos(null);
+      }
+      lastScrollY = window.scrollY;
+    };
+
+    const onResize = () => {
       setOpenMenu(null);
       setMenuPos(null);
     };
-    window.addEventListener("resize", closeFloatingMenu);
-    window.addEventListener("scroll", closeFloatingMenu, { passive: true });
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
     return () => {
-      window.removeEventListener("resize", closeFloatingMenu);
-      window.removeEventListener("scroll", closeFloatingMenu);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
+  /* Bloquear scroll del body cuando el menú móvil está abierto */
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  /* Escape global — cierra mobile y dropdown */
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -241,7 +256,7 @@ export function SiteHeader() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
 
-  // A5: cuando el dropdown se abre, mueve foco al primer item
+  /* A5: cuando el dropdown se abre, mueve foco al primer item */
   useEffect(() => {
     if (openMenu && dropdownRef.current) {
       const first = dropdownRef.current.querySelector<HTMLElement>("[role='menuitem']");
@@ -249,7 +264,7 @@ export function SiteHeader() {
     }
   }, [openMenu]);
 
-  // A5: keydown handler para botones de menú con submenu
+  /* A5: keydown handler para botones de menú con submenu */
   const handleMenuTriggerKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLButtonElement>, href: string, rect: DOMRect) => {
       if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
@@ -273,7 +288,7 @@ export function SiteHeader() {
     [openMenu]
   );
 
-  // A5: keydown en items del dropdown — Arrow Up/Down + Escape
+  /* A5: keydown en items del dropdown — Arrow Up/Down + Escape */
   const handleDropdownItemKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLAnchorElement>) => {
       if (!dropdownRef.current) return;
@@ -326,7 +341,6 @@ export function SiteHeader() {
                   <li key={item.href} role="none" className="nav-item">
                     {item.children ? (
                       <>
-                        {/* C7/A5: sin fontWeight inline — usa clase nav-link; keyDown con arrows */}
                         <button
                           role="menuitem"
                           aria-haspopup="true"
@@ -473,7 +487,7 @@ export function SiteHeader() {
               </button>
             </div>
 
-            {/* Nav — C7: sin fontWeight numérico, usa clases CSS */}
+            {/* Nav */}
             <ul className="mobile-nav-list">
               {mainNavigation.map(item => (
                 <li key={item.href}>
@@ -520,7 +534,7 @@ export function SiteHeader() {
               ))}
             </ul>
 
-            {/* Footer móvil — C7: clases CSS sin style inline */}
+            {/* Footer móvil */}
             <div className="mobile-footer">
               <a href={phoneHref} className="mobile-footer-link">
                 <Phone size={16} aria-hidden="true" className="contact-icon-phone" />

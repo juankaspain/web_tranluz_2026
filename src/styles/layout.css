@@ -1,7 +1,7 @@
 /* ============================================================
    LAYOUT — Estructura de página: header, footer, secciones
    ============================================================
-   Selectores de alto nivel que definen el esqueleto visual.
+   Fix M4/C7: font-weight residuales (790/780/820) → var(--fw-*)
    ============================================================ */
 
 /* ---- Wrappers con max-width ------------------------------- */
@@ -54,7 +54,8 @@
   margin: 8px 0 12px;
   font-size: clamp(1.6rem, 2.8vw, 2.5rem);
   line-height: 1.1;
-  font-weight: 790;
+  /* M4/C7: era font-weight: 790 (no estándar) → var(--fw-extrabold) */
+  font-weight: var(--fw-extrabold, 800);
 }
 
 .section-heading p {
@@ -117,7 +118,8 @@
   margin: 8px 0 12px;
   font-size: clamp(1.75rem, 3vw, 2.8rem);
   line-height: 1.1;
-  font-weight: 790;
+  /* M4/C7: era 790 → var(--fw-extrabold) */
+  font-weight: var(--fw-extrabold, 800);
   color: var(--text);
 }
 
@@ -143,7 +145,8 @@
 .decision-section h2 {
   margin: 0 0 16px;
   font-size: clamp(1.6rem, 2.8vw, 2.5rem);
-  font-weight: 790;
+  /* M4/C7: era 790 → var(--fw-extrabold) */
+  font-weight: var(--fw-extrabold, 800);
   line-height: 1.1;
   color: #ffffff;
 }
@@ -171,7 +174,8 @@
   border: 1px solid rgba(255,255,255,0.28);
   border-radius: 999px;
   padding: 0 22px;
-  font-weight: 760;
+  /* M4/C7: era 760 → var(--fw-semibold) */
+  font-weight: var(--fw-semibold, 600);
   font-family: var(--font-display);
   white-space: nowrap;
   color: #ffffff;
@@ -249,14 +253,15 @@
 
 .authority-metrics > div strong {
   font-size: 1.6rem;
-  font-weight: 820;
+  /* M4/C7: era 820 → var(--fw-extrabold) */
+  font-weight: var(--fw-extrabold, 800);
   color: var(--brand);
   font-family: var(--font-display);
   line-height: 1;
 }
 
 .authority-metrics > div span {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: var(--text-muted);
   line-height: 1.4;
 }
@@ -280,7 +285,7 @@
   color: var(--text-muted);
   padding: 0 14px;
   font-size: 0.82rem;
-  font-weight: 800;
+  font-weight: var(--fw-extrabold, 800);
   transition:
     border-color 180ms ease,
     background 180ms ease,
@@ -312,7 +317,8 @@
 .problem-solution-section h2 {
   margin: 0 0 32px;
   font-size: clamp(1.4rem, 2.5vw, 2.2rem);
-  font-weight: 790;
+  /* M4/C7: era 790 → var(--fw-extrabold) */
+  font-weight: var(--fw-extrabold, 800);
   line-height: 1.15;
 }
 
@@ -352,7 +358,8 @@
 .ps-col h3 {
   margin: 0 0 16px;
   font-size: 1.05rem;
-  font-weight: 780;
+  /* M4/C7: era 780 → var(--fw-bold) */
+  font-weight: var(--fw-bold, 700);
 }
 
 .ps-col ul {

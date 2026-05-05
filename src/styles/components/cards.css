@@ -1,6 +1,9 @@
 /* ============================================================
    CARDS — product-card, content-card, equipment-card,
             service-card, ops-grid, metric-card
+   ============================================================
+   Fix M4: font-size mínimo 0.75rem (12px) en todos los elementos
+   Fix M5: focus-visible con box-shadow que respeta border-radius
    ============================================================ */
 
 /* ---- Product card ---------------------------------------- */
@@ -22,13 +25,24 @@
   border-color: color-mix(in srgb, var(--brand) 30%, var(--line));
 }
 
+/* M5: focus-visible con box-shadow — respeta border-radius */
+.product-card:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--brand) 35%, transparent),
+    var(--shadow);
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+
 .product-card-brand {
   display: flex;
   align-items: center;
   gap: 8px;
   color: var(--text-soft);
-  font-size: 0.8rem;
-  font-weight: 750;
+  /* M4: era 0.80rem — ya era ≥12px, se mantiene */
+  font-size: 0.82rem;
+  font-weight: var(--fw-semibold, 600);
 }
 
 .product-card-brand svg { color: var(--brand); flex: 0 0 auto; }
@@ -41,8 +55,9 @@
   background: var(--brand-soft);
   color: var(--brand);
   padding: 0 10px;
-  font-size: 0.72rem;
-  font-weight: 820;
+  /* M4: era 0.72rem (≈11.5px) → ahora 0.75rem (12px) — mínimo absoluto WCAG */
+  font-size: 0.75rem;
+  font-weight: var(--fw-extrabold, 800);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -50,7 +65,7 @@
 .product-card h3 {
   margin: 0;
   font-size: 1.05rem;
-  font-weight: 780;
+  font-weight: var(--fw-bold, 700);
   line-height: 1.3;
   color: var(--text);
 }
@@ -78,8 +93,9 @@
   background: var(--bg-muted);
   color: var(--text-muted);
   padding: 0 10px;
-  font-size: 0.76rem;
-  font-weight: 720;
+  /* M4: era 0.76rem (≈12.2px) → 0.78rem para mayor legibilidad */
+  font-size: 0.78rem;
+  font-weight: var(--fw-semibold, 600);
   white-space: nowrap;
 }
 
@@ -90,7 +106,7 @@
   margin-top: 4px;
   color: var(--brand);
   font-size: 0.875rem;
-  font-weight: 760;
+  font-weight: var(--fw-semibold, 600);
   text-decoration: none;
   transition: gap 180ms ease;
 }
@@ -124,6 +140,16 @@
   border-color: color-mix(in srgb, var(--brand) 28%, var(--line));
 }
 
+/* M5: focus-visible con box-shadow */
+.content-card:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--brand) 35%, transparent),
+    var(--shadow);
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+
 .card-index {
   display: inline-flex;
   align-items: center;
@@ -137,8 +163,9 @@
   border-radius: var(--radius);
   background: var(--brand-soft);
   color: var(--brand);
-  font-size: 0.8rem;
-  font-weight: 820;
+  /* M4: era 0.80rem — ya OK, se estandariza con var */
+  font-size: 0.82rem;
+  font-weight: var(--fw-extrabold, 800);
   font-family: var(--font-display);
   flex-shrink: 0;
 }
@@ -146,7 +173,7 @@
 .content-card h3 {
   margin: 0;
   font-size: 1rem;
-  font-weight: 780;
+  font-weight: var(--fw-bold, 700);
   line-height: 1.3;
   color: var(--text);
 }
@@ -166,7 +193,7 @@
   margin-top: auto;
   color: var(--brand);
   font-size: 0.875rem;
-  font-weight: 760;
+  font-weight: var(--fw-semibold, 600);
 }
 
 :root[data-theme="dark"] .content-card {
@@ -198,6 +225,16 @@
   transform: translateY(-2px);
 }
 
+/* M5: focus-visible con box-shadow */
+.equipment-card:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--brand) 35%, transparent),
+    var(--shadow);
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+
 .equipment-card-head {
   display: flex;
   align-items: center;
@@ -207,8 +244,9 @@
 }
 
 .equipment-card-head span {
-  font-size: 0.8rem;
-  font-weight: 760;
+  /* M4: era 0.80rem — OK, estandarizado */
+  font-size: 0.82rem;
+  font-weight: var(--fw-semibold, 600);
   color: var(--text-soft);
   text-transform: uppercase;
   letter-spacing: 0.04em;
@@ -219,7 +257,7 @@
 .equipment-card h3 {
   margin: 0 0 8px;
   font-size: 1rem;
-  font-weight: 780;
+  font-weight: var(--fw-bold, 700);
   line-height: 1.3;
   color: var(--text);
 }
@@ -249,7 +287,7 @@
   gap: 6px;
   color: var(--brand);
   font-size: 0.875rem;
-  font-weight: 760;
+  font-weight: var(--fw-semibold, 600);
   margin-top: auto;
 }
 
@@ -290,6 +328,16 @@
   box-shadow: var(--shadow);
 }
 
+/* M5: focus-visible con box-shadow — respeta border-radius de la card */
+.service-card:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--brand) 35%, transparent),
+    var(--shadow);
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+
 .service-icon {
   display: grid;
   place-items: center;
@@ -304,7 +352,7 @@
 .service-card h3 {
   margin: 0;
   font-size: 1rem;
-  font-weight: 780;
+  font-weight: var(--fw-bold, 700);
   line-height: 1.3;
 }
 
@@ -322,7 +370,7 @@
   gap: 6px;
   color: var(--brand);
   font-size: 0.875rem;
-  font-weight: 760;
+  font-weight: var(--fw-semibold, 600);
   margin-top: 4px;
   transition: gap 180ms ease;
 }

@@ -5,6 +5,7 @@
    Fix C2: .hero-gradient-text con fallback accesible vía base.css
    Fix A6: .hero-image necesita sizes en el componente React
    Fix M1: Animaciones fadeInUp con prefers-reduced-motion
+   Fix M2: ::selection scoped en hero (fondo oscuro) — no colisión
    Fix A9: Colores hardcodeados reemplazados por variables CSS
    Fix 1.2: Opacidades de placeholder y metric-card text corregidas
    ============================================================ */
@@ -23,6 +24,20 @@
   .hero-section {
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
+  }
+}
+
+/* Fix M2: ::selection scoped al hero (fondo oscuro)
+   La selección global usa naranja oscuro — sobre texto blanco del hero
+   queda con contraste bajo. Esta regla scoped lo corrige. */
+.hero-section ::selection {
+  background: rgba(245, 158, 11, 0.28);
+  color: #ffffff;
+}
+@media (forced-colors: active) {
+  .hero-section ::selection {
+    background: Highlight;
+    color: HighlightText;
   }
 }
 
@@ -51,7 +66,7 @@
 .hero-heading {
   font-family: var(--font-display);
   font-size: clamp(2rem, 1rem + 4.5vw, 3.75rem);
-  font-weight: var(--fw-extrabold, 800); /* Fix C7: 800 en lugar de 820/850 */
+  font-weight: var(--fw-extrabold, 800);
   line-height: 1.08;
   letter-spacing: -0.02em;
   color: var(--text);
@@ -82,10 +97,8 @@
   overflow: hidden;
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
-/* Fix A6: El componente React debe incluir:
-   sizes="(max-width: 900px) 100vw, 50vw" en el next/image */
 
-/* Metric pills — Fix C1: sale de style={{}} */
+/* Metric pills — Fix C1 */
 .metric-pills {
   display: flex;
   gap: 0.75rem;
@@ -113,7 +126,7 @@
 .metric-pill strong {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 1rem + 0.75vw, 1.75rem);
-  font-weight: var(--fw-extrabold, 800); /* Fix C7: 800 no 790 */
+  font-weight: var(--fw-extrabold, 800);
   color: var(--brand);
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -121,12 +134,11 @@
 
 .metric-pill span {
   font-size: clamp(0.78rem, 0.7rem + 0.15vw, 0.875rem);
-  /* Fix 1.2: sin opacity < 0.8 — usa color semántico */
-  color: var(--text-soft); /* antes: rgba(255,255,255,0.72) — fallaba WCAG */
+  color: var(--text-soft);
   line-height: 1.2;
 }
 
-/* Hero search — Fix C1 + Fix 1.2 */
+/* Hero search */
 .hero-search {
   position: relative;
   display: flex;
@@ -148,12 +160,11 @@
   color: var(--text);
 }
 .hero-search input::placeholder {
-  /* Fix 1.2: antes rgba(255,255,255,0.66) → fallaba WCAG */
   color: var(--text-soft);
   opacity: 1;
 }
 
-/* Intent cards — Fix A9: sin #1f2937 hardcoded */
+/* Intent cards */
 .intent-card {
   background: var(--bg-elevated);
   border: 1px solid var(--line);
@@ -212,7 +223,6 @@
 .hero-animate:nth-child(3) { animation-delay: 200ms; }
 .hero-animate:nth-child(4) { animation-delay: 300ms; }
 
-/* prefers-reduced-motion: elimina animaciones de entrada */
 @media (prefers-reduced-motion: reduce) {
   .hero-animate {
     animation: none;
