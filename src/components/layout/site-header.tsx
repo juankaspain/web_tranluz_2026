@@ -52,6 +52,7 @@ function HeaderSearch() {
 
   const results = query.trim().length > 0
     ? SEARCH_INDEX.filter(i =>
+        const [mobileOpen, setMobileOpen] = useState(false);
         i.label.toLowerCase().includes(query.toLowerCase())
       ).slice(0, 6)
     : [];
