@@ -19,6 +19,8 @@
       ├─ catalog.css       → Catalog controls, filter pills, search
       ├─ final-cta.css     → Final CTA section con stats
       └─ company.css       → Hitos/timeline + valores (Fix M10 Issue #2)
+   └─ breadcrumbs.css     → Breadcrumbs reutilizable (E3 — Issue #2)
+   └─ ui-states.css       → Skeleton, vacíos, errores (E5 — Issue #2)
    └─ form-errors.css     → Errores de formulario accesibles (Issue #1)
 
    Motivo de la división:
@@ -55,3 +57,9 @@
 
 /* 7. Módulos de funcionalidad específica */
 @import "./form-errors.css";
+
+/* 8. Breadcrumbs reutilizable (E3 — Issue #2) */
+@import "./breadcrumbs.css";
+
+/* 9. UI States: skeleton loaders, estados vacíos, errores inline (E5 — Issue #2) */
+@import "./ui-states.css";

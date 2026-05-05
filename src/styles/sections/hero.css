@@ -1,242 +1,416 @@
 /* ============================================================
-   HERO SECTION — Estilos de la sección hero
-   ============================================================
-   Fix C1: Clases CSS para todos los estilos que estaban inline en JSX
-   Fix C2: .hero-gradient-text con fallback accesible vía base.css
-   Fix A6: .hero-image necesita sizes en el componente React
-   Fix M1: Animaciones fadeInUp con prefers-reduced-motion
-   Fix M2: ::selection scoped en hero (fondo oscuro) — no colisión
-   Fix A9: Colores hardcodeados reemplazados por variables CSS
-   Fix 1.2: Opacidades de placeholder y metric-card text corregidas
+   HERO SECTION — estilos completos
+   Ref: Issue #2 Auditoría UI/UX — C1 migrar inline styles
+   Fix C2: .hero-gradient-text con fallback accesible
    ============================================================ */
 
-/* Contenedor hero */
-.hero-section {
+/* ── Hero section base ─────────────────────────────────────── */
+.hero-section-full {
   position: relative;
-  min-height: max(600px, 90dvh);
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    rgba(6, 18, 34, 0.82) 0%,
+    rgba(6, 18, 34, 0.55) 55%,
+    rgba(6, 18, 34, 0.20) 100%
+  );
+}
+
+.hero-bg-glow-amber {
+  position: absolute;
+  bottom: -120px;
+  left: -80px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-bg-glow-blue {
+  position: absolute;
+  top: -60px;
+  right: 10%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-main {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 32px 80px;
+}
+
+.hero-content-grid {
   display: grid;
   grid-template-columns: 1fr;
-  align-items: center;
-  overflow: hidden;
-  padding-block: clamp(4rem, 8vw, 7rem);
-}
-@media (min-width: 900px) {
-  .hero-section {
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-  }
+  gap: 48px;
+  max-width: 700px;
 }
 
-/* Fix M2: ::selection scoped al hero (fondo oscuro)
-   La selección global usa naranja oscuro — sobre texto blanco del hero
-   queda con contraste bajo. Esta regla scoped lo corrige. */
-.hero-section ::selection {
-  background: rgba(245, 158, 11, 0.28);
-  color: #ffffff;
-}
-@media (forced-colors: active) {
-  .hero-section ::selection {
-    background: Highlight;
-    color: HighlightText;
-  }
-}
-
-/* Fix C1: Reemplaza style={{}} inline por clase CSS */
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  max-width: 640px;
-}
-
-.hero-tagline {
+/* ── Badge ──────────────────────────────────────────────────── */
+.hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.875rem;
-  background: var(--brand-soft);
-  border: 1px solid oklch(from var(--brand) l c h / 0.25);
-  border-radius: 9999px;
-  font-size: clamp(0.78rem, 0.7rem + 0.2vw, 0.875rem);
-  font-weight: var(--fw-semibold, 600);
-  color: var(--brand);
-  width: fit-content;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  padding: 6px 14px 6px 8px;
+  backdrop-filter: blur(8px);
+  margin-bottom: 24px;
 }
 
-.hero-heading {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 1rem + 4.5vw, 3.75rem);
-  font-weight: var(--fw-extrabold, 800);
+.hero-badge-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: rgba(255,255,255,0.12);
+  padding: 2px;
+}
+
+.hero-badge-text {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.02em;
+}
+
+/* ── Heading ────────────────────────────────────────────────── */
+.hero-h1 {
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  font-weight: 800;
   line-height: 1.08;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  text-wrap: balance;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0 0 20px;
 }
 
-.hero-body {
-  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  color: var(--text-soft);
+/* C2: gradient text con @supports + fallback accesible */
+.hero-gradient-text {
+  color: #f5a623; /* fallback para navegadores sin clip-path */
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .hero-gradient-text {
+    background: linear-gradient(90deg, #f5a623 0%, #fb923c 50%, #fbbf24 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
   line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
   max-width: 56ch;
+  margin: 0 0 32px;
 }
 
-/* Fix A9: Hero aside — sin hardcoded rgba(17,24,39) → usa variables */
-.hero-aside {
-  position: relative;
-  background: var(--bg-elevated);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-soft);
-}
-
-.hero-image-wrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-}
-
-/* Metric pills — Fix C1 */
-.metric-pills {
+/* ── CTAs ───────────────────────────────────────────────────── */
+.hero-ctas {
   display: flex;
-  gap: 0.75rem;
   flex-wrap: wrap;
-  padding: 1rem 1.25rem;
+  gap: 12px;
+  align-items: center;
 }
 
-.metric-pill {
+.hero-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f97316 0%, #f59e0b 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 13px 26px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: filter 0.18s ease, transform 0.18s ease;
+  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.35);
+}
+
+.hero-cta-primary:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.hero-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 13px 26px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.hero-cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.hero-phone-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.hero-phone-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* ── Metrics row ────────────────────────────────────────────── */
+.hero-metrics-row {
   display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
-  padding: 0.625rem 1rem;
-  background: var(--bg-muted);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  cursor: default;
-  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
-}
-.metric-pill:hover {
-  background: var(--brand-soft);
-  border-color: oklch(from var(--brand) l c h / 0.3);
-  transform: translateY(-2px);
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 40px;
 }
 
-.metric-pill strong {
-  font-family: var(--font-display);
-  font-size: clamp(1.25rem, 1rem + 0.75vw, 1.75rem);
-  font-weight: var(--fw-extrabold, 800);
-  color: var(--brand);
+.hero-metric-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px 16px;
+  backdrop-filter: blur(6px);
+}
+
+.hero-metric-icon {
+  color: #f97316;
+  flex-shrink: 0;
+}
+
+.hero-metric-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
 
-.metric-pill span {
-  font-size: clamp(0.78rem, 0.7rem + 0.15vw, 0.875rem);
-  color: var(--text-soft);
-  line-height: 1.2;
+.hero-metric-label {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.3;
+  max-width: 10ch;
 }
 
-/* Hero search */
-.hero-search {
-  position: relative;
-  display: flex;
-  align-items: center;
-  background: oklch(from var(--bg-elevated) l c h / 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--line);
-  border-radius: 9999px;
-  overflow: hidden;
-}
-
-.hero-search input {
-  flex: 1;
-  padding: 0.75rem 1rem;
-  border: none;
-  background: transparent;
-  font-size: clamp(0.875rem, 0.8rem + 0.2vw, 1rem);
-  color: var(--text);
-}
-.hero-search input::placeholder {
-  color: var(--text-soft);
-  opacity: 1;
-}
-
-/* Intent cards */
-.intent-card {
-  background: var(--bg-elevated);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  cursor: pointer;
-  text-decoration: none;
-  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
-}
-.intent-card:hover {
-  border-color: var(--brand);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-soft);
-}
-.intent-card:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--brand) 72%, white);
-  outline-offset: 3px;
-}
-
-.intent-card__icon {
+/* ── Phone popup ────────────────────────────────────────────── */
+.phone-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 200;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius);
-  background: var(--brand-soft);
-  color: var(--brand);
+  animation: fadeIn 0.15s ease;
 }
 
-.intent-card__label {
-  font-size: clamp(0.875rem, 0.8rem + 0.2vw, 1rem);
-  font-weight: var(--fw-semibold, 600);
-  color: var(--text);
+.phone-popup {
+  background: #fff;
+  color: #0f172a;
+  border-radius: 16px;
+  padding: 28px;
+  width: min(380px, 92vw);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.22);
+  position: relative;
+  animation: slideUp 0.2s ease;
 }
 
-.intent-card__sub {
-  font-size: clamp(0.78rem, 0.7rem + 0.15vw, 0.875rem);
-  color: var(--text-soft);
+.phone-popup-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+  padding: 4px;
+  border-radius: 6px;
+  transition: background 0.15s;
 }
 
-/* Fix M1: Animaciones hero con prefers-reduced-motion */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: none; }
+.phone-popup-close:hover {
+  background: #f1f5f9;
 }
 
-.hero-animate {
-  animation: fadeInUp 600ms ease both;
+.phone-popup-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
 }
-.hero-animate:nth-child(1) { animation-delay: 0ms; }
-.hero-animate:nth-child(2) { animation-delay: 100ms; }
-.hero-animate:nth-child(3) { animation-delay: 200ms; }
-.hero-animate:nth-child(4) { animation-delay: 300ms; }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-animate {
-    animation: none;
-    opacity: 1;
-    transform: none;
+.phone-popup-badge {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #f97316, #f59e0b);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.phone-popup-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 2px;
+}
+
+.phone-popup-hours {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.phone-popup-number {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin: 8px 0 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.phone-popup-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.phone-popup-call-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f97316, #f59e0b);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 13px;
+  border-radius: 10px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.phone-popup-call-btn:hover {
+  filter: brightness(1.08);
+}
+
+.phone-popup-copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 11px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.phone-popup-copy-btn:hover {
+  background: #f1f5f9;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hero-container {
+    padding: 100px 20px 60px;
+  }
+  .hero-metrics-row {
+    gap: 8px;
+  }
+  .hero-metric-pill {
+    padding: 8px 12px;
+  }
+  .hero-metric-value {
+    font-size: 1.1rem;
+  }
+  .hero-ctas {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-cta-primary,
+  .hero-cta-secondary {
+    width: 100%;
+    justify-content: center;
   }
 }
 
-@media (max-width: 899px) {
-  .hero-aside {
-    display: none;
-  }
-  .hero-section {
-    min-height: auto;
-    padding-block: clamp(3rem, 6vw, 5rem);
-  }
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
