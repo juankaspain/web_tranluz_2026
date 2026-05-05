@@ -33,21 +33,22 @@ const navIcon = (href: string) => {
 const SEARCH_INDEX = [
   { label: "Productos",            href: "/productos" },
   { label: "Alquiler de equipos",  href: "/alquiler" },
-  { label: "ITS Servicio Técnico",  href: "/servicios/its-servicio-tecnico" },
+  { label: "ITS Servicio T\u00e9cnico",  href: "/servicios/its-servicio-tecnico" },
   { label: "Revisa Trazabilidad",  href: "/servicios/revisa-trazabilidad" },
-  { label: "Soporte técnico",       href: "/soporte" },
-  { label: "Formación",            href: "/formacion" },
-  { label: "Soluciones eléctricas", href: "/soluciones" },
+  { label: "Soporte t\u00e9cnico",       href: "/soporte" },
+  { label: "Formaci\u00f3n",            href: "/formacion" },
+  { label: "Soluciones el\u00e9ctricas", href: "/soluciones" },
   { label: "Empresa",              href: "/empresa" },
   { label: "Contacto",             href: "/contacto" },
 ];
 
 /* ---- HeaderSearch ------------------------------------------------ */
 function HeaderSearch() {
-  const router   = useRouter();
-  const [query,  setQuery]  = useState("");
-  const [open,   setOpen]   = useState(false);
-  const wrapRef  = useRef<HTMLDivElement>(null);
+  const router    = useRouter();
+  const [query,   setQuery]   = useState("");
+  const [open,    setOpen]    = useState(false);
+  const [focused, setFocused] = useState(false);
+  const wrapRef   = useRef<HTMLDivElement>(null);
 
   const results = query.trim().length > 0
     ? SEARCH_INDEX.filter(i =>
@@ -59,6 +60,7 @@ function HeaderSearch() {
     router.push(href);
     setQuery("");
     setOpen(false);
+    setFocused(false);
   }, [router]);
 
   const onSubmit = useCallback((e: React.FormEvent) => {
@@ -68,37 +70,42 @@ function HeaderSearch() {
 
   useEffect(() => {
     const h = (e: MouseEvent) => {
-      if (wrapRef.current && !wrapRef.current.contains(e.target as Node))
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
         setOpen(false);
+        setFocused(false);
+      }
     };
     document.addEventListener("mousedown", h);
     return () => document.removeEventListener("mousedown", h);
   }, []);
 
   return (
-    <div ref={wrapRef} className="hs-wrap" role="search">
+    <div ref={wrapRef} className={`hs-wrap${focused ? " hs-wrap--focused" : ""}`} role="search">
       <form onSubmit={onSubmit} style={{ display: "contents" }}>
-        <Search size={15} className="hs-icon" aria-hidden="true" />
-        <input
-          type="search"
-          value={query}
-          onChange={e => { setQuery(e.target.value); setOpen(true); }}
-          onFocus={() => setOpen(true)}
-          placeholder="Buscar..."
-          aria-label="Buscar en Tranluz"
-          autoComplete="off"
-          className="hs-input"
-        />
-        {query && (
-          <button
-            type="button"
-            onClick={() => { setQuery(""); setOpen(false); }}
-            className="hs-clear"
-            aria-label="Limpiar"
-          >
-            <X size={13} />
-          </button>
-        )}
+        <div className="hs-form">
+          <Search size={15} className="hs-icon" aria-hidden="true" />
+          <input
+            type="search"
+            value={query}
+            onChange={e => { setQuery(e.target.value); setOpen(true); }}
+            onFocus={() => { setOpen(true); setFocused(true); }}
+            onBlur={() => { setTimeout(() => setFocused(false), 150); }}
+            placeholder="Buscar..."
+            aria-label="Buscar en Tranluz"
+            autoComplete="off"
+            className="hs-input"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => { setQuery(""); setOpen(false); }}
+              className="hs-clear"
+              aria-label="Limpiar"
+            >
+              <X size={13} />
+            </button>
+          )}
+        </div>
       </form>
       {open && results.length > 0 && (
         <div className="hs-dropdown" role="listbox">
@@ -108,14 +115,7 @@ function HeaderSearch() {
               role="option"
               aria-selected="false"
               onClick={() => go(item.href)}
-              style={{
-                display: "block", width: "100%", padding: "8px 10px",
-                borderRadius: "var(--radius)", border: "none",
-                background: "transparent", color: "var(--text)",
-                fontSize: "0.85rem", textAlign: "left", cursor: "pointer",
-              }}
-              onMouseEnter={e => (e.currentTarget.style.background = "var(--bg-muted)")}
-              onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+              className="hs-dropdown__item"
             >
               {item.label}
             </button>
@@ -148,7 +148,7 @@ function PhoneTooltip() {
         className="icon-button"
         onClick={() => setShow(!show)}
         onMouseEnter={() => setShow(true)}
-        aria-label="Ver teléfono de contacto"
+        aria-label="Ver tel\u00e9fono de contacto"
         aria-expanded={show}
         aria-haspopup="true"
       >
@@ -234,10 +234,10 @@ export function SiteHeader() {
           <nav
             ref={navRef}
             className="navbar"
-            aria-label="Navegación principal"
+            aria-label="Navegaci\u00f3n principal"
           >
             {/* Logo */}
-            <Link href="/" className="logo-link" aria-label="Tranluz – inicio">
+            <Link href="/" className="logo-link" aria-label="Tranluz \u2013 inicio">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={assets.logo}
@@ -357,7 +357,7 @@ export function SiteHeader() {
                 ))}
               </ul>
 
-              {/* Actions: Search → Phone → Email → Theme → Language */}
+              {/* Actions: Search \u2192 Phone \u2192 Email \u2192 Theme \u2192 Language */}
               <div className="header-actions">
                 <HeaderSearch />
                 <PhoneTooltip />
@@ -375,7 +375,7 @@ export function SiteHeader() {
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-expanded={mobileOpen}
               aria-controls={mobileMenuId}
-              aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-label={mobileOpen ? "Cerrar men\u00fa" : "Abrir men\u00fa"}
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -389,7 +389,7 @@ export function SiteHeader() {
           className="mobile-overlay"
           role="dialog"
           aria-modal="true"
-          aria-label="Menú de navegación"
+          aria-label="Men\u00fa de navegaci\u00f3n"
           onClick={() => setMobileOpen(false)}
         >
           <div
@@ -481,7 +481,7 @@ export function SiteHeader() {
               ))}
             </ul>
 
-            {/* Footer móvil */}
+            {/* Footer m\u00f3vil */}
             <div style={{ marginTop: "auto", padding: "16px 14px", display: "flex", flexDirection: "column", gap: "10px" }}>
               <a
                 href={phoneHref}
