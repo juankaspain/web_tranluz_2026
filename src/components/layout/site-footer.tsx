@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, MapPin, PhoneCall } from "lucide-react";
 import { brand } from "@/config/brand";
 import { assets } from "@/content/assets";
@@ -59,10 +60,46 @@ const SOCIALS = [
   { Icon: YouTubeIcon, href: brand.social?.youtube ?? "https://youtube.com", label: "YouTube" },
 ];
 
-const ACCREDITATIONS = [
-  { src: "/images/Otros/Aenor_Logo.svg", alt: "AENOR", href: "https://www.aenor.com", w: 64, h: 32 },
-  { src: "/images/Otros/Logos_Financiacion.png", alt: "Financiacion EU", href: "#", w: 160, h: 40 },
-  { src: "/images/Otros/Moves_III_Logo.png", alt: "Programa MOVES III", href: "https://www.miteco.gob.es", w: 96, h: 40 },
+/**
+ * ACCREDITATIONS
+ * filter:
+ *   - SVG logos (Aenor): "brightness(0) invert(1)" → blanco puro sobre fondo oscuro ✓
+ *   - PNGs con fondo blanco (Financiacion, Moves): sin invert; en su lugar usamos
+ *     un contenedor con fondo blanco semitransparente y border-radius para legibilidad.
+ */
+const ACCREDITATIONS: {
+  src: string;
+  alt: string;
+  href: string;
+  w: number;
+  h: number;
+  /** true = SVG o logo ya en blanco; false = PNG con fondo blanco que necesita pastilla */
+  invertToWhite: boolean;
+}[] = [
+  {
+    src: "/images/Otros/Aenor_Logo.svg",
+    alt: "AENOR",
+    href: "https://www.aenor.com",
+    w: 72,
+    h: 36,
+    invertToWhite: true,
+  },
+  {
+    src: "/images/Otros/Logos_Financiacion.png",
+    alt: "Financiación EU",
+    href: "#",
+    w: 180,
+    h: 48,
+    invertToWhite: false,
+  },
+  {
+    src: "/images/Otros/Moves_III_Logo.png",
+    alt: "Programa MOVES III",
+    href: "https://www.miteco.gob.es",
+    w: 110,
+    h: 48,
+    invertToWhite: false,
+  },
 ];
 
 const COPYRIGHT_YEAR = 2026;
@@ -134,13 +171,30 @@ const S = {
   accrLogos: {
     display: "flex",
     alignItems: "center",
-    gap: "16px",
+    gap: "12px",
     flexWrap: "wrap" as const,
   } as React.CSSProperties,
-  accrImg: {
+  /** Contenedor para logos PNG con fondo blanco: pastilla semitransparente */
+  accrPill: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "rgba(255,255,255,0.92)",
+    borderRadius: "6px",
+    padding: "4px 8px",
+    lineHeight: 0,
+  } as React.CSSProperties,
+  /** Logos SVG invertidos a blanco */
+  accrImgWhite: {
     objectFit: "contain" as const,
-    opacity: 0.85,
+    opacity: 0.9,
     filter: "brightness(0) invert(1)",
+    display: "block",
+  } as React.CSSProperties,
+  /** Logos PNG sobre pastilla blanca — sin filtro */
+  accrImgColor: {
+    objectFit: "contain" as const,
+    display: "block",
   } as React.CSSProperties,
   navHeading: {
     fontSize: "11px",
@@ -255,10 +309,29 @@ export function SiteFooter() {
           <div style={S.accrSection}>
             <p style={S.accrLabel}>Certificaciones y acreditaciones</p>
             <div style={S.accrLogos}>
-              {ACCREDITATIONS.map(({ src, alt, href, w, h }) => (
+              {ACCREDITATIONS.map(({ src, alt, href, w, h, invertToWhite }) => (
                 <a key={alt} href={href} target="_blank" rel="noopener noreferrer" title={alt}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={src} alt={alt} width={w} height={h} style={S.accrImg} />
+                  {invertToWhite ? (
+                    /* SVG logo → invertir a blanco directamente */
+                    <Image
+                      src={src}
+                      alt={alt}
+                      width={w}
+                      height={h}
+                      style={S.accrImgWhite}
+                    />
+                  ) : (
+                    /* PNG con fondo blanco → pastilla semitransparente para legibilidad */
+                    <span style={S.accrPill}>
+                      <Image
+                        src={src}
+                        alt={alt}
+                        width={w}
+                        height={h}
+                        style={S.accrImgColor}
+                      />
+                    </span>
+                  )}
                 </a>
               ))}
             </div>
