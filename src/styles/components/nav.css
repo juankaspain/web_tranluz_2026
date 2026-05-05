@@ -1,212 +1,394 @@
 /* ============================================================
-   NAV — Site header, topbar, mega-strip, mobile menu
+   NAV — Header, topbar, mega-strip, mobile menu
    ============================================================
-   Fix A2: .nav-item con position:relative garantizado
-   Fix A5: Keyhandler ARIA documentado — patrón Disclosure
-   Fix C3: PhoneTooltip — hover+focus en desktop, click en mobile
-   Fix A3: .language-selector con touch target 44px
-   Fix 3.5: label sr-only en selector de idioma
+   C3  · PhoneTooltip solo click (HTML/JS) — CSS es tooltip puro
+   C7  · Pesos tipográficos via var(--fw-*) — sin hardcoded
+   A2  · position:relative garantizado en .nav-item
+   A5  · .nav-dropdown accesible con teclado (Arrow/Escape)
+         gestionado en site-header.tsx + tabIndex/focus aquí
    ============================================================ */
 
-/* Header principal */
+/* ---- Header shell ---- */
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  height: var(--header-height);
-  background: oklch(from var(--bg-elevated) l c h / 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--line);
+  z-index: 200;
+  background: oklch(from var(--bg) l c h / 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent;
+  transition:
+    background 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+.site-header.scrolled {
+  background: oklch(from var(--bg) l c h / 0.97);
+  border-bottom-color: var(--line);
+  box-shadow: 0 1px 8px oklch(0 0 0 / 0.06);
 }
 
-.site-header__inner {
+/* ---- Navbar ---- */
+.navbar {
   display: flex;
   align-items: center;
   gap: 1rem;
-  height: 100%;
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  height: var(--header-height, 64px);
+  padding-inline: 0;
 }
 
-/* Fix A2: position:relative explícito en nav-item */
+/* ---- Logo ---- */
+.logo-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+.logo-img {
+  display: block;
+  max-height: 36px;
+  width: auto;
+}
+
+/* ---- Desktop nav ---- */
+.desktop-nav {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+@media (min-width: 1024px) {
+  .desktop-nav { display: flex; }
+}
+
+/* ---- Main nav list ---- */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* A2: position:relative garantizado en cada nav-item */
 .nav-item {
   position: relative;
-  list-style: none;
 }
 
+/* C7: sin fontWeight hardcodeado — usa var(--fw-*) */
 .nav-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.5rem 0.75rem;
-  font-size: clamp(0.875rem, 0.8rem + 0.2vw, 1rem);
-  font-weight: var(--fw-medium, 500);
-  color: var(--text-soft);
-  text-decoration: none;
-  border-radius: var(--radius);
+  gap: 5px;
+  padding: 8px 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: var(--fw-semibold, 600); /* C7: antes fontWeight: 760 */
+  border-radius: 999px;
+  cursor: pointer;
   white-space: nowrap;
+  text-decoration: none;
+  transition: color 160ms ease, background 160ms ease;
 }
 .nav-link:hover,
-.nav-link[aria-expanded="true"] {
+.nav-link:focus-visible {
   color: var(--text);
-  background: var(--line);
+  background: var(--bg-muted);
+}
+.nav-link--trigger {
+  /* extra: el trigger del dropdown tiene la flecha */
 }
 
-/* Dropdown — Fix A2: top:100% funciona correctamente con parent relative */
+/* Chevron animation */
+.nav-chevron {
+  transition: transform 180ms ease;
+}
+.nav-chevron--open {
+  transform: rotate(180deg);
+}
+
+/* ---- Dropdown ---- */
 .nav-dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
+  position: fixed;
+  z-index: 300;
   min-width: 220px;
+  max-width: 280px;
   background: var(--bg-elevated);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-  padding: 0.5rem;
-  z-index: 200;
-  overflow: visible;
-  /* Patrón Disclosure: visibility toggle via JS aria-expanded */
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(-6px);
-  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
-  pointer-events: none;
-}
-.nav-item:hover .nav-dropdown,
-.nav-link[aria-expanded="true"] + .nav-dropdown,
-.nav-link:focus-within + .nav-dropdown {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
+  box-shadow:
+    0 4px 16px oklch(0 0 0 / 0.08),
+    0 1px 3px oklch(0 0 0 / 0.06);
+  padding: 0.4rem;
+  overflow: hidden;
 }
 
-/* Topbar */
-.topbar {
-  background: var(--bg-inverse);
-  color: var(--bg);
-  font-size: clamp(0.78rem, 0.7rem + 0.2vw, 0.875rem);
-  padding: 0.35rem 0;
-}
-.topbar__inner {
+/* A5: cada link del dropdown recibe tabIndex en el TSX;
+   el foco se gestiona con ArrowUp/ArrowDown en onKeyDown */
+.nav-dropdown__link {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: clamp(1rem, 4vw, 2.5rem);
-}
-
-/* Mega-strip — Fix: una única definición (antes redefinida 2 veces) */
-.mega-strip {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  border-bottom: 1px solid var(--line);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.mega-strip::-webkit-scrollbar { display: none; }
-
-.mega-strip__item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.2rem;
-  border-right: 1px solid var(--line);
-  font-size: clamp(0.78rem, 0.7rem + 0.2vw, 0.875rem);
-  font-weight: var(--fw-medium, 500);
-  color: var(--text-soft);
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  font-weight: var(--fw-semibold, 600); /* C7: antes fontWeight: 600 inline */
   text-decoration: none;
-  white-space: nowrap;
-  transition: background 180ms ease, color 180ms ease;
+  transition: background 140ms ease, color 140ms ease;
 }
-.mega-strip__item:hover {
-  background: var(--brand-soft);
-  color: var(--brand);
-}
-.mega-strip__item:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--brand) 72%, white);
-  outline-offset: -2px;
+.nav-dropdown__link:hover,
+.nav-dropdown__link:focus-visible {
+  background: var(--bg-muted);
+  color: var(--text);
 }
 
-/* Fix C3: Phone tooltip — hover+focus en desktop */
-.phone-tooltip {
+/* ---- Header actions ---- */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: 0.5rem;
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 160ms ease, color 160ms ease;
+}
+.icon-button:hover {
+  background: var(--bg-muted);
+  color: var(--text);
+}
+.icon-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--brand) 72%, white);
+  outline-offset: 3px;
+}
+
+/* ---- Contact icons color ---- */
+.contact-icon-phone { color: var(--brand); }
+.contact-icon-email  { color: var(--technical); }
+
+/* ---- Phone tooltip — C3: tooltip puro CSS on show class ---- */
+.contact-icon-wrap {
+  position: relative;
+}
+.contact-tooltip {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
+  min-width: 170px;
   background: var(--bg-elevated);
   border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-  padding: 1rem 1.25rem;
-  min-width: 240px;
-  z-index: 300;
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 14px oklch(0 0 0 / 0.1);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+  z-index: 250;
 }
-/* Desktop: hover + focus activan el tooltip */
-@media (hover: hover) {
-  .phone-btn-wrapper:hover .phone-tooltip,
-  .phone-btn-wrapper:focus-within .phone-tooltip {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-  }
+.contact-tooltip a {
+  color: var(--brand);
+  text-decoration: none;
 }
-/* Mobile: sólo click (JS toggle con aria-expanded) */
-.phone-btn-wrapper[data-open="true"] .phone-tooltip {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(0);
-}
+.contact-tooltip a:hover { text-decoration: underline; }
 
-/* Fix A3 / 3.5: Language selector — touch target 44px + label sr-only */
-.language-selector {
+/* ---- Search widget ---- */
+.hs-wrap {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
 }
-.language-selector select {
-  appearance: none;
-  -webkit-appearance: none;
-  min-width: 44px;
-  min-height: 44px;
-  padding: 0 0.75rem;
+.hs-form {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--bg-muted);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.3rem 0.6rem;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.hs-wrap--focused .hs-form {
+  border-color: var(--brand);
+  background: var(--bg-elevated);
+}
+.hs-icon { color: var(--text-muted); flex-shrink: 0; }
+.hs-input {
+  border: none;
+  background: transparent;
+  font-size: 0.84rem;
+  color: var(--text);
+  width: 110px;
+  outline: none;
+}
+.hs-input::placeholder { color: var(--text-soft); opacity: 1; }
+.hs-clear {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.125rem;
+  border-radius: 50%;
+}
+.hs-clear:hover { color: var(--text); }
+.hs-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--bg-elevated);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: transparent;
-  color: var(--text);
-  font-size: clamp(0.78rem, 0.7rem + 0.2vw, 0.875rem);
-  font-weight: var(--fw-medium, 500);
-  cursor: pointer;
+  box-shadow: 0 4px 14px oklch(0 0 0 / 0.08);
+  overflow: hidden;
+  z-index: 250;
 }
-.language-selector select:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--brand) 72%, white);
-  outline-offset: 2px;
+.hs-dropdown__item {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  font-size: 0.84rem;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+.hs-dropdown__item:hover {
+  background: var(--bg-muted);
 }
 
-/* Quick-access links */
-.quick-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.875rem;
-  font-size: clamp(0.875rem, 0.8rem + 0.2vw, 1rem);
-  font-weight: var(--fw-medium, 500);
-  color: var(--text);
-  text-decoration: none;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-xl);
-  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+/* ---- Mobile toggle ---- */
+.mobile-toggle {
+  display: flex;
 }
-.quick-link:hover {
+@media (min-width: 1024px) {
+  .mobile-toggle { display: none; }
+}
+
+/* ---- Mobile overlay / panel ---- */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  background: oklch(0 0 0 / 0.5);
+  display: flex;
+  justify-content: flex-end;
+}
+.mobile-panel {
+  position: relative;
+  width: min(360px, 88vw);
+  height: 100dvh;
+  background: var(--bg-elevated);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.mobile-panel-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+/* C7: clases para mobile nav — sin style inline */
+.mobile-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+.mobile-nav-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: var(--fw-bold, 700);
+}
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: var(--fw-semibold, 600);
+  text-decoration: none;
+  transition: background 140ms ease, color 140ms ease;
+}
+.mobile-nav-link--child {
+  padding-inline-start: 28px;
+  font-size: 0.86rem;
+}
+.mobile-nav-link:hover {
+  background: var(--bg-muted);
+  color: var(--text);
+}
+
+/* Mobile footer — C7: sin fontWeight inline */
+.mobile-footer {
+  margin-top: auto;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.mobile-footer-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-weight: var(--fw-bold, 700);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 140ms ease, border-color 140ms ease;
+}
+.mobile-footer-link:hover {
+  background: var(--bg-muted);
   border-color: var(--brand);
-  background: var(--brand-soft);
-  transform: translateY(-1px);
+}
+.mobile-footer-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: var(--fw-bold, 700);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 140ms ease;
+}
+.mobile-footer-cta:hover {
+  background: var(--brand-hover, var(--brand));
 }
