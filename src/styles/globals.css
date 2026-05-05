@@ -2,7 +2,7 @@
    GLOBALS.CSS — Orchestrador de módulos CSS
    ============================================================
    Este archivo NO contiene reglas CSS propias.
-   Únicó propósito: definir el orden de carga de los módulos.
+   Único propósito: definir el orden de carga de los módulos.
 
    Arquitectura modular (M8 — Issue #2):
    └─ tokens.css          → Variables CSS (colores, fuentes, sombras)
@@ -17,7 +17,8 @@
    └─ sections/
       ├─ hero.css          → Hero section, hero-aside, intent cards
       ├─ catalog.css       → Catalog controls, filter pills, search
-      └─ final-cta.css     → Final CTA section con stats
+      ├─ final-cta.css     → Final CTA section con stats
+      └─ company.css       → Hitos/timeline + valores (Fix M10 Issue #2)
    └─ form-errors.css     → Errores de formulario accesibles (Issue #1)
 
    Motivo de la división:
@@ -50,6 +51,7 @@
 @import "./sections/hero.css";
 @import "./sections/catalog.css";
 @import "./sections/final-cta.css";
+@import "./sections/company.css";
 
 /* 7. Módulos de funcionalidad específica */
 @import "./form-errors.css";
