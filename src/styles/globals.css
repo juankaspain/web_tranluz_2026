@@ -6623,3 +6623,179 @@ a:focus-visible {
     width: 100%;
   }
 }
+
+  /* ============================================================
+   FIX — Buscador header y consistencia dark mode
+   ============================================================ */
+
+/* ---- Fix buscador (hs-*): mejor visibilidad en ambos modos ---- */
+.hs-form {
+  border: 1.5px solid var(--line-strong);
+  background: var(--bg-elevated);
+  transition: border-color 160ms ease, box-shadow 160ms ease, min-width 200ms ease;
+}
+.hs-wrap--focused .hs-form {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 15%, transparent);
+  min-width: 220px;
+}
+.hs-input {
+  outline: none;
+  caret-color: var(--brand);
+}
+
+/* ---- Fix dark mode: hero section ---- */
+/* En dark mode --bg-inverse es claro (#f4f6f7);
+   el hero-media usa bg-inverse como fondo,
+   así que necesitamos forzar fondo oscuro en dark */
+:root[data-theme="dark"] .hero-media {
+  background: #0c1116;
+}
+:root[data-theme="dark"] .hero-media::after {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.88),
+    rgba(0, 0, 0, 0.55) 50%,
+    rgba(0, 0, 0, 0.22)
+  ),
+  linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+}
+
+/* ---- Fix dark mode: proof-panel-dark ---- */
+/* En dark mode --bg-inverse es claro, texto blanco sería invisible */
+:root[data-theme="dark"] .proof-panel-dark {
+  background: linear-gradient(
+    135deg,
+    var(--bg-muted) 0%,
+    color-mix(in srgb, var(--bg-muted) 82%, var(--brand)) 100%
+  );
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+:root[data-theme="dark"] .proof-panel-dark .proof-eyebrow {
+  color: var(--brand);
+}
+:root[data-theme="dark"] .proof-panel-dark h2,
+:root[data-theme="dark"] .proof-panel-dark h3,
+:root[data-theme="dark"] .proof-panel-dark p {
+  color: var(--text);
+}
+
+/* ---- Fix dark mode: decision-section (bg-inverse claro en dark) ---- */
+:root[data-theme="dark"] .decision-section {
+  background: var(--bg-muted);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+:root[data-theme="dark"] .decision-section h2 {
+  color: var(--text);
+}
+:root[data-theme="dark"] .decision-section p {
+  color: var(--text-muted);
+}
+:root[data-theme="dark"] .decision-section .button-secondary {
+  border-color: var(--line-strong);
+  background: var(--bg-elevated);
+  color: var(--text);
+}
+:root[data-theme="dark"] .decision-section .button-secondary:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+/* ---- Fix dark mode: final-cta con bg-inverse claro ---- */
+:root[data-theme="dark"] .final-cta h2 {
+  color: var(--text);
+}
+:root[data-theme="dark"] .final-cta .button-primary {
+  background: var(--brand);
+  color: #ffffff;
+}
+
+/* ---- Fix dark mode: topbar borde y contraste ---- */
+:root[data-theme="dark"] .topbar {
+  border-bottom-color: var(--line);
+}
+
+/* ---- Fix dark mode: mobile overlay panel ---- */
+:root[data-theme="dark"] .mobile-overlay-panel {
+  background: var(--bg-elevated);
+  border-color: var(--line);
+}
+
+/* ---- Fix dark mode: body gradient consistencia ---- */
+:root[data-theme="dark"] body {
+  background:
+    radial-gradient(
+      circle at top left,
+      color-mix(in srgb, var(--brand-soft) 60%, transparent),
+      transparent 34rem
+    ),
+    radial-gradient(
+      circle at 86% 16%,
+      color-mix(in srgb, var(--technical) 8%, transparent),
+      transparent 28rem
+    ),
+    linear-gradient(180deg, var(--bg), var(--bg-muted) 45%, var(--bg));
+}
+
+/* ---- Fix dark mode: authority-metrics cards ---- */
+:root[data-theme="dark"] .authority-metrics > div {
+  background: var(--bg-elevated);
+  border-color: var(--line);
+}
+
+/* ---- Fix dark mode: product-card y content-card ---- */
+:root[data-theme="dark"] .product-card,
+:root[data-theme="dark"] .content-card {
+  background: var(--bg-elevated);
+  border-color: var(--line);
+}
+
+/* ---- Fix dark mode: catalog-controls y search-field ---- */
+:root[data-theme="dark"] .catalog-controls {
+  background: var(--bg-elevated);
+  border-color: var(--line);
+}
+:root[data-theme="dark"] .search-field {
+  background: var(--bg);
+  border-color: var(--line);
+  color: var(--text-soft);
+}
+:root[data-theme="dark"] .search-field input {
+  color: var(--text);
+}
+
+/* ---- Fix dark mode: page-hero section ---- */
+:root[data-theme="dark"] .page-hero h1 {
+  color: var(--text);
+}
+:root[data-theme="dark"] .page-hero p {
+  color: var(--text-muted);
+}
+
+/* ---- Fix dark mode: footer ---- */
+:root[data-theme="dark"] .site-footer {
+  background: var(--bg);
+  border-top-color: var(--line);
+}
+:root[data-theme="dark"] .footer-partners {
+  border-bottom-color: var(--line);
+}
+:root[data-theme="dark"] .footer-main {
+  border-bottom-color: var(--line);
+}
+:root[data-theme="dark"] .footer-bottom {
+  border-top-color: var(--line);
+}
+
+/* ---- Fix dark mode: support-band ---- */
+:root[data-theme="dark"] .support-band {
+  border-top-color: var(--line);
+}
+
+/* ---- Fix dark mode: authority-section border ---- */
+:root[data-theme="dark"] .authority-section {
+  border-top-color: var(--line);
+  border-bottom-color: var(--line);
+}
