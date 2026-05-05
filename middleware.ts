@@ -2,7 +2,12 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { defaultLocale, isLocale, localeFromAcceptLanguage, localeFromCountry } from "@/i18n/config";
 
+
 export function middleware(request: NextRequest) {
+  // Excluir assets estáticos de Next.js
+  if (request.nextUrl.pathname.startsWith('/_next/')) {
+    return NextResponse.next();
+  }
   const cookieLocale = request.cookies.get("tranluz_locale")?.value;
   const country =
     request.headers.get("x-vercel-ip-country") ??
