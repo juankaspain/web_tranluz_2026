@@ -62,13 +62,18 @@ const SOCIALS = [
   { Icon: YouTubeIcon,   href: brand.social?.youtube   ?? "https://youtube.com",   label: "YouTube" },
 ];
 
+/**
+ * Logos de certificaciones — todos con mix-blend-mode: screen + opacity
+ * para que sean visibles sobre el fondo oscuro sin filtros agresivos.
+ * Los PNG con fondo blanco se fusionan naturalmente con el fondo oscuro
+ * mediante screen (blanco×oscuro → colores del logo).
+ */
 const ACCREDITATIONS: {
-  src: string; alt: string; href: string;
-  w: number; h: number; invertToWhite: boolean;
+  src: string; alt: string; href: string; w: number; h: number;
 }[] = [
-  { src: "/images/Otros/Aenor_Logo.svg",         alt: "AENOR",             href: "https://www.aenor.com",        w: 72,  h: 36, invertToWhite: true },
-  { src: "/images/Otros/Logos_Financiacion.png",  alt: "Financiación EU",   href: "#",                           w: 180, h: 48, invertToWhite: false },
-  { src: "/images/Otros/Moves_III_Logo.png",      alt: "Programa MOVES III", href: "https://www.miteco.gob.es",  w: 110, h: 48, invertToWhite: false },
+  { src: "/images/Otros/Aenor_Logo.svg",        alt: "AENOR",             href: "https://www.aenor.com",       w: 80,  h: 40 },
+  { src: "/images/Otros/Logos_Financiacion.png", alt: "Financiación EU",   href: "#",                          w: 160, h: 44 },
+  { src: "/images/Otros/Moves_III_Logo.png",     alt: "Programa MOVES III", href: "https://www.miteco.gob.es", w: 96,  h: 40 },
 ];
 
 const COPYRIGHT_YEAR = 2026;
@@ -144,16 +149,22 @@ const S = {
     color: T.accent,
     marginBottom: "12px",
   } as React.CSSProperties,
-  accrLogos: { display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" as const } as React.CSSProperties,
-  accrImgWhite: { objectFit: "contain" as const, opacity: 0.8, filter: "brightness(0) invert(1)", display: "block" } as React.CSSProperties,
-  accrPill: {
-    display: "inline-flex", alignItems: "center", justifyContent: "center",
-    background: "rgba(255,255,255,0.90)",
-    borderRadius: "5px",
-    padding: "3px 7px",
-    lineHeight: 0,
+  accrLogos: {
+    display: "flex",
+    alignItems: "center",
+    gap: "16px",
+    flexWrap: "wrap" as const,
   } as React.CSSProperties,
-  accrImgColor: { objectFit: "contain" as const, display: "block" } as React.CSSProperties,
+  /* mix-blend-mode: screen hace visibles los logos sobre fondo oscuro.
+     Los SVG/PNG con fondo blanco se fusionan con el background:
+     blanco × oscuro → colores del logo. opacity 0.80 da presencia
+     sin dominar sobre el contenido principal del footer. */
+  accrImg: {
+    objectFit: "contain" as const,
+    display: "block",
+    opacity: 0.80,
+    mixBlendMode: "screen" as const,
+  } as React.CSSProperties,
   navHeading: {
     fontSize: "11px",
     fontWeight: 700,
@@ -239,15 +250,22 @@ export function SiteFooter() {
           <div style={S.accrSection}>
             <p style={S.accrLabel}>Certificaciones y acreditaciones</p>
             <div style={S.accrLogos}>
-              {ACCREDITATIONS.map(({ src, alt, href, w, h, invertToWhite }) => (
-                <a key={alt} href={href} target="_blank" rel="noopener noreferrer" title={alt}>
-                  {invertToWhite ? (
-                    <Image src={src} alt={alt} width={w} height={h} style={S.accrImgWhite} />
-                  ) : (
-                    <span style={S.accrPill}>
-                      <Image src={src} alt={alt} width={w} height={h} style={S.accrImgColor} />
-                    </span>
-                  )}
+              {ACCREDITATIONS.map(({ src, alt, href, w, h }) => (
+                <a
+                  key={alt}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={alt}
+                  style={{ lineHeight: 0 }}
+                >
+                  <Image
+                    src={src}
+                    alt={alt}
+                    width={w}
+                    height={h}
+                    style={S.accrImg}
+                  />
                 </a>
               ))}
             </div>
