@@ -6799,3 +6799,53 @@ a:focus-visible {
   border-top-color: var(--line);
   border-bottom-color: var(--line);
 }
+
+
+/* ============================================================
+   FIX v2 — Buscador header: caja visible con contraste real
+   ============================================================ */
+
+/* El header tiene background blanco (#fff), por eso el buscador
+   necesita borde con suficiente contraste y fondo diferenciado */
+.hs-form {
+  border: 1.5px solid rgba(17, 24, 32, 0.28) !important;
+  background: var(--bg-muted) !important;
+  box-shadow: inset 0 1px 3px rgba(17, 24, 32, 0.06);
+}
+.hs-wrap--focused .hs-form {
+  border-color: var(--brand) !important;
+  background: var(--bg-elevated) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 18%, transparent) !important;
+}
+
+/* Dark mode: borde visible sobre header oscuro */
+:root[data-theme="dark"] .hs-form {
+  border-color: rgba(238, 243, 245, 0.22) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+:root[data-theme="dark"] .hs-wrap--focused .hs-form {
+  border-color: var(--brand) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+:root[data-theme="dark"] .hs-input {
+  color: var(--text);
+}
+:root[data-theme="dark"] .hs-input::placeholder {
+  color: var(--text-muted);
+}
+:root[data-theme="dark"] .hs-icon {
+  color: var(--text-muted);
+}
+:root[data-theme="dark"] .hs-dropdown {
+  background: var(--bg-elevated);
+  border-color: var(--line);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32);
+}
+:root[data-theme="dark"] .hs-dropdown__item {
+  color: var(--text);
+}
+:root[data-theme="dark"] .hs-dropdown__item:hover {
+  background: color-mix(in srgb, var(--brand) 14%, transparent);
+  color: var(--brand);
+}
