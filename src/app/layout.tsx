@@ -132,14 +132,32 @@ export default function RootLayout({
   return (
     <html
       lang={defaultLocale}
+      data-theme="light"
       suppressHydrationWarning
       className="scroll-smooth"
     >
       <head>
-                <link rel="icon" href="/images/Tranluz/Tranluz_Logo.svg" type="image/svg+xml" />
-                <link rel="shortcut icon" href="/images/Tranluz/Tranluz_Logo.svg" type="image/svg+xml" />
+        {/* Script inline: aplica el tema ANTES del primer paint para evitar FOUC */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){
+  try{
+    var t=localStorage.getItem('tranluz-theme');
+    if(t==='dark'||t==='light'){
+      document.documentElement.setAttribute('data-theme',t);
+    } else {
+      document.documentElement.setAttribute('data-theme','light');
+    }
+  }catch(e){
+    document.documentElement.setAttribute('data-theme','light');
+  }
+})();`,
+          }}
+        />
+        <link rel="icon" href="/images/Tranluz/Tranluz_Logo.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/images/Tranluz/Tranluz_Logo.svg" type="image/svg+xml" />
       </head>
-      <body className="bg-background text-foreground antialiased">
+      <body>
         <SkipLink />
         <AutoTranslate />
         <StructuredData />
