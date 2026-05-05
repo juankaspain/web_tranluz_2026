@@ -64,10 +64,14 @@ const nextConfig = {
   // Compresión
   compress: true,
 
-  // Optimización de paquetes — elimina imports no usados de librerías grandes
-  experimental: {
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
-  },
+  // NOTA: optimizePackageImports eliminado intencionalmente.
+  // Next.js 15 + React 19: esta opción experimental reescribe los imports
+  // de paquetes listados y puede generar una referencia duplicada de React
+  // en chunks SSR sin "use client", produciendo el error:
+  //   TypeError: f.useState is not a function
+  // durante el prerendering estático (ej. /privacidad, /cookies, /aviso-legal).
+  // Webpack nativo hace tree-shaking de lucide-react sin necesitar este flag.
+  experimental: {},
 };
 
 export default nextConfig;
