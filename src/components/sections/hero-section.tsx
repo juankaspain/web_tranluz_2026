@@ -3,18 +3,63 @@
 import { useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Clock, ArrowRight, Phone, X, Copy, CheckCheck, Sparkles, Award, TrendingUp } from "lucide-react";
+import { ArrowRight, Phone, X, Copy, CheckCheck, Sparkles, Award, TrendingUp } from "lucide-react";
 import { brand } from "@/config/brand";
 import { assets } from "@/content/assets";
+import { useCountUp } from "@/hooks/use-count-up";
 
-const heroMetrics = [
-  { value: "+38", label: "años", icon: Award },
-  { value: "4", label: "servicios", icon: TrendingUp },
-  { value: "B2B", label: "sector", icon: Sparkles },
+// ── Metric con animación numérica ──────────────────────────────────────────
+interface HeroMetricItem {
+  /** Número final a animar (null para valores no numéricos como "B2B") */
+  numericEnd: number | null;
+  /** Prefijo estático delante del número (e.g. "+") */
+  prefix?: string;
+  /** Texto estático cuando numericEnd es null */
+  staticValue: string;
+  label: string;
+  icon: React.ElementType;
+}
+
+const heroMetrics: HeroMetricItem[] = [
+  { numericEnd: 38, prefix: "+", staticValue: "+38", label: "años", icon: Award },
+  { numericEnd: 4, prefix: "",  staticValue: "4",   label: "servicios", icon: TrendingUp },
+  { numericEnd: null, prefix: "", staticValue: "B2B", label: "sector", icon: Sparkles },
 ];
 
+// Componente individual que usa el hook
+function AnimatedMetricPill({ metric }: { metric: HeroMetricItem }) {
+  const { count, nodeRef } = useCountUp(
+    metric.numericEnd !== null
+      ? { end: metric.numericEnd, duration: 1400 }
+      : { end: 0, duration: 0 }
+  );
+  const Icon = metric.icon;
+  const displayValue =
+    metric.numericEnd !== null
+      ? `${metric.prefix ?? ""}${count}`
+      : metric.staticValue;
+
+  return (
+    <div
+      className="hero-metric-pill"
+      role="listitem"
+      // @ts-expect-error — ref genérico para el observer
+      ref={metric.numericEnd !== null ? nodeRef : undefined}
+    >
+      <div className="hero-metric-icon" aria-hidden="true">
+        <Icon size={14} color="#fff" />
+      </div>
+      <div>
+        <div className="hero-metric-value" aria-live="polite">
+          {displayValue}
+        </div>
+        <div className="hero-metric-label">{metric.label}</div>
+      </div>
+    </div>
+  );
+}
+
 /* ---- Phone Popup ------------------------------------------------- */
-// C3 fix: el popup SOLO se abre con onClick, nunca con hover
 function PhonePopup({ onClose }: { onClose: () => void }) {
   const [copied, setCopied] = useState(false);
   const phone = brand.phone ?? "+34 954 367 290";
@@ -27,7 +72,6 @@ function PhonePopup({ onClose }: { onClose: () => void }) {
     });
   }, [phone]);
 
-  // Cerrar con Escape
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -36,7 +80,6 @@ function PhonePopup({ onClose }: { onClose: () => void }) {
   );
 
   return (
-    // C1 fix: todos los estilos movidos a clases CSS en globals.css
     <div
       className="phone-popup-overlay"
       onClick={onClose}
@@ -45,11 +88,7 @@ function PhonePopup({ onClose }: { onClose: () => void }) {
       aria-modal="true"
       aria-label="Información de contacto telefónico"
     >
-      <div
-        className="phone-popup"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Header */}
+      <div className="phone-popup" onClick={(e) => e.stopPropagation()}>
         <div className="phone-popup-header">
           <div>
             <div className="phone-popup-badge">
@@ -58,35 +97,19 @@ function PhonePopup({ onClose }: { onClose: () => void }) {
             </div>
             <h3 className="phone-popup-title">Llámanos ahora</h3>
           </div>
-          <button
-            onClick={onClose}
-            aria-label="Cerrar"
-            className="phone-popup-close"
-          >
+          <button onClick={onClose} aria-label="Cerrar" className="phone-popup-close">
             <X size={18} />
           </button>
         </div>
-
-        {/* Phone number */}
-        <a href={phoneHref} className="phone-popup-number">
-          {phone}
-        </a>
-        <p className="phone-popup-hours">
-          Lun–Vie 8:00–18:00 · Urgencias 24h
-        </p>
-
-        {/* Actions */}
+        <a href={phoneHref} className="phone-popup-number">{phone}</a>
+        <p className="phone-popup-hours">Lun–Vie 8:00–18:00 · Urgencias 24h</p>
         <div className="phone-popup-actions">
           <a href={phoneHref} className="phone-popup-call-btn">
             <Phone size={18} />
             Llamar ahora
           </a>
           <button onClick={handleCopy} className="phone-popup-copy-btn">
-            {copied ? (
-              <><CheckCheck size={16} /> Copiado</>
-            ) : (
-              <><Copy size={16} /> Copiar</>
-            )}
+            {copied ? <><CheckCheck size={16} /> Copiado</> : <><Copy size={16} /> Copiar</>}
           </button>
         </div>
       </div>
@@ -99,9 +122,7 @@ export function HeroSection() {
   const [phoneOpen, setPhoneOpen] = useState(false);
 
   return (
-    // C1 fix: position/min-height/overflow/background movidos a .hero-section-full en globals.css
     <section className="hero-section hero-section-full">
-      {/* Background image with overlay */}
       <div className="hero-bg">
         <Image
           src={assets.hero}
@@ -118,58 +139,33 @@ export function HeroSection() {
 
       <div className="container hero-container">
         <div className="hero-content-grid">
-          {/* Main hero content */}
           <div className="hero-main">
-            {/* Badge */}
             <div className="hero-badge" aria-hidden="true">
               <div className="hero-badge-logo">
-                <Image
-                  src={assets.logo}
-                  alt=""
-                  width={24}
-                  height={24}
-                  aria-hidden="true"
-                />
+                <Image src={assets.logo} alt="" width={24} height={24} aria-hidden="true" />
               </div>
               <span className="hero-badge-text">
                 Especialistas desde {brand.founded} · Sevilla
               </span>
             </div>
 
-            {/* C2 fix: gradiente con @supports + fallback forced-colors */}
-            {/* Headline */}
             <h1 className="hero-h1">
               Todo lo que necesitas para{" "}
-              <span className="hero-gradient-text">
-                ejecutar obras eléctricas críticas
-              </span>
+              <span className="hero-gradient-text">ejecutar obras eléctricas críticas</span>
               , en un solo proveedor.
             </h1>
 
-            {/* Subheadline */}
             <p className="hero-sub">
               Equipos, alquiler, servicio técnico, formación y trazabilidad con soporte real en obra.
             </p>
 
-            {/* Metric pills */}
+            {/* Metric pills — contador animado */}
             <div className="hero-metrics-row" role="list" aria-label="Datos clave de Tranluz">
-              {heroMetrics.map((m, i) => {
-                const Icon = m.icon;
-                return (
-                  <div key={i} className="hero-metric-pill" role="listitem">
-                    <div className="hero-metric-icon" aria-hidden="true">
-                      <Icon size={14} color="#fff" />
-                    </div>
-                    <div>
-                      <div className="hero-metric-value">{m.value}</div>
-                      <div className="hero-metric-label">{m.label}</div>
-                    </div>
-                  </div>
-                );
-              })}
+              {heroMetrics.map((m) => (
+                <AnimatedMetricPill key={m.label} metric={m} />
+              ))}
             </div>
 
-            {/* CTAs */}
             <div className="hero-ctas">
               <Link href="/contacto" className="hero-cta-primary">
                 Solicitar presupuesto
@@ -178,8 +174,6 @@ export function HeroSection() {
               <Link href="/alquiler" className="hero-cta-secondary">
                 Ver equipos en alquiler
               </Link>
-
-              {/* C3 fix: phone popup SOLO con onClick */}
               <button
                 onClick={() => setPhoneOpen((v) => !v)}
                 className="hero-phone-btn"
@@ -195,7 +189,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Phone popup — C3: solo se monta cuando phoneOpen === true */}
       {phoneOpen && <PhonePopup onClose={() => setPhoneOpen(false)} />}
     </section>
   );
