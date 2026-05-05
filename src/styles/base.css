@@ -1,0 +1,110 @@
+/* ============================================================
+   BASE — Reset, tipografía base, elementos globales
+   ============================================================
+   Importado después de tokens.css.
+   No contiene selectores de componentes ni clases de layout.
+   ============================================================ */
+
+/* ---- Reset ------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  overflow-x: clip;
+  padding-bottom: env(safe-area-inset-bottom);
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, var(--brand-soft) 72%, transparent), transparent 34rem),
+    radial-gradient(circle at 86% 16%, color-mix(in srgb, var(--technical) 10%, transparent), transparent 28rem),
+    linear-gradient(180deg, var(--bg), var(--bg-muted) 45%, var(--bg));
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  letter-spacing: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Tipografía base -------------------------------------- */
+h1, h2, h3,
+.brand-mark,
+.button,
+.eyebrow {
+  font-family: var(--font-display);
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+p, li, small {
+  text-wrap: pretty;
+}
+
+/* ---- Elementos multimedia --------------------------------- */
+img, svg {
+  display: block;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ---- Interactivos base ------------------------------------ */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ---- Selección de texto ----------------------------------- */
+::selection {
+  background: var(--brand);
+  color: #ffffff;
+}
+
+/* ---- Foco accesible --------------------------------------- */
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--brand) 72%, white);
+  outline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--brand) 72%, white);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* ---- Scrollbar personalizado (webkit) --------------------- */
+::-webkit-scrollbar         { width: 6px; height: 6px; }
+::-webkit-scrollbar-track   { background: var(--bg-muted); }
+::-webkit-scrollbar-thumb   { background: var(--line-strong); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--brand); }
+
+/* ---- Motion reducido -------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

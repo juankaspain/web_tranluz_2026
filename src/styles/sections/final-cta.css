@@ -1,0 +1,190 @@
+/* ============================================================
+   FINAL CTA — Sección llamada a la acción final
+   ============================================================ */
+
+.final-cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 48px;
+  align-items: center;
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--bg-inverse) 96%, transparent), var(--bg-inverse));
+  padding: 56px 48px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.final-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--brand) 18%, transparent), transparent 55%),
+    radial-gradient(circle at 10% 80%, color-mix(in srgb, var(--technical) 12%, transparent), transparent 45%);
+  pointer-events: none;
+}
+
+/* ---- Columna copy ---------------------------------------- */
+.cta-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 20px;
+}
+
+.cta-copy h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+  line-height: 1.1;
+  font-weight: 790;
+  color: #ffffff;
+}
+
+.cta-lead {
+  margin: 0;
+  color: rgba(238, 243, 245, 0.78);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.6;
+}
+
+.cta-benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.cta-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(238, 243, 245, 0.86);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.cta-benefits li svg { flex: 0 0 auto; color: var(--brand); filter: brightness(1.3); }
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.cta-actions .button-ghost {
+  border-color: rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+}
+
+.cta-actions .button-ghost:hover { background: rgba(255, 255, 255, 0.18); }
+
+/* ---- Columna visual -------------------------------------- */
+.cta-visual {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cta-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+.cta-stat strong {
+  font-size: 1.8rem;
+  font-weight: 820;
+  color: #ffffff;
+  line-height: 1;
+  font-family: var(--font-display);
+}
+
+.cta-stat span { font-size: 0.82rem; color: rgba(238, 243, 245, 0.65); line-height: 1.3; }
+
+.cta-badge {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(238, 243, 245, 0.82);
+  font-size: 0.875rem;
+  font-weight: 750;
+}
+
+.cta-badge svg { flex: 0 0 auto; color: var(--brand); filter: brightness(1.3); }
+
+/* ---- Botones sobre fondo oscuro -------------------------- */
+.final-cta .button-primary,
+.final-cta a.button-primary {
+  background: var(--brand);
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.final-cta .button-ghost,
+.final-cta a.button-ghost {
+  border-color: rgba(238, 243, 245, 0.22);
+  background: rgba(238, 243, 245, 0.08);
+  color: rgba(238, 243, 245, 0.9);
+}
+
+.final-cta .button-ghost:hover,
+.final-cta a.button-ghost:hover {
+  border-color: rgba(238, 243, 245, 0.4);
+  background: rgba(238, 243, 245, 0.14);
+  color: #ffffff;
+}
+
+.final-cta h2 { color: #ffffff; }
+.final-cta p  { color: rgba(238, 243, 245, 0.72); }
+.final-cta .cta-benefits li { color: rgba(238, 243, 245, 0.72); }
+
+:root[data-theme="dark"] .final-cta {
+  background: var(--bg-muted);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+
+:root[data-theme="dark"] .final-cta p { color: var(--text-muted); }
+
+/* ---- Responsive ------------------------------------------ */
+@media (max-width: 900px) {
+  .final-cta {
+    grid-template-columns: 1fr;
+    padding: 40px 28px;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .final-cta {
+    padding: 32px 20px;
+    border-radius: var(--radius-lg);
+    margin: 0 16px;
+  }
+  .cta-visual { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  .final-cta {
+    grid-template-columns: 1fr;
+    padding: 28px;
+    margin-bottom: 28px;
+  }
+}

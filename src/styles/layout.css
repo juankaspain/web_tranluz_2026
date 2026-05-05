@@ -1,0 +1,389 @@
+/* ============================================================
+   LAYOUT — Estructura de página: header, footer, secciones
+   ============================================================
+   Selectores de alto nivel que definen el esqueleto visual.
+   ============================================================ */
+
+/* ---- Wrappers con max-width ------------------------------- */
+.topbar,
+.navbar,
+.mega-strip,
+.section,
+.support-band,
+.site-footer,
+.company-proof,
+.final-cta {
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.section {
+  width: min(100%, var(--max-width));
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.section,
+.support-band,
+.company-proof,
+.final-cta {
+  padding-top: 62px;
+  padding-bottom: 62px;
+}
+
+@media (max-width: 760px) {
+  .section,
+  .support-band,
+  .company-proof,
+  .final-cta {
+    padding-top: 42px;
+    padding-bottom: 42px;
+  }
+}
+
+/* ---- Section heading -------------------------------------- */
+.section-heading {
+  margin-bottom: 36px;
+}
+
+.section-heading h2 {
+  margin: 8px 0 12px;
+  font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+  line-height: 1.1;
+  font-weight: 790;
+}
+
+.section-heading p {
+  max-width: 580px;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.6;
+}
+
+.section-heading-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+/* ---- Company proof --------------------------------------- */
+.company-proof-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .company-proof-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* ---- Support band ---------------------------------------- */
+.support-band {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 560px) {
+  .support-band {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Page hero ------------------------------------------- */
+.page-hero {
+  width: min(100%, var(--max-width));
+  margin: 0 auto;
+  padding: 48px 24px 36px;
+}
+
+.page-hero h1 {
+  margin: 8px 0 12px;
+  font-size: clamp(1.75rem, 3vw, 2.8rem);
+  line-height: 1.1;
+  font-weight: 790;
+  color: var(--text);
+}
+
+.page-hero p {
+  max-width: 600px;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .page-hero { padding: 32px 16px 24px; }
+}
+
+/* ---- Decision / CTA section ------------------------------ */
+.decision-section {
+  padding: 80px 0;
+  background: var(--bg-inverse);
+  color: #ffffff;
+}
+
+.decision-section h2 {
+  margin: 0 0 16px;
+  font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+  font-weight: 790;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.decision-section p {
+  margin: 0 0 28px;
+  max-width: 560px;
+  color: rgba(255,255,255,0.78);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.decision-section .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 46px;
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 999px;
+  padding: 0 22px;
+  font-weight: 760;
+  font-family: var(--font-display);
+  white-space: nowrap;
+  color: #ffffff;
+  background: rgba(255,255,255,0.1);
+  transition: background 180ms ease, transform 180ms ease;
+  text-decoration: none;
+}
+
+.decision-section .button-primary {
+  background: var(--brand);
+  border-color: transparent;
+}
+
+.decision-section .button:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateY(-1px);
+}
+
+.decision-section .button-primary:hover {
+  background: var(--brand-strong);
+}
+
+.decision-section .button-secondary {
+  border-color: rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.1);
+  color: #ffffff;
+}
+
+.decision-section .button-secondary:hover {
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.18);
+}
+
+:root[data-theme="dark"] .decision-section {
+  background: var(--bg-muted);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+:root[data-theme="dark"] .decision-section h2 { color: var(--text); }
+:root[data-theme="dark"] .decision-section p  { color: var(--text-muted); }
+
+:root[data-theme="dark"] .decision-section .button-secondary {
+  border-color: var(--line-strong);
+  background: var(--bg-elevated);
+  color: var(--text);
+}
+
+/* ---- Authority section ------------------------------------ */
+.authority-section {
+  padding: 64px 0;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.authority-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.authority-metrics > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 160px;
+  padding: 20px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-soft);
+}
+
+.authority-metrics > div strong {
+  font-size: 1.6rem;
+  font-weight: 820;
+  color: var(--brand);
+  font-family: var(--font-display);
+  line-height: 1;
+}
+
+.authority-metrics > div span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.authority-brands {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.authority-brands a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  padding: 0 14px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    transform 160ms ease;
+}
+
+.authority-brands a:hover {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+  color: var(--brand);
+  transform: translateY(-1px);
+}
+
+.authority-section .eyebrow {
+  display: block;
+  margin-bottom: 8px;
+}
+
+:root[data-theme="dark"] .authority-section {
+  background: var(--bg);
+}
+
+/* ---- Problem / Solution section -------------------------- */
+.problem-solution-section {
+  padding: 64px 0;
+  background: var(--bg-muted);
+}
+
+.problem-solution-section h2 {
+  margin: 0 0 32px;
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-weight: 790;
+  line-height: 1.15;
+}
+
+.ps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.ps-col {
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: var(--bg-elevated);
+}
+
+.ps-bad {
+  border-color: rgba(220, 38, 38, 0.25);
+  background: rgba(254, 242, 242, 0.6);
+}
+
+:root[data-theme="dark"] .ps-bad {
+  background: rgba(127, 29, 29, 0.15);
+  border-color: rgba(248, 113, 113, 0.2);
+}
+
+.ps-good {
+  border-color: rgba(22, 163, 74, 0.25);
+  background: rgba(240, 253, 244, 0.6);
+}
+
+:root[data-theme="dark"] .ps-good {
+  background: rgba(20, 83, 45, 0.18);
+  border-color: rgba(74, 222, 128, 0.2);
+}
+
+.ps-col h3 {
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+  font-weight: 780;
+}
+
+.ps-col ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.ps-col li {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+  .ps-grid { grid-template-columns: 1fr; }
+}
+
+:root[data-theme="dark"] .problem-solution-section { background: var(--bg-muted); }
+:root[data-theme="dark"] .ps-col {
+  background: var(--bg-elevated);
+  border-color: var(--line);
+}
+
+/* ---- Equipment section wrapper --------------------------- */
+.equipment-section {
+  background: var(--bg-muted);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+:root[data-theme="dark"] .equipment-section { background: var(--bg-muted); }

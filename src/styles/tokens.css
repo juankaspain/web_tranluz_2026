@@ -1,0 +1,86 @@
+/* ============================================================
+   TOKENS — Design Tokens: colores, tipografía, sombras, radios
+   ============================================================
+   Fuente única de verdad para todas las variables CSS.
+   Importado por globals.css antes de cualquier otro módulo.
+   ============================================================ */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  /* Superficies */
+  --bg:           #f4f6f7;
+  --bg-elevated:  #ffffff;
+  --bg-muted:     #e5eaee;
+  --bg-inverse:   #111820;
+
+  /* Texto */
+  --text:         #111820;
+  --text-muted:   #4a5668;
+  --text-soft:    #6b7885;
+
+  /* Bordes */
+  --line:         rgba(17, 24, 32, 0.12);
+  --line-strong:  rgba(17, 24, 32, 0.2);
+
+  /* Colores de marca */
+  --brand:        #bd500e;
+  --brand-strong: #973907;
+  --brand-soft:   rgba(189, 80, 14, 0.12);
+
+  /* Colores semánticos de sector */
+  --field:      #247451;
+  --safety:     #c99122;
+  --technical:  #0b5f7a;
+
+  /* Tipografía */
+  --font-body:    "Manrope Variable", Manrope, ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo Variable", Archivo, var(--font-body);
+
+  /* Sombras */
+  --shadow:      0 24px 70px rgba(17, 24, 32, 0.11);
+  --shadow-soft: 0 12px 34px rgba(17, 24, 32, 0.075);
+
+  /* Radios */
+  --radius-xs: 6px;
+  --radius:    8px;
+  --radius-lg: 14px;
+  --radius-xl: 22px;
+
+  /* Layout */
+  --max-width:     1240px;
+  --header-height: 78px;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Superficies */
+  --bg:           #0c1116;
+  --bg-elevated:  #141b22;
+  --bg-muted:     #1b242c;
+  --bg-inverse:   #f4f6f7;
+
+  /* Texto */
+  --text:       #eef3f5;
+  --text-muted: #c8d4db;
+  --text-soft:  #9daab3;
+
+  /* Bordes */
+  --line:        rgba(238, 243, 245, 0.12);
+  --line-strong: rgba(238, 243, 245, 0.23);
+
+  /* Colores de marca */
+  --brand:        #bd500e;
+  --brand-strong: #e07424;
+  --brand-soft:   rgba(224, 116, 36, 0.17);
+
+  /* Colores semánticos de sector */
+  --field:     #4fab78;
+  --safety:    #d9ad44;
+  --technical: #4ba9c4;
+
+  /* Sombras */
+  --shadow:      0 24px 80px rgba(0, 0, 0, 0.4);
+  --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.28);
+}
