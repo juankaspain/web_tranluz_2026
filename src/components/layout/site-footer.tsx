@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -47,8 +49,8 @@ const NAV_COLS = [
   {
     heading: "Empresa",
     links: [
-      { label: "Quiénes somos",       href: "/empresa" },
-      { label: "Soporte",             href: "/soporte" },
+      { label: "Quiénes somos",        href: "/empresa" },
+      { label: "Soporte",              href: "/soporte" },
       { label: "Trabaja con nosotros", href: "/empresa#empleo" },
     ],
   },
@@ -64,24 +66,15 @@ const ACCREDITATIONS: {
   src: string; alt: string; href: string;
   w: number; h: number; invertToWhite: boolean;
 }[] = [
-  { src: "/images/Otros/Aenor_Logo.svg",       alt: "AENOR",            href: "https://www.aenor.com",          w: 72,  h: 36, invertToWhite: true },
-  { src: "/images/Otros/Logos_Financiacion.png", alt: "Financiación EU",  href: "#",                             w: 180, h: 48, invertToWhite: false },
-  { src: "/images/Otros/Moves_III_Logo.png",    alt: "Programa MOVES III", href: "https://www.miteco.gob.es",   w: 110, h: 48, invertToWhite: false },
+  { src: "/images/Otros/Aenor_Logo.svg",         alt: "AENOR",             href: "https://www.aenor.com",        w: 72,  h: 36, invertToWhite: true },
+  { src: "/images/Otros/Logos_Financiacion.png",  alt: "Financiación EU",   href: "#",                           w: 180, h: 48, invertToWhite: false },
+  { src: "/images/Otros/Moves_III_Logo.png",      alt: "Programa MOVES III", href: "https://www.miteco.gob.es",  w: 110, h: 48, invertToWhite: false },
 ];
 
 const COPYRIGHT_YEAR = 2026;
 
 /* ------------------------------------------------------------------ */
 /* Design tokens — footer-scoped                                        */
-/*                                                                      */
-/* Base: #0f1923  (azul-carbono muy oscuro, casi negro)                 */
-/* Surface: #162130  (una capa encima)                                   */
-/* Divider: rgba(255,255,255,0.07)                                       */
-/* Text primary: #e8edf2  (blanco frío suave, no puro)                 */
-/* Text muted: #7a92a8    (azul-gris legible, ratio >4.5:1)             */
-/* Text faint: #4a6070    (para metadatos, 3:1 mínimo)                 */
-/* Accent: #f97316        (naranja Tranluz — solo para CTAs y íconos)  */
-/* Accent hover: #fb923c                                                 */
 /* ------------------------------------------------------------------ */
 const T = {
   bg:           "#0f1923",
@@ -102,13 +95,10 @@ const S = {
     fontSize: "14px",
     lineHeight: "1.6",
   } as React.CSSProperties,
-
-  /* Franja naranja de 3px en la parte superior: marca visual inequívoca */
   topStripe: {
     height: "3px",
     background: `linear-gradient(90deg, ${T.accent} 0%, #fb923c 60%, transparent 100%)`,
   } as React.CSSProperties,
-
   main: {
     maxWidth: "1200px",
     margin: "0 auto",
@@ -117,8 +107,6 @@ const S = {
     gridTemplateColumns: "2fr 1fr 1fr 1.4fr",
     gap: "48px",
   } as React.CSSProperties,
-
-  /* Brand */
   brandLogo: { display: "block", marginBottom: "20px" } as React.CSSProperties,
   brandLogoImg: { height: "44px", width: "auto", objectFit: "contain" as const } as React.CSSProperties,
   brandTagline: {
@@ -128,8 +116,6 @@ const S = {
     marginBottom: "24px",
     maxWidth: "270px",
   } as React.CSSProperties,
-
-  /* Socials */
   socials: { display: "flex", gap: "8px", marginBottom: "32px" } as React.CSSProperties,
   socialLink: {
     display: "inline-flex",
@@ -149,8 +135,6 @@ const S = {
     borderColor: `rgba(249,115,22,0.35)`,
     color: T.accent,
   } as React.CSSProperties,
-
-  /* Accreditations */
   accrSection: { marginTop: "4px" } as React.CSSProperties,
   accrLabel: {
     fontSize: "10px",
@@ -170,8 +154,6 @@ const S = {
     lineHeight: 0,
   } as React.CSSProperties,
   accrImgColor: { objectFit: "contain" as const, display: "block" } as React.CSSProperties,
-
-  /* Nav columns */
   navHeading: {
     fontSize: "11px",
     fontWeight: 700,
@@ -184,16 +166,12 @@ const S = {
   } as React.CSSProperties,
   navList: { listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column" as const, gap: "9px" } as React.CSSProperties,
   navLink: { color: T.textMuted, textDecoration: "none", fontSize: "13.5px", display: "block", transition: "color 150ms ease" } as React.CSSProperties,
-
-  /* Contact */
   contactRow: {
     display: "flex", alignItems: "flex-start", gap: "10px",
     marginBottom: "14px", fontSize: "13.5px", color: T.textMuted,
   } as React.CSSProperties,
   contactIcon: { color: T.accent, flexShrink: 0, marginTop: "3px" } as React.CSSProperties,
   contactLink: { color: T.textMuted, textDecoration: "none" } as React.CSSProperties,
-
-  /* Bottom bar */
   bottomBar: {
     borderTop: `1px solid ${T.divider}`,
     background: "rgba(0,0,0,0.25)",
@@ -210,7 +188,7 @@ const S = {
 } as const;
 
 /* ------------------------------------------------------------------ */
-/* Social with hover via state                                           */
+/* SocialButton — necesita useState para el hover, requiere "use client" */
 /* ------------------------------------------------------------------ */
 function SocialButton({ Icon, href, label }: { Icon: React.FC; href: string; label: string }) {
   const [hovered, setHovered] = React.useState(false);
@@ -230,38 +208,34 @@ function SocialButton({ Icon, href, label }: { Icon: React.FC; href: string; lab
 }
 
 /* ------------------------------------------------------------------ */
-/* Component                                                             */
+/* SiteFooter                                                            */
 /* ------------------------------------------------------------------ */
 export function SiteFooter() {
   const phoneHref = `tel:${brand.phone?.replace(/\s/g, "") ?? ""}`;
 
   return (
     <footer style={S.footer}>
-      {/* Franja naranja superior — ancla visual de la marca */}
+      {/* Franja naranja superior */}
       <div style={S.topStripe} aria-hidden="true" />
 
       <div style={S.main}>
 
-        {/* ── Brand column ────────────────────────────────────────────── */}
+        {/* Brand column */}
         <div>
           <Link href="/" style={S.brandLogo} aria-label="Tranluz — inicio">
             <img src={assets.logoWhite ?? assets.logo} alt="Tranluz" style={S.brandLogoImg} />
           </Link>
-
           <p style={S.brandTagline}>
             Especialistas en máquinas y herramientas para montadores
             eléctricos desde <strong style={{ color: T.textPrimary }}>{brand.founded}</strong>.
             <br />
             Servicio técnico, alquiler, formación y trazabilidad.
           </p>
-
           <div style={S.socials}>
             {SOCIALS.map(({ Icon, href, label }) => (
               <SocialButton key={label} Icon={Icon} href={href} label={label} />
             ))}
           </div>
-
-          {/* Accreditations */}
           <div style={S.accrSection}>
             <p style={S.accrLabel}>Certificaciones y acreditaciones</p>
             <div style={S.accrLogos}>
@@ -280,7 +254,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* ── Nav columns ─────────────────────────────────────────────── */}
+        {/* Nav columns */}
         {NAV_COLS.map((col) => (
           <div key={col.heading}>
             <p style={S.navHeading}>{col.heading}</p>
@@ -294,7 +268,7 @@ export function SiteFooter() {
           </div>
         ))}
 
-        {/* ── Contact column ──────────────────────────────────────────── */}
+        {/* Contact column */}
         <div>
           <p style={S.navHeading}>Contacto</p>
           <div style={S.contactRow}>
@@ -318,9 +292,9 @@ export function SiteFooter() {
           </div>
         </div>
 
-      </div>{/* /main grid */}
+      </div>
 
-      {/* ── Bottom bar ────────────────────────────────────────────────── */}
+      {/* Bottom bar */}
       <div style={S.bottomBar}>
         <div style={S.bottomInner}>
           <p style={S.bottomCopy}>
