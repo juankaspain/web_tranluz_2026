@@ -1,0 +1,14 @@
+# robots.txt — Tranluz
+# Fix C5: SEO — robots.txt creado
+
+User-agent: *
+Allow: /
+
+# Bloquear rutas internas y de API
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /dashboard/
+
+# Sitemap
+Sitemap: https://tranluz.com/sitemap.xml

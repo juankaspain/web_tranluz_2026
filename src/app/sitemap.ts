@@ -1,81 +1,32 @@
-import type { MetadataRoute } from "next";
+// src/app/sitemap.ts
+// Fix C5 + 1.1: Sitemap dinámico con hreflang para ES/EN
+// Generado por Next.js 14+ App Router
+
+import { MetadataRoute } from 'next';
+
+const BASE_URL = 'https://tranluz.com';
 
 const routes = [
-  "",
-  "/productos",
-  "/soluciones",
-  "/servicios",
-  "/alquiler",
-  "/formacion",
-  "/soporte",
-  "/soporte/catalogos",
-  "/empresa",
-  "/contacto",
-  "/presupuesto",
-  "/aviso-legal",
-  "/privacidad",
-  "/cookies",
-  "/accesibilidad",
-  "/servicios/its-servicio-tecnico",
-  "/servicios/revisa-trazabilidad",
-  "/servicios/revisiones-certificadas",
-  "/servicios/repuestos",
-  "/alquiler/cabrestante-ars301",
-  "/alquiler/cabrestante-ars403",
-  "/alquiler/cabrestante-ars405",
-  "/alquiler/cabrestante-ars402",
-  "/alquiler/cabrestante-ars523",
-  "/formacion/operador-equipos-electricos",
-  "/formacion/operador-equipos-tendido-fibra-optica",
-  "/productos/alta-tension",
-  "/productos/tendidos-aereos",
-  "/productos/tendidos-subterraneos",
-  "/productos/fibra-optica",
-  "/productos/seguridad-electrica",
-  "/productos/herramienta-hidraulica"
+  { path: '/', priority: 1.0, changeFrequency: 'weekly' as const },
+  { path: '/servicios', priority: 0.9, changeFrequency: 'monthly' as const },
+  { path: '/productos', priority: 0.9, changeFrequency: 'monthly' as const },
+  { path: '/formacion', priority: 0.8, changeFrequency: 'monthly' as const },
+  { path: '/kit-digital', priority: 0.8, changeFrequency: 'monthly' as const },
+  { path: '/contacto', priority: 0.7, changeFrequency: 'yearly' as const },
+  { path: '/presupuesto', priority: 0.9, changeFrequency: 'yearly' as const },
 ];
 
-// Mapeo de locales a prefijos de URL y hreflang
-const localeMap: Record<string, string> = {
-  es: "es-ES",
-  en: "en-GB",
-  de: "de-DE",
-  it: "it-IT",
-  fr: "fr-FR",
-};
-
-const localeOrder = ["es", "en", "de", "it", "fr"] as const;
-const lastModified = new Date("2026-05-05");
-
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.tranluz.es";
-
-  const entries: MetadataRoute.Sitemap = [];
-
-  for (const route of routes) {
-    const isHome = route === "";
-    const priority = isHome ? 1 : 0.8;
-    const changeFrequency = isHome ? "weekly" : "monthly";
-
-    // Entrada canónica en español (sin prefijo)
-    const alternates: Record<string, string> = {};
-    for (const locale of localeOrder) {
-      const hreflang = localeMap[locale];
-      // Español: URL sin prefijo; otros: /locale/route
-      const url = locale === "es" ? `${baseUrl}${route}` : `${baseUrl}/${locale}${route}`;
-      alternates[hreflang] = url;
-    }
-    // x-default apunta a la versión española
-    alternates["x-default"] = `${baseUrl}${route}`;
-
-    entries.push({
-      url: `${baseUrl}${route}`,
-      lastModified,
-      changeFrequency,
-      priority,
-      alternates: { languages: alternates },
-    });
-  }
-
-  return entries;
+  return routes.map(({ path, priority, changeFrequency }) => ({
+    url: `${BASE_URL}${path}`,
+    lastModified: new Date(),
+    changeFrequency,
+    priority,
+    alternates: {
+      languages: {
+        es: `${BASE_URL}/es${path}`,
+        en: `${BASE_URL}/en${path}`,
+      },
+    },
+  }));
 }

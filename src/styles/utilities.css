@@ -1,10 +1,13 @@
 /* ============================================================
-   UTILITIES — Clases de utilidad reutilizables
+   UTILITIES — Clases de utilidad globales
    ============================================================
-   Clases genéricas sin contexto de componente.
+   Fix 2.5: .sr-only y .visually-hidden unificadas
+   Fix A2:  .nav-item garantiza position:relative
+   Fix A7:  .haction-btn definido con touch-target 44×44px
+   Fix A8:  .mobile-panel con height:100dvh + overflow-y:auto
    ============================================================ */
 
-/* ---- Accesibilidad ---------------------------------------- */
+/* Accesibilidad — texto solo para lectores de pantalla */
 .sr-only,
 .visually-hidden {
   position: absolute;
@@ -15,84 +18,123 @@
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
-  border: 0;
+  border-width: 0;
 }
 
-.skip-link {
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  z-index: 1000;
-  transform: translateY(-140%);
-  border-radius: var(--radius);
-  background: var(--brand);
-  color: #ffffff;
-  padding: 10px 14px;
-  font-weight: 800;
-}
-
-.skip-link:focus {
-  transform: translateY(0);
-}
-
-/* ---- Color ------------------------------------------------ */
-.text-brand { color: var(--brand); }
-.text-muted  { color: var(--text-muted); }
-.text-soft   { color: var(--text-soft); }
-
-/* ---- Layout genérico -------------------------------------- */
+/* Contenedor máximo */
 .container {
-  width: min(100%, var(--max-width));
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  max-width: var(--max-width, 1240px);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
 }
 
-/* ---- Grid utilities --------------------------------------- */
-.grid       { display: grid; gap: 20px; }
-
-.grid-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.grid-two   { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-@media (max-width: 1024px) {
-  .grid-three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-@media (max-width: 640px) {
-  .grid-three,
-  .grid-two { grid-template-columns: 1fr; }
-}
-
-/* ---- Eyebrow label ---------------------------------------- */
-.eyebrow {
-  margin: 0 0 14px;
-  color: var(--brand);
-  font-size: 0.8rem;
-  font-weight: 820;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-/* ---- Scroll-reveal animation ------------------------------ */
-@media (prefers-reduced-motion: no-preference) {
-  .reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 480ms ease, transform 480ms ease;
-  }
-  .reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .reveal-delay-1 { transition-delay: 80ms; }
-  .reveal-delay-2 { transition-delay: 160ms; }
-  .reveal-delay-3 { transition-delay: 240ms; }
-  .reveal-delay-4 { transition-delay: 320ms; }
-}
-
-/* ---- Mobile-only ------------------------------------------ */
-.mobile-only { display: none; }
+/* Grid utilitario */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
 
 @media (max-width: 768px) {
-  .mobile-only { display: inline-flex; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
 }
+
+/* Reveal animation (respeta prefers-reduced-motion vía base.css) */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Fix A7: .haction-btn — botón cerrar panel móvil, 44×44px touch target */
+.haction-btn,
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  color: var(--text-soft);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+.haction-btn:hover,
+.icon-button:hover {
+  background: var(--line);
+  color: var(--text);
+}
+.haction-btn:focus-visible,
+.icon-button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--brand) 72%, white);
+  outline-offset: 2px;
+}
+
+/* Fix A2: .nav-item garantiza position:relative para dropdowns */
+.nav-item {
+  position: relative;
+}
+
+/* Fix A8: .mobile-panel — fullscreen, scrollable, fixed */
+.mobile-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  background: var(--bg-elevated);
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-panel[aria-hidden="false"],
+.mobile-panel.open {
+  transform: translateX(0);
+}
+
+/* Fix 2.5: Focus visible en cards y nav links */
+.quick-link:focus-visible,
+.content-card:focus-visible,
+.overview-card:focus-visible,
+.equipment-card:focus-visible,
+.service-card:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--brand) 72%, white);
+  outline-offset: 3px;
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+
+/* Fix 2.3: .action-dock — visible en mobile tras scroll */
+.action-dock {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--line);
+  gap: 0.75rem;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 760px) {
+  .action-dock.visible {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Aspect ratio helper */
+.aspect-video { aspect-ratio: 16 / 9; }
+.aspect-square { aspect-ratio: 1 / 1; }
