@@ -8,4 +8,8 @@ dist
 *.log
 Thumbs.db
 .chrome-*
+.edge-*
+audit-*.png
+mobile-final*.png
+edge-mobile-final.png
 tsconfig.tsbuildinfo

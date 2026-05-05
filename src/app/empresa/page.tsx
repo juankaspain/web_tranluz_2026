@@ -5,7 +5,7 @@ export const metadata: Metadata = buildMetadata({
   title: "Sobre Tranluz — Especialistas desde 1987",
   description: "Conoce a Tranluz: más de 35 años especializados en equipos eléctricos, alquiler de maquinaria de tendido y servicio técnico para obras eléctricas críticas en España.",
   path: "/empresa",
-  ogImage: "/og/empresa.jpg",
+  ogImage: "/images/generated/tranluz-hero-ai.png",
 });
 
 export { default } from "./page-content";

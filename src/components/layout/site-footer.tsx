@@ -47,7 +47,6 @@ const NAV_COLS = [
     heading: "Empresa",
     links: [
       { label: "Quienes somos", href: "/empresa" },
-      { label: "Kit Digital", href: "/kit-digital" },
       { label: "Soporte", href: "/soporte" },
       { label: "Trabaja con nosotros", href: "/empresa#empleo" },
     ],
@@ -65,6 +64,8 @@ const ACCREDITATIONS = [
   { src: "/images/Otros/Logos_Financiacion.png", alt: "Financiacion EU", href: "#", w: 160, h: 40 },
   { src: "/images/Otros/Moves_III_Logo.png", alt: "Programa MOVES III", href: "https://www.miteco.gob.es", w: 96, h: 40 },
 ];
+
+const COPYRIGHT_YEAR = 2026;
 
 /* ------------------------------------------------------------------ */
 /* Styles                                                                */
@@ -308,7 +309,7 @@ export function SiteFooter() {
       <div style={S.bottomBar}>
         <div style={S.bottomInner}>
           <p style={S.bottomCopy}>
-            &copy; {new Date().getFullYear()} Tranluz, S.L. &mdash; Todos los derechos reservados.
+            &copy; {COPYRIGHT_YEAR} Tranluz, S.L. &mdash; Todos los derechos reservados.
           </p>
           <nav style={S.legalNav}>
             {[

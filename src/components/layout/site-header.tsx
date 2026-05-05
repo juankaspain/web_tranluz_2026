@@ -39,7 +39,6 @@ const SEARCH_INDEX = [
   { label: "Formación",            href: "/formacion" },
   { label: "Soluciones eléctricas", href: "/soluciones" },
   { label: "Empresa",              href: "/empresa" },
-  { label: "Kit Digital",          href: "/kit-digital" },
   { label: "Contacto",             href: "/contacto" },
 ];
 
@@ -52,7 +51,6 @@ function HeaderSearch() {
 
   const results = query.trim().length > 0
     ? SEARCH_INDEX.filter(i =>
-        const [mobileOpen, setMobileOpen] = useState(false);
         i.label.toLowerCase().includes(query.toLowerCase())
       ).slice(0, 6)
     : [];
@@ -76,17 +74,6 @@ function HeaderSearch() {
     document.addEventListener("mousedown", h);
     return () => document.removeEventListener("mousedown", h);
   }, []);
-
-    // Close mobile menu on Escape key
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && mobileOpen) {
-        setMobileOpen(false);
-      }
-    };
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [mobileOpen]);
 
   return (
     <div ref={wrapRef} className="hs-wrap" role="search">
@@ -181,6 +168,7 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled,   setScrolled]   = useState(false);
   const [openMenu,   setOpenMenu]   = useState<string | null>(null);
+  const [menuPos,    setMenuPos]    = useState<{ left: number; top: number } | null>(null);
   const mobileMenuId = useId();
   const navRef       = useRef<HTMLElement>(null);
 
@@ -197,17 +185,44 @@ export function SiteHeader() {
 
   useEffect(() => {
     const fn = (e: MouseEvent) => {
-      if (navRef.current && !navRef.current.contains(e.target as Node))
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setOpenMenu(null);
+        setMenuPos(null);
+      }
     };
     document.addEventListener("mousedown", fn);
     return () => document.removeEventListener("mousedown", fn);
   }, []);
 
   useEffect(() => {
+    const closeFloatingMenu = () => {
+      setOpenMenu(null);
+      setMenuPos(null);
+    };
+    window.addEventListener("resize", closeFloatingMenu);
+    window.addEventListener("scroll", closeFloatingMenu, { passive: true });
+    return () => {
+      window.removeEventListener("resize", closeFloatingMenu);
+      window.removeEventListener("scroll", closeFloatingMenu);
+    };
+  }, []);
+
+  useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        setOpenMenu(null);
+        setMenuPos(null);
+      }
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, []);
 
   return (
     <>
@@ -244,9 +259,22 @@ export function SiteHeader() {
                           role="menuitem"
                           aria-haspopup="true"
                           aria-expanded={openMenu === item.href}
-                          onClick={() =>
-                            setOpenMenu(openMenu === item.href ? null : item.href)
-                          }
+                          onClick={(event) => {
+                            if (openMenu === item.href) {
+                              setOpenMenu(null);
+                              setMenuPos(null);
+                              return;
+                            }
+                            const rect = event.currentTarget.getBoundingClientRect();
+                            const dropdownWidth = 260;
+                            const gutter = 16;
+                            const left = Math.min(
+                              Math.max(rect.left, gutter),
+                              window.innerWidth - dropdownWidth - gutter
+                            );
+                            setMenuPos({ left, top: rect.bottom + 10 });
+                            setOpenMenu(item.href);
+                          }}
                           style={{
                             display: "inline-flex", alignItems: "center", gap: "5px",
                             padding: "8px 10px", border: "none", background: "transparent",
@@ -271,13 +299,17 @@ export function SiteHeader() {
                             className="nav-dropdown"
                             role="menu"
                             aria-label={item.label}
+                            style={menuPos ? { left: menuPos.left, top: menuPos.top } : undefined}
                           >
                             {item.children.map(child => (
                               <Link
                                 key={child.href}
                                 href={child.href}
                                 role="menuitem"
-                                onClick={() => setOpenMenu(null)}
+                                onClick={() => {
+                                  setOpenMenu(null);
+                                  setMenuPos(null);
+                                }}
                                 style={{
                                   display: "flex", alignItems: "center", gap: "8px",
                                   padding: "9px 12px", borderRadius: "var(--radius)",

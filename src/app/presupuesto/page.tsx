@@ -5,7 +5,7 @@ export const metadata: Metadata = buildMetadata({
   title: "Solicitar presupuesto — Tranluz",
   description: "Solicita un presupuesto personalizado para equipos eléctricos, alquiler de cabrestantes, servicio técnico ITS o formación. Respuesta en menos de 24 horas.",
   path: "/presupuesto",
-  ogImage: "/og/presupuesto.jpg",
+  ogImage: "/images/generated/tranluz-hero-ai.png",
 });
 
 export { default } from "./page-content";

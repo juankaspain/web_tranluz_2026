@@ -1,20 +1,17 @@
 import type { Metadata } from "next";
 import type { Viewport } from "next";
 import type { ReactNode } from "react";
-import { cookies, headers } from "next/headers";
 import { AutoTranslate } from "@/components/i18n/auto-translate";
 import { CookieConsent } from "@/components/layout/cookie-consent";
+import { FloatingActions } from "@/components/layout/floating-actions";
 import { SkipLink } from "@/components/layout/skip-link";
 import { StructuredData } from "@/components/seo/structured-data";
-import { ThemeScript } from "@/components/theme/theme-script";
-import { defaultLocale, isLocale } from "@/i18n/config";
+import { defaultLocale } from "@/i18n/config";
 import "@fontsource-variable/manrope";
 import "@fontsource-variable/archivo";
 import "@/styles/globals.css";
 import "@/styles/form-errors.css";
 import { assets } from "@/content/assets";
-
-export const dynamic = "force-dynamic";
 
 const BASE_URL = "https://www.tranluz.es";
 
@@ -55,7 +52,6 @@ export const metadata: Metadata = {
     "fibra óptica tendido",
     "maquinaria tendido cable",
     "prevención riesgos laborales eléctrico",
-    "kit digital equipos",
     "repuestos equipos eléctricos",
   ],
   authors: [{ name: "Tranluz", url: BASE_URL }],
@@ -130,32 +126,16 @@ export const viewport: Viewport = {
   minimumScale: 1,
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  let locale = defaultLocale;
-  try {
-    const requestHeaders = await headers();
-    const cookieStore = await cookies();
-    const cookieLocale = cookieStore.get("tranluz_locale")?.value;
-    const headerLocale = requestHeaders.get("x-tranluz-locale");
-    locale = isLocale(cookieLocale)
-      ? cookieLocale
-      : isLocale(headerLocale)
-      ? headerLocale
-      : defaultLocale;
-  } catch {
-    locale = defaultLocale;
-  }
-
   return (
     <html
-      lang={locale}
+      lang={defaultLocale}
       suppressHydrationWarning
       className="scroll-smooth"
     >
       <head>
-        <ThemeScript />
                 <link rel="icon" href="/images/Tranluz/Tranluz_Logo.svg" type="image/svg+xml" />
                 <link rel="shortcut icon" href="/images/Tranluz/Tranluz_Logo.svg" type="image/svg+xml" />
       </head>
@@ -164,6 +144,7 @@ export default async function RootLayout({
         <AutoTranslate />
         <StructuredData />
         {children}
+        <FloatingActions />
         <CookieConsent />
       </body>
     </html>

@@ -5,7 +5,7 @@ export const metadata: Metadata = buildMetadata({
   title: "Contacto — Tranluz Sevilla",
   description: "Contacta con Tranluz en Sevilla para presupuestos, consultas técnicas, alquiler de equipos o formación. Teléfono, email y ubicación disponibles.",
   path: "/contacto",
-  ogImage: "/og/contacto.jpg",
+  ogImage: "/images/generated/tranluz-hero-ai.png",
 });
 
 export { default } from "./page-content";

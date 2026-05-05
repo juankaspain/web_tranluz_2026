@@ -5,7 +5,7 @@ export const metadata: Metadata = buildMetadata({
   title: "Servicios de traducción técnica e interpretación",
   description: "Servicios profesionales de traducción técnica, interpretación simultánea, revisión y trazabilidad de documentos para empresas. Sede en Sevilla, atención nacional.",
   path: "/servicios",
-  ogImage: "/og/servicios.jpg",
+  ogImage: "/images/generated/tranluz-service-ai.png",
 });
 
 export { default } from "./page-content";

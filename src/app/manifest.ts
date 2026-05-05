@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
 
+const logo = "/images/Tranluz/Tranluz_Logo.svg";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Tranluz — Equipos eléctricos y servicio técnico",
+    name: "Tranluz - Equipos electricos y servicio tecnico",
     short_name: "Tranluz",
     description:
-      "Especialistas desde 1987 en equipos eléctricos, alquiler de cabrestantes, servicio técnico ITS, formación y trazabilidad para obras eléctricas críticas.",
+      "Especialistas desde 1987 en equipos electricos, alquiler de cabrestantes, servicio tecnico ITS, formacion y trazabilidad para obras electricas criticas.",
     start_url: "/",
     scope: "/",
     display: "standalone",
@@ -17,31 +19,7 @@ export default function manifest(): MetadataRoute.Manifest {
     categories: ["business", "productivity"],
     icons: [
       {
-        src: "/icons/icon-192.png",
-        sizes: "192x192",
-        type: "image/png",
-        purpose: "any"
-      },
-      {
-        src: "/icons/icon-192-maskable.png",
-        sizes: "192x192",
-        type: "image/png",
-        purpose: "maskable"
-      },
-      {
-        src: "/icons/icon-512.png",
-        sizes: "512x512",
-        type: "image/png",
-        purpose: "any"
-      },
-      {
-        src: "/icons/icon-512-maskable.png",
-        sizes: "512x512",
-        type: "image/png",
-        purpose: "maskable"
-      },
-      {
-        src: "/favicon.svg",
+        src: logo,
         sizes: "any",
         type: "image/svg+xml",
         purpose: "any"
@@ -51,23 +29,23 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         name: "Solicitar presupuesto",
         short_name: "Presupuesto",
-        description: "Envía una solicitud de presupuesto rápida",
+        description: "Enviar una solicitud de presupuesto rapida",
         url: "/presupuesto",
-        icons: [{ src: "/icons/shortcut-presupuesto.png", sizes: "96x96" }]
+        icons: [{ src: logo, sizes: "any", type: "image/svg+xml" }]
       },
       {
-        name: "Catálogo de productos",
-        short_name: "Catálogo",
-        description: "Explora nuestro catálogo técnico completo",
+        name: "Catalogo de productos",
+        short_name: "Catalogo",
+        description: "Explorar el catalogo tecnico completo",
         url: "/productos",
-        icons: [{ src: "/icons/shortcut-catalogo.png", sizes: "96x96" }]
+        icons: [{ src: logo, sizes: "any", type: "image/svg+xml" }]
       },
       {
         name: "Alquiler de equipos",
         short_name: "Alquiler",
-        description: "Rent Puller — alquiler rápido de equipos",
+        description: "Rent Puller - alquiler rapido de equipos",
         url: "/alquiler",
-        icons: [{ src: "/icons/shortcut-alquiler.png", sizes: "96x96" }]
+        icons: [{ src: logo, sizes: "any", type: "image/svg+xml" }]
       }
     ]
   };

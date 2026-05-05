@@ -33,8 +33,8 @@ export const assets = {
 
   // ─── Footer ────────────────────────────────────────────────────
   footerLogo:    LOGO,
-  footerFunding: `${SITE_URL}/images/Tranluz/logos-financiacion.webp`,
-  footerMoves:   `${SITE_URL}/images/Tranluz/moves-iii-tranluz.webp`,
+  footerFunding: "/images/Otros/Logos_Financiacion.png",
+  footerMoves:   "/images/Otros/Moves_III_Logo.png",
 
   // ─── OG / Social ──────────────────────────────────────────────────
   ogImage:          "/images/generated/tranluz-hero-ai.png",
@@ -44,9 +44,9 @@ export const assets = {
   generatedTraining:"/images/generated/tranluz-training-ai.png",
 
   // ─── Logos de terceros ──────────────────────────────────────────────
-  signature:   `${SITE_URL}/images/Tranluz/Firma-Manuel-Ramos.svg`,
-  quality:     `${SITE_URL}/images/Tranluz/AenorTranluz.svg`,
-  itsLogo:     `${SITE_URL}/images/Tranluz/Logo_ITS_TRANLUZ.svg`,
+  signature:   LOGO,
+  quality:     "/images/Otros/Aenor_Logo.svg",
+  itsLogo:     LOGO,
 
   // ─── Personas ──────────────────────────────────────────────────────
   ceo: aiImg.ceo,
@@ -71,5 +71,5 @@ export const assets = {
   training:    "/images/generated/tranluz-training-ai.png",
   trainingOne: "/images/generated/tranluz-training-ai.png",
   trainingTwo:  aiImg.training,
-  trainingLogo: `${SITE_URL}/images/Tranluz/logo-formate-tranluz.webp`,
+  trainingLogo: LOGO,
 };

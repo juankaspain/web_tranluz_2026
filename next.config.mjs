@@ -1,3 +1,5 @@
+const isDevelopment = process.env.NODE_ENV !== "production";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // ── Imágenes optimizadas ────────────────────────────────────────────────────────────────────────
@@ -26,8 +28,6 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: [
       "lucide-react",
-      "@radix-ui/react-dialog",
-      "@radix-ui/react-accordion",
     ],
     optimizeCss: false,
   },
@@ -50,6 +50,22 @@ const nextConfig = {
 
   // ── Headers de seguridad y caché ─────────────────────────────────────────────────────
   async headers() {
+    const scriptSrc = [
+      "script-src 'self' 'unsafe-inline'",
+      isDevelopment ? "'unsafe-eval'" : "",
+      "https://www.googletagmanager.com",
+      "https://www.google-analytics.com",
+    ].filter(Boolean).join(" ");
+
+    const connectSrc = [
+      "connect-src 'self'",
+      isDevelopment ? "ws: http://localhost:* http://127.0.0.1:*" : "",
+      "https://www.google-analytics.com",
+      "https://analytics.google.com",
+      "https://www.googletagmanager.com",
+      "https://region1.google-analytics.com",
+    ].filter(Boolean).join(" ");
+
     return [
       // Cache estáticos inmutables
       {
@@ -105,7 +121,7 @@ const nextConfig = {
             value: [
               "default-src 'self'",
               // Scripts: self + inline (Next.js hydration) + Google Tag Manager (consentimiento previo)
-              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+              scriptSrc,
               // Estilos: self + inline (Tailwind/CSS-in-JS) + Google Fonts + Fontshare
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://api.fontshare.com",
               // Fuentes: self + Google Fonts CDN + Fontshare
@@ -119,12 +135,11 @@ const nextConfig = {
                 "https://www.tesmec.com",
                 "https://www.plumettaz.com",
                 "https://www.aenor.com",
-                "https://www.acelerapyme.gob.es",
                 "https://commission.europa.eu",
                 "https://www.googletagmanager.com",
               ].join(" "),
               // Conexiones API: self + GA4 + GTM
-              "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com",
+              connectSrc,
               // Workers, manifesto y frames
               "worker-src 'self' blob:",
               "manifest-src 'self'",

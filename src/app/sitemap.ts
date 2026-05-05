@@ -16,7 +16,6 @@ const routes = [
   "/privacidad",
   "/cookies",
   "/accesibilidad",
-  "/kit-digital",
   "/servicios/its-servicio-tecnico",
   "/servicios/revisa-trazabilidad",
   "/servicios/revisiones-certificadas",
@@ -46,6 +45,7 @@ const localeMap: Record<string, string> = {
 };
 
 const localeOrder = ["es", "en", "de", "it", "fr"] as const;
+const lastModified = new Date("2026-05-05");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://www.tranluz.es";
@@ -70,7 +70,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     entries.push({
       url: `${baseUrl}${route}`,
-      lastModified: new Date(),
+      lastModified,
       changeFrequency,
       priority,
       alternates: { languages: alternates },

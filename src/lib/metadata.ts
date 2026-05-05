@@ -14,7 +14,7 @@ export function buildMetadata({
   title,
   description,
   path,
-  ogImage = "/og/default.jpg",
+  ogImage = "/images/generated/tranluz-hero-ai.png",
   locale = "es_ES",
 }: PageMetaInput): Metadata {
   const url = `${BASE_URL}${path}`;

@@ -11,7 +11,6 @@ const servicios = [
   "Servicio técnico ITS",
   "Formación",
   "Trazabilidad Revisa",
-  "Kit Digital",
   "Otro",
 ];
 
@@ -38,7 +37,7 @@ export default function PresupuestoPageContent() {
         <section className="section">
           <div className="presupuesto-layout">
             {/* Formulario */}
-            <div className="presupuesto-form-col">
+            <div className="presupuesto-form-col" id="formulario">
               {enviado ? (
                 <div className="form-success" role="alert">
                   <CheckCircle2 size={40} aria-hidden="true" />

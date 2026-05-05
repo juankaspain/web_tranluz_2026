@@ -11,7 +11,7 @@ const hitos = [
   { year: "2005", text: "Lanzamiento del Servicio Técnico Integral (ITS), con cobertura nacional." },
   { year: "2015", text: "Incorporación del servicio Rent Puller de alquiler de equipos de tendido." },
   { year: "2020", text: "Lanzamiento de Revisa, plataforma digital de trazabilidad de EPI y herramientas." },
-  { year: "2024", text: "Incorporación al programa Kit Digital como agente digitalizador homologado." },
+  { year: "2024", text: "Refuerzo de soluciones digitales de trazabilidad y soporte a clientes." },
 ];
 
 export default function EmpresaPageContent() {
