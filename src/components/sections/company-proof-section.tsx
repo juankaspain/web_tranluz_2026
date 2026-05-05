@@ -1,20 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Award, Building2, CheckCircle2, Factory, Users2 } from "lucide-react";
-
-// A10: utilidad para detectar si un color hex es claro u oscuro
-function isLightColor(hex: string): boolean {
-  const c = hex.replace("#", "");
-  const r = parseInt(c.substring(0, 2), 16);
-  const g = parseInt(c.substring(2, 4), 16);
-  const b = parseInt(c.substring(4, 6), 16);
-  // Luminancia relativa WCAG
-  const toLinear = (x: number) => {
-    const s = x / 255;
-    return s <= 0.04045 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
-  };
-  const L = 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
-  return L >= 0.35; // umbral: si luminancia >= 0.35 → fondo claro → texto oscuro
-}
 
 const stats = [
   { value: "1987", label: "Año de fundación" },
@@ -24,27 +10,84 @@ const stats = [
 ];
 
 const proofPoints = [
-  { icon: Award, text: "Calidad y servicio a precios competitivos" },
-  { icon: Building2, text: "Polígono Industrial Calonge, Sevilla" },
+  { icon: Award,        text: "Calidad y servicio a precios competitivos" },
+  { icon: Building2,    text: "Polígono Industrial Calonge, Sevilla" },
   { icon: CheckCircle2, text: "Acuerdos con fabricantes líderes del sector" },
-  { icon: Factory, text: "Distribuidor oficial para empresas eléctricas y telco" },
-  { icon: Users2, text: "Equipo técnico cualificado y formación especializada" },
+  { icon: Factory,      text: "Distribuidor oficial para empresas eléctricas y telco" },
+  { icon: Users2,       text: "Equipo técnico cualificado y formación especializada" },
 ];
 
-const partnerBrands = [
-  { name: "Tesmec",      sub: "GROUP",   bg: "#C8102E" },
-  { name: "Plumettaz",  sub: "TOOLS",   bg: "#005BAC" },
-  { name: "Work Italia",sub: "SAFETY",  bg: "#C15000" },
-  { name: "3M",         sub: "SCIENCE", bg: "#B00000" },
-  { name: "Tractel",    sub: "LIFTING", bg: "#1A3F6F" },
-  { name: "Cembre",     sub: "CONNECT", bg: "#004d26" },
+/**
+ * Marcas partner con sus logos SVG locales.
+ * Los archivos viven en /public/images/partners/ y Next.js los sirve
+ * desde la raíz como /images/partners/<archivo>.svg
+ *
+ * bg: color de fondo del chip (idéntico al color corporativo de la marca)
+ * useLogo: si true → renderiza <Image>, si false → muestra texto fallback
+ */
+const partnerBrands: {
+  name: string;
+  logo: string;
+  href: string;
+  bg: string;
+  w: number;
+  h: number;
+}[] = [
+  {
+    name: "Tesmec",
+    logo: "/images/partners/tesmec.svg",
+    href: "https://www.tesmec.com/es",
+    bg: "#C8102E",
+    w: 120,
+    h: 36,
+  },
+  {
+    name: "Plumettaz",
+    logo: "/images/partners/plumettaz.svg",
+    href: "https://www.plumettaz.com",
+    bg: "#005BAC",
+    w: 140,
+    h: 36,
+  },
+  {
+    name: "Work Italia",
+    logo: "/images/partners/work-italia.svg",
+    href: "https://www.workitalia.it",
+    bg: "#C15000",
+    w: 140,
+    h: 36,
+  },
+  {
+    name: "3M",
+    logo: "/images/partners/3m.svg",
+    href: "https://www.3m.com/3M/es_ES/",
+    bg: "#B00000",
+    w: 48,
+    h: 36,
+  },
+  {
+    name: "Tractel",
+    logo: "/images/partners/tractel.svg",
+    href: "https://www.tractel.com",
+    bg: "#1A3F6F",
+    w: 130,
+    h: 36,
+  },
+  {
+    name: "Cembre",
+    logo: "/images/partners/cembre.svg",
+    href: "https://www.cembre.com",
+    bg: "#004d26",
+    w: 120,
+    h: 36,
+  },
 ];
 
 export function CompanyProofSection() {
   return (
     <section className="company-proof" aria-labelledby="proof-heading">
       <div className="company-proof-grid">
-        {/* Izquierda: stats + proof points */}
+        {/* ── Izquierda: stats + proof points ─────────────────── */}
         <div className="proof-panel-dark">
           <p className="eyebrow proof-eyebrow">Tranluz en números</p>
           <div className="proof-stats-grid">
@@ -68,7 +111,7 @@ export function CompanyProofSection() {
           </ul>
         </div>
 
-        {/* Derecha: partners + CTA */}
+        {/* ── Derecha: partners + CTA ──────────────────────────── */}
         <div className="proof-panel-light">
           <p className="eyebrow">Marcas distribuidoras</p>
           <h2 id="proof-heading">Partner oficial de las marcas líderes del sector</h2>
@@ -77,23 +120,37 @@ export function CompanyProofSection() {
             herramientas industriales y EPIs para ofrecerte garantía oficial, stock permanente
             y soporte técnico de primer nivel.
           </p>
+
+          {/* ── Grid de logos ──────────────────────────────────── */}
           <div className="proof-brands-grid">
-            {partnerBrands.map((b) => {
-              // A10: determinar si el fondo es claro para forzar texto oscuro (WCAG)
-              const lightBg = isLightColor(b.bg);
-              return (
-                <div
-                  key={b.name}
-                  className="proof-brand-chip"
-                  style={{ "--chip-bg": b.bg } as React.CSSProperties}
-                  {...(lightBg ? { "data-light-bg": "true" } : {})}
-                >
-                  <span className="proof-brand-name">{b.name}</span>
-                  <span className="proof-brand-sub">{b.sub}</span>
-                </div>
-              );
-            })}
+            {partnerBrands.map((b) => (
+              <a
+                key={b.name}
+                href={b.href}
+                className="proof-brand-chip"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Ir al sitio web de ${b.name}`}
+                style={{ "--chip-bg": b.bg } as React.CSSProperties}
+              >
+                <Image
+                  src={b.logo}
+                  alt={b.name}
+                  width={b.w}
+                  height={b.h}
+                  style={{
+                    objectFit: "contain",
+                    maxWidth: "100%",
+                    maxHeight: "36px",
+                    width: "auto",
+                  }}
+                  loading="lazy"
+                  unoptimized
+                />
+              </a>
+            ))}
           </div>
+
           <div className="proof-cta">
             <Link href="/empresa" className="button button-primary">
               Conoce nuestra historia
