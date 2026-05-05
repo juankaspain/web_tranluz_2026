@@ -3,26 +3,44 @@ import { assets } from "@/content/assets";
 
 const BASE_URL = "https://www.tranluz.es";
 
+/**
+ * StructuredData — E4
+ * JSON-LD global con @graph.
+ * Incluye Organization + LocalBusiness (reforzados),
+ * WebSite, Service, Product, Course, FAQPage y BreadcrumbList raíz.
+ *
+ * Los breadcrumbs específicos de página se generan en
+ * src/components/navigation/breadcrumbs.tsx (E3).
+ */
 export function StructuredData() {
   const graph = [
-    // ── Organization ────────────────────────────────────────────────────────────────────────
+    // ── Organization (E4: reforzado) ───────────────────────────────────────
     {
       "@type": "Organization",
       "@id": `${BASE_URL}/#organization`,
       name: brand.name,
+      alternateName: "Tranluz S.L.",
       url: BASE_URL,
       logo: {
         "@type": "ImageObject",
-        // MUST be absolute URL for JSON-LD (assets.logo is relative /images/...)
         url: assets.logoAbsolute,
         width: 200,
         height: 52,
       },
       foundingDate: brand.founded,
+      foundingLocation: {
+        "@type": "Place",
+        name: "Sevilla, España",
+      },
       email: brand.email,
       telephone: brand.phone,
       description:
         "Especialistas desde 1987 en equipos eléctricos, alquiler de cabrestantes, servicio técnico ITS, formación y trazabilidad para obras eléctricas críticas.",
+      numberOfEmployees: {
+        "@type": "QuantitativeValue",
+        minValue: 10,
+        maxValue: 49,
+      },
       sameAs: [
         brand.social.linkedin,
         brand.social.instagram,
@@ -36,21 +54,49 @@ export function StructuredData() {
         addressRegion: "Andalucía",
         addressCountry: "ES",
       },
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: brand.phone,
+          contactType: "customer service",
+          areaServed: "ES",
+          availableLanguage: ["Spanish"],
+          hoursAvailable: {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            opens: "08:30",
+            closes: "18:00",
+          },
+        },
+        {
+          "@type": "ContactPoint",
+          email: brand.email,
+          contactType: "sales",
+          areaServed: "ES",
+        },
+      ],
     },
 
-    // ── LocalBusiness ──────────────────────────────────────────────────────────────────
+    // ── LocalBusiness (E4: reforzado) ──────────────────────────────────────
     {
       "@type": ["LocalBusiness", "ProfessionalService"],
       "@id": `${BASE_URL}/#localbusiness`,
       name: brand.name,
       url: BASE_URL,
-      image: `${BASE_URL}${assets.ogImage}`,
+      image: [
+        `${BASE_URL}${assets.ogImage}`,
+        `${BASE_URL}${assets.logoAbsolute}`,
+      ],
       telephone: brand.phone,
       email: brand.email,
       priceRange: "$$",
       currenciesAccepted: "EUR",
       paymentAccepted: "Transferencia bancaria, tarjeta de crédito",
-      areaServed: ["España", "Portugal", "Europa"],
+      areaServed: [
+        { "@type": "Country", name: "España" },
+        { "@type": "Country", name: "Portugal" },
+        { "@type": "Continent", name: "Europa" },
+      ],
       address: {
         "@type": "PostalAddress",
         streetAddress: brand.address,
@@ -64,6 +110,7 @@ export function StructuredData() {
         latitude: 37.389092,
         longitude: -5.984459,
       },
+      hasMap: `https://maps.google.com/?q=37.389092,-5.984459`,
       openingHoursSpecification: [
         {
           "@type": "OpeningHoursSpecification",
@@ -72,9 +119,10 @@ export function StructuredData() {
           closes: "18:00",
         },
       ],
+      parentOrganization: { "@id": `${BASE_URL}/#organization` },
     },
 
-    // ── WebSite ───────────────────────────────────────────────────────────────────────────
+    // ── WebSite ────────────────────────────────────────────────────────────
     {
       "@type": "WebSite",
       "@id": `${BASE_URL}/#website`,
@@ -89,7 +137,7 @@ export function StructuredData() {
       },
     },
 
-    // ── Service ─────────────────────────────────────────────────────────────────────────
+    // ── Service ────────────────────────────────────────────────────────────
     {
       "@type": "Service",
       "@id": `${BASE_URL}/#technical-service`,
@@ -105,7 +153,7 @@ export function StructuredData() {
       url: `${BASE_URL}/servicios/its-servicio-tecnico`,
     },
 
-    // ── Product ────────────────────────────────────────────────────────────────────────
+    // ── Product ────────────────────────────────────────────────────────────
     {
       "@type": "Product",
       "@id": `${BASE_URL}/alquiler/#product`,
@@ -123,7 +171,7 @@ export function StructuredData() {
       },
     },
 
-    // ── Course ──────────────────────────────────────────────────────────────────────────
+    // ── Course ─────────────────────────────────────────────────────────────
     {
       "@type": "Course",
       "@id": `${BASE_URL}/formacion/#course`,
@@ -150,7 +198,7 @@ export function StructuredData() {
       ],
     },
 
-    // ── FAQ ───────────────────────────────────────────────────────────────────────────────
+    // ── FAQPage ────────────────────────────────────────────────────────────
     {
       "@type": "FAQPage",
       "@id": `${BASE_URL}/#faq`,
@@ -206,7 +254,7 @@ export function StructuredData() {
       ],
     },
 
-    // ── BreadcrumbList ──────────────────────────────────────────────────────────────────────
+    // ── BreadcrumbList raíz ────────────────────────────────────────────────
     {
       "@type": "BreadcrumbList",
       "@id": `${BASE_URL}/#breadcrumb`,

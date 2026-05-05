@@ -126,12 +126,13 @@ function HeaderSearch() {
   );
 }
 
-/* ---- PhoneTooltip ------------------------------------------------ */
+/* ---- PhoneTooltip — C3: SOLO click, nunca hover ------------------ */
 function PhoneTooltip() {
   const [show, setShow] = useState(false);
   const phone     = brand.phone ?? "+34 954 367 290";
   const phoneHref = `tel:${phone.replace(/\s/g, "")}`;
   const wrapRef   = useRef<HTMLDivElement>(null);
+  const tooltipId = useId();
 
   useEffect(() => {
     const h = (e: MouseEvent) => {
@@ -142,20 +143,31 @@ function PhoneTooltip() {
     return () => document.removeEventListener("mousedown", h);
   }, []);
 
+  useEffect(() => {
+    if (!show) return;
+    const h = (e: KeyboardEvent) => { if (e.key === "Escape") setShow(false); };
+    document.addEventListener("keydown", h);
+    return () => document.removeEventListener("keydown", h);
+  }, [show]);
+
   return (
     <div ref={wrapRef} className="contact-icon-wrap">
       <button
         className="icon-button"
-        onClick={() => setShow(!show)}
-        onMouseEnter={() => setShow(true)}
+        onClick={() => setShow(s => !s)}
         aria-label="Ver tel\u00e9fono de contacto"
         aria-expanded={show}
         aria-haspopup="true"
+        aria-controls={tooltipId}
       >
         <Phone size={17} className="contact-icon-phone" />
       </button>
       {show && (
-        <div className="contact-tooltip" role="tooltip">
+        <div
+          id={tooltipId}
+          className="contact-tooltip"
+          role="tooltip"
+        >
           <a href={phoneHref}>{phone}</a>
         </div>
       )}
@@ -171,18 +183,21 @@ export function SiteHeader() {
   const [menuPos,    setMenuPos]    = useState<{ left: number; top: number } | null>(null);
   const mobileMenuId = useId();
   const navRef       = useRef<HTMLElement>(null);
+  const dropdownRef  = useRef<HTMLDivElement>(null);
 
   const phone      = brand.phone ?? "+34 954 367 290";
   const email      = brand.email ?? "info@tranluz.com";
   const phoneHref  = `tel:${phone.replace(/\s/g, "")}`;
   const emailHref  = `mailto:${email}`;
 
+  /* Scrolled state para header shadow */
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 4);
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
+  /* Cerrar dropdown al hacer click fuera del nav */
   useEffect(() => {
     const fn = (e: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
@@ -194,24 +209,41 @@ export function SiteHeader() {
     return () => document.removeEventListener("mousedown", fn);
   }, []);
 
+  /* M6: scroll con threshold 20px — evita cerrar dropdown en micro-scroll
+     El listener trackea el scrollY anterior y solo cierra si el
+     desplazamiento acumulado supera 20px. */
   useEffect(() => {
-    const closeFloatingMenu = () => {
+    let lastScrollY = window.scrollY;
+
+    const onScroll = () => {
+      const delta = Math.abs(window.scrollY - lastScrollY);
+      if (delta > 20) {
+        setOpenMenu(null);
+        setMenuPos(null);
+      }
+      lastScrollY = window.scrollY;
+    };
+
+    const onResize = () => {
       setOpenMenu(null);
       setMenuPos(null);
     };
-    window.addEventListener("resize", closeFloatingMenu);
-    window.addEventListener("scroll", closeFloatingMenu, { passive: true });
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
     return () => {
-      window.removeEventListener("resize", closeFloatingMenu);
-      window.removeEventListener("scroll", closeFloatingMenu);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
+  /* Bloquear scroll del body cuando el menú móvil está abierto */
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  /* Escape global — cierra mobile y dropdown */
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -223,6 +255,60 @@ export function SiteHeader() {
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
   }, []);
+
+  /* A5: cuando el dropdown se abre, mueve foco al primer item */
+  useEffect(() => {
+    if (openMenu && dropdownRef.current) {
+      const first = dropdownRef.current.querySelector<HTMLElement>("[role='menuitem']");
+      first?.focus();
+    }
+  }, [openMenu]);
+
+  /* A5: keydown handler para botones de menú con submenu */
+  const handleMenuTriggerKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLButtonElement>, href: string, rect: DOMRect) => {
+      if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        if (openMenu !== href) {
+          const dropdownWidth = 260;
+          const gutter = 16;
+          const left = Math.min(
+            Math.max(rect.left, gutter),
+            window.innerWidth - dropdownWidth - gutter
+          );
+          setMenuPos({ left, top: rect.bottom + 10 });
+          setOpenMenu(href);
+        }
+      } else if (e.key === "Escape") {
+        setOpenMenu(null);
+        setMenuPos(null);
+        e.currentTarget.focus();
+      }
+    },
+    [openMenu]
+  );
+
+  /* A5: keydown en items del dropdown — Arrow Up/Down + Escape */
+  const handleDropdownItemKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+      if (!dropdownRef.current) return;
+      const items = Array.from(
+        dropdownRef.current.querySelectorAll<HTMLElement>("[role='menuitem']")
+      );
+      const idx = items.indexOf(e.currentTarget);
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        items[(idx + 1) % items.length]?.focus();
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        items[(idx - 1 + items.length) % items.length]?.focus();
+      } else if (e.key === "Escape") {
+        setOpenMenu(null);
+        setMenuPos(null);
+      }
+    },
+    []
+  );
 
   return (
     <>
@@ -244,7 +330,7 @@ export function SiteHeader() {
                 alt="Tranluz"
                 width={110}
                 height={36}
-                style={{ display: "block", maxHeight: 36, width: "auto" }}
+                className="logo-img"
               />
             </Link>
 
@@ -252,13 +338,14 @@ export function SiteHeader() {
             <div className="desktop-nav">
               <ul className="main-nav" role="menubar">
                 {mainNavigation.map(item => (
-                  <li key={item.href} role="none">
+                  <li key={item.href} role="none" className="nav-item">
                     {item.children ? (
                       <>
                         <button
                           role="menuitem"
                           aria-haspopup="true"
                           aria-expanded={openMenu === item.href}
+                          className="nav-link nav-link--trigger"
                           onClick={(event) => {
                             if (openMenu === item.href) {
                               setOpenMenu(null);
@@ -275,12 +362,9 @@ export function SiteHeader() {
                             setMenuPos({ left, top: rect.bottom + 10 });
                             setOpenMenu(item.href);
                           }}
-                          style={{
-                            display: "inline-flex", alignItems: "center", gap: "5px",
-                            padding: "8px 10px", border: "none", background: "transparent",
-                            color: "var(--text-muted)", fontSize: "0.86rem",
-                            fontWeight: 760, borderRadius: "999px",
-                            cursor: "pointer", whiteSpace: "nowrap",
+                          onKeyDown={(e) => {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            handleMenuTriggerKeyDown(e, item.href, rect);
                           }}
                         >
                           {navIcon(item.href)}
@@ -288,14 +372,12 @@ export function SiteHeader() {
                           <ChevronDown
                             size={13}
                             aria-hidden="true"
-                            style={{
-                              transition: "transform 180ms",
-                              transform: openMenu === item.href ? "rotate(180deg)" : "none",
-                            }}
+                            className={`nav-chevron${openMenu === item.href ? " nav-chevron--open" : ""}`}
                           />
                         </button>
                         {openMenu === item.href && (
                           <div
+                            ref={dropdownRef}
                             className="nav-dropdown"
                             role="menu"
                             aria-label={item.label}
@@ -306,15 +388,12 @@ export function SiteHeader() {
                                 key={child.href}
                                 href={child.href}
                                 role="menuitem"
+                                className="nav-dropdown__link"
+                                tabIndex={-1}
+                                onKeyDown={handleDropdownItemKeyDown}
                                 onClick={() => {
                                   setOpenMenu(null);
                                   setMenuPos(null);
-                                }}
-                                style={{
-                                  display: "flex", alignItems: "center", gap: "8px",
-                                  padding: "9px 12px", borderRadius: "var(--radius)",
-                                  color: "var(--text-muted)", fontSize: "0.84rem",
-                                  fontWeight: 600,
                                 }}
                               >
                                 {navIcon(child.href)}
@@ -330,11 +409,7 @@ export function SiteHeader() {
                         target="_blank"
                         rel="noopener noreferrer"
                         role="menuitem"
-                        style={{
-                          display: "inline-flex", alignItems: "center", gap: "5px",
-                          padding: "8px 10px", borderRadius: "999px",
-                          color: "var(--text-muted)", fontSize: "0.86rem", fontWeight: 760,
-                        }}
+                        className="nav-link"
                       >
                         {navIcon(item.href)}
                         {item.label}
@@ -343,11 +418,7 @@ export function SiteHeader() {
                       <Link
                         href={item.href}
                         role="menuitem"
-                        style={{
-                          display: "inline-flex", alignItems: "center", gap: "5px",
-                          padding: "8px 10px", borderRadius: "999px",
-                          color: "var(--text-muted)", fontSize: "0.86rem", fontWeight: 760,
-                        }}
+                        className="nav-link"
                       >
                         {navIcon(item.href)}
                         {item.label}
@@ -357,7 +428,7 @@ export function SiteHeader() {
                 ))}
               </ul>
 
-              {/* Actions: Search \u2192 Phone \u2192 Email \u2192 Theme \u2192 Language */}
+              {/* Actions */}
               <div className="header-actions">
                 <HeaderSearch />
                 <PhoneTooltip />
@@ -405,7 +476,7 @@ export function SiteHeader() {
                 alt="Tranluz"
                 width={100}
                 height={32}
-                style={{ display: "block", width: "auto", maxHeight: 32 }}
+                className="logo-img"
               />
               <button
                 onClick={() => setMobileOpen(false)}
@@ -417,18 +488,12 @@ export function SiteHeader() {
             </div>
 
             {/* Nav */}
-            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <ul className="mobile-nav-list">
               {mainNavigation.map(item => (
                 <li key={item.href}>
                   {item.children ? (
                     <>
-                      <div
-                        style={{
-                          display: "flex", alignItems: "center", gap: "10px",
-                          padding: "12px 14px", color: "var(--text)",
-                          fontSize: "0.9rem", fontWeight: 700,
-                        }}
-                      >
+                      <div className="mobile-nav-section-title">
                         {navIcon(item.href)}
                         {item.label}
                       </div>
@@ -437,11 +502,7 @@ export function SiteHeader() {
                           key={child.href}
                           href={child.href}
                           onClick={() => setMobileOpen(false)}
-                          style={{
-                            display: "flex", alignItems: "center", gap: "10px",
-                            padding: "10px 28px", borderRadius: "var(--radius)",
-                            color: "var(--text-muted)", fontSize: "0.86rem", fontWeight: 600,
-                          }}
+                          className="mobile-nav-link mobile-nav-link--child"
                         >
                           {navIcon(child.href)}
                           {child.label}
@@ -454,11 +515,7 @@ export function SiteHeader() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => setMobileOpen(false)}
-                      style={{
-                        display: "flex", alignItems: "center", gap: "10px",
-                        padding: "12px 14px", borderRadius: "var(--radius)",
-                        color: "var(--text-muted)", fontSize: "0.9rem", fontWeight: 600,
-                      }}
+                      className="mobile-nav-link"
                     >
                       {navIcon(item.href)}
                       {item.label}
@@ -467,11 +524,7 @@ export function SiteHeader() {
                     <Link
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      style={{
-                        display: "flex", alignItems: "center", gap: "10px",
-                        padding: "12px 14px", borderRadius: "var(--radius)",
-                        color: "var(--text-muted)", fontSize: "0.9rem", fontWeight: 600,
-                      }}
+                      className="mobile-nav-link"
                     >
                       {navIcon(item.href)}
                       {item.label}
@@ -481,41 +534,20 @@ export function SiteHeader() {
               ))}
             </ul>
 
-            {/* Footer m\u00f3vil */}
-            <div style={{ marginTop: "auto", padding: "16px 14px", display: "flex", flexDirection: "column", gap: "10px" }}>
-              <a
-                href={phoneHref}
-                style={{
-                  display: "flex", alignItems: "center", gap: "8px",
-                  padding: "12px", borderRadius: "999px",
-                  border: "1px solid var(--line)", color: "var(--text)",
-                  fontWeight: 700, fontSize: "0.9rem",
-                }}
-              >
+            {/* Footer móvil */}
+            <div className="mobile-footer">
+              <a href={phoneHref} className="mobile-footer-link">
                 <Phone size={16} aria-hidden="true" className="contact-icon-phone" />
                 {phone}
               </a>
-              <a
-                href={emailHref}
-                style={{
-                  display: "flex", alignItems: "center", gap: "8px",
-                  padding: "12px", borderRadius: "999px",
-                  border: "1px solid var(--line)", color: "var(--text)",
-                  fontWeight: 700, fontSize: "0.9rem",
-                }}
-              >
+              <a href={emailHref} className="mobile-footer-link">
                 <Mail size={16} aria-hidden="true" className="contact-icon-email" />
                 {email}
               </a>
               <Link
                 href="/contacto"
                 onClick={() => setMobileOpen(false)}
-                style={{
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  gap: "8px", padding: "12px", borderRadius: "999px",
-                  background: "var(--brand)", color: "#fff",
-                  fontWeight: 700, fontSize: "0.9rem",
-                }}
+                className="mobile-footer-cta"
               >
                 Solicitar presupuesto
               </Link>

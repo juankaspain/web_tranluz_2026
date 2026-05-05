@@ -1,0 +1,193 @@
+/* ============================================================
+   FOOTER — Site footer con fondo oscuro y columnas de nav
+   ============================================================
+   Fix M7: Logos de partners en color al hover (filter: none)
+   ============================================================ */
+
+.site-footer {
+  padding-top: 48px;
+  padding-bottom: 32px;
+  border-top: 1px solid rgba(238, 243, 245, 0.1);
+  background: var(--bg-inverse);
+  color: rgba(238, 243, 245, 0.65);
+}
+
+:root[data-theme="dark"] .site-footer {
+  background: var(--bg-muted);
+  border-top: 1px solid var(--line);
+}
+
+/* ---- Footer partners band -------------------------------- */
+.footer-partners {
+  border-bottom: 1px solid var(--line);
+  padding: 20px 0;
+}
+
+/* M7: Logos de partners — monocromo por defecto, color al hover */
+.partner-logo-img {
+  filter: brightness(0) invert(0.3);
+  opacity: 0.7;
+  transition: filter 220ms ease, opacity 220ms ease;
+}
+
+:root[data-theme="dark"] .partner-logo-img {
+  filter: brightness(0) invert(0.7);
+  opacity: 0.6;
+}
+
+.partner-logo-chip:hover .partner-logo-img,
+.partner-logo-chip:focus-visible .partner-logo-img {
+  filter: none;
+  opacity: 1;
+}
+
+/* ---- Footer main grid ------------------------------------ */
+.footer-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  padding: 48px 0 40px;
+  border-bottom: 1px solid rgba(238, 243, 245, 0.1);
+}
+
+:root[data-theme="dark"] .footer-main {
+  border-bottom-color: var(--line);
+}
+
+@media (max-width: 960px) {
+  .footer-main { grid-template-columns: 1fr 1fr; gap: 28px; }
+}
+
+@media (max-width: 560px) {
+  .footer-main { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* ---- Footer brand column --------------------------------- */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-brand p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: rgba(238, 243, 245, 0.55);
+  line-height: 1.6;
+  max-width: 260px;
+}
+
+/* ---- Social links ---------------------------------------- */
+.social-links,
+.footer-social {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.social-links a,
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(238, 243, 245, 0.12);
+  border-radius: 999px;
+  background: rgba(238, 243, 245, 0.06);
+  color: rgba(238, 243, 245, 0.6);
+  transition: border-color 160ms ease, color 160ms ease, background 160ms ease;
+}
+
+.social-links a:hover,
+.footer-social a:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  background: rgba(189, 80, 14, 0.1);
+}
+
+:root[data-theme="dark"] .footer-social a { background: var(--bg-muted); }
+
+/* ---- Footer nav columns ---------------------------------- */
+.footer-nav,
+.footer-nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-nav strong,
+.footer-nav-heading {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 0.75rem;
+  font-weight: var(--fw-extrabold, 800);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(238, 243, 245, 0.9);
+}
+
+.footer-nav a,
+.footer-nav-link {
+  display: block;
+  font-size: 0.875rem;
+  color: rgba(238, 243, 245, 0.55);
+  line-height: 1.8;
+  transition: color 160ms ease;
+}
+
+.footer-nav a:hover,
+.footer-nav-link:hover {
+  color: var(--brand);
+}
+
+/* ---- Footer contact -------------------------------------- */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: rgba(238, 243, 245, 0.55);
+}
+
+.footer-contact-item svg { flex-shrink: 0; color: var(--brand); }
+
+/* ---- Footer bottom bar ----------------------------------- */
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 0;
+  font-size: 0.8rem;
+  color: rgba(238, 243, 245, 0.4);
+}
+
+.footer-bottom-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-bottom-links a {
+  color: rgba(238, 243, 245, 0.4);
+  transition: color 160ms ease;
+}
+
+.footer-bottom-links a:hover { color: var(--brand); }
+
+@media (max-width: 560px) {
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

@@ -1,0 +1,242 @@
+/* ============================================================
+   HERO SECTION — Estilos de la sección hero
+   ============================================================
+   Fix C1: Clases CSS para todos los estilos que estaban inline en JSX
+   Fix C2: .hero-gradient-text con fallback accesible vía base.css
+   Fix A6: .hero-image necesita sizes en el componente React
+   Fix M1: Animaciones fadeInUp con prefers-reduced-motion
+   Fix M2: ::selection scoped en hero (fondo oscuro) — no colisión
+   Fix A9: Colores hardcodeados reemplazados por variables CSS
+   Fix 1.2: Opacidades de placeholder y metric-card text corregidas
+   ============================================================ */
+
+/* Contenedor hero */
+.hero-section {
+  position: relative;
+  min-height: max(600px, 90dvh);
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  overflow: hidden;
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+@media (min-width: 900px) {
+  .hero-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+/* Fix M2: ::selection scoped al hero (fondo oscuro)
+   La selección global usa naranja oscuro — sobre texto blanco del hero
+   queda con contraste bajo. Esta regla scoped lo corrige. */
+.hero-section ::selection {
+  background: rgba(245, 158, 11, 0.28);
+  color: #ffffff;
+}
+@media (forced-colors: active) {
+  .hero-section ::selection {
+    background: Highlight;
+    color: HighlightText;
+  }
+}
+
+/* Fix C1: Reemplaza style={{}} inline por clase CSS */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 640px;
+}
+
+.hero-tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.875rem;
+  background: var(--brand-soft);
+  border: 1px solid oklch(from var(--brand) l c h / 0.25);
+  border-radius: 9999px;
+  font-size: clamp(0.78rem, 0.7rem + 0.2vw, 0.875rem);
+  font-weight: var(--fw-semibold, 600);
+  color: var(--brand);
+  width: fit-content;
+}
+
+.hero-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1rem + 4.5vw, 3.75rem);
+  font-weight: var(--fw-extrabold, 800);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-wrap: balance;
+}
+
+.hero-body {
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  color: var(--text-soft);
+  line-height: 1.65;
+  max-width: 56ch;
+}
+
+/* Fix A9: Hero aside — sin hardcoded rgba(17,24,39) → usa variables */
+.hero-aside {
+  position: relative;
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+/* Metric pills — Fix C1 */
+.metric-pills {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.25rem;
+}
+
+.metric-pill {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding: 0.625rem 1rem;
+  background: var(--bg-muted);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  cursor: default;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.metric-pill:hover {
+  background: var(--brand-soft);
+  border-color: oklch(from var(--brand) l c h / 0.3);
+  transform: translateY(-2px);
+}
+
+.metric-pill strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1rem + 0.75vw, 1.75rem);
+  font-weight: var(--fw-extrabold, 800);
+  color: var(--brand);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-pill span {
+  font-size: clamp(0.78rem, 0.7rem + 0.15vw, 0.875rem);
+  color: var(--text-soft);
+  line-height: 1.2;
+}
+
+/* Hero search */
+.hero-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: oklch(from var(--bg-elevated) l c h / 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.hero-search input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  font-size: clamp(0.875rem, 0.8rem + 0.2vw, 1rem);
+  color: var(--text);
+}
+.hero-search input::placeholder {
+  color: var(--text-soft);
+  opacity: 1;
+}
+
+/* Intent cards */
+.intent-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+.intent-card:hover {
+  border-color: var(--brand);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+.intent-card:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--brand) 72%, white);
+  outline-offset: 3px;
+}
+
+.intent-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+.intent-card__label {
+  font-size: clamp(0.875rem, 0.8rem + 0.2vw, 1rem);
+  font-weight: var(--fw-semibold, 600);
+  color: var(--text);
+}
+
+.intent-card__sub {
+  font-size: clamp(0.78rem, 0.7rem + 0.15vw, 0.875rem);
+  color: var(--text-soft);
+}
+
+/* Fix M1: Animaciones hero con prefers-reduced-motion */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.hero-animate {
+  animation: fadeInUp 600ms ease both;
+}
+.hero-animate:nth-child(1) { animation-delay: 0ms; }
+.hero-animate:nth-child(2) { animation-delay: 100ms; }
+.hero-animate:nth-child(3) { animation-delay: 200ms; }
+.hero-animate:nth-child(4) { animation-delay: 300ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-animate {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 899px) {
+  .hero-aside {
+    display: none;
+  }
+  .hero-section {
+    min-height: auto;
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+}

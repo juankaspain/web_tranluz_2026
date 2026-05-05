@@ -1,10 +1,45 @@
-import { brand } from "@/config/brand";
+"use client";
 
-const metrics = [
-  { value: "+38", label: "Años en el sector eléctrico" },
-  { value: "Oficial", label: "Distribuidor Tesmec y Plumettaz" },
-  { value: "B2B", label: "Infraestructura eléctrica y telecom" },
+import { useRef } from "react";
+import { brand } from "@/config/brand";
+import { useCountUp } from "@/hooks/use-count-up";
+
+interface MetricItem {
+  /** Número final a animar; null para valores no puramente numéricos */
+  numericEnd: number | null;
+  prefix?: string;
+  staticValue: string;
+  label: string;
+}
+
+const metrics: MetricItem[] = [
+  { numericEnd: 38, prefix: "+", staticValue: "+38", label: "Años en el sector eléctrico" },
+  { numericEnd: null, prefix: "",  staticValue: "Oficial", label: "Distribuidor Tesmec y Plumettaz" },
+  { numericEnd: null, prefix: "",  staticValue: "B2B",     label: "Infraestructura eléctrica y telecom" },
 ];
+
+function AnimatedMetric({ metric }: { metric: MetricItem }) {
+  const { count, nodeRef } = useCountUp(
+    metric.numericEnd !== null
+      ? { end: metric.numericEnd, duration: 1400 }
+      : { end: 0, duration: 0 }
+  );
+
+  const displayValue =
+    metric.numericEnd !== null
+      ? `${metric.prefix ?? ""}${count}`
+      : metric.staticValue;
+
+  return (
+    <li
+      // @ts-expect-error — ref genérico para el observer
+      ref={metric.numericEnd !== null ? nodeRef : undefined}
+    >
+      <strong aria-live="polite">{displayValue}</strong>
+      <span>{metric.label}</span>
+    </li>
+  );
+}
 
 export function AuthoritySection() {
   return (
@@ -17,25 +52,14 @@ export function AuthoritySection() {
 
         <ul className="authority-metrics" role="list">
           {metrics.map((m) => (
-            <li key={m.label}>
-              <strong>{m.value}</strong>
-              <span>{m.label}</span>
-            </li>
+            <AnimatedMetric key={m.label} metric={m} />
           ))}
         </ul>
 
-        <ul
-          className="authority-brands"
-          aria-label="Marcas asociadas"
-          role="list"
-        >
+        <ul className="authority-brands" aria-label="Marcas asociadas" role="list">
           {brand.partners.map((p) => (
             <li key={p.name}>
-              <a
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={p.href} target="_blank" rel="noopener noreferrer">
                 {p.name}
               </a>
             </li>

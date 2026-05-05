@@ -1,0 +1,82 @@
+/* ── Breadcrumbs (E3) ─────────────────────────────────────────────────────
+   Estilo visual minimalista para la navegación de migas de pan.
+   Requiere importarse en el layout o en la página que lo use.
+──────────────────────────────────────────────────────────────────────── */
+
+.breadcrumbs {
+  padding-block: var(--space-3, 0.75rem);
+}
+
+.breadcrumbs-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1, 0.25rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--text-xs, 0.8125rem);
+  color: var(--color-text-muted, #6b7280);
+}
+
+.breadcrumbs-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1, 0.25rem);
+}
+
+.breadcrumbs-home-icon {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.breadcrumbs-link {
+  color: var(--color-text-muted, #6b7280);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+.breadcrumbs-link:hover,
+.breadcrumbs-link:focus-visible {
+  color: var(--color-primary, #01696f);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.breadcrumbs-current {
+  color: var(--color-text, #28251d);
+  font-weight: 500;
+}
+
+.breadcrumbs-separator {
+  flex-shrink: 0;
+  opacity: 0.45;
+}
+
+/* ── Error dev details (E2) ────────────────────────────────────────────── */
+.error-dev-details {
+  margin-top: var(--space-8, 2rem);
+  padding: var(--space-4, 1rem);
+  background: var(--color-surface-offset, #f3f0ec);
+  border: 1px solid var(--color-border, #d4d1ca);
+  border-radius: var(--radius-md, 0.5rem);
+  font-size: var(--text-xs, 0.8125rem);
+  text-align: left;
+  max-width: 72ch;
+  margin-inline: auto;
+}
+
+.error-dev-details summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.error-dev-details pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--color-error, #a12c7b);
+  margin-top: var(--space-2, 0.5rem);
+}
